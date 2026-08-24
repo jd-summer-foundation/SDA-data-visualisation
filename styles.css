@@ -19,6 +19,21 @@
   --crit-bg:     #fbeaea;
   --warn-bg:     #fbf3e0;
   --good-bg:     #e6f4e6;
+
+  /* Map classes. The three verdict bands stay the anchors -- 1.0 and 1.25 --
+     but each side of them is graduated, because three flat bands leave Fully
+     Accessible 78 of 88 regions in one colour. Lightness carries the ordering
+     independently of hue, so the ramp survives red/green colour vision. */
+  --map-1:       #a32a2a;
+  --map-2:       #cf5555;
+  --map-3:       #eb9c9c;
+  --map-4:       #e8c069;
+  --map-5:       #8cc691;
+  --map-6:       #2f8a3d;
+  --map-out:     #e4e8ee;
+  --map-nil-bg:  #eef1f5;
+  --map-nil-ink: #98a3b2;
+  --map-mesh:    #ffffff;
   --shadow:      0 1px 2px rgba(15,19,25,.05), 0 4px 14px rgba(15,19,25,.04);
 
   --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -33,6 +48,10 @@
     --accent: #3987e5; --accent-soft: #16283d; --demand: #d95926;
     --critical: #e46a6a; --warning: #e0a020; --good: #35b535;
     --crit-bg: #33191a; --warn-bg: #302512; --good-bg: #162c17;
+    --map-1: #cf3b3b; --map-2: #9e3838; --map-3: #6b2f31;
+    --map-4: #8a6a22; --map-5: #2c6b33; --map-6: #3fa848;
+    --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
+    --map-mesh: #0e1013;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
   }
 }
@@ -43,6 +62,10 @@
   --accent: #3987e5; --accent-soft: #16283d; --demand: #d95926;
   --critical: #e46a6a; --warning: #e0a020; --good: #35b535;
   --crit-bg: #33191a; --warn-bg: #302512; --good-bg: #162c17;
+    --map-1: #cf3b3b; --map-2: #9e3838; --map-3: #6b2f31;
+    --map-4: #8a6a22; --map-5: #2c6b33; --map-6: #3fa848;
+    --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
+    --map-mesh: #0e1013;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
 }
 
@@ -266,3 +289,64 @@ footer a { color: var(--accent); }
 }
 .mode-note[hidden] { display: none; }
 .mode-note b { color: var(--ink); font-weight: 600; }
+
+
+/* ---------- map ---------- */
+.map-wrap svg, .map-inset svg { display: block; width: 100%; height: auto; }
+.map-wrap { max-width: 780px; margin: 0 auto; }
+
+.m1 { fill: var(--map-1); } .m2 { fill: var(--map-2); } .m3 { fill: var(--map-3); }
+.m4 { fill: var(--map-4); } .m5 { fill: var(--map-5); } .m6 { fill: var(--map-6); }
+.m-nil { fill: url(#mapNil); }
+.m-out { fill: var(--map-out); }
+
+/* One mesh path over unstroked fills: the pre-baked region paths overlap on
+   every shared border, so stroking each region would double-draw all of them. */
+.m-mesh { fill: none; stroke: var(--map-mesh); stroke-width: .8;
+          stroke-linejoin: round; opacity: .75; pointer-events: none; }
+
+.m-a path { transition: opacity .12s ease; }
+.m-a:hover path { opacity: .72; }
+.m-a:focus-visible { outline: none; }
+.m-a:focus-visible path, .m-here path {
+  stroke: var(--ink); stroke-width: 2; paint-order: stroke; }
+.m-here path { stroke: var(--accent); stroke-width: 2.4; }
+@media (prefers-reduced-motion: reduce) { .m-a path { transition: none; } }
+
+/* auto-fit with a ceiling so one inset on a state page is the same size as
+   each of the five on the national page, rather than stretching or shrinking
+   to fill the row. */
+.map-insets { display: grid; gap: 12px; margin-top: 16px; justify-content: start;
+              grid-template-columns: repeat(auto-fit, minmax(130px, 200px)); }
+.map-inset figcaption { font-size: 11.5px; color: var(--ink-3); margin-top: 4px;
+                        font-weight: 600; letter-spacing: .01em; }
+.map-inset { margin: 0; }
+@media (max-width: 520px) {
+  .map-insets { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+}
+
+.map-legend { display: flex; flex-direction: column; gap: 5px; margin: 2px 0 14px; }
+.mrow { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--ink-2); }
+.mrow i { font-style: normal; width: 1.1em; text-align: center; font-size: 11px; }
+.msw { display: inline-flex; }
+.msw span { width: 30px; height: 13px; display: inline-block; }
+.msw span:first-child { border-radius: 2px 0 0 2px; }
+.msw span:last-child { border-radius: 0 2px 2px 0; }
+.mticks { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
+.map-note { font-size: 12.5px; color: var(--ink-3); line-height: 1.5;
+            margin: 14px 0 0; max-width: 68ch; }
+
+/* The pattern is defined once and referenced by every map on the page --
+   url(#id) resolves document-wide, so repeating the defs per svg would only
+   duplicate ids. */
+.m-defs { position: absolute; width: 0; height: 0; }
+
+.msw .m1 { background: var(--map-1); } .msw .m2 { background: var(--map-2); }
+.msw .m3 { background: var(--map-3); } .msw .m4 { background: var(--map-4); }
+.msw .m5 { background: var(--map-5); } .msw .m6 { background: var(--map-6); }
+.msw .m-nil { background: repeating-linear-gradient(45deg,
+  var(--map-nil-bg) 0 3px, var(--map-nil-ink) 3px 5px); }
+
+.mrow i.g-crit { color: var(--critical); }
+.mrow i.g-warn { color: var(--warning); }
+.mrow i.g-good { color: var(--good); }

@@ -88,12 +88,41 @@ Donor stock passes down as a **waterfall, not a sum**: HPS keeps enough places t
 cover its own need, and only the surplus counts towards Fully Accessible. Adding
 the two outright would count the same places against two different demands.
 Nationally that takes Fully Accessible from 0.53 to 1.78, and cuts the SA4
-regions below 1.0 from 68 to 26 — those 26 are where the shortfall is real
-rather than an artefact of how stock is categorised.
+regions below 1.0 from 78 to 30 — those 30 are where the gap survives
+substitution, rather than being an artefact of how stock is categorised.
 
 Two caveats the interface states on screen: a dwelling is still *enrolled* in one
 category, and SDA payment follows the participant's funded category — so this
 models physical suitability, not what a provider would be paid.
+
+### The map
+
+Australia and each state carry a choropleth of the 88 SA4 regions, coloured by
+places per participant for whichever design category you pick, and following the
+same enrolled/substitution toggle as the tables. Australia gets insets for the
+five capitals whose Greater Capital City area holds more than one SA4 — between
+them Sydney, Melbourne, Brisbane, Perth and Adelaide hold 43 of the 88 regions,
+and at national scale they are a few pixels each. A state map is a crop of the
+same national geometry with its neighbours greyed for context, so no separate
+per-state boundaries are stored. SA3 has no map, because it has no ratio.
+
+The scale keeps 1.0 and 1.25 as the thresholds — the same cuts the ratio chips
+use — but graduates either side of them. Three flat bands would render Fully
+Accessible as 78 of 88 regions in one red and High Physical Support as 69 of 88
+in one green, which shows nothing about where the pressure sits. The breaks are
+fixed across all four categories so the four maps stay comparable.
+
+Colour is doing the work here, so it is not the only channel: the legend carries
+the same ▼ ◆ ▲ glyphs as the tables, every region states its ratio and both
+underlying counts on hover and to a screen reader, each is a real link reachable
+by keyboard, and the ranked table below the map remains the accessible source of
+the same numbers. A region with no ratio is hatched rather than coloured, so
+"not calculable" cannot be misread as "low".
+
+Two things the map cannot show, and says so on screen: colour is the ratio and
+not the size of the market, so four participants and nine hundred can read the
+same; and a category-specific map has nowhere to put the 4,991 participants
+(19.5%) whose need carries no design category.
 
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
@@ -117,6 +146,34 @@ Each geography carries `categories` (per design category: `enrolled_dwellings`,
 `enrolled_places`, `pipeline_dwellings`, `pipeline_places`,
 `participants_with_need`, `places_per_participant`), `totals`, `build_types` and
 `max_residents`, plus `parent` for the hierarchy.
+
+### Boundaries
+
+The map's geometry is built separately, and only needs rebuilding when the ABS
+changes the boundaries — not every quarter.
+
+```sh
+npm i mapshaper
+python3 scripts/build_geometry.py [data/boundaries/SA4_....shp]
+```
+
+Writes `data/sa4-geometry.json` (~250 KB): one national view plus five capital
+insets, as SVG path strings already projected to Australian Albers (EPSG:3577,
+equal-area, so the outback regions do not read as more important for being
+large) and keyed by the same region ids as `data/sda.json`.
+
+Boundaries are the ABS **Statistical Area Level 4, ASGS Edition 4 (2026),
+GDA2020**, © Commonwealth of Australia, [CC BY 4.0][abs]. The shapefile itself is
+a build input and is not committed — put it in `data/boundaries/`, the same way
+the Supplement P workbook is passed in.
+
+Supplement P publishes no SA4 code, so the join is by region name. The build
+asserts it is exactly one-to-one in both directions and checks the per-state
+counts, and fails rather than quietly dropping a region off the map. It holds
+for the 2025-26 Q4 file: all 88 regions match, and the edition's own change
+flags report no real SA4 altered in 2026.
+
+[abs]: https://creativecommons.org/licenses/by/4.0/
 
 To preview locally, from the repository root:
 
@@ -163,6 +220,9 @@ repository private and preview locally until you decide to publish.
   may already be enrolled but not yet removed from the data.
 - **Table P.1 is not joinable.** It keys on NDIA Service Districts, not SA4;
   P.2 and P.3 key on State only. None of them appear in the explorer.
+- **The map shows a ratio, not a volume.** Two regions with wildly different
+  numbers of participants can carry the same colour. The counts are in every
+  region's tooltip and in the table beneath it.
 - **SA3 has no places figure.** The dwelling-form cross-tabs the derivation
   depends on are published at SA4 and above only, so no places or ratio can be
   formed at SA3. Dwelling counts and participant need still are.
