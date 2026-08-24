@@ -2,3 +2,4 @@ data/_transitional.xlsx
 __pycache__/
 *.pyc
 node_modules/
+data/boundaries/
