@@ -216,6 +216,7 @@ footer { border-top: 1px solid var(--rule); margin-top: 40px; padding-top: 20px;
 footer p { font-family: var(--mono); font-size: 11px; line-height: 1.7; color: var(--ink-3); max-width: 82ch; margin: 0 0 8px; }
 footer a { color: var(--accent); }
 
+.levelswitch[hidden] { display: none; }
 .levelswitch { display: inline-flex; background: var(--ground); border: 1px solid var(--rule); border-radius: 7px; padding: 2px; gap: 2px; }
 .levelswitch button {
   font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
@@ -239,3 +240,29 @@ footer a { color: var(--accent); }
   max-width: 74ch; margin: 16px 0 0;
 }
 .trend-note b { color: var(--ink); font-weight: 600; }
+
+/* ---------- substitution mode ---------- */
+/* Substituted places stay in the supply hue but carry a 45-degree texture, so
+   they never read as the flat lighter tint the pipeline bars already use. */
+.bar-lent {
+  border-radius: 0 4px 4px 0;
+  background-color: var(--accent-soft);
+  background-image: repeating-linear-gradient(45deg,
+    var(--accent) 0 3px, transparent 3px 6px);
+}
+.swatch-lent {
+  background-color: var(--accent-soft);
+  background-image: repeating-linear-gradient(45deg,
+    var(--accent) 0 3px, transparent 3px 6px);
+}
+.borrowed {
+  font-family: var(--mono); font-size: 10px; font-weight: 400; color: var(--ink-3);
+  letter-spacing: 0.02em; margin-top: 2px; white-space: nowrap;
+}
+.mode-note {
+  font-family: var(--serif); font-size: 14px; line-height: 1.55; color: var(--ink-2);
+  max-width: 74ch; margin: 0 0 18px; padding: 12px 14px;
+  background: var(--accent-soft); border-radius: 7px;
+}
+.mode-note[hidden] { display: none; }
+.mode-note b { color: var(--ink); font-weight: 600; }

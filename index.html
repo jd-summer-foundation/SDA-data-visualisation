@@ -50,14 +50,19 @@
           <div class="panel-title">Supply, demand and pipeline by design category</div>
           <div class="panel-sub" id="tableSub"></div>
         </div>
+        <div class="levelswitch" id="modeSwitch" role="group" aria-label="How supply is counted">
+          <button type="button" data-mode="enrolled" aria-pressed="true">As enrolled</button>
+          <button type="button" data-mode="substitution" aria-pressed="false">Allowing substitution</button>
+        </div>
       </div>
+      <p class="mode-note" id="modeNote" hidden></p>
       <div class="tablewrap">
         <table id="catTable">
           <thead>
             <tr>
               <th scope="col">Design category</th>
               <th scope="col">Enrolled<br>dwellings</th>
-              <th scope="col">Enrolled<br>places</th>
+              <th scope="col" id="placesHead">Enrolled<br>places</th>
               <th scope="col">Participants<br>with need</th>
               <th scope="col">Places per<br>participant</th>
               <th scope="col">Pipeline<br>dwellings</th>
@@ -76,11 +81,7 @@
           <div class="panel-sub">Shared scale &middot; pipeline shown lighter, as an intention rather than supply</div>
         </div>
       </div>
-      <div class="legend">
-        <span><i class="swatch" style="background:var(--accent)"></i>Enrolled places</span>
-        <span><i class="swatch" style="background:var(--demand)"></i>Participants with need</span>
-        <span><i class="swatch" style="background:var(--accent);opacity:.34"></i>Pipeline places</span>
-      </div>
+      <div class="legend" id="chartLegend"></div>
       <div class="gap-chart" id="gapChart"></div>
     </section>
 

@@ -12,6 +12,63 @@ let CHILDREN = new Map();
 let current = null;
 let childLevel = null;
 let sort = { key: null, dir: -1 };
+let substitution = false;
+
+/* Which categories a dwelling certified for one category can also house.
+   High Physical Support is defined cumulatively on top of Fully Accessible --
+   it must meet every Fully Accessible requirement plus ceiling-hoist provision,
+   950mm door openings and backup power -- so HPS stock can house someone
+   assessed for Fully Accessible. The reverse is not true. Improved Liveability
+   and Robust sit on different axes (sensory/cognitive, and resilience), so
+   nothing substitutes for them. */
+const DONORS = { "Fully Accessible": ["High Physical Support"] };
+
+/* Places available to each category once substitution is allowed.
+
+   Donor stock is passed down as a waterfall, not added twice: a donor category
+   keeps enough places to cover its own need, and only the surplus flows to the
+   category it can also serve. Adding HPS places to Fully Accessible outright
+   would count the same 13,000 places against two different demands. */
+function effectiveSupply(g) {
+  const out = {};
+  for (const c of DATA.meta.comparable_categories) {
+    const x = g.categories[c];
+    const own = x.enrolled_places;
+    let borrowed = 0;
+    const from = [];
+    for (const donor of DONORS[c] || []) {
+      const d = g.categories[donor];
+      if (d.enrolled_places == null) continue;
+      // A suppressed donor need is below the NDIA's threshold of 11, so
+      // treating it as zero overstates the surplus by at most ten places.
+      const spare = Math.max(0, d.enrolled_places - (d.participants_with_need || 0));
+      if (spare > 0) { borrowed += spare; from.push(donor); }
+    }
+    const places = own == null ? null : own + borrowed;
+    out[c] = {
+      places, borrowed, own, from,
+      ratio: (places != null && x.participants_with_need)
+        ? Math.round(places / x.participants_with_need * 1000) / 1000 : null,
+    };
+  }
+  return out;
+}
+
+/* The figures the current view is built from: as enrolled, or with
+   substitution allowed. */
+function supplyFor(g) {
+  if (!g.has_places) return null;
+  if (!substitution) {
+    const out = {};
+    for (const c of DATA.meta.comparable_categories) {
+      const x = g.categories[c];
+      out[c] = { places: x.enrolled_places, borrowed: 0, own: x.enrolled_places,
+                 from: [], ratio: x.places_per_participant };
+    }
+    return out;
+  }
+  return effectiveSupply(g);
+}
 
 /* ---------- formatting ---------- */
 const fmt = v => (v === null || v === undefined) ? null : Math.round(v).toLocaleString("en-AU");
@@ -53,6 +110,7 @@ async function boot() {
   document.getElementById("view").hidden = false;
 
   wireSearch();
+  wireModeSwitch();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
@@ -65,6 +123,15 @@ function routeFromHash() {
 function go(id) {
   if (location.hash === "#" + encodeURIComponent(id)) render(id);
   else location.hash = encodeURIComponent(id);
+}
+
+function wireModeSwitch() {
+  document.getElementById("modeSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-mode]");
+    if (!btn) return;
+    substitution = btn.dataset.mode === "substitution";
+    render(current.id);
+  });
 }
 
 /* ---------- search ---------- */
@@ -145,6 +212,22 @@ function render(id) {
      g.state && g.level !== "State" ? g.state : null,
      `as at ${DATA.meta.as_at}`].filter(Boolean).join(" · ");
 
+  document.querySelectorAll("#modeSwitch button").forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.mode === "substitution") === substitution)));
+  document.getElementById("modeSwitch").hidden = !g.has_places;
+
+  const note = document.getElementById("modeNote");
+  note.hidden = !(g.has_places && substitution);
+  note.innerHTML =
+    "<b>A model, not a count.</b> High Physical Support is defined cumulatively on top of Fully "
+    + "Accessible, so an HPS dwelling meets the Fully Accessible standard and could house someone "
+    + "assessed for it. Here HPS keeps enough places to cover its own need and only the "
+    + "<b>surplus</b> counts towards Fully Accessible &mdash; adding the two outright would count the "
+    + "same places against two demands. Improved Liveability and Robust are unchanged: nothing "
+    + "substitutes for them. Every dwelling is still <b>enrolled</b> in one category, and SDA payment "
+    + "follows the participant&rsquo;s funded category, so this shows physical suitability rather than "
+    + "what a provider would be paid.";
+
   renderTiles(g);
   renderCategoryTable(g, cats);
   renderChart(g, comparable);
@@ -187,21 +270,30 @@ function renderTiles(g) {
 
 function renderCategoryTable(g, cats) {
   const comparable = new Set(DATA.meta.comparable_categories);
-  document.getElementById("tableSub").textContent = g.has_places
-    ? "Places are the unit comparable with participants · a dwelling may hold several"
-    : "Places are not published below SA4, so no ratio can be formed at SA3";
+  const supply = supplyFor(g);
+  document.getElementById("placesHead").innerHTML =
+    substitution ? "Usable<br>places" : "Enrolled<br>places";
+  document.getElementById("tableSub").textContent = !g.has_places
+    ? "Places are not published below SA4, so no ratio can be formed at SA3"
+    : substitution
+      ? "Surplus High Physical Support places counted towards Fully Accessible, which they meet by design"
+      : "Places are the unit comparable with participants · a dwelling may hold several";
 
   const rows = cats.map(c => {
     const x = g.categories[c];
     const isComparable = comparable.has(c);
     const blank = !x.enrolled_dwellings && !x.participants_with_need && !x.pipeline_dwellings;
     if (blank && !isComparable) return "";
+    const s = supply && supply[c];
+    const places = s ? s.places : x.enrolled_places;
+    const lent = substitution && s && s.borrowed
+      ? `<div class="borrowed">${fmt(s.own)} own + ${fmt(s.borrowed)} spare ${s.from.join(", ")}</div>` : "";
     return `<tr${isComparable ? "" : ' class="dim"'}>`
       + `<td>${c}${isComparable ? "" : '<div style="font-weight:400;font-size:11.5px;color:var(--ink-3)">no eligibility decisions issued</div>'}</td>`
       + `<td>${cell(x.enrolled_dwellings)}</td>`
-      + `<td>${g.has_places ? cell(x.enrolled_places) : '<span class="nil">n/p</span>'}</td>`
+      + `<td>${g.has_places ? cell(places) + lent : '<span class="nil">n/p</span>'}</td>`
       + `<td>${cell(x.participants_with_need)}</td>`
-      + `<td>${g.has_places ? ratioChip(x.places_per_participant) : '<span class="nil">&mdash;</span>'}</td>`
+      + `<td>${g.has_places ? ratioChip(s ? s.ratio : x.places_per_participant) : '<span class="nil">&mdash;</span>'}</td>`
       + `<td>${cell(x.pipeline_dwellings)}</td>`
       + `<td>${g.has_places ? cell(x.pipeline_places) : '<span class="nil">n/p</span>'}</td>`
       + `</tr>`;
@@ -221,9 +313,22 @@ function renderChart(g, comparable) {
   if (!g.has_places) { panel.hidden = true; return; }
   panel.hidden = false;
 
-  const rows = comparable.map(c => ({ name: c, ...g.categories[c] }));
+  const supply = supplyFor(g);
+  const rows = comparable.map(c => ({ name: c, ...g.categories[c], s: supply[c] }));
+  const anyBorrowed = rows.some(r => r.s.borrowed);
+
+  document.getElementById("chartLegend").innerHTML = [
+    ['<i class="swatch" style="background:var(--accent)"></i>', "Enrolled places"],
+    ...(anyBorrowed ? [['<i class="swatch swatch-lent"></i>', "Surplus High Physical Support places"]] : []),
+    ['<i class="swatch" style="background:var(--demand)"></i>', "Participants with need"],
+    ['<i class="swatch" style="background:var(--accent);opacity:.34"></i>', "Pipeline places"],
+  ].map(([sw, label]) => `<span>${sw}${label}</span>`).join("");
+
+  document.querySelector("#chartPanel .panel-sub").textContent = anyBorrowed
+    ? "Shared scale · hatched places are surplus HPS stock that meets the Fully Accessible standard"
+    : "Shared scale · pipeline shown lighter, as an intention rather than supply";
   const max = Math.max(1, ...rows.flatMap(r =>
-    [r.enrolled_places || 0, r.participants_with_need || 0, r.pipeline_places || 0]));
+    [r.s.places || 0, r.participants_with_need || 0, r.pipeline_places || 0]));
   const pct = v => ((v || 0) / max * 100).toFixed(2) + "%";
 
   document.getElementById("gapChart").innerHTML = rows.map(r => {
@@ -233,10 +338,22 @@ function renderChart(g, comparable) {
         <span class="bar-track"><span class="bar ${cls}" style="width:${pct(v)}"></span></span>
         <span class="bar-val">${v == null ? "—" : fmt(v)}</span>
       </div>`;
+    // Borrowed places ride as a second segment so the substitution stays visible
+    // rather than being folded invisibly into the supply bar.
+    const placesLine = r.s.borrowed
+      ? `<div class="bar-line" title="${r.name} — ${fmt(r.s.own)} own places plus ${fmt(r.s.borrowed)} surplus ${r.s.from.join(", ")} places">
+           <span class="bar-tag">Places</span>
+           <span class="bar-track" style="display:flex;gap:2px">
+             <span class="bar bar-supply" style="width:${pct(r.s.own)};border-radius:0"></span>
+             <span class="bar bar-lent" style="width:${pct(r.s.borrowed)}"></span>
+           </span>
+           <span class="bar-val">${fmt(r.s.places)}</span>
+         </div>`
+      : line("Places", "bar-supply", r.s.places, `${r.name} — ${fmt(r.s.places) || 0} enrolled places from ${fmt(r.enrolled_dwellings) || 0} dwellings`);
     return `<div class="gap-row">
-      <div class="gap-label"><span class="gap-name">${r.name}</span>${ratioChip(r.places_per_participant)}</div>
+      <div class="gap-label"><span class="gap-name">${r.name}</span>${ratioChip(r.s.ratio)}</div>
       <div class="bars">
-        ${line("Places", "bar-supply", r.enrolled_places, `${r.name} — ${fmt(r.enrolled_places) || 0} enrolled places from ${fmt(r.enrolled_dwellings) || 0} dwellings`)}
+        ${placesLine}
         ${line("Need", "bar-demand", r.participants_with_need, `${r.name} — ${fmt(r.participants_with_need) || 0} participants with an identified need`)}
         ${line("Pipeline", "bar-pipe", r.pipeline_places, `${r.name} — ${fmt(r.pipeline_places) || 0} pipeline places (an intention, not guaranteed supply)`)}
       </div></div>`;
@@ -297,7 +414,7 @@ function renderChildren(g, comparable) {
     { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
     ...(withPlaces ? comparable.map(c => ({
       key: c, label: c.replace(/ /g, "<br>"), ratio: true,
-      get: s => s.categories[c].places_per_participant
+      get: s => (supplyFor(s) || {})[c]?.ratio ?? null
     })) : []),
   ];
 

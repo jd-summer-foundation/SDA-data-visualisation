@@ -68,6 +68,33 @@ identified need, places per participant, and the pipeline, broken down by design
 category — plus build-type and resident-count breakdowns, and a sortable table
 of the child regions that doubles as an undersupply ranking.
 
+### As enrolled, or allowing substitution
+
+The category table and chart carry a toggle between two readings of supply.
+
+**As enrolled** (the default) counts each dwelling under the single design
+category it is enrolled and certified against. This is the factual view, and it
+is what every raw figure in Supplement P describes.
+
+**Allowing substitution** asks a different question: who could physically live
+here? High Physical Support is defined cumulatively on top of Fully Accessible —
+an HPS dwelling must meet every Fully Accessible requirement plus ceiling-hoist
+provision, 950mm door openings and backup power — so HPS stock can house someone
+assessed for Fully Accessible. The reverse does not hold, and Improved
+Liveability (sensory and cognitive) and Robust (resilience) sit on different
+axes, so nothing substitutes for them.
+
+Donor stock passes down as a **waterfall, not a sum**: HPS keeps enough places to
+cover its own need, and only the surplus counts towards Fully Accessible. Adding
+the two outright would count the same places against two different demands.
+Nationally that takes Fully Accessible from 0.53 to 1.78, and cuts the SA4
+regions below 1.0 from 68 to 26 — those 26 are where the shortfall is real
+rather than an artefact of how stock is categorised.
+
+Two caveats the interface states on screen: a dwelling is still *enrolled* in one
+category, and SDA payment follows the participant's funded category — so this
+models physical suitability, not what a provider would be paid.
+
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
 ## Usage
