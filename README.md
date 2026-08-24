@@ -88,8 +88,8 @@ Donor stock passes down as a **waterfall, not a sum**: HPS keeps enough places t
 cover its own need, and only the surplus counts towards Fully Accessible. Adding
 the two outright would count the same places against two different demands.
 Nationally that takes Fully Accessible from 0.53 to 1.78, and cuts the SA4
-regions below 1.0 from 68 to 26 — those 26 are where the shortfall is real
-rather than an artefact of how stock is categorised.
+regions below 1.0 from 78 to 30 — those 30 are where the gap survives
+substitution, rather than being an artefact of how stock is categorised.
 
 Two caveats the interface states on screen: a dwelling is still *enrolled* in one
 category, and SDA payment follows the participant's funded category — so this
