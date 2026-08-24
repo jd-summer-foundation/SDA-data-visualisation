@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDA Market Explorer</title>
+<meta name="description" content="Specialist Disability Accommodation supply, demand and pipeline by design category, for every Australian SA4 region, state and nationally.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232a78d6%22/%3E%3Crect x=%227%22 y=%2216%22 width=%224%22 height=%229%22 fill=%22white%22/%3E%3Crect x=%2214%22 y=%2210%22 width=%224%22 height=%2215%22 fill=%22white%22/%3E%3Crect x=%2221%22 y=%2214%22 width=%224%22 height=%2211%22 fill=%22white%22 opacity=%22.6%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <div class="brand-name">SDA Market Explorer</div>
+      <div class="brand-sub" id="brandSub">Loading&hellip;</div>
+    </div>
+    <div class="picker">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="color:var(--ink-3)">
+        <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.3-4.3"></path>
+      </svg>
+      <input id="search" type="search" role="combobox" aria-expanded="false"
+             aria-controls="results" aria-autocomplete="list" autocomplete="off"
+             placeholder="Search a region, state or Australia&hellip;" aria-label="Search for a geography">
+      <div class="results" id="results" role="listbox" hidden></div>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="loading" id="loading">Loading data&hellip;</div>
+  <div id="view" hidden>
+
+    <nav class="crumbs" id="crumbs" aria-label="Breadcrumb"></nav>
+
+    <div class="page-head">
+      <h1 id="placeName"></h1>
+      <div class="page-meta" id="placeMeta"></div>
+    </div>
+
+    <dl class="tiles" id="tiles"></dl>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Supply, demand and pipeline by design category</div>
+          <div class="panel-sub" id="tableSub"></div>
+        </div>
+      </div>
+      <div class="tablewrap">
+        <table id="catTable">
+          <thead>
+            <tr>
+              <th scope="col">Design category</th>
+              <th scope="col">Enrolled<br>dwellings</th>
+              <th scope="col">Enrolled<br>places</th>
+              <th scope="col">Participants<br>with need</th>
+              <th scope="col">Places per<br>participant</th>
+              <th scope="col">Pipeline<br>dwellings</th>
+              <th scope="col">Pipeline<br>places</th>
+            </tr>
+          </thead>
+          <tbody id="catBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="chartPanel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Enrolled places against identified need</div>
+          <div class="panel-sub">Shared scale &middot; pipeline shown lighter, as an intention rather than supply</div>
+        </div>
+      </div>
+      <div class="legend">
+        <span><i class="swatch" style="background:var(--accent)"></i>Enrolled places</span>
+        <span><i class="swatch" style="background:var(--demand)"></i>Participants with need</span>
+        <span><i class="swatch" style="background:var(--accent);opacity:.34"></i>Pipeline places</span>
+      </div>
+      <div class="gap-chart" id="gapChart"></div>
+    </section>
+
+    <div class="split">
+      <section class="panel">
+        <div class="panel-head"><div>
+          <div class="panel-title">Enrolled dwellings by build type</div>
+          <div class="panel-sub" id="buildSub"></div>
+        </div></div>
+        <div class="minibars" id="buildBars"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><div>
+          <div class="panel-title">Enrolled dwellings by maximum residents</div>
+          <div class="panel-sub" id="resSub"></div>
+        </div></div>
+        <div class="minibars" id="resBars"></div>
+      </section>
+    </div>
+
+    <section class="panel" id="trendPanel" hidden>
+      <div class="panel-head"><div>
+        <div class="panel-title">Enrolled dwellings against participants with an SDA need</div>
+        <div class="panel-sub">National, by quarter &middot; recovered from Figure P.1</div>
+      </div></div>
+      <div id="trendChart"></div>
+      <p class="trend-note" id="trendNote"></p>
+    </section>
+
+    <section class="panel" id="childPanel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title" id="childTitle"></div>
+          <div class="panel-sub">Places per participant &middot; click a column to sort, a row to open</div>
+        </div>
+        <div class="levelswitch" id="levelSwitch" role="group" aria-label="Region level"></div>
+      </div>
+      <div class="tablewrap">
+        <table id="childTable">
+          <thead><tr id="childHead"></tr></thead>
+          <tbody id="childBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div>
+        <div class="panel-title">How to read these numbers</div>
+        <div class="panel-sub">Limits inherent in the published data</div>
+      </div></div>
+      <div class="notes" id="notes"></div>
+    </section>
+
+    <footer>
+      <p id="footNote"></p>
+      <p>Derived from the NDIA's published quarterly supplement. Places for existing and legacy
+         stock are derived; new-build places are the NDIA's own published figures.
+         <a href="https://www.ndis.gov.au/about-us/publications/quarterly-reports" rel="noopener">NDIS quarterly reports &rarr;</a></p>
+    </footer>
+
+  </div>
+</main>
+
+<script src="app.js"></script>
+</body>
+</html>

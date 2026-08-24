@@ -166,142 +166,12 @@ def places_by_category(row_values):
     return totals
 
 
-def split_region(label):
-    """'NSW - Capital Region' -> ('NSW', 'Capital Region'); state totals -> None."""
-    if label == "Total":
-        return ("National", None)
-    if " - " in label:
-        state, region = label.split(" - ", 1)
-        return (state, region)
-    return (label, None)
-
-
-def build_geography(supply_dwellings, demand_status, level):
-    """Every row label that carries region-level data, in workbook order."""
-    seen, geography = set(), []
-    for label in list(supply_dwellings["rows"]) + list(demand_status["rows"]):
-        if label in seen or label == "Total":
-            continue
-        seen.add(label)
-        state, region = split_region(label)
-        if region is None:
-            continue
-        geography.append({"key": label, "state": state, "region": region, "level": level})
-    return geography
-
-
-def assemble(workbook, level):
-    """Join the supply, pipeline and demand tables for one geographic level."""
-    if level == "SA4":
-        sheets = {
-            "dwellings_by_build_type": "Table P.4",
-            "dwellings_by_category": "Table P.5",
-            "dwellings_by_max_residents": "Table P.6",
-            "newbuild_places_by_category": "Table P.7",
-            "pipeline_dwellings_by_category": "Table P.8",
-            "demand_by_status": "Table P.9",
-            "demand_by_category": "Table P.10",
-            "newbuild_detail": "Table P.11",
-            "existing_legacy_detail": "Table P.12",
-            "pipeline_detail": "Table P.16",
-        }
-    else:
-        sheets = {
-            "dwellings_by_build_type": "Table P.13",
-            "dwellings_by_category": "Table P.14",
-            "dwellings_by_max_residents": "Table P.15",
-            "demand_by_status": "Table P.17",
-            "demand_by_category": "Table P.18",
-        }
-
-    tables = {key: read_table(workbook, name) for key, name in sheets.items()}
-    geography = build_geography(
-        tables["dwellings_by_category"], tables["demand_by_status"], level
-    )
-
-    records = []
-    for place in geography:
-        key = place["key"]
-        record = dict(place)
-
-        stock = tables["dwellings_by_category"]["rows"].get(key, {}).get("values", {})
-        demand = tables["demand_by_category"]["rows"].get(key, {}).get("values", {})
-        status = tables["demand_by_status"]["rows"].get(key, {}).get("values", {})
-
-        newbuild_places, existing_places, pipeline_places, pipeline_stock = {}, {}, {}, {}
-        if level == "SA4":
-            newbuild_places = places_by_category(
-                tables["newbuild_detail"]["rows"].get(key, {}).get("values", {}))
-            existing_places = places_by_category(
-                tables["existing_legacy_detail"]["rows"].get(key, {}).get("values", {}))
-            pipeline_places = places_by_category(
-                tables["pipeline_detail"]["rows"].get(key, {}).get("values", {}))
-            pipeline_stock = tables["pipeline_dwellings_by_category"]["rows"].get(
-                key, {}).get("values", {})
-
-        record["categories"] = {}
-        for category in DESIGN_CATEGORIES:
-            enrolled_places = (newbuild_places.get(category, 0.0)
-                               + existing_places.get(category, 0.0))
-            need = demand.get(category)
-            record["categories"][category] = {
-                "enrolled_dwellings": stock.get(category),
-                "enrolled_places": enrolled_places if level == "SA4" else None,
-                "newbuild_places": newbuild_places.get(category, 0.0) or None,
-                "existing_legacy_places": existing_places.get(category, 0.0) or None,
-                "pipeline_dwellings": pipeline_stock.get(category),
-                "pipeline_places": pipeline_places.get(category, 0.0) or None,
-                "participants_with_need": need,
-                # Places per participant needing this category. Below 1.0 means
-                # fewer resident places exist than participants seeking them.
-                "places_per_participant": (
-                    round(enrolled_places / need, 3)
-                    if level == "SA4" and need not in (None, 0) else None
-                ),
-            }
-
-        record["totals"] = {
-            "enrolled_dwellings": stock.get("Total"),
-            "participants_sda_in_use": status.get(
-                next((c for c in status if "in use" in c.lower()), ""), None),
-            "participants_eligible_not_using": status.get(
-                next((c for c in status if "eligible" in c.lower()), ""), None),
-            "participants_with_need": next(
-                (v for c, v in demand.items() if c.lower().startswith("total")), None),
-            "unallocated_demand": demand.get("Missing"),
-        }
-        records.append(record)
-
-    return {"tables": tables, "records": records}
-
-
-def national_summary(records):
-    """Aggregate the comparable categories across every region."""
-    summary = {}
-    for category in COMPARABLE_CATEGORIES:
-        places = need = pipeline = dwellings = 0.0
-        for record in records:
-            cell = record["categories"][category]
-            places += cell["enrolled_places"] or 0.0
-            need += cell["participants_with_need"] or 0.0
-            pipeline += cell["pipeline_places"] or 0.0
-            dwellings += cell["enrolled_dwellings"] or 0.0
-        summary[category] = {
-            "enrolled_dwellings": int(dwellings),
-            "enrolled_places": int(places),
-            "participants_with_need": int(need),
-            "pipeline_places": int(pipeline),
-            "places_per_participant": round(places / need, 3) if need else None,
-        }
-    return summary
-
-
 def extract_national_trend(source: Path, figure_prose=()):
-    """Recover the quarterly national series from Figure P.1's embedded charts.
+    """Recover the quarterly national series from Figure P.1.
 
-    The figure's numbers exist only inside the chart XML — the sheet itself holds
-    just the alt-text description — so this is the one place the workbook carries
-    a time series.
+    The figure's numbers are not in any cell: most live in the embedded chart
+    XML, and the enrolled-dwellings series survives only in the figure's
+    accessibility description. This is the workbook's only time series.
     """
     wanted = {
         "Participants with SDA in use": "sda_in_use",
@@ -312,26 +182,27 @@ def extract_national_trend(source: Path, figure_prose=()):
     }
     series, quarters = {}, []
     with zipfile.ZipFile(source) as archive:
-        charts = [n for n in archive.namelist() if re.match(r"xl/charts/chart\d+\.xml$", n)]
+        charts = [n for n in archive.namelist()
+                  if re.match(r"xl/charts/chart\d+\.xml$", n)]
         for name in sorted(charts):
             xml = archive.read(name).decode("utf-8", "replace")
             # Excel parks filtered-out series in the c15 extension namespace, so
-            # both tags have to be split on or later series are read as one block.
+            # both tags must be split on or later series merge into one block.
             for block in re.split(r"<c(?:15)?:ser>", xml)[1:]:
                 values = re.findall(r"<c:v>([^<]*)</c:v>", block)
                 if not values:
                     continue
                 label = values[0]
-                periods = [v for v in values[1:] if re.match(r"^[A-Z][a-z]{2}-\d{2}$", v)]
+                periods = [v for v in values[1:]
+                           if re.match(r"^[A-Z][a-z]{2}-\d{2}$", v)]
                 numbers = [float(v) for v in values[1:]
                            if re.match(r"^-?\d+(\.\d+)?$", v)]
-                if label in wanted and len(periods) == len(numbers) and periods:
+                if label in wanted and periods and len(periods) == len(numbers):
                     quarters = quarters or periods
                     series[wanted[label]] = numbers
-    # The enrolled-dwellings series has no chart of its own: its numbers survive
-    # only in the figure's accessibility description, so read them from there.
+
     if "enrolled_dwellings" not in series:
-        month = {m: i for i, m in enumerate(
+        months = {m: i for i, m in enumerate(
             "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(), 1)}
         found = {}
         for prose in figure_prose:
@@ -339,19 +210,263 @@ def extract_national_trend(source: Path, figure_prose=()):
                 continue
             for name, year, count in re.findall(
                     r"In (\w+) (\d{4}) there were ([\d,]+) enrolled dwellings", prose):
-                if name[:3] in month:
-                    label = f"{name[:3]}-{year[2:]}"
-                    found[label] = float(count.replace(",", ""))
+                if name[:3] in months:
+                    found[f"{name[:3]}-{year[2:]}"] = float(count.replace(",", ""))
         if found and quarters:
             series["enrolled_dwellings"] = [found.get(q) for q in quarters]
 
     return {"quarters": quarters, "series": series}
 
 
+SA4_SHEETS = {
+    "build_types": "Table P.4",
+    "categories": "Table P.5",
+    "max_residents": "Table P.6",
+    "newbuild_places": "Table P.7",
+    "pipeline_categories": "Table P.8",
+    "demand_status": "Table P.9",
+    "demand_categories": "Table P.10",
+    "newbuild_detail": "Table P.11",
+    "existing_legacy_detail": "Table P.12",
+    "pipeline_detail": "Table P.16",
+}
+
+SA3_SHEETS = {
+    "build_types": "Table P.13",
+    "categories": "Table P.14",
+    "max_residents": "Table P.15",
+    "demand_status": "Table P.17",
+    "demand_categories": "Table P.18",
+}
+
+# Row labels that carry data but are not places: the national total and the
+# participants whose state could not be determined.
+NATIONAL_ROW = "Total"
+UNKNOWN_STATE_ROW = "Missing"
+
+
+def row_values(table, key):
+    return table["rows"].get(key, {}).get("values", {})
+
+
+def row_flags(table, key):
+    return table["rows"].get(key, {}).get("flags", {})
+
+
+def find_column(columns, *needles):
+    """First column whose name contains all the needles, case-insensitively."""
+    for column in columns:
+        lowered = column.lower()
+        if all(n in lowered for n in needles):
+            return column
+    return None
+
+
+def classify_rows(tables):
+    """Split every row label in a level's tables into national / state / region.
+
+    The workbook publishes state subtotals and a national total as ordinary
+    rows, and they reconcile exactly with the sum of their children, so they are
+    read directly rather than re-aggregated -- which also avoids summing
+    suppressed cells as though they were zero.
+    """
+    labels = []
+    for table in tables.values():
+        for label in table["rows"]:
+            if label not in labels:
+                labels.append(label)
+
+    states, regions = [], []
+    for label in labels:
+        if label in (NATIONAL_ROW, UNKNOWN_STATE_ROW):
+            continue
+        if " - " in label:
+            state, name = label.split(" - ", 1)
+            regions.append((label, state, name))
+        else:
+            states.append(label)
+    return states, regions
+
+
+def build_record(tables, key, *, level, name, state, parent, node_id, derive_places):
+    """One geography's full profile, in the same shape at every level."""
+    categories = tables["categories"]
+    demand = tables["demand_categories"]
+    status = tables["demand_status"]
+
+    stock = row_values(categories, key)
+    stock_flags = row_flags(categories, key)
+    need = row_values(demand, key)
+    need_flags = row_flags(demand, key)
+
+    # New-build places are published outright in P.7, so use the NDIA's own
+    # figure there and reserve the derivation for existing/legacy stock and the
+    # pipeline, where no places figure is published at all.
+    newbuild_places, existing_places, pipeline_places = {}, {}, {}
+    pipeline_stock = {}
+    if derive_places:
+        newbuild_places = {c: v for c, v in
+                           row_values(tables["newbuild_places"], key).items()
+                           if c != "Total" and v is not None}
+        existing_places = places_by_category(
+            row_values(tables["existing_legacy_detail"], key))
+        pipeline_places = places_by_category(row_values(tables["pipeline_detail"], key))
+        pipeline_stock = row_values(tables["pipeline_categories"], key)
+
+    cells = {}
+    for category in DESIGN_CATEGORIES:
+        new_pl = newbuild_places.get(category, 0.0)
+        old_pl = existing_places.get(category, 0.0)
+        places = (new_pl + old_pl) if derive_places else None
+        participants = need.get(category)
+        cells[category] = {
+            "enrolled_dwellings": stock.get(category),
+            "enrolled_dwellings_flag": stock_flags.get(category),
+            "enrolled_places": places,
+            "newbuild_places": new_pl if derive_places else None,
+            "existing_legacy_places": old_pl if derive_places else None,
+            "pipeline_dwellings": pipeline_stock.get(category),
+            "pipeline_places": pipeline_places.get(category) if derive_places else None,
+            "participants_with_need": participants,
+            "participants_with_need_flag": need_flags.get(category),
+            "places_per_participant": (
+                round(places / participants, 3)
+                if places is not None and participants not in (None, 0) else None
+            ),
+        }
+
+    in_use_col = find_column(status["columns"], "in use")
+    eligible_col = find_column(status["columns"], "eligible")
+    need_total_col = find_column(demand["columns"], "total")
+
+    return {
+        "id": node_id,
+        "level": level,
+        "name": name,
+        "state": state,
+        "parent": parent,
+        "source_row": key,
+        "has_places": derive_places,
+        "categories": cells,
+        "totals": {
+            "enrolled_dwellings": stock.get("Total"),
+            "participants_sda_in_use": row_values(status, key).get(in_use_col),
+            "participants_eligible_not_using": row_values(status, key).get(eligible_col),
+            "participants_with_need": need.get(need_total_col),
+            "need_without_category": need.get("Missing"),
+            "pipeline_dwellings": (
+                row_values(tables["pipeline_categories"], key).get("Total")
+                if derive_places else None
+            ),
+        },
+        "build_types": {c: v for c, v in row_values(tables["build_types"], key).items()},
+        "max_residents": {c: v for c, v in row_values(tables["max_residents"], key).items()},
+    }
+
+
+def assemble(workbook):
+    """Build one flat geography list spanning National, State, SA4 and SA3.
+
+    Every node carries the same shape, so the interface renders one component at
+    all four levels. Places are derivable only where the dwelling-form
+    cross-tabs exist (P.11/P.12/P.16), which the NDIA publishes for SA4 and
+    above but not for SA3.
+    """
+    sa4 = {key: read_table(workbook, name) for key, name in SA4_SHEETS.items()}
+    sa3 = {key: read_table(workbook, name) for key, name in SA3_SHEETS.items()}
+
+    sa4_states, sa4_regions = classify_rows(sa4)
+    _, sa3_regions = classify_rows(sa3)
+
+    nodes = [build_record(
+        sa4, NATIONAL_ROW, level="National", name="Australia", state=None,
+        parent=None, node_id="national", derive_places=True)]
+
+    for state in sa4_states:
+        nodes.append(build_record(
+            sa4, state, level="State", name=state, state=state,
+            parent="national", node_id=f"state:{state}", derive_places=True))
+
+    for key, state, name in sa4_regions:
+        nodes.append(build_record(
+            sa4, key, level="SA4", name=name, state=state,
+            parent=f"state:{state}", node_id=f"sa4:{key}", derive_places=True))
+
+    for key, state, name in sa3_regions:
+        nodes.append(build_record(
+            sa3, key, level="SA3", name=name, state=state,
+            parent=f"state:{state}", node_id=f"sa3:{key}", derive_places=False))
+
+    return nodes, sa4
+
+
+def calibrate_derivation(nodes, sa4_tables):
+    """Measure the derivation against the one places figure the NDIA publishes.
+
+    Places for existing/legacy stock (P.12) and the pipeline (P.16) have to be
+    derived as dwellings x the resident count named in each column header. That
+    arithmetic cannot be checked directly, because no published figure exists --
+    but the same arithmetic over P.11 can be compared against published
+    new-build places in P.7, which calibrates it.
+
+    The two do not agree exactly: an enrolled dwelling's maximum residents can
+    be lower than its dwelling type implies, so the derivation runs slightly
+    high or low on individual rows. This reports how closely it tracks, so the
+    derived figures carry a known error rather than an assumed one.
+    """
+    published = sa4_tables["newbuild_places"]
+    checked = exact = 0
+    worst = 0.0
+    published_total = derived_total = 0.0
+    for node in nodes:
+        if not node["has_places"]:
+            continue
+        expected = row_values(published, node["source_row"])
+        if not expected:
+            continue
+        derived = places_by_category(
+            row_values(sa4_tables["newbuild_detail"], node["source_row"]))
+        for category in DESIGN_CATEGORIES:
+            want = expected.get(category)
+            if want is None:
+                continue
+            got = derived.get(category, 0.0)
+            checked += 1
+            if abs(want - got) <= 0.5:
+                exact += 1
+            worst = max(worst, abs(want - got))
+            if node["level"] == "SA4":
+                published_total += want
+                derived_total += got
+    bias = (derived_total / published_total - 1) if published_total else None
+    return {
+        "values_checked": checked,
+        "exact": exact,
+        "exact_share": round(exact / checked, 4) if checked else None,
+        "largest_difference_places": worst,
+        "net_bias_on_sa4_totals": round(bias, 5) if bias is not None else None,
+    }
+
+
+def national_summary(nodes):
+    national = next(n for n in nodes if n["id"] == "national")
+    summary = {}
+    for category in COMPARABLE_CATEGORIES:
+        cell = national["categories"][category]
+        summary[category] = {
+            "enrolled_dwellings": cell["enrolled_dwellings"],
+            "enrolled_places": cell["enrolled_places"],
+            "participants_with_need": cell["participants_with_need"],
+            "pipeline_places": cell["pipeline_places"],
+            "places_per_participant": cell["places_per_participant"],
+        }
+    return summary
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("workbook", type=Path)
-    parser.add_argument("-o", "--out", type=Path, default=Path("data"))
+    parser.add_argument("-o", "--out", type=Path, default=Path("docs/data"))
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
@@ -362,30 +477,47 @@ def main():
     figure_prose = [str(cell) for row in workbook["Figure P.1"].iter_rows(values_only=True)
                     for cell in row if cell]
 
-    sa4 = assemble(workbook, "SA4")
-    sa3 = assemble(workbook, "SA3")
+    nodes, sa4_tables = assemble(workbook)
+    caption = sa4_tables["categories"]["caption"]
+    as_at = re.search(r"as at (.+)$", caption)
+
+    calibration = calibrate_derivation(nodes, sa4_tables)
 
     bundle = {
-        "source": args.workbook.name,
-        "period": read_table(workbook, "Table P.5")["caption"],
-        "design_categories": DESIGN_CATEGORIES,
-        "comparable_categories": COMPARABLE_CATEGORIES,
+        "meta": {
+            "source": args.workbook.name,
+            "as_at": as_at.group(1).strip() if as_at else None,
+            "design_categories": DESIGN_CATEGORIES,
+            "comparable_categories": COMPARABLE_CATEGORIES,
+            "notes": sa4_tables["demand_categories"]["notes"]
+                     + sa4_tables["pipeline_detail"]["notes"],
+            "derivation_calibration": calibration,
+        },
         "national_trend": extract_national_trend(args.workbook, figure_prose),
-        "national_summary": national_summary(sa4["records"]),
-        "sa4": sa4["records"],
-        "sa3": sa3["records"],
+        "national_summary": national_summary(nodes),
+        "geographies": nodes,
     }
 
     target = args.out / "sda.json"
-    target.write_text(json.dumps(bundle, indent=1))
+    target.write_text(json.dumps(bundle, separators=(",", ":")))
     converted.unlink()
 
+    levels = {}
+    for node in nodes:
+        levels[node["level"]] = levels.get(node["level"], 0) + 1
+
     print(f"wrote {target}  ({target.stat().st_size / 1024:.0f} KB)")
-    print(f"  SA4 regions: {len(sa4['records'])}   SA3 regions: {len(sa3['records'])}")
+    print(f"  as at: {bundle['meta']['as_at']}")
+    print("  geographies: " + "  ".join(f"{k}={v}" for k, v in levels.items()))
     print(f"  quarters of national trend: {len(bundle['national_trend']['quarters'])}")
+    print(f"  derivation calibration vs published P.7: "
+          f"{calibration['exact']}/{calibration['values_checked']} exact "
+          f"({calibration['exact_share']:.1%}), largest gap "
+          f"{calibration['largest_difference_places']:.0f} places, net bias "
+          f"{calibration['net_bias_on_sa4_totals']:+.3%}")
     for category, cell in bundle["national_summary"].items():
-        print(f"  {category:<24} places={cell['enrolled_places']:>6}"
-              f"  need={cell['participants_with_need']:>6}"
+        print(f"  {category:<24} places={cell['enrolled_places']:>7.0f}"
+              f"  need={cell['participants_with_need']:>6.0f}"
               f"  ratio={cell['places_per_participant']}")
 
 
