@@ -55,8 +55,8 @@ Figure P.1's national totals exactly.
 
 ## The explorer
 
-`docs/` is a static site — one HTML page, one stylesheet, one script, one JSON
-file. It renders the same profile at every level:
+The repository root is a static site — one HTML page, one stylesheet, one
+script, one JSON file. It renders the same profile at every level:
 
 - **Australia** — all 88 SA4 regions combined
 - **Each state and territory** — the NDIA's own published subtotals
@@ -77,7 +77,7 @@ pip install openpyxl
 python3 scripts/extract_sda.py <Supplement_P_*.xlsx>
 ```
 
-Writes `docs/data/sda.json` (~1 MB) containing:
+Writes `data/sda.json` (~1 MB) containing:
 
 | Key | Contents |
 | --- | --- |
@@ -91,27 +91,29 @@ Each geography carries `categories` (per design category: `enrolled_dwellings`,
 `participants_with_need`, `places_per_participant`), `totals`, `build_types` and
 `max_residents`, plus `parent` for the hierarchy.
 
-To preview locally:
+To preview locally, from the repository root:
 
 ```sh
-cd docs && python3 -m http.server 8000
+python3 -m http.server 8000
 ```
 
 ## Publishing on GitHub Pages
 
-The site needs no build step, so Pages can serve `docs/` directly:
+The site lives at the repository root and needs no build step, so Pages serves
+it as-is:
 
-1. Merge this branch into `main` (Pages serves from a branch, so the files must
-   be on the branch you select).
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to `Deploy from a branch`.
-4. Set **Branch** to `main` and the folder to `/docs`, then **Save**.
-5. Wait a minute or two for the first deploy, then open
-   `https://jd-summer-foundation.github.io/SDA-data-visualisation/`.
+- **Settings → Pages → Source** = `Deploy from a branch`
+- **Branch** = `main`, folder = `/ (root)`
 
-Re-running the extractor and pushing the updated `docs/data/sda.json` is all a
-new quarter needs — the site picks it up with no other change. If a refresh
-appears to show stale numbers, it is browser cache; a hard reload clears it.
+`index.html` at the root takes precedence over `README.md`, so Pages serves the
+explorer rather than rendering this file. `.nojekyll` stops Pages running the
+files through Jekyll on the way.
+
+Live at `https://jd-summer-foundation.github.io/SDA-data-visualisation/`.
+
+Re-running the extractor and pushing the updated `data/sda.json` is all a new
+quarter needs — the site picks it up with no other change. If a refresh appears
+to show stale numbers, it is browser cache; a hard reload clears it.
 
 Note that a Pages site on a public repository is public, whether or not the
 repository itself is. If the data should stay internal for now, keep the

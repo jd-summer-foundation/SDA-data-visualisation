@@ -1,4 +1,4 @@
-docs/data/_transitional.xlsx
+data/_transitional.xlsx
 __pycache__/
 *.pyc
 node_modules/
