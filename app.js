@@ -7,12 +7,14 @@ const RATIO_GOOD = 1.25;   // comfortably supplied
 const RATIO_TIGHT = 1.0;   // below this, fewer places than participants
 
 let DATA = null;
+let GEO = null;
 let BY_ID = new Map();
 let CHILDREN = new Map();
 let current = null;
 let childLevel = null;
 let sort = { key: null, dir: -1 };
 let substitution = false;
+let mapCategory = "Fully Accessible";
 
 /* Which categories a dwelling certified for one category can also house.
    High Physical Support is defined cumulatively on top of Fully Accessible --
@@ -99,6 +101,16 @@ async function boot() {
     return;
   }
 
+  // The map is an enhancement, not the point of the page: if its geometry is
+  // missing or unreadable the rest of the explorer still works, so this
+  // failure is swallowed rather than surfaced.
+  try {
+    const geo = await fetch("data/sa4-geometry.json");
+    if (geo.ok) GEO = await geo.json();
+  } catch (err) {
+    GEO = null;
+  }
+
   DATA.geographies.forEach(g => {
     BY_ID.set(g.id, g);
     if (!CHILDREN.has(g.parent)) CHILDREN.set(g.parent, []);
@@ -111,6 +123,7 @@ async function boot() {
 
   wireSearch();
   wireModeSwitch();
+  wireMapCategory();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
@@ -123,6 +136,17 @@ function routeFromHash() {
 function go(id) {
   if (location.hash === "#" + encodeURIComponent(id)) render(id);
   else location.hash = encodeURIComponent(id);
+}
+
+function wireMapCategory() {
+  document.getElementById("mapSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-cat]");
+    if (!btn) return;
+    mapCategory = btn.dataset.cat;
+    // Only the map changes, so the rest of the profile is left alone and the
+    // reader keeps their scroll position.
+    renderMap(current);
+  });
 }
 
 function wireModeSwitch() {
@@ -231,6 +255,7 @@ function render(id) {
   renderTiles(g);
   renderCategoryTable(g, cats);
   renderChart(g, comparable);
+  renderMap(g);
   renderBreakdowns(g);
   renderChildren(g, comparable);
   renderTrend(g);
@@ -517,6 +542,175 @@ function renderTrend(g) {
     + `while participants with an identified SDA need rose <b>${growth(need[0], need[last])}</b>. `
     + `Aggregate supply is catching up quickly, so the category shortfalls above are a question of `
     + `<b>composition</b> — which design categories, in which regions — rather than volume alone.`;
+}
+
+/* ---------- map ---------- */
+
+/* The same two thresholds ratioChip() uses, with each side of them graduated.
+   Three flat bands would render Fully Accessible as 78 of 88 regions in one
+   colour and High Physical Support as 69 of 88 in another, which is a map
+   that cannot show where the pressure sits. The breaks are fixed across all
+   four categories so the four maps stay directly comparable. */
+const MAP_BREAKS = [0.5, 0.75, RATIO_TIGHT, RATIO_GOOD, 2];
+
+/* Which capital is worth an inset. Hobart, Darwin and Canberra are a single
+   SA4 each, so an inset would show nothing the main map does not. */
+const STATE_INSET = { NSW: "Greater Sydney", VIC: "Greater Melbourne",
+                      QLD: "Greater Brisbane", WA: "Greater Perth",
+                      SA: "Greater Adelaide" };
+
+const MAP_DEFS =
+  '<svg class="m-defs" aria-hidden="true">'
+  + '<defs><pattern id="mapNil" width="7" height="7" patternUnits="userSpaceOnUse"'
+  + ' patternTransform="rotate(45)">'
+  + '<rect width="7" height="7" fill="var(--map-nil-bg)"/>'
+  + '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--map-nil-ink)" stroke-width="2"/>'
+  + '</pattern></defs></svg>';
+
+function mapClass(r) {
+  if (r === null || r === undefined) return "m-nil";
+  let i = 0;
+  while (i < MAP_BREAKS.length && r >= MAP_BREAKS[i]) i++;
+  return "m" + (i + 1);
+}
+
+/* Bounds of a set of already-projected paths. A state map is a crop of the
+   national geometry rather than a second copy of it, which is why the file
+   carries one national view and five insets and nothing per state. */
+const boxCache = new Map();
+function pathBox(key, ds) {
+  if (boxCache.has(key)) return boxCache.get(key);
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const d of ds) {
+    const re = /(-?[\d.]+),(-?[\d.]+)/g;
+    let m;
+    while ((m = re.exec(d))) {
+      const x = +m[1], y = +m[2];
+      if (x < x0) x0 = x;
+      if (x > x1) x1 = x;
+      if (y < y0) y0 = y;
+      if (y > y1) y1 = y;
+    }
+  }
+  const pad = Math.max(x1 - x0, y1 - y0) * 0.05;
+  const box = [x0 - pad, y0 - pad, x1 - x0 + pad * 2, y1 - y0 + pad * 2]
+    .map(n => n.toFixed(1)).join(" ");
+  boxCache.set(key, box);
+  return box;
+}
+
+function renderMap(g) {
+  const panel = document.getElementById("mapPanel");
+  // SA3 carries no places and so no ratio -- there is nothing to colour.
+  if (!GEO || !GEO.views || g.level === "SA3") { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const cat = mapCategory;
+  const scope = g.level === "National" ? null : g.state;
+  const nat = GEO.views.national;
+  const inScope = id => !scope || (BY_ID.get(id) || {}).state === scope;
+
+  const ratioOf = id => {
+    const r = BY_ID.get(id);
+    const s = r && supplyFor(r);
+    return s && s[cat] ? s[cat].ratio : null;
+  };
+
+  /* An anchor rather than a click handler: that gives keyboard focus, the
+     screen-reader name and the deep link for free, and hashchange already
+     routes it. */
+  const region = (id, d) => {
+    if (!inScope(id)) return '<path class="m-out" d="' + d + '"/>';
+    const r = BY_ID.get(id);
+    const v = ratioOf(id);
+    const x = r.categories[cat] || {};
+    const verdict = v === null ? "no ratio — no places and no identified need"
+      : v < RATIO_TIGHT ? "fewer places than participants"
+      : v < RATIO_GOOD ? "roughly balanced" : "more places than participants";
+    return '<a class="m-a' + (id === g.id ? " m-here" : "") + '"'
+      + ' href="#' + encodeURIComponent(id) + '">'
+      + "<title>" + r.name + " — "
+      + (v === null ? "" : v.toFixed(2) + " places per participant · ")
+      + verdict + " · " + (fmt(x.enrolled_places) || "not disclosed")
+      + " places, " + (fmt(x.participants_with_need) || "not disclosed")
+      + " participants</title>"
+      + '<path class="' + mapClass(v) + '" d="' + d + '"/></a>';
+  };
+
+  const draw = (view, box, label) => {
+    const out = ['<svg viewBox="' + box + '" role="img" aria-label="' + label + '">'];
+    for (const id in view.regions) out.push(region(id, view.regions[id]));
+    out.push('<path class="m-mesh" d="' + view.mesh + '"/></svg>');
+    return out.join("");
+  };
+
+  const ids = Object.keys(nat.regions).filter(inScope);
+  const vals = ids.map(ratioOf);
+  const known = vals.filter(v => v !== null).length;
+  const short = vals.filter(v => v !== null && v < RATIO_TIGHT).length;
+  const where = scope || "Australia";
+  // known can be short of the region count: a region with neither places nor
+  // need has no ratio, and must not be counted as though it had one.
+  const label = cat + ", places per participant by SA4 region. " + short + " of the "
+    + known + " regions with a ratio in " + where
+    + " have fewer places than participants with an identified need"
+    + (substitution ? ", allowing substitution" : "") + ".";
+
+  document.getElementById("mapMain").innerHTML = MAP_DEFS + draw(
+    nat, scope ? pathBox(scope, ids.map(i => nat.regions[i]))
+               : "0 0 " + nat.width + " " + nat.height, label);
+
+  const insets = scope
+    ? (STATE_INSET[scope] ? [STATE_INSET[scope]] : [])
+    : Object.keys(STATE_INSET).map(k => STATE_INSET[k]);
+  document.getElementById("mapInsets").innerHTML = insets.map(name => {
+    const v = GEO.views["gccsa:" + name];
+    if (!v) return "";
+    return '<figure class="map-inset">'
+      + draw(v, "0 0 " + v.width + " " + v.height, name + ", " + cat)
+      + "<figcaption>" + name.replace("Greater ", "") + "</figcaption></figure>";
+  }).join("");
+
+  document.getElementById("mapSwitch").innerHTML =
+    DATA.meta.comparable_categories.map(c =>
+      '<button type="button" data-cat="' + c + '" aria-pressed="'
+      + (c === cat) + '">' + c + "</button>").join("");
+
+  document.getElementById("mapSub").textContent =
+    (substitution ? "Allowing substitution" : "As enrolled") + " · "
+    + (scope ? where + ", " + ids.length + " regions"
+             : "all " + ids.length + " SA4 regions")
+    + " · click a region to open it";
+
+  const sw = c => '<span class="' + c + '"></span>';
+  document.getElementById("mapLegend").innerHTML =
+    '<div class="mrow"><i class="g-crit">▼</i><span class="msw">'
+    + sw("m1") + sw("m2") + sw("m3") + "</span><span>fewer places than participants</span>"
+    + '<span class="mticks">under 1.00</span></div>'
+    + '<div class="mrow"><i class="g-warn">◆</i><span class="msw">' + sw("m4")
+    + "</span><span>roughly balanced</span>"
+    + '<span class="mticks">1.00 – 1.25</span></div>'
+    + '<div class="mrow"><i class="g-good">▲</i><span class="msw">'
+    + sw("m5") + sw("m6") + "</span><span>more places than participants</span>"
+    + '<span class="mticks">1.25 and over</span></div>'
+    // Only worth a legend row when something in view actually uses it.
+    + (vals.some(v => v === null)
+        ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")
+          + "</span><span>no ratio — no places and no identified need</span></div>"
+        : "");
+
+  const tot = BY_ID.get("national").totals;
+  const miss = tot.need_without_category, all = tot.participants_with_need;
+  document.getElementById("mapNote").innerHTML =
+    "<b>Colour shows the ratio, not the size of the market.</b> A region with four "
+    + "participants and one with nine hundred can read the same; open a region for the counts "
+    + "behind it. And the ratio is a mismatch of <b>mix</b>, not a waiting list — a "
+    + "participant assessed for one category but housed in another appears on both sides, in "
+    + "different categories. " + (miss && all
+      ? "A further <b>" + fmt(miss) + "</b> of " + fmt(all) + " participants ("
+        + (miss / all * 100).toFixed(1) + "%) have no design category recorded, so no "
+        + "category-specific map can place them at all."
+      : "");
 }
 
 function renderNotes(g) {

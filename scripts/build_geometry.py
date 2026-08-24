@@ -54,6 +54,13 @@ SIMPLIFY_INSET = "12%"
 DECIMALS_NATIONAL = 0
 DECIMALS_INSET = 1
 
+# At national scale one pixel is about four kilometres, so anything under this
+# is a speck under two pixels wide. Dropping them halves the ring count without
+# moving the bounds or losing a region -- every SA4's mainland part still
+# draws. Insets are left alone: Bribie, Moreton and Stradbroke are real shapes
+# at city scale.
+ISLANDS_NATIONAL = "50km2"
+
 WIDTH_NATIONAL = 960
 
 # Insets are fitted inside a fixed square and centred rather than scaled to a
@@ -99,7 +106,7 @@ def mapshaper(args):
     return proc.stderr
 
 
-def run_view(shp, tmp, tag, where, simplify):
+def run_view(shp, tmp, tag, where, simplify, islands):
     """Reproject, simplify and export one view as fills plus a border mesh.
 
     Both layers come out of the same simplification pass, so they cannot
@@ -119,6 +126,7 @@ def run_view(shp, tmp, tag, where, simplify):
         "-proj", PROJECTION,
         "-simplify", "visvalingam", "weighted", simplify, "keep-shapes",
         "-clean",
+    ] + (["-filter-islands", "min-area=" + islands] if islands else []) + [
         "-o", regions, "format=geojson",
         "-innerlines",
         "-o", mesh, "format=geojson",
@@ -204,8 +212,9 @@ def make_fit(box, width, height, decimals):
     return path, height
 
 
-def build_view(shp, tmp, tag, where, simplify, width, decimals, height=None):
-    regions, mesh = run_view(shp, tmp, tag, where, simplify)
+def build_view(shp, tmp, tag, where, simplify, width, decimals, height=None,
+               islands=None):
+    regions, mesh = run_view(shp, tmp, tag, where, simplify, islands)
     feats = [f for f in regions.get("features", []) if f.get("geometry")]
     if not feats:
         die("no features for view " + tag)
@@ -246,7 +255,8 @@ def main():
     with tempfile.TemporaryDirectory() as tmp:
         views = {"national": build_view(shp, tmp, "national", REAL_SA4,
                                         SIMPLIFY_NATIONAL, WIDTH_NATIONAL,
-                                        DECIMALS_NATIONAL)}
+                                        DECIMALS_NATIONAL,
+                                        islands=ISLANDS_NATIONAL)}
         for gcc in INSETS:
             where = '%s && GCC_NAME26 === "%s"' % (REAL_SA4, gcc)
             views["gccsa:" + gcc] = build_view(
