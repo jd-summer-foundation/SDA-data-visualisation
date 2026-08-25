@@ -84,12 +84,27 @@ assessed for Fully Accessible. The reverse does not hold, and Improved
 Liveability (sensory and cognitive) and Robust (resilience) sit on different
 axes, so nothing substitutes for them.
 
-Donor stock passes down as a **waterfall, not a sum**: HPS keeps enough places to
-cover its own need, and only the surplus counts towards Fully Accessible. Adding
-the two outright would count the same places against two different demands.
-Nationally that takes Fully Accessible from 0.53 to 1.78, and cuts the SA4
-regions below 1.0 from 78 to 30 — those 30 are where the gap survives
-substitution, rather than being an artefact of how stock is categorised.
+So the two are reported as **one pooled category**, `High Physical Support +
+Fully Accessible` — one body of stock against one body of demand. Nationally
+that pool holds 16,622 places against 11,587 participants, a ratio of **1.44**,
+and 31 of the 88 SA4 regions sit below 1.0. Read separately and as enrolled,
+Fully Accessible is below 1.0 in 78 of 87 regions, so most of that gap is an
+artefact of how stock is categorised rather than stock that does not exist.
+
+An earlier version passed the surplus down as a waterfall instead — HPS keeping
+enough to cover its own need, the remainder counting towards Fully Accessible.
+That credited the borrower without debiting the donor, so the same places backed
+two comfortable-looking ratios at once, and three of the four categories were
+identical in both readings.
+
+Pooling has its own flaw, stated here rather than hidden: it counts Fully
+Accessible stock against High Physical Support need, which is not physically
+possible, since the substitution only runs one way. In this file it never
+flatters a region — no region has High Physical Support below 1.0 while the pool
+reads 1.0 or above, because Fully Accessible is short almost everywhere and so
+has no surplus to lend upwards. It is also the more conservative of the two
+readings: against the waterfall it moves 14 regions down a band and none up.
+Worth re-checking when the numbers move.
 
 Two caveats the interface states on screen: a dwelling is still *enrolled* in one
 category, and SDA payment follows the participant's funded category — so this
@@ -106,11 +121,19 @@ and at national scale they are a few pixels each. A state map is a crop of the
 same national geometry with its neighbours greyed for context, so no separate
 per-state boundaries are stored. SA3 has no map, because it has no ratio.
 
-The scale keeps 1.0 and 1.25 as the thresholds — the same cuts the ratio chips
-use — but graduates either side of them. Three flat bands would render Fully
-Accessible as 78 of 88 regions in one red and High Physical Support as 69 of 88
-in one green, which shows nothing about where the pressure sits. The breaks are
-fixed across all four categories so the four maps stay comparable.
+The scale is **diverging**, because both ends are a problem. Red is below 1.0,
+green is the balanced band from 1.0 to 1.5, and two blues sit above it, breaking
+at 2.5. A red-to-green scale treats more as always better, which reported High
+Physical Support — 77 of 88 regions above 1.0, and 49% of its places in regions
+at 3.0 or above, in real markets rather than tiny ones — as uniformly healthy.
+
+1.5 and 2.5 are where the mass actually sits. High Physical Support puts 29
+regions between them and 35 above; Robust 15 and 24; Fully Accessible and
+Improved Liveability barely reach the band at all. Robust's extremes are mostly
+small denominators — its top three regions have 7, 7 and 4 participants — which
+is why the two blues stay distinct rather than merging into one. The breaks are
+fixed across categories so the maps stay comparable, and the ratio chips in the
+tables use the same cuts.
 
 Colour is doing the work here, so it is not the only channel: the legend carries
 the same ▼ ◆ ▲ glyphs as the tables, every region states its ratio and both
@@ -220,6 +243,9 @@ repository private and preview locally until you decide to publish.
   may already be enrolled but not yet removed from the data.
 - **Table P.1 is not joinable.** It keys on NDIA Service Districts, not SA4;
   P.2 and P.3 key on State only. None of them appear in the explorer.
+- **A high ratio is not automatically good.** Above about 1.5 a region holds
+  more places than the need recorded against them, which is its own kind of
+  market failure. The scale says so rather than running green all the way up.
 - **The map shows a ratio, not a volume.** Two regions with wildly different
   numbers of participants can carry the same colour. The counts are in every
   region's tooltip and in the table beneath it.
