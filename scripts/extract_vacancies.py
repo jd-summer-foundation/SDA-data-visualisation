@@ -25,6 +25,8 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import math
+import random
 import re
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -398,27 +400,136 @@ def build_bridge(grouped, sda, categories):
     return sorted(points, key=lambda p: (p["state"], p["region"], p["category"]))
 
 
-def spearman(pairs):
-    """Rank correlation, with midranks for ties. Pure stdlib, n is small."""
-    def ranks(values):
-        order = sorted(range(len(values)), key=lambda i: values[i])
-        out = [0.0] * len(values)
-        i = 0
-        while i < len(order):
-            j = i
-            while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
-                j += 1
-            shared = (i + j) / 2 + 1
-            for k in range(i, j + 1):
-                out[order[k]] = shared
-            i = j + 1
-        return out
+def ranks(values):
+    """Ranks with midranks for ties."""
+    order = sorted(range(len(values)), key=lambda i: values[i])
+    out = [0.0] * len(values)
+    i = 0
+    while i < len(order):
+        j = i
+        while j + 1 < len(order) and values[order[j + 1]] == values[order[i]]:
+            j += 1
+        shared = (i + j) / 2 + 1
+        for k in range(i, j + 1):
+            out[order[k]] = shared
+        i = j + 1
+    return out
 
-    xs, ys = ranks([p[0] for p in pairs]), ranks([p[1] for p in pairs])
+
+def correlate(xs, ys):
+    """Pearson correlation of two equal-length sequences."""
     mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
     num = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
     den = (sum((x - mx) ** 2 for x in xs) * sum((y - my) ** 2 for y in ys)) ** 0.5
-    return round(num / den, 3) if den else None
+    return num / den if den else None
+
+
+def spearman(pairs):
+    """Rank correlation, with midranks for ties. Pure stdlib, n is small."""
+    r = correlate(ranks([p[0] for p in pairs]), ranks([p[1] for p in pairs]))
+    return round(r, 3) if r is not None else None
+
+
+def fisher_p(r, n):
+    """Two-sided p for a correlation, via the Fisher z-transform."""
+    if r is None or n < 6 or abs(r) >= 1:
+        return None
+    z = 0.5 * math.log((1 + r) / (1 - r)) * math.sqrt(n - 3)
+    return round(math.erfc(abs(z) / math.sqrt(2)), 4)
+
+
+def within_region_correlation(bridge, shuffles=4000):
+    """The same relationship, measured inside each SA4 rather than across them.
+
+    The pooled correlation mixes two comparisons. One asks whether a region with
+    a high places-per-participant figure has more vacancy than another region —
+    which is exactly the comparison Housing Hub's uneven coverage corrupts, since
+    a provider base that advertises more inflates every category in that region.
+    The other asks whether, *within* one region, the categories the supplement
+    calls oversupplied are the ones sitting advertised. Coverage is a property of
+    the region, so it cancels in the second comparison, which makes it the one
+    worth reporting.
+
+    Ranks are formed inside each region and centred there before pooling, so no
+    region's overall level contributes. Significance comes from a permutation
+    test that reshuffles vacancy ranks within a region only, preserving both the
+    grouping and the marginal distributions; the Fisher approximation would
+    assume independent observations that centring has already used up.
+    """
+    groups = defaultdict(list)
+    for point in bridge:
+        groups[point["region_id"]].append(point)
+    groups = [g for g in groups.values() if len(g) >= 3]
+    if len(groups) < 2:
+        return None
+
+    def pooled(rng=None):
+        xs, ys = [], []
+        for group in groups:
+            gx = ranks([p["places_per_participant"] for p in group])
+            gy = ranks([p["rate"] for p in group])
+            if rng:
+                rng.shuffle(gy)
+            mx, my = sum(gx) / len(gx), sum(gy) / len(gy)
+            xs += [x - mx for x in gx]
+            ys += [y - my for y in gy]
+        return correlate(xs, ys)
+
+    observed = pooled()
+    # Seeded locally: a module-level seed would be a side effect on an otherwise
+    # pure extractor, and the build needs to be reproducible.
+    rng = random.Random(0)
+    beats = sum(1 for _ in range(shuffles) if abs(pooled(rng)) >= abs(observed))
+    return {
+        "r": round(observed, 3),
+        "points": sum(len(g) for g in groups),
+        "regions": len(groups),
+        "p": round((beats + 1) / (shuffles + 1), 4),
+    }
+
+
+def category_correlations(bridge, categories):
+    """The relationship within each design category, across regions.
+
+    Reported because it is mostly absent: holding category constant, only High
+    Physical Support and Robust show it at all. Stating that alongside the
+    pooled figure is what stops the panel reading as a stronger claim than the
+    data supports.
+    """
+    out = []
+    for name in categories:
+        pairs = [(p["places_per_participant"], p["rate"])
+                 for p in bridge if p["category"] == name]
+        if len(pairs) < 6:
+            continue
+        r = spearman(pairs)
+        out.append({"category": name, "r": r, "p": fisher_p(r, len(pairs)),
+                    "points": len(pairs)})
+    return out
+
+
+def ratio_tertiles(bridge):
+    """Pooled vacancy rate in each third of the places-per-participant range.
+
+    The plain-language version of the correlation: what the relationship is
+    actually worth, in points of vacancy, without asking anyone to read a rho.
+    """
+    ordered = sorted(bridge, key=lambda p: p["places_per_participant"])
+    size = len(ordered) // 3
+    cuts = [("Lowest third", ordered[:size]),
+            ("Middle third", ordered[size:2 * size]),
+            ("Highest third", ordered[2 * size:])]
+    out = []
+    for label, group in cuts:
+        vacant = sum(p["vacant_places"] for p in group)
+        enrolled = sum(p["enrolled_places"] for p in group)
+        out.append({
+            "label": label,
+            "from": round(group[0]["places_per_participant"], 2),
+            "to": round(group[-1]["places_per_participant"], 2),
+            "rate": round(vacant / enrolled, 4),
+        })
+    return out
 
 
 def main():
@@ -461,6 +572,15 @@ def main():
     correlation = spearman([(p["places_per_participant"], p["rate"]) for p in bridge])
     without_vic = spearman([(p["places_per_participant"], p["rate"])
                             for p in bridge if p["state"] != "VIC"])
+    within_region = within_region_correlation(bridge)
+    by_category = category_correlations(bridge, comparable)
+    tertiles = ratio_tertiles(bridge)
+
+    # A within-region figure computed over a handful of regions would be noise
+    # wearing a decimal point, and it is the panel's load-bearing claim.
+    assert within_region and -1 <= within_region["r"] <= 1, "within-region correlation out of range"
+    assert within_region["regions"] >= 15, \
+        f"only {within_region['regions']} regions carry 3+ categories; too few to report"
 
     as_at = re.search(r"(\d{4})(\d{2})(\d{2})", args.vacancies.stem)
     bundle = {
@@ -482,6 +602,9 @@ def main():
                 "spearman": correlation,
                 "spearman_excluding_vic": without_vic,
                 "points": len(bridge),
+                "within_region": within_region,
+                "by_category": by_category,
+                "tertiles": tertiles,
             },
         },
         "regions": regions,
@@ -508,6 +631,12 @@ def main():
           f"({unresolved_sa3} listings had no matching SA3)")
     print(f"  bridge: rho={correlation} over {len(bridge)} SA4-category points "
           f"({without_vic} excluding VIC)")
+    print(f"    within region: r={within_region['r']} over {within_region['points']} points "
+          f"in {within_region['regions']} SA4s, permutation p={within_region['p']}")
+    print("    within category: " + "  ".join(
+        f"{row['category'].split()[0]}={row['r']:+.2f}(p={row['p']})" for row in by_category))
+    print("    by ratio third: " + "  ".join(
+        f"{row['from']}-{row['to']}: {row['rate']:.2%}" for row in tertiles))
     for row in national["by_category"]:
         share = f"{row['rate']:.2%}" if row["rate"] is not None else "n/a"
         print(f"  {row['category']:<24} vacant={row['vacant_places']:>5}"

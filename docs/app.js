@@ -701,10 +701,14 @@ function renderVacBridge(g) {
   if (!points.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
+  // Only ids that actually carry points, so the note never claims a highlight
+  // that is not on screen. An SA3 has no points of its own and cannot reach its
+  // SA4 — Supplement P hangs SA3 off the state — so it highlights nothing.
+  const withPoints = new Set(points.map(p => p.region_id));
   const here = new Set(
-    g.level === "National" ? []
+    (g.level === "National" ? []
       : g.level === "State" ? points.filter(p => p.state === g.state).map(p => p.region_id)
-      : [g.id, g.parent].filter(Boolean));
+      : [g.id]).filter(id => withPoints.has(id)));
 
   const W = 900, H = 340, M = { t: 18, r: 20, b: 52, l: 58 };
   const iw = W - M.l - M.r, ih = H - M.t - M.b;
@@ -714,10 +718,15 @@ function renderVacBridge(g) {
   const y = v => M.t + ih - (v / yMax) * ih;
 
   const corr = VAC.meta.bridge_correlation;
+  const wr = corr.within_region;
   const out = [`<svg class="scatter" viewBox="0 0 ${W} ${H}" role="img" aria-label="`
     + `Across ${corr.points} SA4 and design category combinations, regions with more enrolled places `
     + `per participant tend to have a higher share of those places listed vacant. `
-    + `Spearman rank correlation ${corr.spearman}.">`];
+    + `Spearman rank correlation ${corr.spearman.toFixed(2)}`
+    + (wr ? `, rising to ${wr.r.toFixed(2)} when categories are compared within a single region` : "")
+    + `. Pooled vacancy runs `
+    + corr.tertiles.map(t => `${pct(t.rate, 1)} in the ${t.label.toLowerCase()} of the range`).join(", ")
+    + `.">`];
 
   for (let t = 0; t <= yMax + 1e-9; t += yMax / 4) {
     out.push(`<line class="grid-line" x1="${M.l}" y1="${y(t).toFixed(1)}" x2="${M.l + iw}" y2="${y(t).toFixed(1)}"/>`);
@@ -747,13 +756,37 @@ function renderVacBridge(g) {
   out.push("</svg>");
   document.getElementById("vacBridgeChart").innerHTML = out.join("");
 
+  // The pooled figure is the least informative way to state this, in both
+  // directions, so the note gives the comparison that survives the coverage
+  // caveat and the one that does not.
+  const worked = corr.by_category.filter(c => c.p != null && c.p < 0.06);
+  const didnt = corr.by_category.filter(c => !(c.p != null && c.p < 0.06));
+  const list = rows => rows.map(c => c.category).join(" and ");
+  // Coefficient and p together, so a marginal result reads as marginal rather
+  // than being lumped in with a clear one.
+  const detail = rows => rows.map(c =>
+    `${c.category} (&rho; = ${c.r.toFixed(2)}, p = ${c.p.toFixed(2)})`).join(" and ");
+  const low = corr.tertiles[0], high = corr.tertiles[corr.tertiles.length - 1];
+
   document.getElementById("vacBridgeNote").innerHTML =
     `Each point is one design category in one SA4. The two datasets are independent — one is the NDIA's `
     + `enrolment and eligibility record, the other a listings platform — and they agree in direction: `
-    + `rank correlation <b>&rho; = ${corr.spearman}</b> across ${corr.points} points, and `
-    + `<b>${corr.spearman_excluding_vic}</b> with Victoria excluded, so it is not a Victorian artefact. `
-    + `That is a real but loose relationship: it supports reading a high places-per-participant figure as `
-    + `genuine slack in the market, and it does not support predicting any single region's vacancy from it.`
+    + `rank correlation <b>&rho; = ${corr.spearman.toFixed(2)}</b> across ${corr.points} points, `
+    + `<b>${corr.spearman_excluding_vic.toFixed(2)}</b> with Victoria excluded. In plain terms, the third of the `
+    + `market with the most places per participant runs <b>${pct(high.rate, 1)}</b> vacant against `
+    + `<b>${pct(low.rate, 1)}</b> for the third with the fewest.`
+    + (wr ? `<br><br>The comparison that carries the most weight is <b>within</b> a region: holding the `
+      + `SA4 constant and asking which of its categories sit advertised, the correlation rises to `
+      + `<b>${wr.r.toFixed(2)}</b> (${wr.points} points across ${wr.regions} regions, p = ${wr.p}). That matters `
+      + `because the listing-propensity problem stamped across this whole view is a property of the `
+      + `<i>region</i> — a provider base that advertises more inflates every category it holds alike — `
+      + `so it cancels when the comparison stays inside one region.` : "")
+    + (worked.length && didnt.length
+      ? `<br><br>Held the other way it is much weaker. Within a single design category, comparing regions, `
+        + `only ${detail(worked)} show the relationship; for ${list(didnt)} it is `
+        + `indistinguishable from zero. So this supports reading a high places-per-participant figure as `
+        + `genuine slack in a market — it does not support predicting one region's vacancy from its ratio.`
+      : "")
     + (here.size ? ` Points in ${g.level === "National" ? "Australia" : g.name} are highlighted.` : "");
 }
 

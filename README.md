@@ -92,10 +92,31 @@ The two datasets are independent — one is the NDIA's enrolment and eligibility
 record, the other a listings platform — which makes the vacancy view a check on
 the supply one. Across the 127 SA4-and-design-category combinations with enough
 enrolled places to form a rate, the two agree in direction: rank correlation
-**&rho; = 0.40**, and **0.39** with Victoria excluded, so it is not a Victorian
-artefact. That is real but loose. It supports reading a high
-`places_per_participant` as genuine slack in a market; it does not support
-predicting any single region's vacancy from it.
+**&rho; = 0.40**, and **0.39** with Victoria excluded. The third of the market
+with the most places per participant runs **19.3%** vacant against **10.5%** for
+the third with the fewest.
+
+Which comparison that correlation is made *across* matters more than the
+coefficient, and it cuts both ways:
+
+- **Within a region it is stronger: &rho; = 0.50** (70 points across the 20 SA4s
+  carrying three or more categories, permutation p = 0.0005). This is the
+  load-bearing version. Listing propensity — the caveat stamped across the whole
+  view — is a property of the *region*: a provider base that advertises more
+  inflates every category it holds alike, so it cancels when the comparison
+  stays inside one SA4. The relationship surviving that control is much better
+  evidence than the pooled figure.
+- **Within a design category it largely disappears.** Comparing regions inside
+  one category, only High Physical Support (&rho; = 0.30) and Robust
+  (&rho; = 0.46) show it; Improved Liveability and Fully Accessible are
+  indistinguishable from zero.
+
+So it supports reading a high `places_per_participant` as genuine slack in a
+market. It does not support predicting any single region's vacancy from it.
+
+The extractor recomputes all of this on every build and asserts that at least 15
+regions carry three or more categories, so a thinner future export fails rather
+than publishing a coefficient derived from a handful of regions.
 
 ## Usage
 
@@ -242,3 +263,10 @@ repository private and preview locally until you decide to publish.
 - **A region with no listings is not a region with no vacancy.** Two SA4s and
   108 SA3s have nothing listed; the vacancy view says so explicitly rather than
   showing a zero.
+- **The bridge correlation is not an artefact of its shared term.** Enrolled
+  places appears on both axes — numerator of `places_per_participant`,
+  denominator of the vacancy rate — which can manufacture correlation out of
+  noise. Simulating a world where vacancy is a constant 15.2% independent of the
+  ratio puts the measured &rho; at **+0.007** (sd 0.091), so the shared term
+  introduces no material bias in either direction and the observed 0.40 sits
+  4.3 standard deviations above that null.
