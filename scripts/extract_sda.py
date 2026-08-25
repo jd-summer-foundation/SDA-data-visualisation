@@ -466,7 +466,7 @@ def national_summary(nodes):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("workbook", type=Path)
-    parser.add_argument("-o", "--out", type=Path, default=Path("docs/data"))
+    parser.add_argument("-o", "--out", type=Path, default=Path("data"))
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 

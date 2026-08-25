@@ -8,7 +8,7 @@ supplies both:
 1. **Region.** A postcode/locality concordance resolves every listing to the
    SA4 and SA3 used by `extract_sda.py`, so vacancy sits on the same geography
    as supply and demand.
-2. **Denominator.** `docs/data/sda.json` carries enrolled places by design
+2. **Denominator.** `data/sda.json` carries enrolled places by design
    category and enrolled dwellings by maximum residents, which turns a raw
    vacancy count into a rate.
 
@@ -18,7 +18,7 @@ the dwelling's resident capacity, so comparing it with `Vacancy` separates a
 wholly empty two-bedroom house from one spare room in a five-resident group home.
 
 Usage:  python3 scripts/extract_vacancies.py <vacancies.csv> \
-                --postcodes <australian_postcodes.csv> [-o docs/data/]
+                --postcodes <australian_postcodes.csv> [-o data/]
 """
 from __future__ import annotations
 
@@ -536,7 +536,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("vacancies", type=Path)
     parser.add_argument("-p", "--postcodes", type=Path, required=True)
-    parser.add_argument("-o", "--out", type=Path, default=Path("docs/data"))
+    parser.add_argument("-o", "--out", type=Path, default=Path("data"))
     args = parser.parse_args()
 
     sda = json.loads((args.out / "sda.json").read_text())

@@ -3,11 +3,19 @@
    Australia, each state/territory, each SA4, and each SA3. */
 "use strict";
 
-const RATIO_GOOD = 1.25;   // comfortably supplied
+/* Both ends of this measure are a problem, so it has four states, not three.
+   Below 1.0 a region has fewer places than participants; 1.0 to 1.5 is the
+   balanced band; above that, stock has been built past the need recorded
+   against it -- High Physical Support has 77 of 88 regions above 1.0 and 49%
+   of its places in regions at 3.0 or more, which a "more is better" scale
+   reported as uniformly healthy. */
 const RATIO_TIGHT = 1.0;   // below this, fewer places than participants
+const RATIO_GOOD = 1.5;    // top of the balanced band
+const RATIO_HIGH = 2.5;    // beyond this, far past the recorded need
 
 let DATA = null;
 let VAC = null;                       // loaded on first entry to the vacancy view
+let GEO = null;
 let BY_ID = new Map();
 let CHILDREN = new Map();
 let current = null;
@@ -16,6 +24,84 @@ let childLevel = null;
 let vacChildLevel = null;
 let sort = { key: null, dir: -1 };
 let vacSort = { key: null, dir: -1 };
+let substitution = false;
+let mapCategory = "Fully Accessible";
+
+/* High Physical Support is defined cumulatively on top of Fully Accessible --
+   an HPS dwelling must meet every Fully Accessible requirement plus
+   ceiling-hoist provision, 950mm door openings and backup power -- so HPS
+   stock can house someone assessed for Fully Accessible. The reverse does not
+   hold, and Improved Liveability (sensory and cognitive) and Robust
+   (resilience) sit on different axes, so nothing substitutes for them.
+
+   Allowing substitution therefore reports the two as a single pooled
+   category: one body of stock against one body of demand. An earlier version
+   passed the surplus down as a waterfall instead, which credited Fully
+   Accessible without debiting High Physical Support -- so the same places
+   backed two comfortable-looking ratios at once, and three of the four
+   categories were identical in both readings.
+
+   Pooling counts Fully Accessible stock against High Physical Support need,
+   which physically does not work. In this file that never flatters anything:
+   no region of the 88 has High Physical Support below 1.0 while the pooled
+   figure reads 1.0 or above, because Fully Accessible is short almost
+   everywhere and so has no surplus to lend upwards. Pooling is also the more
+   conservative of the two -- against the waterfall it moves 14 regions down
+   from "far above" to "above" and 7 from "above" to "balanced", and none up.
+   Worth re-checking when the numbers move. */
+const POOL_NAME = "High Physical Support + Fully Accessible";
+const POOL_OF = ["High Physical Support", "Fully Accessible"];
+
+/* The comparable categories the current supply reading is expressed in. */
+function categoriesFor() {
+  const cs = DATA.meta.comparable_categories;
+  return substitution
+    ? cs.filter(c => POOL_OF.indexOf(c) < 0).concat([POOL_NAME])
+    : cs.slice();
+}
+
+/* Every category the table lists, with the pooled row standing where High
+   Physical Support would have been. */
+function tableCategories() {
+  if (!substitution) return DATA.meta.design_categories;
+  const out = [];
+  for (const c of DATA.meta.design_categories) {
+    if (c === POOL_OF[0]) out.push(POOL_NAME);
+    else if (c !== POOL_OF[1]) out.push(c);
+  }
+  return out;
+}
+
+/* One category's figures, summed over its members if it is the pool. A
+   suppressed member makes the whole total unknown rather than smaller: the
+   NDIA publishes small counts as "<11", and adding that as zero would
+   understate supply and demand alike. */
+function figuresFor(g, c) {
+  const members = c === POOL_NAME ? POOL_OF : [c];
+  const add = f => members.reduce((t, m) => {
+    const v = g.categories[m][f];
+    return (t === null || v == null) ? null : t + v;
+  }, 0);
+  const places = add("enrolled_places");
+  const need = add("participants_with_need");
+  return {
+    enrolled_dwellings: add("enrolled_dwellings"),
+    enrolled_places: places,
+    participants_with_need: need,
+    pipeline_dwellings: add("pipeline_dwellings"),
+    pipeline_places: add("pipeline_places"),
+    ratio: (places != null && need) ? Math.round(places / need * 1000) / 1000 : null,
+  };
+}
+
+/* The figures the current view is built from, keyed by the categories of the
+   current reading. */
+function supplyFor(g) {
+  if (!g.has_places) return null;
+  const out = {};
+  for (const c of categoriesFor()) out[c] = figuresFor(g, c);
+  return out;
+}
 
 /* ---------- formatting ---------- */
 const fmt = v => (v === null || v === undefined) ? null : Math.round(v).toLocaleString("en-AU");
@@ -27,11 +113,15 @@ const pctCell = v => pct(v) ?? '<span class="nil">&mdash;</span>';
 
 function ratioChip(r) {
   if (r === null || r === undefined) return '<span class="nil">&mdash;</span>';
-  const cls = r < RATIO_TIGHT ? "r-crit" : r < RATIO_GOOD ? "r-warn" : "r-good";
-  // Form as well as number: the glyph carries the verdict where colour cannot.
+  const cls = r < RATIO_TIGHT ? "r-crit" : r < RATIO_GOOD ? "r-good"
+            : r < RATIO_HIGH ? "r-over" : "r-over2";
+  // Form as well as number: the glyph carries the verdict where colour cannot,
+  // and the two above-band states are told apart by the figure itself.
   const mark = r < RATIO_TIGHT ? "▼" : r < RATIO_GOOD ? "◆" : "▲";
   const label = r < RATIO_TIGHT ? "fewer places than participants"
-              : r < RATIO_GOOD ? "roughly balanced" : "more places than participants";
+              : r < RATIO_GOOD ? "balanced"
+              : r < RATIO_HIGH ? "above the need recorded against it"
+              : "far above the need recorded against it";
   return `<span class="ratio ${cls}" title="${r.toFixed(2)} places per participant — ${label}">`
        + `<i aria-hidden="true">${mark}</i>${r.toFixed(2)}<span class="sr-only"> — ${label}</span></span>`;
 }
@@ -50,6 +140,16 @@ async function boot() {
     return;
   }
 
+  // The map is an enhancement, not the point of the page: if its geometry is
+  // missing or unreadable the rest of the explorer still works, so this
+  // failure is swallowed rather than surfaced.
+  try {
+    const geo = await fetch("data/sa4-geometry.json");
+    if (geo.ok) GEO = await geo.json();
+  } catch (err) {
+    GEO = null;
+  }
+
   DATA.geographies.forEach(g => {
     BY_ID.set(g.id, g);
     if (!CHILDREN.has(g.parent)) CHILDREN.set(g.parent, []);
@@ -62,6 +162,8 @@ async function boot() {
 
   wireSearch();
   wireViewSwitch();
+  wireModeSwitch();
+  wireMapCategory();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
@@ -107,6 +209,46 @@ async function loadVacancies() {
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   VAC = await res.json();
   return VAC;
+}
+
+/* Re-render while keeping one element where it was on screen. Not scrolling
+   is not enough on its own: substitution drops a row from the category table,
+   so everything below it moves up by a row's height. */
+function inPlace(anchorId, run) {
+  const at = () => document.getElementById(anchorId).getBoundingClientRect().top;
+  const before = at();
+  run();
+  const shift = at() - before;
+  if (shift) window.scrollBy(0, shift);
+}
+
+function wireMapCategory() {
+  // Supply mode is shared with the table's toggle, so this re-renders the
+  // whole profile rather than just the map -- the two must never disagree.
+  document.getElementById("mapModeSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-mode]");
+    if (!btn) return;
+    substitution = btn.dataset.mode === "substitution";
+    inPlace("mapModeSwitch", () => render(current.id));
+  });
+
+  document.getElementById("mapSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-cat]");
+    if (!btn) return;
+    mapCategory = btn.dataset.cat;
+    // Only the map changes, but its legend gains and loses rows with the
+    // category, which moves the map itself.
+    inPlace("mapSwitch", () => renderMap(current));
+  });
+}
+
+function wireModeSwitch() {
+  document.getElementById("modeSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-mode]");
+    if (!btn) return;
+    substitution = btn.dataset.mode === "substitution";
+    inPlace("modeSwitch", () => render(current.id));
+  });
 }
 
 /* ---------- search ---------- */
@@ -164,6 +306,10 @@ function wireSearch() {
 
 /* ---------- render ---------- */
 function render(id) {
+  // Toggles re-render the profile in place. Jumping to the top is right when
+  // the reader has moved to another geography and wrong when they have just
+  // changed how the same one is counted.
+  const moved = !current || current.id !== id;
   current = BY_ID.get(id);
   renderChrome(current);
 
@@ -186,7 +332,7 @@ function render(id) {
   } else {
     renderSupply(current);
   }
-  window.scrollTo({ top: 0, behavior: "instant" });
+  if (moved) window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 /* Breadcrumbs, title and place name are the same in both views. */
@@ -212,12 +358,31 @@ function renderChrome(g) {
 }
 
 function renderSupply(g) {
-  const cats = DATA.meta.design_categories;
-  const comparable = DATA.meta.comparable_categories;
+  const cats = tableCategories();
+  const comparable = categoriesFor();
+
+  document.querySelectorAll("#modeSwitch button").forEach(b =>
+    b.setAttribute("aria-pressed", String((b.dataset.mode === "substitution") === substitution)));
+  document.getElementById("modeSwitch").hidden = !g.has_places;
+
+  const note = document.getElementById("modeNote");
+  note.hidden = !(g.has_places && substitution);
+  note.innerHTML =
+    "<b>A model, not a count.</b> High Physical Support is defined cumulatively on top of Fully "
+    + "Accessible, so an HPS dwelling meets the Fully Accessible standard and could house someone "
+    + "assessed for it. Here the two are reported as <b>one pooled category</b> &mdash; one body of "
+    + "stock against one body of demand &mdash; rather than as a donor and a borrower, which would "
+    + "let the same places back two comfortable ratios at once. Improved Liveability and Robust are "
+    + "unchanged: nothing substitutes for them. Pooling does count Fully Accessible stock against "
+    + "High Physical Support need, which is not physically possible; in this file it never flatters "
+    + "a region, because Fully Accessible is short almost everywhere. Every dwelling is still "
+    + "<b>enrolled</b> in one category, and SDA payment follows the participant&rsquo;s funded "
+    + "category, so this shows physical suitability rather than what a provider would be paid.";
 
   renderTiles(g);
   renderCategoryTable(g, cats);
   renderChart(g, comparable);
+  renderMap(g);
   renderBreakdowns(g);
   renderChildren(g, comparable);
   renderTrend(g);
@@ -255,13 +420,17 @@ function renderTiles(g) {
 }
 
 function renderCategoryTable(g, cats) {
-  const comparable = new Set(DATA.meta.comparable_categories);
-  document.getElementById("tableSub").textContent = g.has_places
-    ? "Places are the unit comparable with participants · a dwelling may hold several"
-    : "Places are not published below SA4, so no ratio can be formed at SA3";
+  const comparable = new Set(categoriesFor());
+  document.getElementById("placesHead").innerHTML =
+    substitution ? "Usable<br>places" : "Enrolled<br>places";
+  document.getElementById("tableSub").textContent = !g.has_places
+    ? "Places are not published below SA4, so no ratio can be formed at SA3"
+    : substitution
+      ? "High Physical Support and Fully Accessible pooled — one body of stock against one body of demand"
+      : "Places are the unit comparable with participants · a dwelling may hold several";
 
   const rows = cats.map(c => {
-    const x = g.categories[c];
+    const x = figuresFor(g, c);
     const isComparable = comparable.has(c);
     const blank = !x.enrolled_dwellings && !x.participants_with_need && !x.pipeline_dwellings;
     if (blank && !isComparable) return "";
@@ -270,7 +439,7 @@ function renderCategoryTable(g, cats) {
       + `<td>${cell(x.enrolled_dwellings)}</td>`
       + `<td>${g.has_places ? cell(x.enrolled_places) : '<span class="nil">n/p</span>'}</td>`
       + `<td>${cell(x.participants_with_need)}</td>`
-      + `<td>${g.has_places ? ratioChip(x.places_per_participant) : '<span class="nil">&mdash;</span>'}</td>`
+      + `<td>${g.has_places ? ratioChip(x.ratio) : '<span class="nil">&mdash;</span>'}</td>`
       + `<td>${cell(x.pipeline_dwellings)}</td>`
       + `<td>${g.has_places ? cell(x.pipeline_places) : '<span class="nil">n/p</span>'}</td>`
       + `</tr>`;
@@ -290,7 +459,18 @@ function renderChart(g, comparable) {
   if (!g.has_places) { panel.hidden = true; return; }
   panel.hidden = false;
 
-  const rows = comparable.map(c => ({ name: c, ...g.categories[c] }));
+  const rows = comparable.map(c => ({ name: c, ...figuresFor(g, c) }));
+
+  document.getElementById("chartLegend").innerHTML = [
+    ['<i class="swatch" style="background:var(--accent)"></i>',
+      substitution ? "Usable places" : "Enrolled places"],
+    ['<i class="swatch" style="background:var(--demand)"></i>', "Participants with need"],
+    ['<i class="swatch" style="background:var(--accent);opacity:.34"></i>', "Pipeline places"],
+  ].map(([sw, label]) => `<span>${sw}${label}</span>`).join("");
+
+  document.querySelector("#chartPanel .panel-sub").textContent = substitution
+    ? "Shared scale · High Physical Support and Fully Accessible pooled into one category"
+    : "Shared scale · pipeline shown lighter, as an intention rather than supply";
   const max = Math.max(1, ...rows.flatMap(r =>
     [r.enrolled_places || 0, r.participants_with_need || 0, r.pipeline_places || 0]));
   const pct = v => ((v || 0) / max * 100).toFixed(2) + "%";
@@ -302,10 +482,12 @@ function renderChart(g, comparable) {
         <span class="bar-track"><span class="bar ${cls}" style="width:${pct(v)}"></span></span>
         <span class="bar-val">${v == null ? "—" : fmt(v)}</span>
       </div>`;
+    const placesLine = line("Places", "bar-supply", r.enrolled_places,
+      `${r.name} — ${fmt(r.enrolled_places) || 0} places from ${fmt(r.enrolled_dwellings) || 0} dwellings`);
     return `<div class="gap-row">
-      <div class="gap-label"><span class="gap-name">${r.name}</span>${ratioChip(r.places_per_participant)}</div>
+      <div class="gap-label"><span class="gap-name">${r.name}</span>${ratioChip(r.ratio)}</div>
       <div class="bars">
-        ${line("Places", "bar-supply", r.enrolled_places, `${r.name} — ${fmt(r.enrolled_places) || 0} enrolled places from ${fmt(r.enrolled_dwellings) || 0} dwellings`)}
+        ${placesLine}
         ${line("Need", "bar-demand", r.participants_with_need, `${r.name} — ${fmt(r.participants_with_need) || 0} participants with an identified need`)}
         ${line("Pipeline", "bar-pipe", r.pipeline_places, `${r.name} — ${fmt(r.pipeline_places) || 0} pipeline places (an intention, not guaranteed supply)`)}
       </div></div>`;
@@ -366,7 +548,7 @@ function renderChildren(g, comparable) {
     { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
     ...(withPlaces ? comparable.map(c => ({
       key: c, label: c.replace(/ /g, "<br>"), ratio: true,
-      get: s => s.categories[c].places_per_participant
+      get: s => (supplyFor(s) || {})[c]?.ratio ?? null
     })) : []),
   ];
 
@@ -376,6 +558,9 @@ function renderChildren(g, comparable) {
   ).join("");
 
   const rows = [...shown];
+  // The pooled column appears and disappears with the toggle, so a sort key
+  // can outlive its column.
+  if (sort.key && !cols.some(c => c.key === sort.key)) sort = { key: null, dir: -1 };
   if (sort.key) {
     const col = cols.find(c => c.key === sort.key);
     rows.sort((a, b) => {
@@ -469,6 +654,212 @@ function renderTrend(g) {
     + `while participants with an identified SDA need rose <b>${growth(need[0], need[last])}</b>. `
     + `Aggregate supply is catching up quickly, so the category shortfalls above are a question of `
     + `<b>composition</b> — which design categories, in which regions — rather than volume alone.`;
+}
+
+/* ---------- map ---------- */
+
+/* Diverging, because both ends are a problem. Below 1.0 a region has fewer
+   places than participants; far above it, stock has been built well past the
+   need recorded against it. A red-to-green scale treats more as always
+   better, which paints High Physical Support -- where 49% of places sit in
+   regions at 3.0 or above, and in real markets rather than tiny ones -- as
+   uniformly healthy.
+
+   1.5 and 2.5 are where the mass actually sits. Of the 88 regions, High
+   Physical Support puts 29 between them and 35 above, and Robust 15 and 24,
+   while Fully Accessible and Improved Liveability barely reach the band.
+   Breaks are fixed across the four categories so the maps stay comparable.
+
+   Note these are not ratioChip()'s cuts: the chips still read 1.25 and over
+   as simply good. */
+const MAP_BREAKS = [0.5, 0.75, RATIO_TIGHT, RATIO_GOOD, RATIO_HIGH];
+
+/* Which capital is worth an inset. Hobart, Darwin and Canberra are a single
+   SA4 each, so an inset would show nothing the main map does not. */
+const STATE_INSET = { NSW: "Greater Sydney", VIC: "Greater Melbourne",
+                      QLD: "Greater Brisbane", WA: "Greater Perth",
+                      SA: "Greater Adelaide" };
+
+const MAP_DEFS =
+  '<svg class="m-defs" aria-hidden="true">'
+  + '<defs><pattern id="mapNil" width="7" height="7" patternUnits="userSpaceOnUse"'
+  + ' patternTransform="rotate(45)">'
+  + '<rect width="7" height="7" fill="var(--map-nil-bg)"/>'
+  + '<line x1="0" y1="0" x2="0" y2="7" stroke="var(--map-nil-ink)" stroke-width="2"/>'
+  + '</pattern></defs></svg>';
+
+function mapClass(r) {
+  if (r === null || r === undefined) return "m-nil";
+  let i = 0;
+  while (i < MAP_BREAKS.length && r >= MAP_BREAKS[i]) i++;
+  return "m" + (i + 1);
+}
+
+/* Bounds of a set of already-projected paths. A state map is a crop of the
+   national geometry rather than a second copy of it, which is why the file
+   carries one national view and five insets and nothing per state. */
+const boxCache = new Map();
+function pathBox(key, ds) {
+  if (boxCache.has(key)) return boxCache.get(key);
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const d of ds) {
+    const re = /(-?[\d.]+),(-?[\d.]+)/g;
+    let m;
+    while ((m = re.exec(d))) {
+      const x = +m[1], y = +m[2];
+      if (x < x0) x0 = x;
+      if (x > x1) x1 = x;
+      if (y < y0) y0 = y;
+      if (y > y1) y1 = y;
+    }
+  }
+  const pad = Math.max(x1 - x0, y1 - y0) * 0.05;
+  const box = [x0 - pad, y0 - pad, x1 - x0 + pad * 2, y1 - y0 + pad * 2]
+    .map(n => n.toFixed(1)).join(" ");
+  boxCache.set(key, box);
+  return box;
+}
+
+function renderMap(g) {
+  const panel = document.getElementById("mapPanel");
+  // SA3 carries no places and so no ratio -- there is nothing to colour.
+  if (!GEO || !GEO.views || g.level === "SA3") { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const cats = categoriesFor();
+  // The pooled category exists only in one reading, so a selection can go
+  // stale when the toggle moves.
+  if (cats.indexOf(mapCategory) < 0) {
+    mapCategory = substitution ? POOL_NAME : "Fully Accessible";
+  }
+  const cat = mapCategory;
+  const scope = g.level === "National" ? null : g.state;
+  const nat = GEO.views.national;
+  const inScope = id => !scope || (BY_ID.get(id) || {}).state === scope;
+
+  const ratioOf = id => {
+    const r = BY_ID.get(id);
+    const s = r && supplyFor(r);
+    return s && s[cat] ? s[cat].ratio : null;
+  };
+
+  /* An anchor rather than a click handler: that gives keyboard focus, the
+     screen-reader name and the deep link for free, and hashchange already
+     routes it. */
+  const region = (id, d) => {
+    if (!inScope(id)) return '<path class="m-out" d="' + d + '"/>';
+    const r = BY_ID.get(id);
+    const v = ratioOf(id);
+    const x = r.categories[cat] || {};
+    const verdict = v === null ? "no ratio — no places and no identified need"
+      : v < RATIO_TIGHT ? "fewer places than participants"
+      : v < 1.5 ? "balanced"
+      : v < RATIO_HIGH ? "more places than participants"
+      : "far more places than the need recorded against them";
+    return '<a class="m-a' + (id === g.id ? " m-here" : "") + '"'
+      + ' href="#' + encodeURIComponent(id) + '">'
+      + "<title>" + r.name + " — "
+      + (v === null ? "" : v.toFixed(2) + " places per participant · ")
+      + verdict + " · " + (fmt(x.enrolled_places) || "not disclosed")
+      + " places, " + (fmt(x.participants_with_need) || "not disclosed")
+      + " participants</title>"
+      + '<path class="' + mapClass(v) + '" d="' + d + '"/></a>';
+  };
+
+  const draw = (view, box, label) => {
+    const out = ['<svg viewBox="' + box + '" role="img" aria-label="' + label + '">'];
+    for (const id in view.regions) out.push(region(id, view.regions[id]));
+    out.push('<path class="m-mesh" d="' + view.mesh + '"/></svg>');
+    return out.join("");
+  };
+
+  const ids = Object.keys(nat.regions).filter(inScope);
+  const vals = ids.map(ratioOf);
+  const known = vals.filter(v => v !== null).length;
+  const short = vals.filter(v => v !== null && v < RATIO_TIGHT).length;
+  const over = vals.filter(v => v !== null && v >= RATIO_HIGH).length;
+  const where = scope || "Australia";
+  // known can be short of the region count: a region with neither places nor
+  // need has no ratio, and must not be counted as though it had one.
+  const label = cat + ", places per participant by SA4 region. " + short + " of the "
+    + known + " regions with a ratio in " + where
+    + " have fewer places than participants with an identified need"
+    + (substitution ? ", allowing substitution" : "") + ". "
+    + over + " sit at " + RATIO_HIGH.toFixed(2) + " or above.";
+
+  document.getElementById("mapMain").innerHTML = MAP_DEFS + draw(
+    nat, scope ? pathBox(scope, ids.map(i => nat.regions[i]))
+               : "0 0 " + nat.width + " " + nat.height, label);
+
+  const insets = scope
+    ? (STATE_INSET[scope] ? [STATE_INSET[scope]] : [])
+    : Object.keys(STATE_INSET).map(k => STATE_INSET[k]);
+  document.getElementById("mapInsets").innerHTML = insets.map(name => {
+    const v = GEO.views["gccsa:" + name];
+    if (!v) return "";
+    return '<figure class="map-inset">'
+      + draw(v, "0 0 " + v.width + " " + v.height, name + ", " + cat)
+      + "<figcaption>" + name.replace("Greater ", "") + "</figcaption></figure>";
+  }).join("");
+
+  document.getElementById("mapSwitch").innerHTML =
+    cats.map(c =>
+      '<button type="button" data-cat="' + c + '" aria-pressed="'
+      + (c === cat) + '">' + (c === POOL_NAME ? "HPS + Fully Accessible" : c)
+      + "</button>").join("");
+
+  /* The same toggle as the table above, repeated here because the table is
+     usually scrolled off screen by the time the map is in view. */
+  document.getElementById("mapModeSwitch").innerHTML =
+    [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]].map(
+      m => '<button type="button" data-mode="' + m[0] + '" aria-pressed="'
+        + ((m[0] === "substitution") === substitution) + '">' + m[1] + "</button>").join("");
+
+  /* Say so when the toggle cannot change this map: nothing substitutes for
+     Improved Liveability or Robust, and silence reads as a broken control. */
+  const inert = document.getElementById("mapModeNote");
+  inert.hidden = !substitution || cat === POOL_NAME;
+  inert.textContent = inert.hidden ? "" :
+    "Substitution does not change this map: nothing substitutes for " + cat
+    + ". Only High Physical Support and Fully Accessible combine, and they do so "
+    + "as a single pooled category.";
+
+  document.getElementById("mapSub").textContent =
+    (substitution ? "Allowing substitution" : "As enrolled") + " · "
+    + (scope ? where + ", " + ids.length + " regions"
+             : "all " + ids.length + " SA4 regions")
+    + " · click a region to open it";
+
+  const sw = c => '<span class="' + c + '"></span>';
+  document.getElementById("mapLegend").innerHTML =
+    '<div class="mrow"><i class="g-crit">▼</i><span class="msw">'
+    + sw("m1") + sw("m2") + sw("m3") + "</span><span>fewer places than participants</span>"
+    + '<span class="mticks">under 1.00</span></div>'
+    + '<div class="mrow"><i class="g-good">◆</i><span class="msw">' + sw("m4")
+    + "</span><span>balanced</span>"
+    + '<span class="mticks">1.00 – 1.50</span></div>'
+    + '<div class="mrow"><i class="g-over">▲</i><span class="msw">'
+    + sw("m5") + sw("m6")
+    + "</span><span>above the need recorded against it</span>"
+    + '<span class="mticks">1.50 – 2.50, then 2.50 and over</span></div>'
+    // Only worth a legend row when something in view actually uses it.
+    + (vals.some(v => v === null)
+        ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")
+          + "</span><span>no ratio — no places and no identified need</span></div>"
+        : "");
+
+  const tot = BY_ID.get("national").totals;
+  const miss = tot.need_without_category, all = tot.participants_with_need;
+  document.getElementById("mapNote").innerHTML =
+    "<b>Colour shows the ratio, not the size of the market.</b> A region with four "
+    + "participants and one with nine hundred can read the same; open a region for the counts "
+    + "behind it. And the ratio is a mismatch of <b>mix</b>, not a waiting list — a "
+    + "participant assessed for one category but housed in another appears on both sides, in "
+    + "different categories. " + (miss && all
+      ? "A further <b>" + fmt(miss) + "</b> of " + fmt(all) + " participants ("
+        + (miss / all * 100).toFixed(1) + "%) have no design category recorded, so no "
+        + "category-specific map can place them at all."
+      : "");
 }
 
 function renderNotes(g) {

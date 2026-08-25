@@ -55,8 +55,8 @@ Figure P.1's national totals exactly.
 
 ## The explorer
 
-`docs/` is a static site — one HTML page, one stylesheet, one script, one JSON
-file. It renders the same profile at every level:
+The repository root is a static site — one HTML page, one stylesheet, one
+script, one JSON file. It renders the same profile at every level:
 
 - **Australia** — all 88 SA4 regions combined
 - **Each state and territory** — the NDIA's own published subtotals
@@ -67,6 +67,85 @@ Every profile shows enrolled dwellings, enrolled places, participants with an
 identified need, places per participant, and the pipeline, broken down by design
 category — plus build-type and resident-count breakdowns, and a sortable table
 of the child regions that doubles as an undersupply ranking.
+
+### As enrolled, or allowing substitution
+
+The category table and chart carry a toggle between two readings of supply.
+
+**As enrolled** (the default) counts each dwelling under the single design
+category it is enrolled and certified against. This is the factual view, and it
+is what every raw figure in Supplement P describes.
+
+**Allowing substitution** asks a different question: who could physically live
+here? High Physical Support is defined cumulatively on top of Fully Accessible —
+an HPS dwelling must meet every Fully Accessible requirement plus ceiling-hoist
+provision, 950mm door openings and backup power — so HPS stock can house someone
+assessed for Fully Accessible. The reverse does not hold, and Improved
+Liveability (sensory and cognitive) and Robust (resilience) sit on different
+axes, so nothing substitutes for them.
+
+So the two are reported as **one pooled category**, `High Physical Support +
+Fully Accessible` — one body of stock against one body of demand. Nationally
+that pool holds 16,622 places against 11,587 participants, a ratio of **1.44**,
+and 31 of the 88 SA4 regions sit below 1.0. Read separately and as enrolled,
+Fully Accessible is below 1.0 in 78 of 87 regions, so most of that gap is an
+artefact of how stock is categorised rather than stock that does not exist.
+
+An earlier version passed the surplus down as a waterfall instead — HPS keeping
+enough to cover its own need, the remainder counting towards Fully Accessible.
+That credited the borrower without debiting the donor, so the same places backed
+two comfortable-looking ratios at once, and three of the four categories were
+identical in both readings.
+
+Pooling has its own flaw, stated here rather than hidden: it counts Fully
+Accessible stock against High Physical Support need, which is not physically
+possible, since the substitution only runs one way. In this file it never
+flatters a region — no region has High Physical Support below 1.0 while the pool
+reads 1.0 or above, because Fully Accessible is short almost everywhere and so
+has no surplus to lend upwards. It is also the more conservative of the two
+readings: against the waterfall it moves 14 regions down a band and none up.
+Worth re-checking when the numbers move.
+
+Two caveats the interface states on screen: a dwelling is still *enrolled* in one
+category, and SDA payment follows the participant's funded category — so this
+models physical suitability, not what a provider would be paid.
+
+### The map
+
+Australia and each state carry a choropleth of the 88 SA4 regions, coloured by
+places per participant for whichever design category you pick, and following the
+same enrolled/substitution toggle as the tables. Australia gets insets for the
+five capitals whose Greater Capital City area holds more than one SA4 — between
+them Sydney, Melbourne, Brisbane, Perth and Adelaide hold 43 of the 88 regions,
+and at national scale they are a few pixels each. A state map is a crop of the
+same national geometry with its neighbours greyed for context, so no separate
+per-state boundaries are stored. SA3 has no map, because it has no ratio.
+
+The scale is **diverging**, because both ends are a problem. Red is below 1.0,
+green is the balanced band from 1.0 to 1.5, and two blues sit above it, breaking
+at 2.5. A red-to-green scale treats more as always better, which reported High
+Physical Support — 77 of 88 regions above 1.0, and 49% of its places in regions
+at 3.0 or above, in real markets rather than tiny ones — as uniformly healthy.
+
+1.5 and 2.5 are where the mass actually sits. High Physical Support puts 29
+regions between them and 35 above; Robust 15 and 24; Fully Accessible and
+Improved Liveability barely reach the band at all. Robust's extremes are mostly
+small denominators — its top three regions have 7, 7 and 4 participants — which
+is why the two blues stay distinct rather than merging into one. The breaks are
+fixed across categories so the maps stay comparable, and the ratio chips in the
+tables use the same cuts.
+
+Colour is doing the work here, so it is not the only channel: the legend carries
+the same ▼ ◆ ▲ glyphs as the tables, every region states its ratio and both
+underlying counts on hover and to a screen reader, each is a real link reachable
+by keyboard, and the ranked table below the map remains the accessible source of
+the same numbers. A region with no ratio is hatched rather than coloured, so
+"not calculable" cannot be misread as "low".
+
+Two things the map cannot show, and says so on screen: colour is the ratio and
+not the size of the market, so four participants and nine hundred can read the
+same; and a category-specific map has nowhere to put the 4,991 participants
+(19.5%) whose need carries no design category.
 
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
@@ -127,7 +206,7 @@ pip install openpyxl
 python3 scripts/extract_sda.py <Supplement_P_*.xlsx>
 ```
 
-Writes `docs/data/sda.json` (~1 MB) containing:
+Writes `data/sda.json` (~1 MB) containing:
 
 | Key | Contents |
 | --- | --- |
@@ -141,10 +220,38 @@ Each geography carries `categories` (per design category: `enrolled_dwellings`,
 `participants_with_need`, `places_per_participant`), `totals`, `build_types` and
 `max_residents`, plus `parent` for the hierarchy.
 
-To preview locally:
+### Boundaries
+
+The map's geometry is built separately, and only needs rebuilding when the ABS
+changes the boundaries — not every quarter.
 
 ```sh
-cd docs && python3 -m http.server 8000
+npm i mapshaper
+python3 scripts/build_geometry.py [data/boundaries/SA4_....shp]
+```
+
+Writes `data/sa4-geometry.json` (~250 KB): one national view plus five capital
+insets, as SVG path strings already projected to Australian Albers (EPSG:3577,
+equal-area, so the outback regions do not read as more important for being
+large) and keyed by the same region ids as `data/sda.json`.
+
+Boundaries are the ABS **Statistical Area Level 4, ASGS Edition 4 (2026),
+GDA2020**, © Commonwealth of Australia, [CC BY 4.0][abs]. The shapefile itself is
+a build input and is not committed — put it in `data/boundaries/`, the same way
+the Supplement P workbook is passed in.
+
+Supplement P publishes no SA4 code, so the join is by region name. The build
+asserts it is exactly one-to-one in both directions and checks the per-state
+counts, and fails rather than quietly dropping a region off the map. It holds
+for the 2025-26 Q4 file: all 88 regions match, and the edition's own change
+flags report no real SA4 altered in 2026.
+
+[abs]: https://creativecommons.org/licenses/by/4.0/
+
+To preview locally, from the repository root:
+
+```sh
+python3 -m http.server 8000
 ```
 
 ## Vacancy data
@@ -154,9 +261,9 @@ python3 scripts/extract_vacancies.py data/List_SDA_20260824.csv \
         --postcodes data/australian_postcodes.csv
 ```
 
-Reads the Housing Hub export, the postcode concordance and `docs/data/sda.json`,
-and writes `docs/data/vacancies.json` (~680 KB), fetched lazily so the supply
-view still loads one file:
+Reads the Housing Hub export, the postcode concordance and `data/sda.json`, and
+writes `data/vacancies.json` (~680 KB), fetched lazily so the supply view still
+loads one file:
 
 | Key | Contents |
 | --- | --- |
@@ -187,25 +294,32 @@ correction. Vacancy appears in 86 of the 88 SA4 regions. See `data/README.md`
 for the concordance's quirks — in particular that its `*_2021` columns are
 corrupt and must not be used.
 
-Sources live in `data/`, outside `docs/`, because the export carries provider
-contact details and Pages serves `docs/` publicly. Only aggregates are written
-to `docs/`; no per-listing row and no contact detail ever reaches it.
+**The published site is the repository root, so every committed file is public.**
+There is no unserved directory to hide a source file in — `.nojekyll` means even
+an underscore-prefixed one would be served. So the two CSVs in `data/` are cut
+down to the columns the extractor actually reads before they are committed: the
+vacancy export keeps eight columns and loses `Name`, `Status`, `Email`, `Phone`
+and `Website 1`–`5`; the concordance keeps five of its 41. Rebuilding from the
+reduced files reproduces `data/vacancies.json` byte for byte, and no provider
+contact detail exists anywhere in the repository. See `data/README.md`.
 
 ## Publishing on GitHub Pages
 
-The site needs no build step, so Pages can serve `docs/` directly:
+The site lives at the repository root and needs no build step, so Pages serves
+it as-is:
 
-1. Merge this branch into `main` (Pages serves from a branch, so the files must
-   be on the branch you select).
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, set **Source** to `Deploy from a branch`.
-4. Set **Branch** to `main` and the folder to `/docs`, then **Save**.
-5. Wait a minute or two for the first deploy, then open
-   `https://jd-summer-foundation.github.io/SDA-data-visualisation/`.
+- **Settings → Pages → Source** = `Deploy from a branch`
+- **Branch** = `main`, folder = `/ (root)`
 
-Re-running the extractor and pushing the updated `docs/data/sda.json` is all a
-new quarter needs — the site picks it up with no other change. If a refresh
-appears to show stale numbers, it is browser cache; a hard reload clears it.
+`index.html` at the root takes precedence over `README.md`, so Pages serves the
+explorer rather than rendering this file. `.nojekyll` stops Pages running the
+files through Jekyll on the way.
+
+Live at `https://jd-summer-foundation.github.io/SDA-data-visualisation/`.
+
+Re-running the extractor and pushing the updated `data/sda.json` is all a new
+quarter needs — the site picks it up with no other change. If a refresh appears
+to show stale numbers, it is browser cache; a hard reload clears it.
 
 Note that a Pages site on a public repository is public, whether or not the
 repository itself is. If the data should stay internal for now, keep the
@@ -228,6 +342,12 @@ repository private and preview locally until you decide to publish.
   may already be enrolled but not yet removed from the data.
 - **Table P.1 is not joinable.** It keys on NDIA Service Districts, not SA4;
   P.2 and P.3 key on State only. None of them appear in the explorer.
+- **A high ratio is not automatically good.** Above about 1.5 a region holds
+  more places than the need recorded against them, which is its own kind of
+  market failure. The scale says so rather than running green all the way up.
+- **The map shows a ratio, not a volume.** Two regions with wildly different
+  numbers of participants can carry the same colour. The counts are in every
+  region's tooltip and in the table beneath it.
 - **SA3 has no places figure.** The dwelling-form cross-tabs the derivation
   depends on are published at SA4 and above only, so no places or ratio can be
   formed at SA3. Dwelling counts and participant need still are.
