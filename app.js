@@ -139,6 +139,15 @@ function go(id) {
 }
 
 function wireMapCategory() {
+  // Supply mode is shared with the table's toggle, so this re-renders the
+  // whole profile rather than just the map -- the two must never disagree.
+  document.getElementById("mapModeSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-mode]");
+    if (!btn) return;
+    substitution = btn.dataset.mode === "substitution";
+    render(current.id);
+  });
+
   document.getElementById("mapSwitch").addEventListener("click", e => {
     const btn = e.target.closest("button[data-cat]");
     if (!btn) return;
@@ -546,12 +555,22 @@ function renderTrend(g) {
 
 /* ---------- map ---------- */
 
-/* The same two thresholds ratioChip() uses, with each side of them graduated.
-   Three flat bands would render Fully Accessible as 78 of 88 regions in one
-   colour and High Physical Support as 69 of 88 in another, which is a map
-   that cannot show where the pressure sits. The breaks are fixed across all
-   four categories so the four maps stay directly comparable. */
-const MAP_BREAKS = [0.5, 0.75, RATIO_TIGHT, RATIO_GOOD, 2];
+/* Diverging, because both ends are a problem. Below 1.0 a region has fewer
+   places than participants; far above it, stock has been built well past the
+   need recorded against it. A red-to-green scale treats more as always
+   better, which paints High Physical Support -- where 49% of places sit in
+   regions at 3.0 or above, and in real markets rather than tiny ones -- as
+   uniformly healthy.
+
+   1.5 and 2.5 are where the mass actually sits. Of the 88 regions, High
+   Physical Support puts 29 between them and 35 above, and Robust 15 and 24,
+   while Fully Accessible and Improved Liveability barely reach the band.
+   Breaks are fixed across the four categories so the maps stay comparable.
+
+   Note these are not ratioChip()'s cuts: the chips still read 1.25 and over
+   as simply good. */
+const MAP_BREAKS = [0.5, 0.75, RATIO_TIGHT, 1.5, 2.5];
+const MAP_HIGH = 2.5;
 
 /* Which capital is worth an inset. Hobart, Darwin and Canberra are a single
    SA4 each, so an inset would show nothing the main map does not. */
@@ -626,7 +645,9 @@ function renderMap(g) {
     const x = r.categories[cat] || {};
     const verdict = v === null ? "no ratio — no places and no identified need"
       : v < RATIO_TIGHT ? "fewer places than participants"
-      : v < RATIO_GOOD ? "roughly balanced" : "more places than participants";
+      : v < 1.5 ? "balanced"
+      : v < MAP_HIGH ? "more places than participants"
+      : "far more places than the need recorded against them";
     return '<a class="m-a' + (id === g.id ? " m-here" : "") + '"'
       + ' href="#' + encodeURIComponent(id) + '">'
       + "<title>" + r.name + " — "
@@ -648,13 +669,15 @@ function renderMap(g) {
   const vals = ids.map(ratioOf);
   const known = vals.filter(v => v !== null).length;
   const short = vals.filter(v => v !== null && v < RATIO_TIGHT).length;
+  const over = vals.filter(v => v !== null && v >= MAP_HIGH).length;
   const where = scope || "Australia";
   // known can be short of the region count: a region with neither places nor
   // need has no ratio, and must not be counted as though it had one.
   const label = cat + ", places per participant by SA4 region. " + short + " of the "
     + known + " regions with a ratio in " + where
     + " have fewer places than participants with an identified need"
-    + (substitution ? ", allowing substitution" : "") + ".";
+    + (substitution ? ", allowing substitution" : "") + ". "
+    + over + " sit at " + MAP_HIGH.toFixed(2) + " or above.";
 
   document.getElementById("mapMain").innerHTML = MAP_DEFS + draw(
     nat, scope ? pathBox(scope, ids.map(i => nat.regions[i]))
@@ -676,6 +699,24 @@ function renderMap(g) {
       '<button type="button" data-cat="' + c + '" aria-pressed="'
       + (c === cat) + '">' + c + "</button>").join("");
 
+  /* The same toggle as the table above, repeated here because the table is
+     usually scrolled off screen by the time the map is in view. */
+  document.getElementById("mapModeSwitch").innerHTML =
+    [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]].map(
+      m => '<button type="button" data-mode="' + m[0] + '" aria-pressed="'
+        + ((m[0] === "substitution") === substitution) + '">' + m[1] + "</button>").join("");
+
+  /* Say so when the toggle cannot change this map. High Physical Support is
+     the only donor, so only Fully Accessible moves -- silence here reads as
+     a broken control. */
+  const donors = DONORS[cat] || [];
+  const inert = document.getElementById("mapModeNote");
+  inert.hidden = donors.length > 0;
+  inert.textContent = donors.length ? "" :
+    "Substitution does not change this map: " + cat + " has no donor category. "
+    + "Only Fully Accessible changes, since High Physical Support is the one "
+    + "category that can house another's participants.";
+
   document.getElementById("mapSub").textContent =
     (substitution ? "Allowing substitution" : "As enrolled") + " · "
     + (scope ? where + ", " + ids.length + " regions"
@@ -687,12 +728,13 @@ function renderMap(g) {
     '<div class="mrow"><i class="g-crit">▼</i><span class="msw">'
     + sw("m1") + sw("m2") + sw("m3") + "</span><span>fewer places than participants</span>"
     + '<span class="mticks">under 1.00</span></div>'
-    + '<div class="mrow"><i class="g-warn">◆</i><span class="msw">' + sw("m4")
-    + "</span><span>roughly balanced</span>"
-    + '<span class="mticks">1.00 – 1.25</span></div>'
-    + '<div class="mrow"><i class="g-good">▲</i><span class="msw">'
-    + sw("m5") + sw("m6") + "</span><span>more places than participants</span>"
-    + '<span class="mticks">1.25 and over</span></div>'
+    + '<div class="mrow"><i class="g-good">◆</i><span class="msw">' + sw("m4")
+    + "</span><span>balanced</span>"
+    + '<span class="mticks">1.00 – 1.50</span></div>'
+    + '<div class="mrow"><i class="g-over">▲</i><span class="msw">'
+    + sw("m5") + sw("m6")
+    + "</span><span>above the need recorded against it</span>"
+    + '<span class="mticks">1.50 – 2.50, then 2.50 and over</span></div>'
     // Only worth a legend row when something in view actually uses it.
     + (vals.some(v => v === null)
         ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")

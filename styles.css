@@ -20,16 +20,18 @@
   --warn-bg:     #fbf3e0;
   --good-bg:     #e6f4e6;
 
-  /* Map classes. The three verdict bands stay the anchors -- 1.0 and 1.25 --
-     but each side of them is graduated, because three flat bands leave Fully
-     Accessible 78 of 88 regions in one colour. Lightness carries the ordering
-     independently of hue, so the ramp survives red/green colour vision. */
+  /* Map classes: diverging, because both ends are a problem. Red is short of
+     identified need, green is the balanced band, blue is well above it. The
+     old scale ran red to green as though more were always better, which read
+     High Physical Support -- 49% of its places sit in regions at 3.0 or above
+     -- as uniformly healthy. Lightness carries the ordering independently of
+     hue, and the blue end is unambiguous under red/green colour vision. */
   --map-1:       #a32a2a;
   --map-2:       #cf5555;
   --map-3:       #eb9c9c;
-  --map-4:       #e8c069;
-  --map-5:       #8cc691;
-  --map-6:       #2f8a3d;
+  --map-4:       #3f9553;
+  --map-5:       #8fbcd9;
+  --map-6:       #2f6f9e;
   --map-out:     #e4e8ee;
   --map-nil-bg:  #eef1f5;
   --map-nil-ink: #98a3b2;
@@ -49,7 +51,7 @@
     --critical: #e46a6a; --warning: #e0a020; --good: #35b535;
     --crit-bg: #33191a; --warn-bg: #302512; --good-bg: #162c17;
     --map-1: #cf3b3b; --map-2: #9e3838; --map-3: #6b2f31;
-    --map-4: #8a6a22; --map-5: #2c6b33; --map-6: #3fa848;
+    --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
@@ -63,7 +65,7 @@
   --critical: #e46a6a; --warning: #e0a020; --good: #35b535;
   --crit-bg: #33191a; --warn-bg: #302512; --good-bg: #162c17;
     --map-1: #cf3b3b; --map-2: #9e3838; --map-3: #6b2f31;
-    --map-4: #8a6a22; --map-5: #2c6b33; --map-6: #3fa848;
+    --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
@@ -350,3 +352,8 @@ footer a { color: var(--accent); }
 .mrow i.g-crit { color: var(--critical); }
 .mrow i.g-warn { color: var(--warning); }
 .mrow i.g-good { color: var(--good); }
+.mrow i.g-over { color: var(--map-6); }
+
+.map-controls { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+@media (max-width: 700px) { .map-controls { align-items: stretch; } }
+.map-mode-note { font-size: 12px; color: var(--ink-3); margin: -6px 0 12px; }
