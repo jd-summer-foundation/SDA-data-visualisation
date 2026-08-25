@@ -169,6 +169,17 @@ function go(id) {
   else location.hash = encodeURIComponent(id);
 }
 
+/* Re-render while keeping one element where it was on screen. Not scrolling
+   is not enough on its own: substitution drops a row from the category table,
+   so everything below it moves up by a row's height. */
+function inPlace(anchorId, run) {
+  const at = () => document.getElementById(anchorId).getBoundingClientRect().top;
+  const before = at();
+  run();
+  const shift = at() - before;
+  if (shift) window.scrollBy(0, shift);
+}
+
 function wireMapCategory() {
   // Supply mode is shared with the table's toggle, so this re-renders the
   // whole profile rather than just the map -- the two must never disagree.
@@ -176,16 +187,16 @@ function wireMapCategory() {
     const btn = e.target.closest("button[data-mode]");
     if (!btn) return;
     substitution = btn.dataset.mode === "substitution";
-    render(current.id);
+    inPlace("mapModeSwitch", () => render(current.id));
   });
 
   document.getElementById("mapSwitch").addEventListener("click", e => {
     const btn = e.target.closest("button[data-cat]");
     if (!btn) return;
     mapCategory = btn.dataset.cat;
-    // Only the map changes, so the rest of the profile is left alone and the
-    // reader keeps their scroll position.
-    renderMap(current);
+    // Only the map changes, but its legend gains and loses rows with the
+    // category, which moves the map itself.
+    inPlace("mapSwitch", () => renderMap(current));
   });
 }
 
@@ -194,7 +205,7 @@ function wireModeSwitch() {
     const btn = e.target.closest("button[data-mode]");
     if (!btn) return;
     substitution = btn.dataset.mode === "substitution";
-    render(current.id);
+    inPlace("modeSwitch", () => render(current.id));
   });
 }
 
@@ -253,6 +264,10 @@ function wireSearch() {
 
 /* ---------- render ---------- */
 function render(id) {
+  // Toggles re-render the profile in place. Jumping to the top is right when
+  // the reader has moved to another geography and wrong when they have just
+  // changed how the same one is counted.
+  const moved = !current || current.id !== id;
   current = BY_ID.get(id);
   const g = current;
   const cats = tableCategories();
@@ -308,7 +323,7 @@ function render(id) {
     + `${g.level === "SA3" ? "SA3" : "SA4"}-level tables of NDIS Supplement P, as at ${DATA.meta.as_at}. `
     + `State and national figures are the NDIA's own published subtotals, which reconcile exactly `
     + `with the sum of their regions.`;
-  window.scrollTo({ top: 0, behavior: "instant" });
+  if (moved) window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function renderTiles(g) {
