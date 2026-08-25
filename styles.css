@@ -17,6 +17,9 @@
   --warning:     #b47a00;
   --good:        #0a7d0a;
   --crit-bg:     #fbeaea;
+  --over-bg:     #e7eff6;
+  --over-2:      #1d4f74;
+  --over-2-bg:   #d5e5f1;
   --warn-bg:     #fbf3e0;
   --good-bg:     #e6f4e6;
 
@@ -54,6 +57,7 @@
     --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
+    --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
   }
 }
@@ -68,6 +72,7 @@
     --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
+    --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
 }
 
@@ -191,6 +196,10 @@ tbody tr.linked:hover td.region a { color: var(--accent); text-decoration: under
 .r-crit { color: var(--critical); background: var(--crit-bg); }
 .r-warn { color: var(--warning);  background: var(--warn-bg); }
 .r-good { color: var(--good);     background: var(--good-bg); }
+/* Above the balanced band. Two shades rather than one: 1.5 and 2.5 are far
+   apart in what they imply, and the figure in the chip tells them apart. */
+.r-over  { color: var(--map-6);   background: var(--over-bg); }
+.r-over2 { color: var(--over-2);  background: var(--over-2-bg); }
 .ratio i { font-style: normal; font-size: 9.5px; }
 
 /* ---------- bar chart ---------- */
@@ -267,23 +276,6 @@ footer a { color: var(--accent); }
 .trend-note b { color: var(--ink); font-weight: 600; }
 
 /* ---------- substitution mode ---------- */
-/* Substituted places stay in the supply hue but carry a 45-degree texture, so
-   they never read as the flat lighter tint the pipeline bars already use. */
-.bar-lent {
-  border-radius: 0 4px 4px 0;
-  background-color: var(--accent-soft);
-  background-image: repeating-linear-gradient(45deg,
-    var(--accent) 0 3px, transparent 3px 6px);
-}
-.swatch-lent {
-  background-color: var(--accent-soft);
-  background-image: repeating-linear-gradient(45deg,
-    var(--accent) 0 3px, transparent 3px 6px);
-}
-.borrowed {
-  font-family: var(--mono); font-size: 10px; font-weight: 400; color: var(--ink-3);
-  letter-spacing: 0.02em; margin-top: 2px; white-space: nowrap;
-}
 .mode-note {
   font-family: var(--serif); font-size: 14px; line-height: 1.55; color: var(--ink-2);
   max-width: 74ch; margin: 0 0 18px; padding: 12px 14px;
