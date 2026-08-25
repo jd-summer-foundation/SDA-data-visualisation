@@ -70,7 +70,36 @@ of the child regions that doubles as an undersupply ranking.
 
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
+## The vacancy view
+
+A toggle in the masthead switches the same page between two views of the same
+region. **Supply & demand** is the profile above. **Vacancy** answers a question
+Supplement P cannot: what is actually sitting empty right now, and is it whole
+dwellings or single rooms?
+
+The distinction is the point. A spare room in an occupied five-resident group
+home is a matching problem. A wholly empty two-bedroom house is stranded
+capital. Nationally the split is close to even — 2,161 vacant places in
+dwellings standing completely empty against 1,432 single rooms — and which one a
+region has is almost entirely a function of dwelling size, not design category.
+
+Vacancy deep links carry the view in front of the geography:
+`#vacancy!national`, `#vacancy!sa4:VIC - Melbourne - West`. Bare geography links
+are unchanged and still open the supply view, so nothing already published
+breaks.
+
+The two datasets are independent — one is the NDIA's enrolment and eligibility
+record, the other a listings platform — which makes the vacancy view a check on
+the supply one. Across the 127 SA4-and-design-category combinations with enough
+enrolled places to form a rate, the two agree in direction: rank correlation
+**&rho; = 0.40**, and **0.39** with Victoria excluded, so it is not a Victorian
+artefact. That is real but loose. It supports reading a high
+`places_per_participant` as genuine slack in a market; it does not support
+predicting any single region's vacancy from it.
+
 ## Usage
+
+The supplement extractor:
 
 ```sh
 pip install openpyxl
@@ -96,6 +125,50 @@ To preview locally:
 ```sh
 cd docs && python3 -m http.server 8000
 ```
+
+## Vacancy data
+
+```sh
+python3 scripts/extract_vacancies.py data/List_SDA_20260824.csv \
+        --postcodes data/australian_postcodes.csv
+```
+
+Reads the Housing Hub export, the postcode concordance and `docs/data/sda.json`,
+and writes `docs/data/vacancies.json` (~680 KB), fetched lazily so the supply
+view still loads one file:
+
+| Key | Contents |
+| --- | --- |
+| `meta` | as-at dates, listing and place totals, how each listing matched, price-band cut-points, the bridge correlation |
+| `regions` | one profile per geography id — `national`, `state:*`, `sa4:*`, `sa3:*` — keyed to match `sda.json` |
+| `bridge` | SA4 &times; design category: vacancy rate against `places_per_participant` |
+
+Each profile carries `depth` (the whole/rooms/multi-dwelling split), plus
+`by_capacity`, `by_category`, `by_form`, `by_feature`, `price_bands` and
+`top_suburbs`. Zero-valued keys are dropped to keep the file small; read an
+absent key as 0. The last four are emitted only where a region has at least 20
+listings — the median SA3 has five, where a price-band or with/without split is
+noise.
+
+**The whole-versus-rooms derivation.** `Building Type` names the dwelling's
+resident capacity and `Vacancy` counts vacant places. Where the count reaches
+capacity, the dwelling is counted as wholly empty; below it, the difference is
+rooms in a dwelling someone already lives in. 112 listings report *more*
+vacancies than the dwelling can hold — nine in a "1 residents" villa — which can
+only mean one listing covering several dwellings; that surplus is held in a
+third bucket rather than assigned to either. The three sum to 3,753, asserted on
+every build.
+
+**Region assignment.** The export carries no statistical geography, so each
+listing is placed by postcode and suburb. All 2,321 resolve: 2,247 on an exact
+postcode and suburb, 31 on the postcode alone, and 43 on a hand-checked
+correction. Vacancy appears in 86 of the 88 SA4 regions. See `data/README.md`
+for the concordance's quirks — in particular that its `*_2021` columns are
+corrupt and must not be used.
+
+Sources live in `data/`, outside `docs/`, because the export carries provider
+contact details and Pages serves `docs/` publicly. Only aggregates are written
+to `docs/`; no per-listing row and no contact detail ever reaches it.
 
 ## Publishing on GitHub Pages
 
@@ -142,3 +215,30 @@ repository private and preview locally until you decide to publish.
   `COMPARABLE_CATEGORIES` support a supply-versus-demand comparison.
 - **SA boundaries changed** from 2011 to 2016 definitions in March 2023, which
   limits comparability with earlier supplements.
+
+### And for the vacancy view
+
+- **Housing Hub is a listings platform, not a vacancy census.** Only vacancies a
+  provider chose to advertise appear, and providers advertise at very different
+  rates. Victoria shows 17.3% of its enrolled places as vacant against New South
+  Wales' 6.0% — a gap far too large to be real, and better read as a difference
+  in how much of each market lists here. Compare categories and dwelling types
+  within a region freely; compare regions against each other only with this in
+  mind.
+- **Every rate straddles two dates.** Vacancies are as at 24 August 2026, the
+  enrolled places they are divided by as at 30 June 2026. A rate is suppressed
+  where fewer than 50 enrolled places sit under it.
+- **No rate below SA4.** The dwelling cross-tabs the places derivation needs are
+  published at SA4 and above only, so SA3 pages show counts and the
+  whole-versus-rooms split but no rate. 30 listings sit in a locality with no SA3
+  counterpart in the supplement and are counted at SA4 and above only.
+- **Design category and dwelling features do not predict whole-dwelling
+  vacancy.** Fitting a logistic model to the 1,910 shared dwellings in the
+  export, once dwelling size and form are held constant, design category, onsite
+  overnight assistance, a breakout room and price all lose any independent
+  association with whether a vacancy is the whole dwelling (|z| &le; 1.6).
+  Dwelling size is doing nearly all the work. The category and feature charts are
+  description, not explanation.
+- **A region with no listings is not a region with no vacancy.** Two SA4s and
+  108 SA3s have nothing listed; the vacancy view says so explicitly rather than
+  showing a zero.

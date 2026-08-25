@@ -7,15 +7,23 @@ const RATIO_GOOD = 1.25;   // comfortably supplied
 const RATIO_TIGHT = 1.0;   // below this, fewer places than participants
 
 let DATA = null;
+let VAC = null;                       // loaded on first entry to the vacancy view
 let BY_ID = new Map();
 let CHILDREN = new Map();
 let current = null;
+let view = "supply";
 let childLevel = null;
+let vacChildLevel = null;
 let sort = { key: null, dir: -1 };
+let vacSort = { key: null, dir: -1 };
 
 /* ---------- formatting ---------- */
 const fmt = v => (v === null || v === undefined) ? null : Math.round(v).toLocaleString("en-AU");
 const cell = v => { const s = fmt(v); return s === null ? '<span class="nil">&mdash;</span>' : s; };
+
+const pct = (v, dp = 1) =>
+  (v === null || v === undefined) ? null : (v * 100).toFixed(dp) + "%";
+const pctCell = v => pct(v) ?? '<span class="nil">&mdash;</span>';
 
 function ratioChip(r) {
   if (r === null || r === undefined) return '<span class="nil">&mdash;</span>';
@@ -53,18 +61,52 @@ async function boot() {
   document.getElementById("view").hidden = false;
 
   wireSearch();
+  wireViewSwitch();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
 
-function routeFromHash() {
-  const id = decodeURIComponent(location.hash.replace(/^#/, "")) || "national";
-  render(BY_ID.has(id) ? id : "national");
+/* The hash is either a bare geography id — every link ever published — or
+   "vacancy!<id>". Splitting on the first "!" keeps the old links working, and
+   ids may themselves contain colons ("sa4:VIC - Geelong"). */
+function parseHash() {
+  const raw = decodeURIComponent(location.hash.replace(/^#/, ""));
+  const cut = raw.indexOf("!");
+  const name = cut === -1 ? "supply" : raw.slice(0, cut);
+  const id = cut === -1 ? raw : raw.slice(cut + 1);
+  return { view: name === "vacancy" ? "vacancy" : "supply", id: id || "national" };
 }
 
-function go(id) {
-  if (location.hash === "#" + encodeURIComponent(id)) render(id);
-  else location.hash = encodeURIComponent(id);
+const hashFor = (name, id) =>
+  "#" + (name === "vacancy" ? "vacancy!" : "") + encodeURIComponent(id);
+
+function routeFromHash() {
+  const route = parseHash();
+  view = route.view;
+  render(BY_ID.has(route.id) ? route.id : "national");
+}
+
+function go(id, name = view) {
+  const next = hashFor(name, id);
+  if (location.hash === next) { view = name; render(id); }
+  else location.hash = next;
+}
+
+function wireViewSwitch() {
+  document.getElementById("viewSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-view]");
+    if (btn && btn.dataset.view !== view) go(current.id, btn.dataset.view);
+  });
+}
+
+/* The vacancy bundle is only fetched when someone actually asks for it, so the
+   supply view still loads one file. */
+async function loadVacancies() {
+  if (VAC) return VAC;
+  const res = await fetch("data/vacancies.json");
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  VAC = await res.json();
+  return VAC;
 }
 
 /* ---------- search ---------- */
@@ -123,10 +165,32 @@ function wireSearch() {
 /* ---------- render ---------- */
 function render(id) {
   current = BY_ID.get(id);
-  const g = current;
-  const cats = DATA.meta.design_categories;
-  const comparable = DATA.meta.comparable_categories;
+  renderChrome(current);
 
+  document.querySelectorAll("#viewSwitch button").forEach(btn =>
+    btn.setAttribute("aria-pressed", String(btn.dataset.view === view)));
+  document.getElementById("viewSupply").hidden = view !== "supply";
+  document.getElementById("viewVacancy").hidden = view !== "vacancy";
+
+  if (view === "vacancy") {
+    loadVacancies()
+      .then(() => { if (view === "vacancy") renderVacancy(current); })
+      .catch(err => {
+        document.getElementById("vacEmpty").hidden = false;
+        document.getElementById("vacEmpty").innerHTML =
+          `Could not load data/vacancies.json (${err.message}).<br>`
+          + `Run <code>python3 scripts/extract_vacancies.py &lt;vacancies.csv&gt; `
+          + `--postcodes &lt;australian_postcodes.csv&gt;</code> to build it.`;
+        document.getElementById("vacBody").hidden = true;
+      });
+  } else {
+    renderSupply(current);
+  }
+  window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+/* Breadcrumbs, title and place name are the same in both views. */
+function renderChrome(g) {
   document.title = `${g.level === "National" ? "Australia" : g.name} — SDA Market Explorer`;
 
   // breadcrumbs
@@ -145,6 +209,12 @@ function render(id) {
      g.state && g.level !== "State" ? g.state : null,
      `as at ${DATA.meta.as_at}`].filter(Boolean).join(" · ");
 
+}
+
+function renderSupply(g) {
+  const cats = DATA.meta.design_categories;
+  const comparable = DATA.meta.comparable_categories;
+
   renderTiles(g);
   renderCategoryTable(g, cats);
   renderChart(g, comparable);
@@ -158,7 +228,6 @@ function render(id) {
     + `${g.level === "SA3" ? "SA3" : "SA4"}-level tables of NDIS Supplement P, as at ${DATA.meta.as_at}. `
     + `State and national figures are the NDIA's own published subtotals, which reconcile exactly `
     + `with the sum of their regions.`;
-  window.scrollTo({ top: 0, behavior: "instant" });
 }
 
 function renderTiles(g) {
@@ -441,6 +510,408 @@ function renderNotes(g) {
   ];
 
   document.getElementById("notes").innerHTML = notes.map(([tag, head, body]) =>
+    `<div class="note"><span class="note-tag ${tag}">${tag === "t-block" ? "Must read" : tag === "t-care" ? "Caution" : "Method"}</span>`
+    + `<p><b>${head}</b> ${body}</p></div>`).join("");
+}
+
+/* ---------- vacancy view ---------- */
+
+// Zero-valued keys are dropped from the JSON to keep it small; absent means 0.
+const num = (obj, key) => (obj && obj[key]) || 0;
+const shareOf = (part, whole) => whole ? part / whole : null;
+
+function renderVacancy(g) {
+  // A region with nothing listed has no entry at all; the tiles and notes still
+  // render, so give them an empty profile rather than a missing one.
+  const profile = VAC.regions[g.id] || {
+    listings: 0, vacant_places: 0, enrolled_places: null, rate: null,
+    depth: { whole: {}, rooms: {}, multi_dwelling: {} },
+    by_category: [], by_capacity: [], by_form: [], by_feature: [],
+    price_bands: [], top_suburbs: [],
+  };
+  const empty = document.getElementById("vacEmpty");
+  const body = document.getElementById("vacBody");
+
+  renderVacTiles(g, profile);
+  renderVacNotes(g, profile);
+
+  document.getElementById("footNote").textContent =
+    `Vacancy listings exported from Housing Hub as at ${VAC.meta.as_at}, counted against `
+    + `enrolled places from NDIS Supplement P as at ${VAC.meta.sda_as_at}. `
+    + `SA4 and SA3 are assigned from each listing's suburb and postcode — the export does not `
+    + `carry a statistical geography — and every one of the ${fmt(VAC.meta.listings)} listings resolved.`;
+
+  if (!profile.listings) {
+    body.hidden = true;
+    empty.hidden = false;
+    empty.innerHTML = `<b>No SDA vacancies are listed in ${g.level === "National" ? "Australia" : g.name}.</b> `
+      + `That is an absence of listings on Housing Hub, which is not the same as an absence of `
+      + `vacancy — see the notes below.`;
+    return;
+  }
+  empty.hidden = true;
+  body.hidden = false;
+
+  renderVacDepth(g, profile);
+  renderVacCategories(g, profile);
+  renderVacForms(profile);
+  renderVacFeatures(profile);
+  renderVacBridge(g);
+  renderVacChildren(g);
+  renderVacPrice(profile);
+  renderVacSuburbs(profile);
+}
+
+function renderVacTiles(g, p) {
+  const whole = num(p.depth.whole, "places");
+  const tiles = [
+    ["Vacant places", cell(p.vacant_places),
+      `${fmt(p.listings)} listing${p.listings === 1 ? "" : "s"}`],
+    ...(p.rate != null ? [["Share of enrolled places", pctCell(p.rate),
+      `of ${fmt(p.enrolled_places)} enrolled places`]] : []),
+    ["In wholly empty dwellings", cell(whole),
+      p.vacant_places ? `${pct(shareOf(whole, p.vacant_places), 0)} of vacant places` : null],
+    ["In otherwise occupied dwellings", cell(num(p.depth.rooms, "places")),
+      `${fmt(num(p.depth.rooms, "listings"))} listings with a spare room`],
+  ];
+  document.getElementById("vacTiles").innerHTML = tiles.map(([k, v, note]) =>
+    `<div class="tile"><dt>${k}</dt><dd>${v}${note ? `<div class="tile-note">${note}</div>` : ""}</dd></div>`
+  ).join("");
+}
+
+/* The headline. A vacancy is only comparable with another once you know
+   whether it is a dwelling standing empty or one spare room in a share house,
+   and that split is almost entirely a function of how many people the dwelling
+   holds — so capacity is the axis. */
+function stackRow(label, sub, parts, total, scale, extra = "") {
+  const seg = (cls, v, tip) => v
+    ? `<span class="stackseg ${cls}" style="width:${(v / total * 100).toFixed(2)}%" title="${tip}"></span>` : "";
+  return `<div class="stackrow ${extra}">
+    <span class="lbl">${label}${sub ? `<span class="sub">${sub}</span>` : ""}</span>
+    <span><span class="stackbar" style="width:${(total / scale * 100).toFixed(2)}%">
+      ${seg("seg-whole", parts.whole, `${fmt(parts.whole)} places in wholly empty dwellings`)}
+      ${seg("seg-rooms", parts.rooms, `${fmt(parts.rooms)} places in otherwise occupied dwellings`)}
+      ${seg("seg-multi", parts.multi, `${fmt(parts.multi)} places in listings covering several dwellings`)}
+    </span></span>
+    <span class="val">${fmt(total)}${parts.whole ? ` · ${pct(shareOf(parts.whole, total), 0)}` : ""}</span>
+  </div>`;
+}
+
+function renderVacDepth(g, p) {
+  const rows = p.by_capacity.filter(r => num(r, "vacant_places"));
+  const scale = Math.max(1, ...rows.map(r => num(r, "vacant_places")));
+  const parts = r => ({ whole: num(r, "whole_places"), rooms: num(r, "room_places"),
+                        multi: num(r, "surplus_places") });
+
+  const total = { whole: num(p.depth.whole, "places"), rooms: num(p.depth.rooms, "places"),
+                  multi: num(p.depth.multi_dwelling, "places") };
+
+  document.getElementById("vacDepthSub").textContent =
+    "Vacant places by the number of residents the dwelling holds · whole dwelling, or one room in it";
+
+  document.getElementById("vacDepth").innerHTML =
+    stackRow("All vacancies", `${fmt(p.listings)} listings`, total, p.vacant_places, p.vacant_places, "total")
+    + rows.map(r => stackRow(
+        r.label,
+        `${fmt(num(r, "listings"))} listing${num(r, "listings") === 1 ? "" : "s"}`,
+        parts(r), num(r, "vacant_places"), scale)).join("");
+
+  const one = rows.find(r => r.capacity === 1);
+  const big = rows.filter(r => r.capacity >= 4)
+                  .reduce((a, r) => ({ v: a.v + num(r, "vacant_places"), w: a.w + num(r, "whole_places") }),
+                          { v: 0, w: 0 });
+  document.getElementById("vacDepthNote").innerHTML =
+    `<b>${fmt(total.whole)} of ${fmt(p.vacant_places)} vacant places (${pct(shareOf(total.whole, p.vacant_places), 0)})</b> `
+    + `are in dwellings standing completely empty; ${fmt(total.rooms)} are single rooms in dwellings someone `
+    + `already lives in. The split is mostly a question of dwelling size`
+    + (one ? `: a ${one.label.toLowerCase()} dwelling is empty or it is not` : "")
+    + (big.v ? `, while only ${pct(shareOf(big.w, big.v), 0)} of vacancy in dwellings of four or more `
+             + `residents is a whole empty dwelling` : "")
+    + `. A spare room is a matching problem; an empty dwelling is stranded capital.`;
+}
+
+/* Bar length is the rate where a denominator exists, and the raw count where it
+   does not — Supplement P publishes no places below SA4. */
+function miniBars(host, rows, { value, label, tip, note, scale }) {
+  // Counts scale to the largest row; shares of a whole scale to 1, so they stay
+  // comparable between regions. Seeding at 1 would flatten every fraction.
+  const max = scale === "share" ? 1 : Math.max(...rows.map(value), Number.MIN_VALUE);
+  document.getElementById(host).innerHTML = rows.length
+    ? rows.map(r => `
+      <div class="minirow" title="${tip(r)}">
+        <span class="lbl">${label(r)}</span>
+        <span><span class="minibar" style="width:${(value(r) / max * 100).toFixed(2)}%"></span></span>
+        <span class="val">${note(r)}</span>
+      </div>`).join("")
+    : '<p class="empty">Nothing to show for this region.</p>';
+}
+
+function renderVacCategories(g, p) {
+  const rated = p.by_category.some(r => r.rate != null);
+  const rows = p.by_category.filter(r => rated ? r.rate != null : num(r, "vacant_places"));
+  document.getElementById("vacCatSub").textContent = rated
+    ? "Vacant places as a share of enrolled places"
+    : "Vacant places · no rate, because Supplement P publishes no places below SA4";
+
+  miniBars("vacCatBars", rows, {
+    value: r => rated ? r.rate : num(r, "vacant_places"),
+    label: r => r.category,
+    tip: r => `${r.category} — ${fmt(num(r, "vacant_places"))} vacant places`
+      + (r.enrolled_places ? ` of ${fmt(r.enrolled_places)} enrolled` : "")
+      + `, ${fmt(num(r, "whole_listings"))} of ${fmt(num(r, "listings"))} listings a whole dwelling`,
+    note: r => rated ? pctCell(r.rate) : fmt(num(r, "vacant_places")),
+  });
+}
+
+function renderVacForms(p) {
+  const rows = p.by_form;
+  const scale = Math.max(1, ...rows.map(r => num(r, "vacant_places")));
+  document.getElementById("vacFormBars").innerHTML = rows.map(r => stackRow(
+    r.form,
+    `${fmt(num(r, "listings"))} listing${num(r, "listings") === 1 ? "" : "s"}`,
+    { whole: num(r, "whole_places"), rooms: num(r, "room_places"), multi: num(r, "surplus_places") },
+    num(r, "vacant_places"), scale)).join("");
+}
+
+function renderVacFeatures(p) {
+  const panel = document.getElementById("vacFeaturePanel");
+  if (!p.by_feature.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const rows = p.by_feature.flatMap(f => [
+    { label: `${f.feature} — yes`, side: f.with },
+    { label: `${f.feature} — no`, side: f.without },
+  ]);
+  miniBars("vacFeatureBars", rows, {
+    value: r => shareOf(num(r.side, "whole_places"), num(r.side, "vacant_places")) || 0,
+    label: r => r.label,
+    tip: r => `${r.label} — ${fmt(num(r.side, "whole_places"))} of ${fmt(num(r.side, "vacant_places"))} `
+      + `vacant places are a whole empty dwelling`,
+    note: r => pctCell(shareOf(num(r.side, "whole_places"), num(r.side, "vacant_places"))),
+    scale: "share",
+  });
+}
+
+/* The one place the two datasets can be checked against each other: where
+   Supplement P reports more enrolled places per participant than a region's
+   assessed need, more of those places turn up listed as vacant. */
+function renderVacBridge(g) {
+  const panel = document.getElementById("vacBridgePanel");
+  const points = VAC.bridge;
+  if (!points.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const here = new Set(
+    g.level === "National" ? []
+      : g.level === "State" ? points.filter(p => p.state === g.state).map(p => p.region_id)
+      : [g.id, g.parent].filter(Boolean));
+
+  const W = 900, H = 340, M = { t: 18, r: 20, b: 52, l: 58 };
+  const iw = W - M.l - M.r, ih = H - M.t - M.b;
+  const xMax = Math.ceil(Math.max(...points.map(p => p.places_per_participant)) * 2) / 2;
+  const yMax = Math.ceil(Math.max(...points.map(p => p.rate)) * 20) / 20;
+  const x = v => M.l + Math.min(v / xMax, 1) * iw;
+  const y = v => M.t + ih - (v / yMax) * ih;
+
+  const corr = VAC.meta.bridge_correlation;
+  const out = [`<svg class="scatter" viewBox="0 0 ${W} ${H}" role="img" aria-label="`
+    + `Across ${corr.points} SA4 and design category combinations, regions with more enrolled places `
+    + `per participant tend to have a higher share of those places listed vacant. `
+    + `Spearman rank correlation ${corr.spearman}.">`];
+
+  for (let t = 0; t <= yMax + 1e-9; t += yMax / 4) {
+    out.push(`<line class="grid-line" x1="${M.l}" y1="${y(t).toFixed(1)}" x2="${M.l + iw}" y2="${y(t).toFixed(1)}"/>`);
+    out.push(`<text x="${M.l - 9}" y="${(y(t) + 3.5).toFixed(1)}" text-anchor="end">${(t * 100).toFixed(0)}%</text>`);
+  }
+  // 1.00 places per participant is where a region has exactly as many places as
+  // participants assessed as needing that category.
+  out.push(`<line class="axis-line" x1="${x(1)}" y1="${M.t}" x2="${x(1)}" y2="${M.t + ih}"/>`);
+  out.push(`<text x="${x(1)}" y="${M.t - 5}" text-anchor="middle">1.00</text>`);
+  out.push(`<line class="axis-line" x1="${M.l}" y1="${M.t + ih}" x2="${M.l + iw}" y2="${M.t + ih}"/>`);
+  for (let t = 0; t <= xMax + 1e-9; t += xMax / 5) {
+    out.push(`<text x="${x(t).toFixed(1)}" y="${M.t + ih + 19}" text-anchor="middle">${t.toFixed(1)}</text>`);
+  }
+  out.push(`<text class="axis-title" x="${M.l + iw / 2}" y="${H - 8}" text-anchor="middle">Enrolled places per participant with that need &rarr;</text>`);
+  out.push(`<text class="axis-title" transform="translate(14 ${M.t + ih / 2}) rotate(-90)" text-anchor="middle">Share listed vacant &rarr;</text>`);
+
+  // Highlighted points last, so they sit above the cloud.
+  [...points].sort((a, b) => Number(here.has(a.region_id)) - Number(here.has(b.region_id)))
+    .forEach(p => {
+      const mine = here.has(p.region_id);
+      out.push(`<g><title>${p.region} (${p.state}) — ${p.category}: `
+        + `${fmt(p.vacant_places)} of ${fmt(p.enrolled_places)} enrolled places listed vacant `
+        + `(${pct(p.rate)}), ${p.places_per_participant.toFixed(2)} places per participant</title>`
+        + `<circle class="pt${mine ? " pt-here" : ""}" cx="${x(p.places_per_participant).toFixed(1)}" `
+        + `cy="${y(p.rate).toFixed(1)}" r="${mine ? 6 : 5}"/></g>`);
+    });
+  out.push("</svg>");
+  document.getElementById("vacBridgeChart").innerHTML = out.join("");
+
+  document.getElementById("vacBridgeNote").innerHTML =
+    `Each point is one design category in one SA4. The two datasets are independent — one is the NDIA's `
+    + `enrolment and eligibility record, the other a listings platform — and they agree in direction: `
+    + `rank correlation <b>&rho; = ${corr.spearman}</b> across ${corr.points} points, and `
+    + `<b>${corr.spearman_excluding_vic}</b> with Victoria excluded, so it is not a Victorian artefact. `
+    + `That is a real but loose relationship: it supports reading a high places-per-participant figure as `
+    + `genuine slack in the market, and it does not support predicting any single region's vacancy from it.`
+    + (here.size ? ` Points in ${g.level === "National" ? "Australia" : g.name} are highlighted.` : "");
+}
+
+function renderVacChildren(g) {
+  const panel = document.getElementById("vacChildPanel");
+  const kids = (CHILDREN.get(g.id) || []).filter(k => VAC.regions[k.id]);
+  if (!kids.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const levels = [...new Set(kids.map(k => k.level))];
+  if (!levels.includes(vacChildLevel)) vacChildLevel = levels[0];
+
+  document.getElementById("vacLevelSwitch").innerHTML = levels.length > 1
+    ? levels.map(l => `<button type="button" data-level="${l}" aria-pressed="${l === vacChildLevel}">${l}</button>`).join("")
+    : "";
+  document.getElementById("vacLevelSwitch").onclick = e => {
+    const btn = e.target.closest("button[data-level]");
+    if (!btn) return;
+    vacChildLevel = btn.dataset.level;
+    vacSort = { key: null, dir: -1 };
+    renderVacChildren(g);
+  };
+
+  const shown = kids.filter(k => k.level === vacChildLevel);
+  document.getElementById("vacChildTitle").textContent =
+    `${shown.length} ${vacChildLevel === "State" ? "states and territories" : `${vacChildLevel} regions`} with `
+    + `vacancies listed, within ${g.level === "National" ? "Australia" : g.name}`;
+
+  const P = k => VAC.regions[k.id];
+  const cols = [
+    { key: "name", label: "Region" },
+    { key: "places", label: "Vacant<br>places", get: k => P(k).vacant_places },
+    { key: "rate", label: "Share of<br>enrolled places", get: k => P(k).rate, format: pctCell },
+    { key: "whole", label: "Of that, wholly<br>empty dwellings",
+      get: k => shareOf(num(P(k).depth.whole, "places"), P(k).vacant_places), format: pctCell },
+    { key: "listings", label: "Listings", get: k => P(k).listings },
+  ];
+
+  document.getElementById("vacChildHead").innerHTML = cols.map(c =>
+    `<th scope="col" class="sortable" data-key="${c.key}"${vacSort.key === c.key ? ` aria-sort="${vacSort.dir === 1 ? "ascending" : "descending"}"` : ""}>`
+    + `${c.label} <span class="sortcue" aria-hidden="true">${vacSort.key === c.key ? (vacSort.dir === 1 ? "▲" : "▼") : "↕"}</span></th>`
+  ).join("");
+
+  const rows = [...shown];
+  const col = cols.find(c => c.key === vacSort.key);
+  if (col) {
+    rows.sort((a, b) => {
+      if (!col.get) return vacSort.dir * a.name.localeCompare(b.name);
+      const p = col.get(a), q = col.get(b);
+      if (p == null && q == null) return 0;
+      if (p == null) return 1;          // regions with no value sort last either way
+      if (q == null) return -1;
+      return vacSort.dir * (p - q);
+    });
+  } else {
+    rows.sort((a, b) => P(b).vacant_places - P(a).vacant_places);
+  }
+
+  document.getElementById("vacChildBody").innerHTML = rows.map(k =>
+    `<tr class="linked" data-id="${encodeURIComponent(k.id)}">`
+    + cols.map(c => c.key === "name"
+        ? `<td class="region"><a href="${hashFor("vacancy", k.id)}">${k.name}</a></td>`
+        : `<td>${(c.format || cell)(c.get(k))}</td>`).join("")
+    + `</tr>`).join("");
+
+  document.getElementById("vacChildHead").onclick = e => {
+    const th = e.target.closest("th[data-key]");
+    if (!th) return;
+    const key = th.dataset.key;
+    vacSort = (vacSort.key === key) ? { key, dir: -vacSort.dir } : { key, dir: key === "name" ? 1 : -1 };
+    renderVacChildren(g);
+  };
+  document.getElementById("vacChildBody").onclick = e => {
+    if (e.target.closest("a")) return;
+    const tr = e.target.closest("tr[data-id]");
+    if (tr) go(decodeURIComponent(tr.dataset.id));
+  };
+}
+
+function renderVacPrice(p) {
+  const panel = document.getElementById("vacPricePanel");
+  if (!p.price_bands.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const bands = new Map(VAC.meta.price_bands.map(b => [b.label, b]));
+  const money = v => "$" + Math.round(v / 1000) + "k";
+  document.getElementById("vacPriceSub").textContent =
+    "Quartiles of maximum price per room, set nationally";
+
+  miniBars("vacPriceBars", p.price_bands, {
+    value: r => num(r, "vacant_places"),
+    label: r => {
+      const b = bands.get(r.label);
+      const range = b.from == null ? `under ${money(b.to)}`
+                  : b.to == null ? `${money(b.from)} and over`
+                  : `${money(b.from)}–${money(b.to)}`;
+      return `${r.label}<span class="sub">${range}</span>`;
+    },
+    tip: r => `${r.label} — ${fmt(num(r, "vacant_places"))} vacant places, `
+      + `${pct(shareOf(num(r, "whole_places"), num(r, "vacant_places")), 0)} of them a whole empty dwelling`,
+    note: r => fmt(num(r, "vacant_places")),
+  });
+}
+
+function renderVacSuburbs(p) {
+  const panel = document.getElementById("vacSuburbPanel");
+  if (!p.top_suburbs.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  miniBars("vacSuburbBars", p.top_suburbs, {
+    value: r => num(r, "vacant_places"),
+    label: r => r.suburb,
+    tip: r => `${r.suburb} — ${fmt(num(r, "vacant_places"))} vacant places across `
+      + `${fmt(num(r, "listings"))} listing${num(r, "listings") === 1 ? "" : "s"}`,
+    note: r => fmt(num(r, "vacant_places")),
+  });
+}
+
+function renderVacNotes(g, p) {
+  const meta = VAC.meta;
+  const assigned = meta.match.postcode + meta.match.override;
+  const notes = [
+    ["t-block", "Housing Hub is a listings platform, not a vacancy census.",
+     "Only vacancies a provider chose to advertise appear here, and providers list at very different "
+     + "rates. Victoria shows <b>17.3%</b> of its enrolled places as vacant against New South Wales' "
+     + "<b>6.0%</b> — a gap far too large to be real, and better read as a difference in how much of "
+     + "each market advertises here. Compare categories and dwelling types within a region freely; "
+     + "compare one region against another only with this in mind."],
+    ["t-info", "Whole-dwelling and single-room vacancies are derived, not published.",
+     "The export gives a vacancy count and a building type. Where the count reaches the resident "
+     + "capacity the building type names, the dwelling is counted as wholly empty; below it, the "
+     + "difference is counted as rooms in a dwelling someone already lives in. "
+     + `<b>${fmt(num(p.depth.multi_dwelling, "listings"))}</b> listing${num(p.depth.multi_dwelling, "listings") === 1 ? "" : "s"} here `
+     + "report more vacancies than the dwelling can hold, which can only mean one listing covering "
+     + "several dwellings; those surplus places are kept in a third bucket rather than assigned to either."],
+    ["t-care", "Two dates, not one.",
+     `Vacancies are as at <b>${meta.as_at}</b>; the enrolled places they are divided by are as at `
+     + `<b>${meta.sda_as_at}</b>. Every rate on this page straddles those two months, and a rate is `
+     + "suppressed where fewer than 50 enrolled places sit underneath it."],
+    ["t-care", "Design category and dwelling features do not predict whole-dwelling vacancy.",
+     "It is tempting to read the category and feature charts causally. Fitting a model to the 1,910 "
+     + "shared dwellings in this export, once dwelling size and form are held constant, design "
+     + "category, onsite overnight assistance, a breakout room and price all lose any independent "
+     + "association with whether a vacancy is the whole dwelling. Dwelling size is doing nearly all "
+     + "the work. Read those two charts as description, not explanation."],
+    ["t-info", "Regions are assigned from postcode and suburb.",
+     `The export carries no statistical geography, so each listing is matched to an SA4 through a `
+     + `postcode and locality concordance. All <b>${fmt(meta.listings)}</b> listings resolved: `
+     + `${fmt(meta.match.suburb)} on an exact suburb and postcode, and ${fmt(assigned)} on the postcode `
+     + `alone or a hand-checked correction. Vacancy appears in `
+     + `<b>${meta.regions_with_vacancy.SA4}</b> of the 88 SA4 regions.`],
+    ["t-care", "No rate below SA4.",
+     "Supplement P publishes the dwelling cross-tabs the places derivation needs at SA4 and above "
+     + `only, so SA3 pages show counts and the whole-versus-rooms split but no rate. `
+     + `${fmt(meta.sa3_unresolved_listings)} listings sit in a locality with no SA3 counterpart in the `
+     + "supplement and are counted at SA4 and above only."],
+  ];
+  document.getElementById("vacNotes").innerHTML = notes.map(([tag, head, body]) =>
     `<div class="note"><span class="note-tag ${tag}">${tag === "t-block" ? "Must read" : tag === "t-care" ? "Caution" : "Method"}</span>`
     + `<p><b>${head}</b> ${body}</p></div>`).join("");
 }

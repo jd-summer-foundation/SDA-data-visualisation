@@ -19,6 +19,10 @@
       <div class="brand-name">SDA Market Explorer</div>
       <div class="brand-sub" id="brandSub">Loading&hellip;</div>
     </div>
+    <div class="viewswitch" id="viewSwitch" role="group" aria-label="Choose a view">
+      <button type="button" data-view="supply" aria-pressed="true">Supply &amp; demand</button>
+      <button type="button" data-view="vacancy" aria-pressed="false">Vacancy</button>
+    </div>
     <div class="picker">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="color:var(--ink-3)">
         <circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4.3-4.3"></path>
@@ -41,6 +45,8 @@
       <h1 id="placeName"></h1>
       <div class="page-meta" id="placeMeta"></div>
     </div>
+
+    <div id="viewSupply">
 
     <dl class="tiles" id="tiles"></dl>
 
@@ -133,6 +139,109 @@
       </div></div>
       <div class="notes" id="notes"></div>
     </section>
+
+    </div><!-- /#viewSupply -->
+
+    <div id="viewVacancy" hidden>
+
+      <dl class="tiles" id="vacTiles"></dl>
+
+      <p class="vac-empty" id="vacEmpty" hidden></p>
+
+      <div id="vacBody">
+
+      <section class="panel">
+        <div class="panel-head"><div>
+          <div class="panel-title">Whole dwellings, or single rooms?</div>
+          <div class="panel-sub" id="vacDepthSub"></div>
+        </div></div>
+        <div class="legend">
+          <span><i class="swatch" style="background:var(--accent)"></i>Whole dwelling empty</span>
+          <span><i class="swatch" style="background:var(--accent);opacity:.4"></i>Room in an occupied dwelling</span>
+          <span><i class="swatch" style="background:var(--ink-3)"></i>Listing covering several dwellings</span>
+        </div>
+        <div class="stackbars" id="vacDepth"></div>
+        <p class="trend-note" id="vacDepthNote"></p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head"><div>
+          <div class="panel-title">Vacancy rate by design category</div>
+          <div class="panel-sub" id="vacCatSub"></div>
+        </div></div>
+        <div class="minibars" id="vacCatBars"></div>
+      </section>
+
+      <div class="split">
+        <section class="panel">
+          <div class="panel-head"><div>
+            <div class="panel-title">Vacant places by dwelling form</div>
+            <div class="panel-sub">Share of each form&rsquo;s vacancy that is the whole dwelling</div>
+          </div></div>
+          <div class="minibars" id="vacFormBars"></div>
+        </section>
+        <section class="panel" id="vacFeaturePanel">
+          <div class="panel-head"><div>
+            <div class="panel-title">Whole-dwelling vacancy by feature</div>
+            <div class="panel-sub">Share of each group&rsquo;s vacant places that is a whole empty dwelling</div>
+          </div></div>
+          <div class="minibars" id="vacFeatureBars"></div>
+        </section>
+      </div>
+
+      <section class="panel" id="vacBridgePanel">
+        <div class="panel-head"><div>
+          <div class="panel-title">Vacancy against the supply and demand picture</div>
+          <div class="panel-sub">Every SA4 and design category with enough enrolled places to form a rate</div>
+        </div></div>
+        <div id="vacBridgeChart"></div>
+        <p class="trend-note" id="vacBridgeNote"></p>
+      </section>
+
+      <section class="panel" id="vacChildPanel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title" id="vacChildTitle"></div>
+            <div class="panel-sub">Click a column to sort, a row to open</div>
+          </div>
+          <div class="levelswitch" id="vacLevelSwitch" role="group" aria-label="Region level"></div>
+        </div>
+        <div class="tablewrap">
+          <table id="vacChildTable">
+            <thead><tr id="vacChildHead"></tr></thead>
+            <tbody id="vacChildBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="split">
+        <section class="panel" id="vacPricePanel">
+          <div class="panel-head"><div>
+            <div class="panel-title">Vacant places by price band</div>
+            <div class="panel-sub" id="vacPriceSub"></div>
+          </div></div>
+          <div class="minibars" id="vacPriceBars"></div>
+        </section>
+        <section class="panel" id="vacSuburbPanel">
+          <div class="panel-head"><div>
+            <div class="panel-title">Where the vacancies are</div>
+            <div class="panel-sub">Most vacant places, by suburb</div>
+          </div></div>
+          <div class="minibars" id="vacSuburbBars"></div>
+        </section>
+      </div>
+
+      </div><!-- /#vacBody -->
+
+      <section class="panel">
+        <div class="panel-head"><div>
+          <div class="panel-title">How to read these numbers</div>
+          <div class="panel-sub">Limits inherent in a listings platform</div>
+        </div></div>
+        <div class="notes" id="vacNotes"></div>
+      </section>
+
+    </div><!-- /#viewVacancy -->
 
     <footer>
       <p id="footNote"></p>
