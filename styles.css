@@ -228,7 +228,7 @@ tbody tr.linked:hover td.region a { color: var(--accent); text-decoration: under
 .minirow { display: grid; grid-template-columns: minmax(88px, auto) minmax(0, 1fr) 46px; align-items: center; gap: 10px; }
 .minirow .lbl { font-size: 13px; color: var(--ink-2); }
 .minirow .val { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
-.minibar { height: 13px; border-radius: 0 3px 3px 0; background: var(--accent); min-width: 2px; }
+.minibar { display: block; height: 13px; border-radius: 0 3px 3px 0; background: var(--accent); min-width: 2px; }
 
 /* ---------- notes ---------- */
 .notes { display: flex; flex-direction: column; gap: 13px; }
@@ -275,6 +275,42 @@ footer a { color: var(--accent); }
 }
 .trend-note b { color: var(--ink); font-weight: 600; }
 
+/* ---------- view switch ---------- */
+.viewswitch { display: inline-flex; background: var(--ground); border: 1px solid var(--rule); border-radius: 7px; padding: 2px; gap: 2px; flex: none; }
+.viewswitch button {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 0; border-radius: 5px; padding: 6px 12px; cursor: pointer;
+  color: var(--ink-3); white-space: nowrap;
+}
+.viewswitch button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+
+/* ---------- stacked depth bars ---------- */
+.stackbars { display: flex; flex-direction: column; gap: 13px; }
+.stackrow { display: grid; grid-template-columns: minmax(104px, auto) minmax(0, 1fr) 92px; align-items: center; gap: 11px; }
+.stackrow.total { padding-bottom: 13px; margin-bottom: 3px; border-bottom: 1px solid var(--rule-soft); }
+.stackrow.total .lbl, .stackrow.total .val { font-weight: 700; color: var(--ink); }
+.stackrow .lbl { font-size: 13px; color: var(--ink-2); }
+.stackrow .sub, .minirow .sub { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); }
+.stackrow .val { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
+.stackbar { display: flex; height: 17px; border-radius: 0 3px 3px 0; overflow: hidden; min-width: 2px; }
+.stackseg { height: 100%; min-width: 0; }
+.seg-whole { background: var(--accent); }
+.seg-rooms { background: var(--accent); opacity: .4; }
+.seg-multi { background: var(--ink-3); }
+
+/* ---------- bridge scatter ---------- */
+.scatter { width: 100%; height: auto; display: block; overflow: visible; }
+.scatter text { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); letter-spacing: 0.03em; }
+.scatter .axis-title { font-family: var(--sans); font-size: 11.5px; font-weight: 600; fill: var(--ink-2); letter-spacing: 0; }
+.scatter .pt { fill: var(--accent); fill-opacity: .34; stroke: var(--accent); stroke-opacity: .5; }
+.scatter .pt-here { fill: var(--demand); fill-opacity: .9; stroke: var(--surface); stroke-width: 1.5; }
+
+/* ---------- vacancy empty state ---------- */
+.vac-empty {
+  font-family: var(--serif); font-size: 15px; line-height: 1.55; color: var(--ink-2);
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 22px; margin: 0 0 22px; max-width: none;
+}
 /* ---------- substitution mode ---------- */
 .mode-note {
   font-family: var(--serif); font-size: 14px; line-height: 1.55; color: var(--ink-2);
