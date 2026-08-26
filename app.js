@@ -117,28 +117,34 @@ const pct = (v, dp = 1) =>
   (v === null || v === undefined) ? null : (v * 100).toFixed(dp) + "%";
 const pctCell = v => pct(v) ?? '<span class="nil">&mdash;</span>';
 
-/* The verdict a ratio carries, in words. Chips, heat cells and the map all
-   read from here so the three cannot come to describe the same cut
-   differently. */
-function ratioLabel(r) {
-  return r < RATIO_TIGHT ? "fewer places than participants"
-       : r < RATIO_GOOD ? "balanced"
-       : r < RATIO_HIGH ? "above the need recorded against it"
-       : "far above the need recorded against it";
-}
-
-/* Form as well as number: the glyph carries the verdict where colour cannot,
-   and the two above-band states are told apart by the figure itself. */
+/* The four states of the measure, in one place. Chips, heat cells, the map
+   and the band tally all read from here, so none of them can come to describe
+   the same cut differently. Form as well as colour: the glyph carries the
+   verdict where colour cannot, and the two above-band states are told apart by
+   the figure itself. `swatch` is the map class that stands for the band where
+   one colour has to represent it -- the map subdivides "under" three ways, and
+   m2 is its middle. */
+const RATIO_BANDS = [
+  { short: "Under",    mark: "▼", chip: "r-crit",  swatch: "m2",
+    label: "fewer places than participants" },
+  { short: "Balanced", mark: "◆", chip: "r-good",  swatch: "m4",
+    label: "balanced" },
+  { short: "Over",     mark: "▲", chip: "r-over",  swatch: "m5",
+    label: "above the need recorded against it" },
+  { short: "Far over", mark: "▲", chip: "r-over2", swatch: "m6",
+    label: "far above the need recorded against it" },
+];
 const NO_RATIO = "no ratio — no places and no identified need";
-const ratioMark = r => r < RATIO_TIGHT ? "▼" : r < RATIO_GOOD ? "◆" : "▲";
+
+const ratioBand = r => r < RATIO_TIGHT ? 0 : r < RATIO_GOOD ? 1 : r < RATIO_HIGH ? 2 : 3;
+const ratioLabel = r => RATIO_BANDS[ratioBand(r)].label;
+const ratioMark = r => RATIO_BANDS[ratioBand(r)].mark;
 
 function ratioChip(r) {
   if (r === null || r === undefined) return '<span class="nil">&mdash;</span>';
-  const cls = r < RATIO_TIGHT ? "r-crit" : r < RATIO_GOOD ? "r-good"
-            : r < RATIO_HIGH ? "r-over" : "r-over2";
-  const label = ratioLabel(r);
-  return `<span class="ratio ${cls}" title="${r.toFixed(2)} places per participant — ${label}">`
-       + `<i aria-hidden="true">${ratioMark(r)}</i>${r.toFixed(2)}<span class="sr-only"> — ${label}</span></span>`;
+  const b = RATIO_BANDS[ratioBand(r)];
+  return `<span class="ratio ${b.chip}" title="${r.toFixed(2)} places per participant — ${b.label}">`
+       + `<i aria-hidden="true">${b.mark}</i>${r.toFixed(2)}<span class="sr-only"> — ${b.label}</span></span>`;
 }
 
 /* Sortable header cells. Shared so a second table cannot quietly lose the
@@ -436,6 +442,7 @@ function renderSupply(g) {
   renderChildren(g, comparable);
   renderTrend(g);
   renderHeat(g);
+  renderBands(g);
   renderNotes(g);
 
   document.getElementById("footNote").textContent =
@@ -943,18 +950,25 @@ function abbrLabel(short, full) {
    Regions sit under their state, and the state row carries the NDIA's own
    published subtotals -- not an average of the regions beneath it, which
    would weight a four-participant region equally with a nine-hundred one. */
-function renderHeat(g) {
-  const panel = document.getElementById("heatPanel");
-  // Scoped to where the reader is: nationally every region, and below that the
-  // regions of the state they are in, so an SA4 can be read against its peers.
+/* The SA4s the reader's position puts in view, under their states: nationally
+   every region, and below that the regions of the state they are in, so a
+   region can be read against its peers. Shared by the grid and the tally
+   beneath it, which must always be counting the same regions. */
+function sa4Groups(g) {
   const scope = g.level === "National" ? null : g.state;
-  const groups = (CHILDREN.get("national") || [])
+  return (CHILDREN.get("national") || [])
     .filter(st => !scope || st.state === scope)
     .map(st => ({
       state: st,
       kids: (CHILDREN.get(st.id) || []).filter(k => k.level === "SA4" && hasData(k)),
     }))
     .filter(gr => gr.kids.length);
+}
+
+function renderHeat(g) {
+  const panel = document.getElementById("heatPanel");
+  const scope = g.level === "National" ? null : g.state;
+  const groups = sa4Groups(g);
   if (!groups.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
@@ -1075,6 +1089,90 @@ function renderHeat(g) {
     const tr = e.target.closest("tr[data-id]");
     if (tr) go(decodeURIComponent(tr.dataset.id));
   };
+}
+
+/* ---------- band tally ---------- */
+
+/* The grid above shows every region against every reading; this counts them.
+   It answers the question the grid raises but cannot state -- how widespread
+   is this? -- and the answer is not close: Improved Liveability and Fully
+   Accessible are short in the large majority of regions, High Physical
+   Support long in the large majority, and largely the same regions.
+
+   Rows are the grid's own columns, in the grid's own order, so the two panels
+   cannot come to disagree about what is being counted or drift apart in how
+   they arrange it. That puts the pooled reading directly beneath the two
+   readings it combines, which is where the comparison wants it: pooling takes
+   Fully Accessible from short almost everywhere to a genuinely mixed picture,
+   while Improved Liveability does not move at all, nothing substituting for
+   it. */
+function renderBands(g) {
+  const panel = document.getElementById("bandPanel");
+  const regions = sa4Groups(g).flatMap(gr => gr.kids);
+  if (!regions.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const pub = DATA.meta.comparable_categories;
+  const tally = HEAT_COLS
+    .filter(c => c.cat === POOL_NAME || pub.indexOf(c.cat) >= 0)
+    .map(c => {
+      const counts = RATIO_BANDS.map(() => 0);
+      let nil = 0;
+      for (const s of regions) {
+        const r = s.has_places ? figuresFor(s, c.cat).ratio : null;
+        if (r === null) nil++;
+        else counts[ratioBand(r)]++;
+      }
+      return { cat: c.cat, counts, nil };
+    });
+
+  const n = regions.length;
+  const anyNil = tally.some(t => t.nil);
+  const share = v => (v / n * 100).toFixed(0) + "%";
+  const of = t => t.cat;
+
+  document.getElementById("bandTitle").textContent =
+    `How many of those ${n} regions are short, and how many are long`;
+  document.getElementById("bandSub").textContent =
+    "Count of regions in each band · the same readings and cuts as the grid above";
+
+  document.getElementById("bandHead").innerHTML =
+    '<th scope="col">Design category</th>'
+    + RATIO_BANDS.map(b =>
+        `<th scope="col"><i class="bsw ${b.swatch}" aria-hidden="true"></i>${b.short}</th>`).join("")
+    + (anyNil ? '<th scope="col">No ratio</th>' : "")
+    + '<th scope="col" class="bdist">Distribution</th>';
+
+  document.getElementById("bandBody").innerHTML = tally.map(t => {
+    const cells = t.counts.map(v =>
+      `<td>${v}${v ? ` <span class="bshare">${share(v)}</span>` : ""}</td>`).join("");
+    const seg = (v, cls, title) => v
+      ? `<span class="bseg ${cls}" style="width:${(v / n * 100).toFixed(2)}%" title="${title}"></span>` : "";
+    const bar = t.counts.map((v, i) =>
+        seg(v, RATIO_BANDS[i].swatch, `${v} of ${n} — ${RATIO_BANDS[i].label}`)).join("")
+      + seg(t.nil, "m-nil", `${t.nil} of ${n} — ${NO_RATIO}`);
+    // The pooled row is a second reading of the two rows above it rather than a
+    // category in its own right, so it is marked as derived from them.
+    const pooled = t.cat === POOL_NAME;
+    return `<tr${pooled ? ' class="pooled"' : ""}>`
+      + `<td>${pooled ? "HPS + Fully Accessible" : of(t)}`
+      + (pooled ? '<div class="bnote">the two rows above, read as one body of stock '
+        + 'against one body of demand</div>' : "")
+      + "</td>" + cells
+      + (anyNil ? `<td>${t.nil || '<span class="nil">&mdash;</span>'}</td>` : "")
+      + `<td class="bdist"><span class="bbar">${bar}</span></td></tr>`;
+  }).join("");
+
+  const under = c => share(tally.find(t => t.cat === c).counts[0]);
+  document.getElementById("bandNote").innerHTML =
+    "<b>A count of regions, not of people.</b> Every region counts once here however "
+    + "large it is, so this says how widespread a shortfall is and not how many "
+    + "participants it reaches; the grid above carries the counts behind each region. "
+    + `Pooling moves the picture a long way &mdash; ${under(POOL_NAME)} of regions short `
+    + `rather than ${under("Fully Accessible")} &mdash; because much of the Fully `
+    + "Accessible shortfall is stock that exists and is enrolled as High Physical "
+    + `Support. Improved Liveability does not move at all: at ${under("Improved Liveability")} `
+    + "of regions short, nothing substitutes for it.";
 }
 
 function renderNotes(g) {

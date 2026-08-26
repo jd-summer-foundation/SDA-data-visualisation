@@ -190,6 +190,30 @@ and its verdict to a screen reader, and a region with no ratio is hatched. The
 text colour on each of the six fills is a token of its own, because the scale's
 lightness ordering inverts between the light and dark themes.
 
+### The band tally
+
+Beneath the grid, a count of how many regions sit in each band, over the same
+regions the grid covers. The grid raises a question it cannot state — how
+widespread is this? — and at 30 June 2026 the answer is not close: Improved
+Liveability is short in 75 of the 88 regions and Fully Accessible in 78, while
+High Physical Support is above the balanced band in 64 and far above it in 35,
+largely the same regions.
+
+Its rows are the grid's own columns, in the grid's own order, built from the
+same `HEAT_COLS` list, so the two panels cannot come to disagree about what is
+counted or drift apart in how it is arranged. That puts the pooled reading
+directly beneath the two readings it combines, which is where the comparison
+wants it: pooling takes Fully Accessible from short in 89% of regions to short
+in 35%, since much of that shortfall is stock that exists and is enrolled as
+High Physical Support, while Improved Liveability does not move at all, at 85%
+either way. The pooled row is indented and tinted rather than listed as a peer,
+because it is a second reading of two of the rows above it and not a category
+in its own right.
+
+The counts are of regions, not of people: every region counts once however
+large it is, so the tally says how widespread a shortfall is and not how many
+participants it reaches. The grid above carries the counts behind each region.
+
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
 ## The vacancy view

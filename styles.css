@@ -479,3 +479,31 @@ footer a { color: var(--accent); }
   .heatgrid td.region.sa4 { padding-left: 22px; }
   .heatwrap { max-height: 66vh; }
 }
+
+/* ---------- band tally ---------- */
+.bandtally { min-width: 700px; }
+.bandtally td:first-child { font-weight: 600; }
+.bandtally th i.bsw {
+  width: 11px; height: 11px; border-radius: 2px; display: inline-block;
+  vertical-align: -1px; margin-right: 6px;
+}
+.bandtally th .bsw.m2 { background: var(--map-2); }
+.bandtally th .bsw.m4 { background: var(--map-4); }
+.bandtally th .bsw.m5 { background: var(--map-5); }
+.bandtally th .bsw.m6 { background: var(--map-6); }
+.bshare { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 3px; }
+
+/* The pooled row is a second reading of the two rows above it rather than a
+   category in its own right, so it is indented under them and tinted, not
+   listed as their peer. */
+.bandtally tbody tr.pooled td { background: var(--surface-2); }
+.bandtally tbody tr.pooled td:first-child { padding-left: 26px; }
+.bnote { font-weight: 400; font-size: 11.5px; color: var(--ink-3); white-space: normal; }
+
+.bandtally td.bdist, .bandtally th.bdist { width: 34%; min-width: 190px; }
+.bbar { display: flex; height: 15px; border-radius: 3px; overflow: hidden; }
+.bseg { height: 100%; min-width: 0; }
+.bseg.m2 { background: var(--map-2); } .bseg.m4 { background: var(--map-4); }
+.bseg.m5 { background: var(--map-5); } .bseg.m6 { background: var(--map-6); }
+.bseg.m-nil { background: repeating-linear-gradient(45deg,
+  var(--map-nil-bg) 0 3px, var(--map-nil-ink) 3px 5px); }
