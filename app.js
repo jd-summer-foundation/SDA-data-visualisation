@@ -165,6 +165,16 @@ function rowCompare(col, dir) {
 const hasData = k => (k.totals.enrolled_dwellings || 0) > 0
                   || (k.totals.participants_with_need || 0) > 0;
 
+/* The enrolled/substitution toggle is repeated beside the category table, the
+   map and the region grid: a reader deep in the page should not have to scroll
+   back to the top to change the reading. All three are the one piece of state,
+   so they are built and wired from here and cannot come to disagree. */
+const MODES = [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]];
+const MODE_SWITCHES = ["modeSwitch", "mapModeSwitch", "heatModeSwitch"];
+const modeButtons = () => MODES.map(([mode, label]) =>
+  `<button type="button" data-mode="${mode}" aria-pressed="`
+  + `${(mode === "substitution") === substitution}">${label}</button>`).join("");
+
 /* ---------- loading ---------- */
 async function boot() {
   let res;
@@ -262,15 +272,6 @@ function inPlace(anchorId, run) {
 }
 
 function wireMapCategory() {
-  // Supply mode is shared with the table's toggle, so this re-renders the
-  // whole profile rather than just the map -- the two must never disagree.
-  document.getElementById("mapModeSwitch").addEventListener("click", e => {
-    const btn = e.target.closest("button[data-mode]");
-    if (!btn) return;
-    substitution = btn.dataset.mode === "substitution";
-    inPlace("mapModeSwitch", () => render(current.id));
-  });
-
   document.getElementById("mapSwitch").addEventListener("click", e => {
     const btn = e.target.closest("button[data-cat]");
     if (!btn) return;
@@ -282,12 +283,16 @@ function wireMapCategory() {
 }
 
 function wireModeSwitch() {
-  document.getElementById("modeSwitch").addEventListener("click", e => {
-    const btn = e.target.closest("button[data-mode]");
-    if (!btn) return;
-    substitution = btn.dataset.mode === "substitution";
-    inPlace("modeSwitch", () => render(current.id));
-  });
+  for (const id of MODE_SWITCHES) {
+    document.getElementById(id).addEventListener("click", e => {
+      const btn = e.target.closest("button[data-mode]");
+      if (!btn) return;
+      substitution = btn.dataset.mode === "substitution";
+      // Every panel is re-read, not just the one holding the button: supply
+      // mode is shared, and two panels disagreeing about it would be a lie.
+      inPlace(id, () => render(current.id));
+    });
+  }
 }
 
 /* ---------- search ---------- */
@@ -850,12 +855,7 @@ function renderMap(g) {
       + (c === cat) + '">' + (c === POOL_NAME ? "HPS + Fully Accessible" : c)
       + "</button>").join("");
 
-  /* The same toggle as the table above, repeated here because the table is
-     usually scrolled off screen by the time the map is in view. */
-  document.getElementById("mapModeSwitch").innerHTML =
-    [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]].map(
-      m => '<button type="button" data-mode="' + m[0] + '" aria-pressed="'
-        + ((m[0] === "substitution") === substitution) + '">' + m[1] + "</button>").join("");
+  document.getElementById("mapModeSwitch").innerHTML = modeButtons();
 
   /* Say so when the toggle cannot change this map: nothing substitutes for
      Improved Liveability or Robust, and silence reads as a broken control. */
@@ -931,12 +931,17 @@ function renderHeat(g, comparable) {
   if (!groups.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
+  document.getElementById("heatModeSwitch").innerHTML = modeButtons();
+
   const cols = [
     { key: "name", label: "Region" },
     { key: "dwellings", label: "Enrolled<br>dwellings", get: s => s.totals.enrolled_dwellings },
     { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
+    // The pooled name broken on every space is six lines of header over a
+    // grid whose header is pinned; the map's own shorthand fits in two.
     ...comparable.map(c => ({
-      key: c, label: c.replace(/ /g, "<br>"), heat: true,
+      key: c, heat: true,
+      label: c === POOL_NAME ? "HPS +<br>Fully Accessible" : c.replace(/ /g, "<br>"),
       get: s => (supplyFor(s) || {})[c]?.ratio ?? null,
     })),
   ];
@@ -957,9 +962,11 @@ function renderHeat(g, comparable) {
   document.getElementById("heatTitle").textContent =
     `${regions} SA4 regions by design category`
     + (scope ? ` in ${groups[0].state.name}` : " across Australia");
+  // The switch beside it already names the reading, so the subtitle says only
+  // what the reading does to these columns.
   document.getElementById("heatSub").textContent =
-    (substitution ? "Allowing substitution" : "As enrolled")
-    + " · places per participant · click a column to sort, a row to open";
+    (substitution ? "HPS and Fully Accessible pooled · " : "")
+    + "Places per participant · click a column to sort, a row to open";
 
   document.getElementById("heatHead").innerHTML = headCells(cols, heatSort);
 

@@ -156,6 +156,13 @@ while another runs long in the same places. The grid at the foot of every supply
 profile puts every SA4 against every comparable category at once: regions down
 the side, design categories across the top, places per participant in the cell.
 
+It carries its own copy of the enrolled/substitution toggle, because by the time
+the grid is in view the one beside the category table is far off screen. All
+three copies — table, map, grid — are the same piece of state and are wired
+once, so they cannot come to disagree; switching any of them re-reads the whole
+profile. Under substitution the grid drops to three columns, with High Physical
+Support and Fully Accessible pooled into one.
+
 It is scoped to where the reader is — all 88 regions nationally, and below that
 the regions of the state they are in, with their own row marked — and each
 state's regions sit under a row carrying the NDIA's own published subtotals for
