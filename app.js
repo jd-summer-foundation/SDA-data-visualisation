@@ -26,6 +26,8 @@ let sort = { key: null, dir: -1 };
 let vacSort = { key: null, dir: -1 };
 let substitution = false;
 let mapCategory = "Fully Accessible";
+let heatSort = { key: null, dir: -1 };
+let heatCollapsed = new Set();
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -111,20 +113,57 @@ const pct = (v, dp = 1) =>
   (v === null || v === undefined) ? null : (v * 100).toFixed(dp) + "%";
 const pctCell = v => pct(v) ?? '<span class="nil">&mdash;</span>';
 
+/* The verdict a ratio carries, in words. Chips, heat cells and the map all
+   read from here so the three cannot come to describe the same cut
+   differently. */
+function ratioLabel(r) {
+  return r < RATIO_TIGHT ? "fewer places than participants"
+       : r < RATIO_GOOD ? "balanced"
+       : r < RATIO_HIGH ? "above the need recorded against it"
+       : "far above the need recorded against it";
+}
+
+/* Form as well as number: the glyph carries the verdict where colour cannot,
+   and the two above-band states are told apart by the figure itself. */
+const NO_RATIO = "no ratio — no places and no identified need";
+const ratioMark = r => r < RATIO_TIGHT ? "▼" : r < RATIO_GOOD ? "◆" : "▲";
+
 function ratioChip(r) {
   if (r === null || r === undefined) return '<span class="nil">&mdash;</span>';
   const cls = r < RATIO_TIGHT ? "r-crit" : r < RATIO_GOOD ? "r-good"
             : r < RATIO_HIGH ? "r-over" : "r-over2";
-  // Form as well as number: the glyph carries the verdict where colour cannot,
-  // and the two above-band states are told apart by the figure itself.
-  const mark = r < RATIO_TIGHT ? "▼" : r < RATIO_GOOD ? "◆" : "▲";
-  const label = r < RATIO_TIGHT ? "fewer places than participants"
-              : r < RATIO_GOOD ? "balanced"
-              : r < RATIO_HIGH ? "above the need recorded against it"
-              : "far above the need recorded against it";
+  const label = ratioLabel(r);
   return `<span class="ratio ${cls}" title="${r.toFixed(2)} places per participant — ${label}">`
-       + `<i aria-hidden="true">${mark}</i>${r.toFixed(2)}<span class="sr-only"> — ${label}</span></span>`;
+       + `<i aria-hidden="true">${ratioMark(r)}</i>${r.toFixed(2)}<span class="sr-only"> — ${label}</span></span>`;
 }
+
+/* Sortable header cells. Shared so a second table cannot quietly lose the
+   aria-sort or the cue. */
+function headCells(cols, st) {
+  return cols.map(c =>
+    `<th scope="col" class="sortable" data-key="${c.key}"`
+    + (st.key === c.key ? ` aria-sort="${st.dir === 1 ? "ascending" : "descending"}"` : "") + ">"
+    + `${c.label} <span class="sortcue" aria-hidden="true">`
+    + `${st.key === c.key ? (st.dir === 1 ? "▲" : "▼") : "↕"}</span></th>`).join("");
+}
+
+/* Regions with no value sort last regardless of direction: a region without a
+   ratio is unknown, not smallest. */
+function rowCompare(col, dir) {
+  return (a, b) => {
+    if (!col.get) return dir * a.name.localeCompare(b.name);
+    const x = col.get(a), y = col.get(b);
+    if (x == null && y == null) return 0;
+    if (x == null) return 1;
+    if (y == null) return -1;
+    return dir * (x - y);
+  };
+}
+
+/* "<State> - Other" rows exist for participants whose region is unknown; drop
+   them where they carry nothing, but keep them where they hold real counts. */
+const hasData = k => (k.totals.enrolled_dwellings || 0) > 0
+                  || (k.totals.participants_with_need || 0) > 0;
 
 /* ---------- loading ---------- */
 async function boot() {
@@ -386,6 +425,7 @@ function renderSupply(g) {
   renderBreakdowns(g);
   renderChildren(g, comparable);
   renderTrend(g);
+  renderHeat(g, comparable);
   renderNotes(g);
 
   document.getElementById("footNote").textContent =
@@ -532,10 +572,6 @@ function renderChildren(g, comparable) {
     renderChildren(g, comparable);
   };
 
-  // "<State> - Other" rows exist for participants whose region is unknown; drop
-  // them where they carry nothing, but keep them where they hold real counts.
-  const hasData = k => (k.totals.enrolled_dwellings || 0) > 0
-                    || (k.totals.participants_with_need || 0) > 0;
   const shown = kids.filter(k => k.level === childLevel && hasData(k));
   document.getElementById("childTitle").textContent =
     `${shown.length} ${childLevel === "State" ? "states and territories" : `${childLevel} regions`} within `
@@ -552,26 +588,14 @@ function renderChildren(g, comparable) {
     })) : []),
   ];
 
-  document.getElementById("childHead").innerHTML = cols.map(c =>
-    `<th scope="col" class="sortable" data-key="${c.key}"${sort.key === c.key ? ` aria-sort="${sort.dir === 1 ? "ascending" : "descending"}"` : ""}>`
-    + `${c.label} <span class="sortcue" aria-hidden="true">${sort.key === c.key ? (sort.dir === 1 ? "▲" : "▼") : "↕"}</span></th>`
-  ).join("");
+  document.getElementById("childHead").innerHTML = headCells(cols, sort);
 
   const rows = [...shown];
   // The pooled column appears and disappears with the toggle, so a sort key
   // can outlive its column.
   if (sort.key && !cols.some(c => c.key === sort.key)) sort = { key: null, dir: -1 };
   if (sort.key) {
-    const col = cols.find(c => c.key === sort.key);
-    rows.sort((a, b) => {
-      if (!col.get) return sort.dir * a.name.localeCompare(b.name);
-      const x = col.get(a), y = col.get(b);
-      // Regions with no value sort last regardless of direction.
-      if (x == null && y == null) return 0;
-      if (x == null) return 1;
-      if (y == null) return -1;
-      return sort.dir * (x - y);
-    });
+    rows.sort(rowCompare(cols.find(c => c.key === sort.key), sort.dir));
   } else {
     rows.sort((a, b) => (b.totals.enrolled_dwellings || 0) - (a.totals.enrolled_dwellings || 0));
   }
@@ -695,6 +719,28 @@ function mapClass(r) {
   return "m" + (i + 1);
 }
 
+/* One legend for the scale, shared by the map and the heatmap below it. The
+   two panels colour the same measure on the same breaks, so a second copy of
+   this markup would only be a way for them to drift apart. */
+function ratioLegend(showNil) {
+  const sw = c => '<span class="' + c + '"></span>';
+  return '<div class="mrow"><i class="g-crit">▼</i><span class="msw">'
+    + sw("m1") + sw("m2") + sw("m3") + "</span><span>fewer places than participants</span>"
+    + '<span class="mticks">under 1.00</span></div>'
+    + '<div class="mrow"><i class="g-good">◆</i><span class="msw">' + sw("m4")
+    + "</span><span>balanced</span>"
+    + '<span class="mticks">1.00 – 1.50</span></div>'
+    + '<div class="mrow"><i class="g-over">▲</i><span class="msw">'
+    + sw("m5") + sw("m6")
+    + "</span><span>above the need recorded against it</span>"
+    + '<span class="mticks">1.50 – 2.50, then 2.50 and over</span></div>'
+    // Only worth a legend row when something in view actually uses it.
+    + (showNil
+        ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")
+          + "</span><span>" + NO_RATIO + "</span></div>"
+        : "");
+}
+
 /* Bounds of a set of already-projected paths. A state map is a crop of the
    national geometry rather than a second copy of it, which is why the file
    carries one national view and five insets and nothing per state. */
@@ -751,11 +797,7 @@ function renderMap(g) {
     const r = BY_ID.get(id);
     const v = ratioOf(id);
     const x = r.categories[cat] || {};
-    const verdict = v === null ? "no ratio — no places and no identified need"
-      : v < RATIO_TIGHT ? "fewer places than participants"
-      : v < 1.5 ? "balanced"
-      : v < RATIO_HIGH ? "more places than participants"
-      : "far more places than the need recorded against them";
+    const verdict = v === null ? NO_RATIO : ratioLabel(v);
     return '<a class="m-a' + (id === g.id ? " m-here" : "") + '"'
       + ' href="#' + encodeURIComponent(id) + '">'
       + "<title>" + r.name + " — "
@@ -830,23 +872,7 @@ function renderMap(g) {
              : "all " + ids.length + " SA4 regions")
     + " · click a region to open it";
 
-  const sw = c => '<span class="' + c + '"></span>';
-  document.getElementById("mapLegend").innerHTML =
-    '<div class="mrow"><i class="g-crit">▼</i><span class="msw">'
-    + sw("m1") + sw("m2") + sw("m3") + "</span><span>fewer places than participants</span>"
-    + '<span class="mticks">under 1.00</span></div>'
-    + '<div class="mrow"><i class="g-good">◆</i><span class="msw">' + sw("m4")
-    + "</span><span>balanced</span>"
-    + '<span class="mticks">1.00 – 1.50</span></div>'
-    + '<div class="mrow"><i class="g-over">▲</i><span class="msw">'
-    + sw("m5") + sw("m6")
-    + "</span><span>above the need recorded against it</span>"
-    + '<span class="mticks">1.50 – 2.50, then 2.50 and over</span></div>'
-    // Only worth a legend row when something in view actually uses it.
-    + (vals.some(v => v === null)
-        ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")
-          + "</span><span>no ratio — no places and no identified need</span></div>"
-        : "");
+  document.getElementById("mapLegend").innerHTML = ratioLegend(vals.some(v => v === null));
 
   const tot = BY_ID.get("national").totals;
   const miss = tot.need_without_category, all = tot.participants_with_need;
@@ -860,6 +886,150 @@ function renderMap(g) {
         + (miss / all * 100).toFixed(1) + "%) have no design category recorded, so no "
         + "category-specific map can place them at all."
       : "");
+}
+
+/* ---------- supply heatmap ---------- */
+
+/* A cell of the heatmap: the ratio's own colour behind the figure, rather than
+   a chip's tint. Eighty-eight rows of tinted pills read as a pale wash; the
+   full fill is what makes a column of short regions visible at a glance. */
+function heatCell(r) {
+  if (r === null || r === undefined)
+    return `<td class="hc m-nil" title="${NO_RATIO}"><span class="sr-only">${NO_RATIO}</span></td>`;
+  const label = ratioLabel(r);
+  return `<td class="hc ${mapClass(r)}" title="${r.toFixed(2)} places per participant — ${label}">`
+       + `<i aria-hidden="true">${ratioMark(r)}</i>${r.toFixed(2)}`
+       + `<span class="sr-only"> — ${label}</span></td>`;
+}
+
+/* The map reads one design category at a time and the region table one level
+   at a time, so neither shows a category running short across the country
+   while another runs long in the same places. This grid puts every SA4
+   against every comparable category at once.
+
+   It is coloured on the map's own six-class scale rather than the chips',
+   for two reasons: the two panels then cannot tell different stories about
+   the same number, and a chip's tint is light enough that eighty-eight rows
+   of them read as a pale wash rather than a pattern. The full fill is what
+   makes a short column or a long region visible without reading a figure.
+
+   Regions sit under their state, and the state row carries the NDIA's own
+   published subtotals -- not an average of the regions beneath it, which
+   would weight a four-participant region equally with a nine-hundred one. */
+function renderHeat(g, comparable) {
+  const panel = document.getElementById("heatPanel");
+  // Scoped to where the reader is: nationally every region, and below that the
+  // regions of the state they are in, so an SA4 can be read against its peers.
+  const scope = g.level === "National" ? null : g.state;
+  const groups = (CHILDREN.get("national") || [])
+    .filter(st => !scope || st.state === scope)
+    .map(st => ({
+      state: st,
+      kids: (CHILDREN.get(st.id) || []).filter(k => k.level === "SA4" && hasData(k)),
+    }))
+    .filter(gr => gr.kids.length);
+  if (!groups.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const cols = [
+    { key: "name", label: "Region" },
+    { key: "dwellings", label: "Enrolled<br>dwellings", get: s => s.totals.enrolled_dwellings },
+    { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
+    ...comparable.map(c => ({
+      key: c, label: c.replace(/ /g, "<br>"), heat: true,
+      get: s => (supplyFor(s) || {})[c]?.ratio ?? null,
+    })),
+  ];
+
+  // The pooled column appears and disappears with the substitution toggle, so
+  // a sort key can outlive its column.
+  if (heatSort.key && !cols.some(c => c.key === heatSort.key)) heatSort = { key: null, dir: -1 };
+  const cmp = heatSort.key
+    ? rowCompare(cols.find(c => c.key === heatSort.key), heatSort.dir)
+    : (a, b) => (b.totals.enrolled_dwellings || 0) - (a.totals.enrolled_dwellings || 0);
+  // Sorting orders the regions inside each state and the states against each
+  // other, on the state's own figure. Grouping is the point of the panel, so a
+  // sort rearranges it rather than dissolving it.
+  groups.forEach(gr => gr.kids.sort(cmp));
+  groups.sort((a, b) => cmp(a.state, b.state));
+
+  const regions = groups.reduce((n, gr) => n + gr.kids.length, 0);
+  document.getElementById("heatTitle").textContent =
+    `${regions} SA4 regions by design category`
+    + (scope ? ` in ${groups[0].state.name}` : " across Australia");
+  document.getElementById("heatSub").textContent =
+    (substitution ? "Allowing substitution" : "As enrolled")
+    + " · places per participant · click a column to sort, a row to open";
+
+  document.getElementById("heatHead").innerHTML = headCells(cols, heatSort);
+
+  const dataCells = s => cols.slice(1).map(c =>
+    c.heat ? heatCell(c.get(s)) : `<td>${cell(c.get(s))}</td>`).join("");
+
+  const one = groups.length === 1;
+  const body = document.getElementById("heatBody");
+  body.innerHTML = groups.map(gr => {
+    const id = encodeURIComponent(gr.state.id);
+    // Scoped to one state there is nothing to collapse the group in favour of,
+    // so the control is not offered and the group cannot be shut.
+    const open = one || !heatCollapsed.has(gr.state.id);
+    const head =
+      `<tr class="grouprow linked" data-id="${id}">`
+      + `<td class="region">`
+      + (one ? "" : `<button type="button" class="gtoggle" data-state="${id}"`
+        + ` aria-expanded="${open}"><span class="sr-only">${open ? "Collapse" : "Expand"} `
+        + `${gr.state.name}</span><span aria-hidden="true">${open ? "▾" : "▸"}</span></button>`)
+      + `<a href="#${id}">${gr.state.name}</a>`
+      + `<span class="gcount">${gr.kids.length} regions</span></td>`
+      + dataCells(gr.state) + "</tr>";
+    if (!open) return head;
+    return head + gr.kids.map(s =>
+      `<tr class="linked${s.id === g.id ? " here" : ""}" data-id="${encodeURIComponent(s.id)}">`
+      + `<td class="region sa4"><a href="#${encodeURIComponent(s.id)}">${s.name}</a></td>`
+      + dataCells(s) + "</tr>").join("");
+  }).join("");
+
+  // The hatch is only worth a legend row when something in view actually uses it.
+  document.getElementById("heatLegend").innerHTML =
+    ratioLegend(!!body.querySelector("td.m-nil"));
+
+  document.getElementById("heatNote").innerHTML =
+    "<b>Colour shows the ratio, not the size of the market.</b> A region with four "
+    + "participants and one with nine hundred can read the same, which is why the two "
+    + "counts sit beside them. The scale is the map's, on the same breaks, so a cell here "
+    + "and a region there are always the same colour for the same figure.";
+
+  // The grid scrolls inside its own panel, so a re-render must not throw the
+  // reader back to the top of eighty-eight rows.
+  const again = () => {
+    const wrap = document.getElementById("heatWrap");
+    const top = wrap.scrollTop, left = wrap.scrollLeft;
+    renderHeat(g, comparable);
+    wrap.scrollTop = top;
+    wrap.scrollLeft = left;
+  };
+
+  document.getElementById("heatHead").onclick = e => {
+    const th = e.target.closest("th[data-key]");
+    if (!th) return;
+    const key = th.dataset.key;
+    heatSort = (heatSort.key === key) ? { key, dir: -heatSort.dir }
+                                      : { key, dir: key === "name" ? 1 : -1 };
+    again();
+  };
+  document.getElementById("heatBody").onclick = e => {
+    const tog = e.target.closest("button.gtoggle");
+    if (tog) {
+      const sid = decodeURIComponent(tog.dataset.state);
+      if (heatCollapsed.has(sid)) heatCollapsed.delete(sid);
+      else heatCollapsed.add(sid);
+      again();
+      return;
+    }
+    if (e.target.closest("a")) return;   // let the link handle its own navigation
+    const tr = e.target.closest("tr[data-id]");
+    if (tr) go(decodeURIComponent(tr.dataset.id));
+  };
 }
 
 function renderNotes(g) {

@@ -65,8 +65,9 @@ script, one JSON file. It renders the same profile at every level:
 
 Every profile shows enrolled dwellings, enrolled places, participants with an
 identified need, places per participant, and the pipeline, broken down by design
-category — plus build-type and resident-count breakdowns, and a sortable table
-of the child regions that doubles as an undersupply ranking.
+category — plus build-type and resident-count breakdowns, a sortable table
+of the child regions that doubles as an undersupply ranking, and the region grid
+described below.
 
 ### As enrolled, or allowing substitution
 
@@ -146,6 +147,31 @@ Two things the map cannot show, and says so on screen: colour is the ratio and
 not the size of the market, so four participants and nine hundred can read the
 same; and a category-specific map has nowhere to put the 4,991 participants
 (19.5%) whose need carries no design category.
+
+### The region grid
+
+The map answers one design category at a time and the child-region table one
+level at a time, so neither shows a category running short across the country
+while another runs long in the same places. The grid at the foot of every supply
+profile puts every SA4 against every comparable category at once: regions down
+the side, design categories across the top, places per participant in the cell.
+
+It is scoped to where the reader is — all 88 regions nationally, and below that
+the regions of the state they are in, with their own row marked — and each
+state's regions sit under a row carrying the NDIA's own published subtotals for
+that state, not an average of the regions beneath it. Sorting a column reorders
+the regions inside each state and the states against each other, rather than
+dissolving the grouping the panel exists for.
+
+Cells are filled with the map's six-class scale, on the map's breaks, so a cell
+here and a region there are always the same colour for the same figure; the two
+panels share one legend for that reason. The full fill rather than the tables'
+tinted chip is what makes a short column or a long region visible without
+reading a figure — eighty-eight rows of chips read as a pale wash. Colour is
+again not the only channel: every cell keeps the ▼ ◆ ▲ glyph, states its ratio
+and its verdict to a screen reader, and a region with no ratio is hatched. The
+text colour on each of the six fills is a token of its own, because the scale's
+lightness ordering inverts between the light and dark themes.
 
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 

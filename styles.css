@@ -39,6 +39,16 @@
   --map-nil-bg:  #eef1f5;
   --map-nil-ink: #98a3b2;
   --map-mesh:    #ffffff;
+  /* Ink for text sitting on a map fill. The scale's lightness ordering flips
+     between the two themes -- #eb9c9c is a pale red in daylight and #6b2f31 a
+     deep one at night -- so the readable ink flips with it. Every pair here
+     clears WCAG AA at the heatmap's 11.5px, checked against the tokens above. */
+  --on-map-1:    #ffffff;
+  --on-map-2:    #0b0d10;
+  --on-map-3:    #0b0d10;
+  --on-map-4:    #0b0d10;
+  --on-map-5:    #0b0d10;
+  --on-map-6:    #ffffff;
   --shadow:      0 1px 2px rgba(15,19,25,.05), 0 4px 14px rgba(15,19,25,.04);
 
   --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -57,6 +67,8 @@
     --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
+    --on-map-1: #ffffff; --on-map-2: #ffffff; --on-map-3: #ffffff;
+    --on-map-4: #0b0d10; --on-map-5: #ffffff; --on-map-6: #0b0d10;
     --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
   }
@@ -72,6 +84,8 @@
     --map-4: #3d9e50; --map-5: #35648a; --map-6: #4fa3e0;
     --map-out: #232830; --map-nil-bg: #1f242b; --map-nil-ink: #5d6875;
     --map-mesh: #0e1013;
+    --on-map-1: #ffffff; --on-map-2: #ffffff; --on-map-3: #ffffff;
+    --on-map-4: #0b0d10; --on-map-5: #ffffff; --on-map-6: #0b0d10;
     --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
 }
@@ -385,3 +399,68 @@ footer a { color: var(--accent); }
 .map-controls { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
 @media (max-width: 700px) { .map-controls { align-items: stretch; } }
 .map-mode-note { font-size: 12px; color: var(--ink-3); margin: -6px 0 12px; }
+
+/* ---------- supply heatmap ---------- */
+/* Eighty-eight regions and eight state rows do not fit a screen, so the grid
+   scrolls inside its own panel with the header and the region column pinned.
+   A single state's regions never reach the ceiling and so never scroll. */
+.heatwrap { max-height: 70vh; overflow: auto; overscroll-behavior: contain; }
+.heatgrid { min-width: 720px; border-collapse: separate; border-spacing: 0; }
+.heatgrid th {
+  position: sticky; top: 0; z-index: 3; background: var(--surface);
+  text-align: center; border-bottom: none; box-shadow: inset 0 -1px 0 var(--rule);
+}
+.heatgrid th:first-child { text-align: left; z-index: 4; }
+.heatgrid th:first-child, .heatgrid td:first-child {
+  position: sticky; left: 0; background: var(--surface); min-width: 208px;
+}
+.heatgrid td:first-child { z-index: 2; box-shadow: inset -1px 0 0 var(--rule-soft); }
+.heatgrid td { border-bottom: 1px solid var(--rule-soft); }
+
+/* The ratio's own colour behind the figure. A 2px gutter in the panel's own
+   background keeps the cells reading as tiles rather than one wash. */
+.heatgrid td.hc {
+  text-align: center; font-family: var(--mono); font-size: 11.5px; font-weight: 600;
+  padding: 8px 10px; border: 0; box-shadow: inset -2px -2px 0 var(--surface);
+}
+.heatgrid td.hc i { font-style: normal; font-size: 9px; margin-right: 4px; opacity: .8; }
+.heatgrid td.hc.m1 { background: var(--map-1); color: var(--on-map-1); }
+.heatgrid td.hc.m2 { background: var(--map-2); color: var(--on-map-2); }
+.heatgrid td.hc.m3 { background: var(--map-3); color: var(--on-map-3); }
+.heatgrid td.hc.m4 { background: var(--map-4); color: var(--on-map-4); }
+.heatgrid td.hc.m5 { background: var(--map-5); color: var(--on-map-5); }
+.heatgrid td.hc.m6 { background: var(--map-6); color: var(--on-map-6); }
+.heatgrid td.hc.m-nil {
+  background: repeating-linear-gradient(45deg,
+    var(--map-nil-bg) 0 3px, var(--map-nil-ink) 3px 5px);
+}
+
+/* State rows carry the state's own published subtotals, so they are a reading
+   in their own right rather than a divider. */
+.heatgrid tbody tr.grouprow td { background: var(--surface-2); }
+.heatgrid tbody tr.grouprow td:first-child {
+  font-weight: 700; letter-spacing: .01em; white-space: nowrap;
+}
+.gtoggle {
+  font: inherit; font-size: 10px; line-height: 1; color: var(--ink-3);
+  background: none; border: 0; padding: 2px 3px;
+  margin: 0 4px 0 -3px; cursor: pointer;
+}
+.gtoggle:hover { color: var(--accent); }
+.gcount { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
+          text-transform: uppercase; color: var(--ink-3); font-weight: 500;
+          margin-left: 8px; }
+.heatgrid td.region.sa4 { padding-left: 30px; font-weight: 500; }
+
+.heatgrid tbody tr.linked:hover td:first-child { background: var(--surface-2); }
+.heatgrid tbody tr.here td:first-child {
+  background: var(--accent-soft); box-shadow: inset 3px 0 0 var(--accent), inset -1px 0 0 var(--rule-soft);
+}
+
+/* The pinned region column is worth less of a phone's width than of a
+   laptop's, where it can afford a region's full name on one line. */
+@media (max-width: 640px) {
+  .heatgrid th:first-child, .heatgrid td:first-child { min-width: 148px; }
+  .heatgrid td.region.sa4 { padding-left: 18px; }
+  .heatwrap { max-height: 66vh; }
+}
