@@ -411,9 +411,18 @@ footer a { color: var(--accent); }
   text-align: center; border-bottom: none; box-shadow: inset 0 -1px 0 var(--rule);
 }
 .heatgrid th:first-child { text-align: left; z-index: 4; }
+/* The acronym headers carry their expansion in a title; the underline a
+   browser adds to <abbr> reads as noise at this size. */
+.heatgrid th abbr { text-decoration: none; border-bottom: 0; cursor: help; }
 .heatgrid th:first-child, .heatgrid td:first-child {
   position: sticky; left: 0; background: var(--surface); min-width: 208px;
 }
+/* With every state closed the column holds nothing longer than "VIC 17
+   regions", and stretching the grid to the panel spends the difference on a
+   region column with nothing in it. Closed, the grid is sized by its own
+   content instead, so the whole table reads narrower. */
+.heatgrid.tight { width: auto; min-width: 0; }
+.heatgrid.tight th:first-child, .heatgrid.tight td:first-child { min-width: 132px; }
 .heatgrid td:first-child { z-index: 2; box-shadow: inset -1px 0 0 var(--rule-soft); }
 .heatgrid td { border-bottom: 1px solid var(--rule-soft); }
 
@@ -441,16 +450,21 @@ footer a { color: var(--accent); }
 .heatgrid tbody tr.grouprow td:first-child {
   font-weight: 700; letter-spacing: .01em; white-space: nowrap;
 }
+/* The one control on the grid that is not "open this place", sharing a row
+   with a link that is: a 10px caret in 3px of padding was a target smaller
+   than the row it sat in, and a miss navigated away instead of expanding. */
 .gtoggle {
-  font: inherit; font-size: 10px; line-height: 1; color: var(--ink-3);
-  background: none; border: 0; padding: 2px 3px;
-  margin: 0 4px 0 -3px; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  vertical-align: middle; width: 26px; height: 26px;
+  font: inherit; font-size: 13px; line-height: 1; color: var(--ink-3);
+  background: none; border: 0; border-radius: 5px; padding: 0;
+  margin: -4px 4px -4px -6px; cursor: pointer;
 }
-.gtoggle:hover { color: var(--accent); }
+.gtoggle:hover { color: var(--accent); background: var(--accent-soft); }
 .gcount { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
           text-transform: uppercase; color: var(--ink-3); font-weight: 500;
           margin-left: 8px; }
-.heatgrid td.region.sa4 { padding-left: 30px; font-weight: 500; }
+.heatgrid td.region.sa4 { padding-left: 34px; font-weight: 500; }
 
 .heatgrid tbody tr.linked:hover td:first-child { background: var(--surface-2); }
 .heatgrid tbody tr.here td:first-child {
@@ -461,6 +475,7 @@ footer a { color: var(--accent); }
    laptop's, where it can afford a region's full name on one line. */
 @media (max-width: 640px) {
   .heatgrid th:first-child, .heatgrid td:first-child { min-width: 148px; }
-  .heatgrid td.region.sa4 { padding-left: 18px; }
+  .heatgrid.tight th:first-child, .heatgrid.tight td:first-child { min-width: 120px; }
+  .heatgrid td.region.sa4 { padding-left: 22px; }
   .heatwrap { max-height: 66vh; }
 }

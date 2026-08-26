@@ -27,7 +27,11 @@ let vacSort = { key: null, dir: -1 };
 let substitution = false;
 let mapCategory = "Fully Accessible";
 let heatSort = { key: null, dir: -1 };
-let heatCollapsed = new Set();
+/* Which states in the region grid are open. Eighty-eight SA4 rows is more
+   than a reader can hold at once, and the state rows carry the NDIA's own
+   subtotals, so the grid opens as eight readable rows and the regions are
+   expanded a state at a time. */
+let heatExpanded = new Set();
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -165,12 +169,13 @@ function rowCompare(col, dir) {
 const hasData = k => (k.totals.enrolled_dwellings || 0) > 0
                   || (k.totals.participants_with_need || 0) > 0;
 
-/* The enrolled/substitution toggle is repeated beside the category table, the
-   map and the region grid: a reader deep in the page should not have to scroll
-   back to the top to change the reading. All three are the one piece of state,
-   so they are built and wired from here and cannot come to disagree. */
+/* The enrolled/substitution toggle is repeated beside the category table and
+   the map: a reader deep in the page should not have to scroll back to the top
+   to change the reading. Both are the one piece of state, so they are built and
+   wired from here and cannot come to disagree. The region grid carries no
+   switch -- it shows both readings as columns instead. */
 const MODES = [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]];
-const MODE_SWITCHES = ["modeSwitch", "mapModeSwitch", "heatModeSwitch"];
+const MODE_SWITCHES = ["modeSwitch", "mapModeSwitch"];
 const modeButtons = () => MODES.map(([mode, label]) =>
   `<button type="button" data-mode="${mode}" aria-pressed="`
   + `${(mode === "substitution") === substitution}">${label}</button>`).join("");
@@ -430,7 +435,7 @@ function renderSupply(g) {
   renderBreakdowns(g);
   renderChildren(g, comparable);
   renderTrend(g);
-  renderHeat(g, comparable);
+  renderHeat(g);
   renderNotes(g);
 
   document.getElementById("footNote").textContent =
@@ -902,6 +907,28 @@ function heatCell(r) {
        + `<span class="sr-only"> — ${label}</span></td>`;
 }
 
+/* The grid reads every comparable category and the pooled column at once,
+   rather than following the page's enrolled/substitution switch. The question
+   it exists to answer -- can High Physical Support stock cover the Fully
+   Accessible shortfall in this region? -- is a comparison between the two
+   readings, so putting one of them behind a toggle is the one thing that makes
+   it unanswerable. HPS, FA and the pool therefore sit side by side, out of the
+   order the rest of the page uses, so all three can be read across a row.
+
+   Spelled out, those three headers are eleven words over a grid that already
+   scrolls sideways, so they are labelled by acronym, expanded in each header's
+   own title and in the note under the grid. */
+const HEAT_COLS = [
+  { cat: "Improved Liveability", label: "Improved<br>Liveability" },
+  { cat: "High Physical Support", label: abbrLabel("HPS", "High Physical Support") },
+  { cat: "Fully Accessible", label: abbrLabel("FA", "Fully Accessible") },
+  { cat: POOL_NAME, label: abbrLabel("HPS+FA", POOL_NAME + ", pooled") },
+  { cat: "Robust", label: "Robust" },
+];
+function abbrLabel(short, full) {
+  return `<abbr title="${full}">${short}</abbr>`;
+}
+
 /* The map reads one design category at a time and the region table one level
    at a time, so neither shows a category running short across the country
    while another runs long in the same places. This grid puts every SA4
@@ -916,7 +943,7 @@ function heatCell(r) {
    Regions sit under their state, and the state row carries the NDIA's own
    published subtotals -- not an average of the regions beneath it, which
    would weight a four-participant region equally with a nine-hundred one. */
-function renderHeat(g, comparable) {
+function renderHeat(g) {
   const panel = document.getElementById("heatPanel");
   // Scoped to where the reader is: nationally every region, and below that the
   // regions of the state they are in, so an SA4 can be read against its peers.
@@ -931,23 +958,22 @@ function renderHeat(g, comparable) {
   if (!groups.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
-  document.getElementById("heatModeSwitch").innerHTML = modeButtons();
-
+  // Ratios are read straight from the figures rather than through the page's
+  // current reading, which covers only one of these columns at a time.
+  const pub = DATA.meta.comparable_categories;
   const cols = [
     { key: "name", label: "Region" },
     { key: "dwellings", label: "Enrolled<br>dwellings", get: s => s.totals.enrolled_dwellings },
     { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
-    // The pooled name broken on every space is six lines of header over a
-    // grid whose header is pinned; the map's own shorthand fits in two.
-    ...comparable.map(c => ({
-      key: c, heat: true,
-      label: c === POOL_NAME ? "HPS +<br>Fully Accessible" : c.replace(/ /g, "<br>"),
-      get: s => (supplyFor(s) || {})[c]?.ratio ?? null,
-    })),
+    ...HEAT_COLS
+      .filter(c => c.cat === POOL_NAME || pub.indexOf(c.cat) >= 0)
+      .map(c => ({
+        key: c.cat, label: c.label, heat: true,
+        get: s => s.has_places ? figuresFor(s, c.cat).ratio : null,
+      })),
   ];
 
-  // The pooled column appears and disappears with the substitution toggle, so
-  // a sort key can outlive its column.
+  // A sort key can outlive its column if the published categories change.
   if (heatSort.key && !cols.some(c => c.key === heatSort.key)) heatSort = { key: null, dir: -1 };
   const cmp = heatSort.key
     ? rowCompare(cols.find(c => c.key === heatSort.key), heatSort.dir)
@@ -962,24 +988,27 @@ function renderHeat(g, comparable) {
   document.getElementById("heatTitle").textContent =
     `${regions} SA4 regions by design category`
     + (scope ? ` in ${groups[0].state.name}` : " across Australia");
-  // The switch beside it already names the reading, so the subtitle says only
-  // what the reading does to these columns.
+  // Scoped to one state its regions are already the rows, so there is nothing
+  // to expand and the instruction to do it would be a dead end.
+  const one = groups.length === 1;
   document.getElementById("heatSub").textContent =
-    (substitution ? "HPS and Fully Accessible pooled · " : "")
-    + "Places per participant · click a column to sort, a row to open";
+    "Places per participant · "
+    + (one ? "" : "click ▸ to open a state's regions, ")
+    + "click a column to sort, a row to open";
 
   document.getElementById("heatHead").innerHTML = headCells(cols, heatSort);
 
   const dataCells = s => cols.slice(1).map(c =>
     c.heat ? heatCell(c.get(s)) : `<td>${cell(c.get(s))}</td>`).join("");
 
-  const one = groups.length === 1;
   const body = document.getElementById("heatBody");
+  let anyOpen = false;
   body.innerHTML = groups.map(gr => {
     const id = encodeURIComponent(gr.state.id);
     // Scoped to one state there is nothing to collapse the group in favour of,
     // so the control is not offered and the group cannot be shut.
-    const open = one || !heatCollapsed.has(gr.state.id);
+    const open = one || heatExpanded.has(gr.state.id);
+    if (open) anyOpen = true;
     const head =
       `<tr class="grouprow linked" data-id="${id}">`
       + `<td class="region">`
@@ -996,6 +1025,10 @@ function renderHeat(g, comparable) {
       + dataCells(s) + "</tr>").join("");
   }).join("");
 
+  // Closed, the pinned column holds nothing longer than "VIC 17 regions", and
+  // the width a full SA4 name needs is width the coloured columns lose.
+  document.getElementById("heatTable").classList.toggle("tight", !anyOpen);
+
   // The hatch is only worth a legend row when something in view actually uses it.
   document.getElementById("heatLegend").innerHTML =
     ratioLegend(!!body.querySelector("td.m-nil"));
@@ -1004,14 +1037,19 @@ function renderHeat(g, comparable) {
     "<b>Colour shows the ratio, not the size of the market.</b> A region with four "
     + "participants and one with nine hundred can read the same, which is why the two "
     + "counts sit beside them. The scale is the map's, on the same breaks, so a cell here "
-    + "and a region there are always the same colour for the same figure.";
+    + "and a region there are always the same colour for the same figure. "
+    + "<b>HPS</b> is High Physical Support and <b>FA</b> is Fully Accessible; "
+    + "<b>HPS+FA</b> reports the two as one pooled category &mdash; one body of stock "
+    + "against one body of demand &mdash; because an HPS dwelling meets the Fully "
+    + "Accessible standard and could house someone assessed for it. It is a model, not a "
+    + "count: every dwelling is still enrolled in one category.";
 
   // The grid scrolls inside its own panel, so a re-render must not throw the
   // reader back to the top of eighty-eight rows.
   const again = () => {
     const wrap = document.getElementById("heatWrap");
     const top = wrap.scrollTop, left = wrap.scrollLeft;
-    renderHeat(g, comparable);
+    renderHeat(g);
     wrap.scrollTop = top;
     wrap.scrollLeft = left;
   };
@@ -1028,8 +1066,8 @@ function renderHeat(g, comparable) {
     const tog = e.target.closest("button.gtoggle");
     if (tog) {
       const sid = decodeURIComponent(tog.dataset.state);
-      if (heatCollapsed.has(sid)) heatCollapsed.delete(sid);
-      else heatCollapsed.add(sid);
+      if (heatExpanded.has(sid)) heatExpanded.delete(sid);
+      else heatExpanded.add(sid);
       again();
       return;
     }

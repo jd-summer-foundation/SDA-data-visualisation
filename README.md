@@ -156,12 +156,22 @@ while another runs long in the same places. The grid at the foot of every supply
 profile puts every SA4 against every comparable category at once: regions down
 the side, design categories across the top, places per participant in the cell.
 
-It carries its own copy of the enrolled/substitution toggle, because by the time
-the grid is in view the one beside the category table is far off screen. All
-three copies — table, map, grid — are the same piece of state and are wired
-once, so they cannot come to disagree; switching any of them re-reads the whole
-profile. Under substitution the grid drops to three columns, with High Physical
-Support and Fully Accessible pooled into one.
+The grid carries no supply-mode toggle. Both readings are columns instead:
+`HPS`, `FA` and `HPS+FA` sit side by side, so the question the panel exists for
+— can High Physical Support stock cover the Fully Accessible shortfall in *this*
+region? — is a comparison across a row rather than a switch to flip and
+remember. Spelled out those three headers are eleven words over a grid that
+already scrolls sideways, so they are acronyms, expanded in each header's title
+and in the note under the grid. The category table and the map keep their own
+copies of the toggle, which remain one piece of state wired once.
+
+States arrive closed. Eighty-eight SA4 rows is more than a reader can hold at
+once, and the state rows carry the NDIA's own subtotals, so the grid arrives as
+eight readable rows and the regions are expanded a state at a time — which also
+lets the closed grid be sized by its own content, narrower than the panel it
+sits in, rather than spending the difference on a region column with nothing in
+it. The expand control shares a row with a link that navigates away, so it gets
+a 26px target: a miss used to leave the page rather than open the state.
 
 It is scoped to where the reader is — all 88 regions nationally, and below that
 the regions of the state they are in, with their own row marked — and each
