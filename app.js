@@ -1112,18 +1112,34 @@ function renderBands(g) {
   if (!regions.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
+  /* Counted twice over. A region counts once whichever way it is read, so the
+     count answers "how widespread", and a reader is right to wonder whether a
+     crowd of small regions is carrying it. Weighting each region by the
+     participants it holds in that category answers "how many people", and the
+     weight has to be the category's own participants rather than the region's
+     total need: Robust is between 1.6% and 20% of a region's need, so a
+     region-total weight would misstate that row badly.
+
+     Participants with need is also the denominator of the ratio itself, which
+     makes it the natural weight and, unlike general population, something the
+     supplement actually publishes per category. No cell of the 352 is
+     suppressed and none has need without a ratio, so no participant falls out
+     of the tally on the way through. */
   const pub = DATA.meta.comparable_categories;
   const tally = HEAT_COLS
     .filter(c => c.cat === POOL_NAME || pub.indexOf(c.cat) >= 0)
     .map(c => {
       const counts = RATIO_BANDS.map(() => 0);
-      let nil = 0;
+      const weights = RATIO_BANDS.map(() => 0);
+      let nil = 0, nilWeight = 0, need = 0;
       for (const s of regions) {
-        const r = s.has_places ? figuresFor(s, c.cat).ratio : null;
-        if (r === null) nil++;
-        else counts[ratioBand(r)]++;
+        const x = s.has_places ? figuresFor(s, c.cat) : { ratio: null, participants_with_need: null };
+        const w = x.participants_with_need || 0;
+        need += w;
+        if (x.ratio === null) { nil++; nilWeight += w; }
+        else { counts[ratioBand(x.ratio)]++; weights[ratioBand(x.ratio)] += w; }
       }
-      return { cat: c.cat, counts, nil };
+      return { cat: c.cat, counts, weights, nil, nilWeight, need };
     });
 
   const n = regions.length;
@@ -1134,7 +1150,7 @@ function renderBands(g) {
   document.getElementById("bandTitle").textContent =
     `How many of those ${n} regions are short, and how many are long`;
   document.getElementById("bandSub").textContent =
-    "Count of regions in each band · the same readings and cuts as the grid above";
+    "Regions in each band, and the participants they hold · the same readings and cuts as the grid above";
 
   document.getElementById("bandHead").innerHTML =
     '<th scope="col">Design category</th>'
@@ -1143,14 +1159,26 @@ function renderBands(g) {
     + (anyNil ? '<th scope="col">No ratio</th>' : "")
     + '<th scope="col" class="bdist">Distribution</th>';
 
+  /* One bar per reading, stacked, on the same colours and the same four cuts.
+     Divergence then shows as a mismatch in the segment boundaries -- which is
+     the whole question -- without adding four more columns to a table that
+     already has seven. Each segment's title names its own unit, or the two bars
+     would be indistinguishable on hover. */
+  const bandBar = (values, nilValue, total, unit) => {
+    const seg = (v, cls, label) => v
+      ? `<span class="bseg ${cls}" style="width:${(v / total * 100).toFixed(2)}%"`
+        + ` title="${fmt(v)} of ${fmt(total)} ${unit} — ${label}"></span>` : "";
+    return '<span class="brow"><span class="bbar">'
+      + values.map((v, i) => seg(v, RATIO_BANDS[i].swatch, RATIO_BANDS[i].label)).join("")
+      + seg(nilValue, "m-nil", NO_RATIO)
+      + `</span><span class="bcap">${fmt(total)} ${unit}</span></span>`;
+  };
+
   document.getElementById("bandBody").innerHTML = tally.map(t => {
     const cells = t.counts.map(v =>
       `<td>${v}${v ? ` <span class="bshare">${share(v)}</span>` : ""}</td>`).join("");
-    const seg = (v, cls, title) => v
-      ? `<span class="bseg ${cls}" style="width:${(v / n * 100).toFixed(2)}%" title="${title}"></span>` : "";
-    const bar = t.counts.map((v, i) =>
-        seg(v, RATIO_BANDS[i].swatch, `${v} of ${n} — ${RATIO_BANDS[i].label}`)).join("")
-      + seg(t.nil, "m-nil", `${t.nil} of ${n} — ${NO_RATIO}`);
+    const bar = bandBar(t.counts, t.nil, n, "regions")
+      + (t.need ? bandBar(t.weights, t.nilWeight, t.need, "participants") : "");
     // The pooled row is a second reading of the two rows above it rather than a
     // category in its own right, so it is marked as derived from them.
     const pooled = t.cat === POOL_NAME;
@@ -1160,19 +1188,33 @@ function renderBands(g) {
         + 'against one body of demand</div>' : "")
       + "</td>" + cells
       + (anyNil ? `<td>${t.nil || '<span class="nil">&mdash;</span>'}</td>` : "")
-      + `<td class="bdist"><span class="bbar">${bar}</span></td></tr>`;
+      + `<td class="bdist">${bar}</td></tr>`;
   }).join("");
 
-  const under = c => share(tally.find(t => t.cat === c).counts[0]);
+  /* Read off the tally rather than written down, so a rebuilt data file cannot
+     leave the prose asserting something the table no longer shows. */
+  const row = c => tally.find(t => t.cat === c);
+  const byRegion = (c, i) => share(row(c).counts[i]);
+  const byPerson = (c, i) => (row(c).weights[i] / row(c).need * 100).toFixed(0) + "%";
+
   document.getElementById("bandNote").innerHTML =
-    "<b>A count of regions, not of people.</b> Every region counts once here however "
-    + "large it is, so this says how widespread a shortfall is and not how many "
-    + "participants it reaches; the grid above carries the counts behind each region. "
-    + `Pooling moves the picture a long way &mdash; ${under(POOL_NAME)} of regions short `
-    + `rather than ${under("Fully Accessible")} &mdash; because much of the Fully `
-    + "Accessible shortfall is stock that exists and is enrolled as High Physical "
-    + `Support. Improved Liveability does not move at all: at ${under("Improved Liveability")} `
-    + "of regions short, nothing substitutes for it.";
+    "<b>Two ways of counting, because a region is not a person.</b> The upper bar counts "
+    + "regions, each once however large, and answers how widespread a shortfall is. The "
+    + "lower one weights each region by the participants it holds in that category, and "
+    + "answers how many people it reaches. Where they agree, a crowd of small regions is "
+    + "not carrying the finding &mdash; and for the two shortfalls that matter most they "
+    + `agree closely: Improved Liveability is short in ${byRegion("Improved Liveability", 0)} `
+    + `of regions and for ${byPerson("Improved Liveability", 0)} of its participants, Fully `
+    + `Accessible in ${byRegion("Fully Accessible", 0)} and ${byPerson("Fully Accessible", 0)}. `
+    + "Where they diverge it is the oversupply that grows, not the shortfall: High Physical "
+    + `Support is short in ${byRegion("High Physical Support", 0)} of regions but for only `
+    + `${byPerson("High Physical Support", 0)} of its participants, and far above the need `
+    + `recorded against it in ${byRegion("High Physical Support", 3)} of regions holding `
+    + `${byPerson("High Physical Support", 3)} of them. Counting regions understates it. `
+    + "<b>General population is deliberately not the weight here</b> &mdash; SDA need "
+    + "follows disability prevalence and where services were historically built, not "
+    + "headcount, and participants with an identified need is already the denominator of "
+    + "the ratio being banded.";
 }
 
 function renderNotes(g) {
