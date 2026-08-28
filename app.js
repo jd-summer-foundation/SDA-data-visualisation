@@ -104,6 +104,17 @@ function figuresFor(g, c) {
   };
 }
 
+/* A geography's enrolled places over every design category, not only the
+   comparable ones -- the whole resident capacity that sits behind its
+   dwellings. Totals carry dwellings but not places, so it is summed from the
+   categories, and the tiles and the SA4 grid read it from here so neither can
+   report a different capacity for the same region. */
+function totalPlaces(g) {
+  if (!g.has_places) return null;
+  return DATA.meta.design_categories
+    .reduce((sum, c) => sum + (g.categories[c].enrolled_places || 0), 0);
+}
+
 /* The figures the current view is built from, keyed by the categories of the
    current reading. */
 function supplyFor(g) {
@@ -471,8 +482,7 @@ function renderSupply(g) {
 
 function renderTiles(g) {
   const t = g.totals;
-  const places = DATA.meta.design_categories
-    .reduce((sum, c) => sum + (g.categories[c].enrolled_places || 0), 0);
+  const places = totalPlaces(g);
   const missing = t.need_without_category;
   const share = (missing && t.participants_with_need)
     ? ` · ${(missing / t.participants_with_need * 100).toFixed(0)}% of need` : "";
@@ -994,7 +1004,7 @@ function renderHeat(g) {
   const pub = DATA.meta.comparable_categories;
   const cols = [
     { key: "name", label: "Region" },
-    { key: "dwellings", label: "Enrolled<br>dwellings", get: s => s.totals.enrolled_dwellings },
+    { key: "places", label: "Enrolled<br>places", get: totalPlaces },
     { key: "need", label: "Participants<br>with need", get: s => s.totals.participants_with_need },
     ...HEAT_COLS
       .filter(c => c.cat === POOL_NAME || pub.indexOf(c.cat) >= 0)
@@ -1008,7 +1018,7 @@ function renderHeat(g) {
   if (heatSort.key && !cols.some(c => c.key === heatSort.key)) heatSort = { key: null, dir: -1 };
   const cmp = heatSort.key
     ? rowCompare(cols.find(c => c.key === heatSort.key), heatSort.dir)
-    : (a, b) => (b.totals.enrolled_dwellings || 0) - (a.totals.enrolled_dwellings || 0);
+    : (a, b) => (totalPlaces(b) || 0) - (totalPlaces(a) || 0);
   // Sorting orders the regions inside each state and the states against each
   // other, on the state's own figure. Grouping is the point of the panel, so a
   // sort rearranges it rather than dissolving it.
@@ -1067,7 +1077,9 @@ function renderHeat(g) {
   document.getElementById("heatNote").innerHTML =
     "<b>Colour shows the ratio, not the size of the market.</b> A region with four "
     + "participants and one with nine hundred can read the same, which is why the two "
-    + "counts sit beside them. The scale is the map's, on the same breaks, so a cell here "
+    + "counts the ratio is formed from &mdash; places and participants &mdash; sit beside "
+    + "them. Places, not dwellings: a dwelling may hold several, and it is places that are "
+    + "the unit comparable with participants. The scale is the map's, on the same breaks, so a cell here "
     + "and a region there are always the same colour for the same figure. "
     + "<b>HPS</b> is High Physical Support and <b>FA</b> is Fully Accessible; "
     + "<b>HPS+FA</b> reports the two as one pooled category &mdash; one body of stock "
