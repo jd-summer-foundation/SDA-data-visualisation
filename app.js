@@ -1206,14 +1206,18 @@ function renderBands(g) {
     + (anyNil ? '<th scope="col">No ratio</th>' : "")
     + '<th scope="col" class="bdist">Distribution</th>';
 
-  /* The share leads and the absolute follows it, quietly: 85% is the figure
-     that carries the comparison between rows, and 75 is the check on it. */
-  /* Nothing at all reads as an em dash rather than 0%, which keeps the No ratio
+  /* The share alone: it is what carries the comparison between rows, and the
+     absolute beside it was a second number of its own varying width, which left
+     every share sitting at a different place in its column. The counts are not
+     lost -- each bar's segments carry them on hover, under the row's own
+     denominator in the caption.
+
+     Nothing at all reads as an em dash rather than 0%, which keeps the No ratio
      column -- all zeroes under the weighted reading, since no participant sits
      in a cell without a ratio -- from looking like a column of measurements. A
-     rounded-down 0% with a count beside it is a different thing and keeps it. */
+     share that rounds down to 0% is a different thing and keeps its figure. */
   const bandCell = (v, total) => v
-    ? `<td><b>${(v / total * 100).toFixed(0)}%</b> <span class="bcount">${fmt(v)}</span></td>`
+    ? `<td><b>${(v / total * 100).toFixed(0)}%</b></td>`
     : '<td><span class="nil">&mdash;</span></td>';
 
   const bandBar = ({ values, nilValue, total, unit }) => {

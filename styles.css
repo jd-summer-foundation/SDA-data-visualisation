@@ -494,10 +494,9 @@ footer a { color: var(--accent); }
 .bandtally th .bsw.m4 { background: var(--map-4); }
 .bandtally th .bsw.m5 { background: var(--map-5); }
 .bandtally th .bsw.m6 { background: var(--map-6); }
-/* The share carries the comparison between rows, so it takes the cell; the
-   absolute follows it quietly, as the check on it. */
+/* The share is the whole cell, right-aligned with the rest of the table, so a
+   column of them lines up on the per-cent sign and can be read down. */
 .bandtally td b { font-weight: 600; }
-.bcount { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 4px; }
 
 /* The pooled row is a second reading of the two rows above it rather than a
    category in its own right, so it is indented under them and tinted, not
