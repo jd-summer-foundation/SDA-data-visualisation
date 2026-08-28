@@ -379,6 +379,9 @@ footer a { color: var(--accent); }
 .mticks { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
 .map-note { font-size: 12.5px; color: var(--ink-3); line-height: 1.5;
             margin: 14px 0 0; max-width: 68ch; }
+/* A measure cap earns its place under a map, which is narrow; under a table
+   that fills the panel it just strands the note in the left half. */
+.map-note.wide { max-width: none; }
 
 /* The pattern is defined once and referenced by every map on the page --
    url(#id) resolves document-wide, so repeating the defs per svg would only
@@ -491,7 +494,10 @@ footer a { color: var(--accent); }
 .bandtally th .bsw.m4 { background: var(--map-4); }
 .bandtally th .bsw.m5 { background: var(--map-5); }
 .bandtally th .bsw.m6 { background: var(--map-6); }
-.bshare { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 3px; }
+/* The share carries the comparison between rows, so it takes the cell; the
+   absolute follows it quietly, as the check on it. */
+.bandtally td b { font-weight: 600; }
+.bcount { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 4px; }
 
 /* The pooled row is a second reading of the two rows above it rather than a
    category in its own right, so it is indented under them and tinted, not
@@ -500,15 +506,12 @@ footer a { color: var(--accent); }
 .bandtally tbody tr.pooled td:first-child { padding-left: 26px; }
 .bnote { font-weight: 400; font-size: 11.5px; color: var(--ink-3); white-space: normal; }
 
-.bandtally td.bdist, .bandtally th.bdist { width: 34%; min-width: 200px; }
-/* Two bars, one per reading, stacked so their segment boundaries line up and a
-   divergence between them is visible without reading a number. */
-.bandtally td.bdist { padding-top: 8px; padding-bottom: 8px; }
-.brow { display: block; }
-.brow + .brow { margin-top: 5px; }
+.bandtally td.bdist, .bandtally th.bdist { width: 30%; min-width: 190px; }
+/* The caption carries the row's own denominator, which under the weighted
+   reading differs from row to row. */
 .bcap { display: block; font-family: var(--mono); font-size: 9px; letter-spacing: .06em;
-        text-transform: uppercase; color: var(--ink-3); margin-top: 2px; }
-.bbar { display: flex; height: 11px; border-radius: 3px; overflow: hidden; }
+        text-transform: uppercase; color: var(--ink-3); margin-top: 3px; }
+.bbar { display: flex; height: 13px; border-radius: 3px; overflow: hidden; }
 .bseg { height: 100%; min-width: 0; }
 .bseg.m2 { background: var(--map-2); } .bseg.m4 { background: var(--map-4); }
 .bseg.m5 { background: var(--map-5); } .bseg.m6 { background: var(--map-6); }

@@ -210,30 +210,41 @@ either way. The pooled row is indented and tinted rather than listed as a peer,
 because it is a second reading of two of the rows above it and not a category
 in its own right.
 
-Each row carries two bars, not one, because a region is not a person. The upper
-bar counts regions, each once however large, and answers how widespread a
-shortfall is. The lower one weights every region by the participants it holds in
-that category, and answers how many people it reaches. Stacked on the same cuts
-and colours, a divergence between them shows as a mismatch in the segment
-boundaries — which is the question a reader will have — without adding four more
-columns to a table that already has seven.
+**It is weighted by participants by default**, because a region is not a person.
+Counting each region once, whatever its size, answers how widespread a shortfall
+is; weighting each by the participants it holds in that category answers how many
+people it reaches. A switch in the panel head moves between the two, and it moves
+the whole table — the band columns and the bar together, since region counts
+beside a participant-weighted bar would be incoherent. An earlier version showed
+both readings at once as two stacked bars per row and was simply too dense to
+read; one reading at a time, with the other a click away, is the same information
+in a panel a person can take in.
 
-**The weight is participants with an identified need, not general population**,
-and deliberately so. Population is not in the file, but the deeper objection is
-that SDA need does not track headcount: it follows disability prevalence and
-where services were historically built. Participants with need is also already
-the denominator of the ratio being banded, which makes it the natural weight, and
-the supplement publishes it per category. It must be the *category's own*
-participants rather than the region's total need — Robust is between 1.6% and 20%
-of a region's need, so a region-total weight would misstate that row badly. It
-costs nothing in coverage: no cell of the 352 is suppressed and none carries need
+Weighted is the default because it is the honest reading rather than the softer
+one. Population is deliberately not the weight: it is not in the file, but the
+deeper objection is that SDA need does not track headcount — it follows disability
+prevalence and where services were historically built. Participants with need is
+already the denominator of the ratio being banded, which makes it the natural
+weight, and the supplement publishes it per category. It must be the *category's
+own* participants rather than the region's total need: Robust is between 1.6% and
+20% of a region's need, so a region-total weight would misstate that row badly.
+Coverage costs nothing — no cell of the 352 is suppressed and none carries need
 without a ratio, so no participant falls out of the tally.
 
-What the second bar shows is mostly reassurance. The two shortfalls that carry
-the story barely move — Improved Liveability short in 85% of regions and for 83%
-of its participants, Fully Accessible 89% and 89% — so a crowd of small regions
-is not manufacturing them. Where the readings diverge it is the oversupply that
-grows: High Physical Support is short in 12% of regions but for only 3% of its
+Under the weighted reading each row is a share of its own category's
+participants, so the denominators differ down the column; the caption under each
+bar carries that row's total, which is what makes it legible. The percentage
+leads each cell and the absolute follows it quietly, because the share is what
+carries the comparison between rows. A genuine zero reads as an em dash rather
+than 0%, which keeps the No ratio column — all zeroes when weighted, since no
+participant sits in a cell without a ratio — from looking like a column of
+measurements.
+
+Switching readings is mostly reassurance. The two shortfalls that carry the story
+barely move — Improved Liveability short in 85% of regions and for 83% of its
+participants, Fully Accessible 89% and 89% — so a crowd of small regions is not
+manufacturing them. Where the readings diverge it is the oversupply that grows:
+High Physical Support is short in 12% of regions but for only 3% of its
 participants, and far above the need recorded against it in 40% of regions
 holding 46% of them. Counting regions understates it. Robust is the one row to
 treat carefully, and not for the expected reason: its far-over regions hold a

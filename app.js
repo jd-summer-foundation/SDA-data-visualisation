@@ -27,6 +27,10 @@ let vacSort = { key: null, dir: -1 };
 let substitution = false;
 let mapCategory = "Fully Accessible";
 let heatSort = { key: null, dir: -1 };
+/* Whether the band tally weights each region by the participants it holds.
+   Weighted by default: a region is not a person, and counting each once
+   whatever its size is the reading that needs justifying, not this one. */
+let bandWeighted = true;
 /* Which states in the region grid are open. Eighty-eight SA4 rows is more
    than a reader can hold at once, and the state rows carry the NDIA's own
    subtotals, so the grid opens as eight readable rows and the regions are
@@ -224,6 +228,7 @@ async function boot() {
   wireViewSwitch();
   wireModeSwitch();
   wireMapCategory();
+  wireBandSwitch();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
@@ -304,6 +309,18 @@ function wireModeSwitch() {
       inPlace(id, () => render(current.id));
     });
   }
+}
+
+/* Unlike the supply-mode switches above, this one is local to its own panel --
+   it changes how the tally is counted, not what the page is reading -- so it
+   re-renders that panel alone and leaves the rest of the profile untouched. */
+function wireBandSwitch() {
+  document.getElementById("bandModeSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-band]");
+    if (!btn) return;
+    bandWeighted = btn.dataset.band === "weighted";
+    inPlace("bandModeSwitch", () => renderBands(current));
+  });
 }
 
 /* ---------- search ---------- */
@@ -1143,14 +1160,32 @@ function renderBands(g) {
     });
 
   const n = regions.length;
+  // Whether any region lacks a ratio is a fact about the data rather than about
+  // the reading, so the column keeps its place as the toggle moves.
   const anyNil = tally.some(t => t.nil);
-  const share = v => (v / n * 100).toFixed(0) + "%";
   const of = t => t.cat;
 
-  document.getElementById("bandTitle").textContent =
-    `How many of those ${n} regions are short, and how many are long`;
+  /* The two readings of a row, chosen between rather than shown at once. Each
+     weighted row is a share of its OWN category's participants -- the
+     denominators differ down the column, which is why the bar caption carries
+     each row's total. */
+  const reading = t => bandWeighted
+    ? { values: t.weights, nilValue: t.nilWeight, total: t.need, unit: "participants" }
+    : { values: t.counts, nilValue: t.nil, total: n, unit: "regions" };
+
+  document.getElementById("bandModeSwitch").innerHTML =
+    [["weighted", "By participants"], ["regions", "By regions"]].map(([mode, label]) =>
+      `<button type="button" data-band="${mode}" aria-pressed="`
+      + `${(mode === "weighted") === bandWeighted}">${label}</button>`).join("");
+
+  document.getElementById("bandTitle").textContent = bandWeighted
+    ? "How much of the need sits where supply is short, and where it is long"
+    : `How many of those ${n} regions are short, and how many are long`;
   document.getElementById("bandSub").textContent =
-    "Regions in each band, and the participants they hold · the same readings and cuts as the grid above";
+    (bandWeighted
+      ? "Each region weighted by the participants it holds in that category"
+      : `Each of the ${n} regions counted once, whatever its size`)
+    + " · the same readings and cuts as the grid above";
 
   document.getElementById("bandHead").innerHTML =
     '<th scope="col">Design category</th>'
@@ -1159,26 +1194,29 @@ function renderBands(g) {
     + (anyNil ? '<th scope="col">No ratio</th>' : "")
     + '<th scope="col" class="bdist">Distribution</th>';
 
-  /* One bar per reading, stacked, on the same colours and the same four cuts.
-     Divergence then shows as a mismatch in the segment boundaries -- which is
-     the whole question -- without adding four more columns to a table that
-     already has seven. Each segment's title names its own unit, or the two bars
-     would be indistinguishable on hover. */
-  const bandBar = (values, nilValue, total, unit) => {
+  /* The share leads and the absolute follows it, quietly: 85% is the figure
+     that carries the comparison between rows, and 75 is the check on it. */
+  /* Nothing at all reads as an em dash rather than 0%, which keeps the No ratio
+     column -- all zeroes under the weighted reading, since no participant sits
+     in a cell without a ratio -- from looking like a column of measurements. A
+     rounded-down 0% with a count beside it is a different thing and keeps it. */
+  const bandCell = (v, total) => v
+    ? `<td><b>${(v / total * 100).toFixed(0)}%</b> <span class="bcount">${fmt(v)}</span></td>`
+    : '<td><span class="nil">&mdash;</span></td>';
+
+  const bandBar = ({ values, nilValue, total, unit }) => {
     const seg = (v, cls, label) => v
       ? `<span class="bseg ${cls}" style="width:${(v / total * 100).toFixed(2)}%"`
         + ` title="${fmt(v)} of ${fmt(total)} ${unit} — ${label}"></span>` : "";
-    return '<span class="brow"><span class="bbar">'
+    return '<span class="bbar">'
       + values.map((v, i) => seg(v, RATIO_BANDS[i].swatch, RATIO_BANDS[i].label)).join("")
       + seg(nilValue, "m-nil", NO_RATIO)
-      + `</span><span class="bcap">${fmt(total)} ${unit}</span></span>`;
+      + `</span><span class="bcap">${fmt(total)} ${unit}</span>`;
   };
 
   document.getElementById("bandBody").innerHTML = tally.map(t => {
-    const cells = t.counts.map(v =>
-      `<td>${v}${v ? ` <span class="bshare">${share(v)}</span>` : ""}</td>`).join("");
-    const bar = bandBar(t.counts, t.nil, n, "regions")
-      + (t.need ? bandBar(t.weights, t.nilWeight, t.need, "participants") : "");
+    const r = reading(t);
+    const cells = r.values.map(v => bandCell(v, r.total)).join("");
     // The pooled row is a second reading of the two rows above it rather than a
     // category in its own right, so it is marked as derived from them.
     const pooled = t.cat === POOL_NAME;
@@ -1187,34 +1225,38 @@ function renderBands(g) {
       + (pooled ? '<div class="bnote">the two rows above, read as one body of stock '
         + 'against one body of demand</div>' : "")
       + "</td>" + cells
-      + (anyNil ? `<td>${t.nil || '<span class="nil">&mdash;</span>'}</td>` : "")
-      + `<td class="bdist">${bar}</td></tr>`;
+      + (anyNil ? bandCell(r.nilValue, r.total) : "")
+      + `<td class="bdist">${bandBar(r)}</td></tr>`;
   }).join("");
 
   /* Read off the tally rather than written down, so a rebuilt data file cannot
      leave the prose asserting something the table no longer shows. */
   const row = c => tally.find(t => t.cat === c);
-  const byRegion = (c, i) => share(row(c).counts[i]);
+  const byRegion = (c, i) => (row(c).counts[i] / n * 100).toFixed(0) + "%";
   const byPerson = (c, i) => (row(c).weights[i] / row(c).need * 100).toFixed(0) + "%";
 
   document.getElementById("bandNote").innerHTML =
-    "<b>Two ways of counting, because a region is not a person.</b> The upper bar counts "
-    + "regions, each once however large, and answers how widespread a shortfall is. The "
-    + "lower one weights each region by the participants it holds in that category, and "
-    + "answers how many people it reaches. Where they agree, a crowd of small regions is "
-    + "not carrying the finding &mdash; and for the two shortfalls that matter most they "
-    + `agree closely: Improved Liveability is short in ${byRegion("Improved Liveability", 0)} `
-    + `of regions and for ${byPerson("Improved Liveability", 0)} of its participants, Fully `
-    + `Accessible in ${byRegion("Fully Accessible", 0)} and ${byPerson("Fully Accessible", 0)}. `
-    + "Where they diverge it is the oversupply that grows, not the shortfall: High Physical "
-    + `Support is short in ${byRegion("High Physical Support", 0)} of regions but for only `
+    "<b>Weighted by participants, because a region is not a person.</b> Counting each "
+    + "region once, whatever its size, answers how widespread a shortfall is; weighting "
+    + "each by the participants it holds in that category answers how many people it "
+    + "reaches. The switch above moves between the two, and weighted is the default "
+    + "because it is the honest one rather than the softer one &mdash; the two agree "
+    + "closely on the shortfalls that carry the story. Improved Liveability is short in "
+    + `${byRegion("Improved Liveability", 0)} of regions and for `
+    + `${byPerson("Improved Liveability", 0)} of its participants; Fully Accessible in `
+    + `${byRegion("Fully Accessible", 0)} and ${byPerson("Fully Accessible", 0)}. So no `
+    + "crowd of small regions is manufacturing them. Where the readings diverge it is the "
+    + "oversupply that grows: High Physical Support is short in "
+    + `${byRegion("High Physical Support", 0)} of regions but for only `
     + `${byPerson("High Physical Support", 0)} of its participants, and far above the need `
     + `recorded against it in ${byRegion("High Physical Support", 3)} of regions holding `
-    + `${byPerson("High Physical Support", 3)} of them. Counting regions understates it. `
-    + "<b>General population is deliberately not the weight here</b> &mdash; SDA need "
-    + "follows disability prevalence and where services were historically built, not "
-    + "headcount, and participants with an identified need is already the denominator of "
-    + "the ratio being banded.";
+    + `${byPerson("High Physical Support", 3)} of them &mdash; counting regions understates `
+    + "it. Weighted, each row is a share of <em>its own</em> category's participants, so "
+    + "the totals under the bars differ down the column. "
+    + "<b>General population is deliberately not the weight</b> &mdash; SDA need follows "
+    + "disability prevalence and where services were historically built, not headcount, "
+    + "and participants with an identified need is already the denominator of the ratio "
+    + "being banded.";
 }
 
 function renderNotes(g) {
