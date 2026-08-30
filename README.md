@@ -358,6 +358,47 @@ because a region high on one is often nowhere on another. The "state rows are
 summed from their regions" caveat does not apply while ranked, there being no
 state rows, and the note under the grid says so.
 
+### Enrolled now, or with the pipeline
+
+The panel's own figures answer *how much stock is standing spare*. The question
+they raise and cannot settle is *which way is this going*, so the view carries a
+second reading: **With pipeline** adds each category's `pipeline_places` to its
+enrolled places and recomputes everything against the same recorded need.
+
+The answer is not close. At 1.05 allowing substitution, national surplus goes
+from **3,671 dwellings to 8,778** — and **88% of the national pipeline, 5,782 of
+6,549 dwellings, is going into regions that already hold surplus**. High Physical
+Support alone is 7,210 pipeline places on 13,173 enrolled, a 55% increase in the
+most oversupplied category, against 1,243 Improved Liveability places on a
+3,073-place Improved Liveability shortfall. The pipeline does not correct the
+mismatch; it compounds it. Melbourne - West goes from 497 surplus dwellings to
+967, Melbourne - South East from 228 to 556, Adelaide - North from 225 to 509.
+
+Two details make this reading defensible rather than merely alarming.
+
+Dwellings are converted on the **combined** average — `(enrolled_places +
+pipeline_places) / (enrolled_dwellings + pipeline_dwellings)` — because the
+supplement publishes both sides of the pipeline and a pipeline dwelling is not
+the same size as an enrolled one. Where `pipeline_dwellings` is suppressed the
+enrolled average stands in. And a suppressed `pipeline_places` makes the whole
+category unknown rather than counting as nothing coming: 8 of the 88 regions are
+affected, and reading them as zero would report a thin region as safe on the
+strength of a number nobody published.
+
+The grid carries a **Pipeline dwellings** column in both readings — it is the
+fact that makes the two worth comparing — and the tiles carry both figures at
+once, so the before and after sit together without a click.
+
+It is a scenario, and the page says so at its loudest. It counts every pipeline
+dwelling as built and enrolled in the category it is listed against, and holds
+demand at what is recorded today. The NDIA states that pipeline dwellings may
+never be enrolled, may be enrolled in a different design category, and that some
+already-enrolled dwellings remain in the pipeline data, overstating it; from
+March 2026 dwellings that have not progressed within 36 months are removed.
+Demand will move too, and Supplement P publishes no projection of it, so nothing
+here offsets the new stock. Read it as the direction the intended stock points,
+and the enrolled reading as the one that is true.
+
 Deep links carry the view: `#surplus!sa4:VIC - Geelong`.
 
 ## The vacancy view

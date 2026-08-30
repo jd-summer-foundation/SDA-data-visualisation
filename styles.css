@@ -436,7 +436,7 @@ footer a { color: var(--accent); }
    scrolls inside its own panel with the header and the region column pinned.
    A single state's regions never reach the ceiling and so never scroll. */
 .heatwrap { max-height: 70vh; overflow: auto; overscroll-behavior: contain; }
-.heatgrid { min-width: 720px; border-collapse: separate; border-spacing: 0; }
+.heatgrid { min-width: 830px; border-collapse: separate; border-spacing: 0; }
 .heatgrid th {
   position: sticky; top: 0; z-index: 3; background: var(--surface);
   text-align: center; border-bottom: none; box-shadow: inset 0 -1px 0 var(--rule);

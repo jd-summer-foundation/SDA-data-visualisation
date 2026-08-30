@@ -58,6 +58,12 @@ let surplusCategory = SURPLUS_ALL;
 let surplusSort = { key: null, dir: -1 };
 let surplusExpanded = new Set();
 let surplusGrouped = true;
+/* Whether the reading includes the pipeline. The panel's own figures answer
+   "how much is standing spare"; this answers the question they raise and
+   cannot settle on their own -- is this getting better or worse. Off by
+   default: what is built is a fact and what is intended is not, so the
+   committed reading is the one a reader lands on. */
+let surplusPipeline = false;
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -193,10 +199,21 @@ const SURPLUS_BREAKS = [1, 10, 25, 50, 100];
    falls back to its state and then to Australia rather than dropping out: the
    average is a conversion factor, not a finding, and a coarser one is better
    than none. */
-function placesPerDwelling(g, c) {
+function placesPerDwelling(g, c, withPipeline) {
   for (let n = g; n; n = n.parent ? BY_ID.get(n.parent) : null) {
     const x = n.categories && n.categories[c];
-    if (x && x.enrolled_dwellings && x.enrolled_places) {
+    if (!x) continue;
+    /* Reading the pipeline in, the average is taken over both bodies of stock
+       together -- the supplement publishes dwellings and places for the
+       pipeline as well, and pipeline dwellings are not the same size as
+       enrolled ones. Where its dwelling count is suppressed the enrolled
+       average stands in: a coarser conversion factor beats none. */
+    if (withPipeline && x.pipeline_dwellings && x.pipeline_places
+        && x.enrolled_dwellings && x.enrolled_places) {
+      return (x.enrolled_places + x.pipeline_places)
+           / (x.enrolled_dwellings + x.pipeline_dwellings);
+    }
+    if (x.enrolled_dwellings && x.enrolled_places) {
       return x.enrolled_places / x.enrolled_dwellings;
     }
   }
@@ -224,9 +241,20 @@ function surplusTotal(rec) {
    Null propagates exactly as it does in figuresFor(): the NDIA publishes small
    counts as "<11", and reading that as zero on the demand side would invent
    surplus that may not exist. */
-function surplusFor(g, T = surplusThreshold) {
+function surplusFor(g, T = surplusThreshold, pipe = surplusPipeline) {
   if (!g.has_places) return null;
   const at = c => (g.categories && g.categories[c]) || {};
+
+  /* The places a category has to answer with. Reading the pipeline in, that is
+     what is built plus what is intended; a suppressed pipeline figure makes the
+     whole category unknown rather than counting as nothing coming, which would
+     report a thin region as safe on the strength of a number nobody published. */
+  const placesOf = c => {
+    const x = at(c);
+    if (x.enrolled_places == null) return null;
+    if (!pipe) return x.enrolled_places;
+    return x.pipeline_places == null ? null : x.enrolled_places + x.pipeline_places;
+  };
 
   /* What High Physical Support is asked to cover before any of it counts as
      spare. Only when substitution is allowed -- read as enrolled, each
@@ -234,19 +262,21 @@ function surplusFor(g, T = surplusThreshold) {
   let owed = 0;
   if (substitution) {
     const x = at(POOL_OF[1]);
-    owed = (x.enrolled_places == null || x.participants_with_need == null)
+    const p = placesOf(POOL_OF[1]);
+    owed = (p === null || x.participants_with_need == null)
       ? null
-      : Math.max(0, T * x.participants_with_need - x.enrolled_places);
+      : Math.max(0, T * x.participants_with_need - p);
   }
 
   const rec = {};
   for (const c of SURPLUS_ORDER) {
     const lent = (c === POOL_OF[0]) ? owed : 0;
     const x = at(c);
-    const excess = (lent === null || x.enrolled_places == null || x.participants_with_need == null)
+    const p = placesOf(c);
+    const excess = (lent === null || p === null || x.participants_with_need == null)
       ? null
-      : Math.max(0, x.enrolled_places - T * x.participants_with_need - lent);
-    const ppd = placesPerDwelling(g, c);
+      : Math.max(0, p - T * x.participants_with_need - lent);
+    const ppd = placesPerDwelling(g, c, pipe);
     rec[c] = {
       excess_places: excess,
       places_per_dwelling: ppd,
@@ -540,12 +570,23 @@ function wireBandSwitch() {
    supply view's: a reader at the bottom of eighty-eight rows should not have
    to scroll back to the top to change it. Both write the one variable. */
 const SURPLUS_THRESH_SWITCHES = ["surThreshSwitch", "surGridThreshSwitch"];
+const SURPLUS_PIPE_SWITCHES = ["surPipeSwitch", "surGridPipeSwitch"];
 function wireSurplusSwitches() {
   for (const id of SURPLUS_THRESH_SWITCHES) {
     document.getElementById(id).addEventListener("click", e => {
       const btn = e.target.closest("button[data-thresh]");
       if (!btn) return;
       surplusThreshold = +btn.dataset.thresh;
+      inPlace(id, () => renderSurplus(current));
+    });
+  }
+  for (const id of SURPLUS_PIPE_SWITCHES) {
+    document.getElementById(id).addEventListener("click", e => {
+      const btn = e.target.closest("button[data-pipe]");
+      if (!btn) return;
+      surplusPipeline = btn.dataset.pipe === "pipeline";
+      // Every panel is re-read: the two switches are one piece of state, and
+      // the tiles, map, grid and notes all change with it.
       inPlace(id, () => renderSurplus(current));
     });
   }
@@ -1582,11 +1623,13 @@ function renderSurplus(g) {
    for an SA4 returns that region's PEERS -- right for the grid and the map,
    which put a region among the others in its state, and quite wrong for a tile
    that names the region itself. */
-function surplusOf(g) {
+function surplusOf(g, pipe = surplusPipeline) {
   if (!g.has_places) return null;
-  if (g.level === "SA4") return surplusFor(g);
+  if (g.level === "SA4") return surplusFor(g, surplusThreshold, pipe);
   const kids = sa4Groups(g).flatMap(gr => gr.kids);
-  return kids.length ? surplusAgg(kids.map(k => surplusFor(k))) : null;
+  return kids.length
+    ? surplusAgg(kids.map(k => surplusFor(k, surplusThreshold, pipe)))
+    : null;
 }
 
 const threshLabel = () => SURPLUS_THRESHOLDS.find(t => t[0] === surplusThreshold)[1];
@@ -1597,20 +1640,47 @@ function threshButtons() {
     + `${label}</button>`).join("");
 }
 
+/* Enrolled now, or with the pipeline read in. Labelled by what each reading
+   counts rather than "now / later": the pipeline is an intention with no date
+   on it, and a control that implied one would be making a forecast the data
+   cannot support. */
+const PIPE_READINGS = [["enrolled", "Enrolled now"], ["pipeline", "With pipeline"]];
+function pipeButtons() {
+  return PIPE_READINGS.map(([mode, label]) =>
+    `<button type="button" data-pipe="${mode}" aria-pressed="`
+    + `${(mode === "pipeline") === surplusPipeline}">${label}</button>`).join("");
+}
+
+/* The same geography read the other way, for the comparison the tiles carry. */
+const otherReading = g => surplusOf(g, !surplusPipeline);
+
 function renderSurplusTiles(g) {
   const rec = surplusOf(g);
   const cats = surplusCats();
+  /* The reading not currently selected, so the before and after sit together
+     without a click. This is the whole point of the pipeline overlay: the
+     figure on its own says how much, and only the pair says which way it is
+     going. */
+  const other = rec ? otherReading(g) : null;
+  const against = (x, y) => {
+    if (!other || x.dwellings === null || y.dwellings === null) return null;
+    return surplusPipeline
+      ? `${fmt(y.dwellings)} enrolled now → ${fmt(x.dwellings)} with pipeline`
+      : `${fmt(y.dwellings)} if the pipeline lands as intended`;
+  };
   const tiles = rec
     ? [["Surplus dwellings", cell(rec.total.dwellings),
-        `past ${surplusThreshold.toFixed(2)} × recorded need`
-        + (rec.total.excess_places != null
-            ? ` · ${fmt(rec.total.excess_places)} places` : "")],
+        against(rec.total, other && other.total)
+        || (`past ${surplusThreshold.toFixed(2)} × recorded need`
+            + (rec.total.excess_places != null
+                ? ` · ${fmt(rec.total.excess_places)} places` : ""))],
        ...cats.map(c => {
          const x = rec[c];
          const lent = (c === POOL_OF[0] && substitution && x.lent)
            ? `after covering ${fmt(x.lent)} Fully Accessible places` : null;
          return [c, cell(x.dwellings),
-           lent || (x.excess_places != null ? `${fmt(x.excess_places)} places` : null)];
+           against(x, other && other[c]) || lent
+           || (x.excess_places != null ? `${fmt(x.excess_places)} places` : null)];
        })]
     : [["Surplus dwellings", '<span class="nil">&mdash;</span>',
         "places are not published below SA4"]];
@@ -1702,7 +1772,9 @@ function renderSurplusMap(g) {
   const holding = vals.filter(v => v !== null && v > 0).length;
   const total = vals.reduce((t, v) => t + (v || 0), 0);
   const where = scope || "Australia";
-  const label = catLabel + ", surplus dwellings by SA4 region. " + holding + " of the "
+  const label = catLabel + ", surplus dwellings by SA4 region"
+    + (surplusPipeline ? ", counting the pipeline as though it were built" : "")
+    + ". " + holding + " of the "
     + ids.length + " regions in " + where + " hold stock past "
     + surplusThreshold.toFixed(2) + " times the need recorded against them, "
     + fmt(total) + " dwellings in all.";
@@ -1729,11 +1801,13 @@ function renderSurplusMap(g) {
       '<button type="button" data-cat="' + key + '" aria-pressed="'
       + (key === cat) + '">' + label2 + "</button>").join("");
   document.getElementById("surThreshSwitch").innerHTML = threshButtons();
+  document.getElementById("surPipeSwitch").innerHTML = pipeButtons();
   document.getElementById("surModeSwitch").innerHTML = modeButtons();
 
   document.getElementById("surMapSub").textContent =
     fmt(total) + " surplus dwellings across " + holding + " of "
     + (scope ? ids.length + " " + where + " regions" : "all " + ids.length + " SA4 regions")
+    + " · " + (surplusPipeline ? "enrolled and pipeline" : "enrolled stock only")
     + " · " + (substitution ? "allowing substitution" : "as enrolled")
     + " · click a region to open it";
 
@@ -1751,7 +1825,13 @@ function renderSurplusMap(g) {
         ? " High Physical Support is shown after covering the Fully Accessible shortfall in "
           + "the same region: those places are subtracted from it, not counted twice."
         : " Read as enrolled, so High Physical Support surplus here has not been asked to "
-          + "cover the Fully Accessible shortfall beside it.");
+          + "cover the Fully Accessible shortfall beside it.")
+    + (surplusPipeline
+        ? " <b>The pipeline is counted here as though every dwelling in it were built, "
+          + "enrolled in the category it is listed against, and met by no new demand.</b> None "
+          + "of those three is safe &mdash; see the notes below &mdash; so this is the direction "
+          + "the intended stock points, not a forecast of where it lands."
+        : "");
 }
 
 /* The same figures as the map, as counts rather than colour, every category at
@@ -1774,6 +1854,7 @@ function renderSurplusGrid(g) {
       sur: kids ? surplusAgg(kids.map(k => surplusFor(k))) : surplusFor(node),
       places: parts.reduce((t, k) => t + (totalPlaces(k) || 0), 0),
       dwellings: parts.reduce((t, k) => t + (k.totals.enrolled_dwellings || 0), 0),
+      pipeline: parts.reduce((t, k) => t + (k.totals.pipeline_dwellings || 0), 0),
     };
   };
   const rows = groups.map(gr => ({
@@ -1785,6 +1866,10 @@ function renderSurplusGrid(g) {
     { key: "name", label: "Region" },
     { key: "places", label: "Enrolled<br>places", get: r => r.places },
     { key: "dwellings", label: "Enrolled<br>dwellings", get: r => r.dwellings },
+    /* Always shown, whichever reading is selected: how much is intended is the
+       fact that makes the two readings worth comparing, and hiding it behind
+       the switch would leave the reader guessing what moved the numbers. */
+    { key: "pipeline", label: "Pipeline<br>dwellings", get: r => r.pipeline },
     ...cats.map(c => ({
       key: c, surplus: true,
       label: c === POOL_OF[0] ? abbrLabel("HPS", c)
@@ -1808,7 +1893,9 @@ function renderSurplusGrid(g) {
 
   const regions = rows.reduce((n, r) => n + r.kids.length, 0);
   document.getElementById("surGridTitle").textContent =
-    `Surplus dwellings in ${regions} SA4 regions by design category`
+    (surplusPipeline
+      ? `Surplus dwellings if the pipeline lands, in ${regions} SA4 regions`
+      : `Surplus dwellings in ${regions} SA4 regions by design category`)
     + (scope ? ` in ${rows[0].head.node.name}` : " across Australia");
   const one = rows.length === 1;
   // Ranked, there is no state heading over a row, so the state moves into the
@@ -1817,6 +1904,7 @@ function renderSurplusGrid(g) {
   const ranked = !surplusGrouped;
   document.getElementById("surGridSub").textContent =
     `Stock past ${surplusThreshold.toFixed(2)} × the need recorded against it · `
+    + (surplusPipeline ? "enrolled and pipeline · " : "enrolled stock only · ")
     + (substitution ? "allowing substitution · " : "as enrolled · ")
     + (ranked
         ? `${regions} regions ranked`
@@ -1826,6 +1914,7 @@ function renderSurplusGrid(g) {
 
   document.getElementById("surGridGroupSwitch").innerHTML = groupButtons(surplusGrouped);
   document.getElementById("surGridThreshSwitch").innerHTML = threshButtons();
+  document.getElementById("surGridPipeSwitch").innerHTML = pipeButtons();
   // The total column is ruled off from the four it sums; headCells() is shared
   // with the supply grid, so the class is added here rather than given to it.
   document.getElementById("surGridHead").innerHTML = headCells(cols, surplusSort)
@@ -1902,6 +1991,13 @@ function renderSurplusGrid(g) {
     + "average places per dwelling in that category, rounded down &mdash; because the supplement "
     + "publishes places against participants and dwellings against nothing. "
     + "<b>HPS</b> is High Physical Support and <b>FA</b> is Fully Accessible."
+    + (surplusPipeline
+        ? " <b>The surplus columns count the pipeline as built.</b> The pipeline column is "
+          + "the same either way &mdash; it is what makes the two readings worth comparing "
+          + "&mdash; and demand is held at what is recorded today, because the supplement "
+          + "publishes no participant projection. Switch to <b>enrolled now</b> for the "
+          + "committed stock alone."
+        : "")
     + (substitution
         ? " Allowing substitution, HPS answers for the Fully Accessible shortfall in its own "
           + "region first, and only what is left over is counted here; the places it lends are "
@@ -1977,10 +2073,20 @@ function renderSurplusNotes(g) {
      "Each category answers for its own need alone, so High Physical Support surplus here has not been "
      + "asked to cover the Fully Accessible shortfall standing beside it. Switch to <b>allowing "
      + "substitution</b> for the reading that has."]]),
-    ["t-care", "The pipeline is excluded.",
+    ...(surplusPipeline ? [["t-block", "This reading is a scenario, not a forecast.",
+     "It counts every pipeline dwelling as built and enrolled in the category it is listed against, "
+     + "and holds demand at what is recorded today. The NDIA states that pipeline dwellings <b>may "
+     + "never be enrolled</b>, <b>may be enrolled in a different design category</b>, and that some "
+     + "already-enrolled dwellings remain in the pipeline data &mdash; overstating it; from March 2026 "
+     + "dwellings that have not progressed within 36 months are removed. Demand will also move, and "
+     + "the supplement publishes no projection of it, so nothing here offsets the new stock. Every one "
+     + "of those points cuts the same way as the others do not: treat this as the direction the "
+     + "intended stock points, and the enrolled reading as the one that is true."]]
+     : [["t-care", "The pipeline is excluded.",
      "This is the standing enrolled stock only. Pipeline dwellings &mdash; which the NDIA states may "
      + "never be enrolled, or may be enrolled in a different category &mdash; would add to every surplus "
-     + "shown here, and add most where the surplus is already largest."],
+     + "shown here, and add most where the surplus is already largest. Switch to <b>with pipeline</b> "
+     + "to see how much."]]),
     ["t-care", "Small counts are suppressed, not zero.",
      "Where the NDIA publishes a count below its threshold, no surplus can be formed and the cell reads "
      + "&mdash; rather than 0. Those cells are left out of the totals beside them rather than counted as "
