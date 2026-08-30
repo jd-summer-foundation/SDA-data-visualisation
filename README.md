@@ -251,6 +251,18 @@ treat carefully, and not for the expected reason: its far-over regions hold a
 median of 16 participants, but the category is small nationally (1,754), so it is
 the category rather than the regions that is thin.
 
+Both region grids — this one and the surplus grid — carry a **By state /
+Ranked** switch. Grouped is the default and the organising idea: regions sit
+under their state, sorting reorders them inside it, and the state row carries
+the NDIA's own subtotal. But sorting inside groups, however it is sorted, can
+never put the largest region in one state beside the largest in another, so the
+question the grid most obviously raises — *which regions, nationally?* — is the
+one it cannot answer. **Ranked** drops the grouping for a flat 1-to-n list on
+whichever column is sorted, each row carrying its own position and its own
+state. Making it a mode rather than a side-effect of sorting means neither
+reading has to compromise, and the sort carries across the switch in both
+directions.
+
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
 ## The surplus view
@@ -335,6 +347,16 @@ category beyond the need recorded against that category in that region. The
 Vacancy view is the one that reads listed availability. The pipeline is excluded
 throughout: it would add to every surplus shown, and add most where the surplus
 is already largest.
+
+The grid carries the same **By state / Ranked** switch as the supply-view region
+grid, described above. Ranked is how the question "which SA4s hold the most
+overstock in absolute terms" gets answered: at 1.05 read as enrolled, that is
+Melbourne - West on 511 dwellings, then Melbourne - South East on 277, Adelaide
+- North on 265, Logan - Beaudesert on 210 and Perth - South East on 208. Rank is
+position under the current sort and nothing more — sort by the column you mean,
+because a region high on one is often nowhere on another. The "state rows are
+summed from their regions" caveat does not apply while ranked, there being no
+state rows, and the note under the grid says so.
 
 Deep links carry the view: `#surplus!sa4:VIC - Geelong`.
 

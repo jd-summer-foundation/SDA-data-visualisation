@@ -41,6 +41,14 @@ let bandWeighted = true;
    subtotals, so the grid opens as eight readable rows and the regions are
    expanded a state at a time. */
 let heatExpanded = new Set();
+/* Whether the grid keeps its state grouping. Grouped is the default and the
+   organising idea of the panel; ranked exists because sorting inside groups,
+   however it is sorted, can never put the largest region in one state next to
+   the largest in another -- and "which regions, nationally" is a question the
+   grid otherwise raises and cannot answer. Making it a mode rather than a
+   side-effect of sorting means neither reading has to compromise: grouped
+   still groups, and ranked is a clean 1-to-n list. */
+let heatGrouped = true;
 
 /* Surplus view state. The threshold is a tolerance, not a target: a region is
    only counted as holding surplus once it is this far past its own recorded
@@ -49,6 +57,7 @@ let surplusThreshold = 1.05;
 let surplusCategory = SURPLUS_ALL;
 let surplusSort = { key: null, dir: -1 };
 let surplusExpanded = new Set();
+let surplusGrouped = true;
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -326,6 +335,27 @@ function ratioChip(r) {
   const b = RATIO_BANDS[ratioBand(r)];
   return `<span class="ratio ${b.chip}" title="${r.toFixed(2)} places per participant — ${b.label}">`
        + `<i aria-hidden="true">${b.mark}</i>${r.toFixed(2)}<span class="sr-only"> — ${b.label}</span></span>`;
+}
+
+/* The grouping switch, shared by the two region grids so they cannot come to
+   offer the reader different controls over the same arrangement. */
+const GRID_GROUPINGS = [["state", "By state"], ["ranked", "Ranked"]];
+const groupButtons = grouped => GRID_GROUPINGS.map(([mode, label]) =>
+  `<button type="button" data-group="${mode}" aria-pressed="`
+  + `${(mode === "state") === grouped}">${label}</button>`).join("");
+
+/* The region cell of a ranked row. The rank is the row's position under the
+   current sort, so it is a reading aid rather than a fact about the region --
+   it is marked aria-hidden and the name carries the row on its own. The state
+   moves into the row because the row is no longer under a state heading, and
+   is dropped where the whole grid is one state and it would repeat on every
+   line. */
+function rankCell(i, href, name, state, showState) {
+  return `<td class="region ranked">`
+    + `<span class="rank" aria-hidden="true">${i + 1}</span>`
+    + `<a href="${href}">${name}</a>`
+    + (showState && state ? `<span class="rstate">${state}</span>` : "")
+    + `</td>`;
 }
 
 /* Sortable header cells. Shared so a second table cannot quietly lose the
@@ -1230,19 +1260,32 @@ function renderHeat(g) {
   // Scoped to one state its regions are already the rows, so there is nothing
   // to expand and the instruction to do it would be a dead end.
   const one = groups.length === 1;
+  // Ranked, the grouping is gone, so the state column has to move into each
+  // row -- except where the grid is a single state and it would repeat on
+  // every line.
+  const showState = !one;
+  const ranked = !heatGrouped;
   document.getElementById("heatSub").textContent =
     "Places per participant · "
-    + (one ? "" : "click ▸ to open a state's regions, ")
+    + (ranked
+        ? `${regions} regions ranked` + (heatSort.key ? "" : " by enrolled places") + ", "
+        : one ? "" : "click ▸ to open a state's regions, ")
     + "click a column to sort, a row to open";
 
+  document.getElementById("heatGroupSwitch").innerHTML = groupButtons(heatGrouped);
   document.getElementById("heatHead").innerHTML = headCells(cols, heatSort);
 
   const dataCells = s => cols.slice(1).map(c =>
     c.heat ? heatCell(c.get(s)) : `<td>${cell(c.get(s))}</td>`).join("");
 
   const body = document.getElementById("heatBody");
-  let anyOpen = false;
-  body.innerHTML = groups.map(gr => {
+  let anyOpen = ranked;
+  body.innerHTML = ranked
+    ? groups.flatMap(gr => gr.kids).sort(cmp).map((s, i) =>
+        `<tr class="linked${s.id === g.id ? " here" : ""}" data-id="${encodeURIComponent(s.id)}">`
+        + rankCell(i, "#" + encodeURIComponent(s.id), s.name, s.state, showState)
+        + dataCells(s) + "</tr>").join("")
+    : groups.map(gr => {
     const id = encodeURIComponent(gr.state.id);
     // Scoped to one state there is nothing to collapse the group in favour of,
     // so the control is not offered and the group cannot be shut.
@@ -1265,7 +1308,8 @@ function renderHeat(g) {
   }).join("");
 
   // Closed, the pinned column holds nothing longer than "VIC 17 regions", and
-  // the width a full SA4 name needs is width the coloured columns lose.
+  // the width a full SA4 name needs is width the coloured columns lose. Ranked,
+  // every row carries a full name, so the column is never tight.
   document.getElementById("heatTable").classList.toggle("tight", !anyOpen);
 
   // The hatch is only worth a legend row when something in view actually uses it.
@@ -1302,6 +1346,14 @@ function renderHeat(g) {
     heatSort = (heatSort.key === key) ? { key, dir: -heatSort.dir }
                                       : { key, dir: key === "name" ? 1 : -1 };
     again();
+  };
+  document.getElementById("heatGroupSwitch").onclick = e => {
+    const btn = e.target.closest("button[data-group]");
+    if (!btn) return;
+    heatGrouped = btn.dataset.group === "state";
+    // The panel grows and shrinks by dozens of rows, so it is re-rendered in
+    // place rather than left to jump under the reader.
+    inPlace("heatGroupSwitch", again);
   };
   document.getElementById("heatBody").onclick = e => {
     const tog = e.target.closest("button.gtoggle");
@@ -1759,12 +1811,20 @@ function renderSurplusGrid(g) {
     `Surplus dwellings in ${regions} SA4 regions by design category`
     + (scope ? ` in ${rows[0].head.node.name}` : " across Australia");
   const one = rows.length === 1;
+  // Ranked, there is no state heading over a row, so the state moves into the
+  // row itself -- unless the whole grid is one state and it would repeat.
+  const showState = !one;
+  const ranked = !surplusGrouped;
   document.getElementById("surGridSub").textContent =
     `Stock past ${surplusThreshold.toFixed(2)} × the need recorded against it · `
     + (substitution ? "allowing substitution · " : "as enrolled · ")
-    + (one ? "" : "click ▸ to open a state's regions, ")
+    + (ranked
+        ? `${regions} regions ranked`
+          + (surplusSort.key ? "" : " by surplus across all categories") + ", "
+        : one ? "" : "click ▸ to open a state's regions, ")
     + "click a column to sort, a row to open";
 
+  document.getElementById("surGridGroupSwitch").innerHTML = groupButtons(surplusGrouped);
   document.getElementById("surGridThreshSwitch").innerHTML = threshButtons();
   // The total column is ruled off from the four it sums; headCells() is shared
   // with the supply grid, so the class is added here rather than given to it.
@@ -1794,8 +1854,13 @@ function renderSurplusGrid(g) {
     c.surplus ? surplusCell(c, r) : `<td>${cell(c.get(r))}</td>`).join("");
 
   const body = document.getElementById("surGridBody");
-  let anyOpen = false;
-  body.innerHTML = rows.map(gr => {
+  let anyOpen = ranked;
+  body.innerHTML = ranked
+    ? rows.flatMap(gr => gr.kids).sort(cmp).map((r, i) =>
+        `<tr class="linked${r.id === g.id ? " here" : ""}" data-id="${encodeURIComponent(r.id)}">`
+        + rankCell(i, hashFor("surplus", r.id), r.name, r.node.state, showState)
+        + dataCells(r) + "</tr>").join("")
+    : rows.map(gr => {
     const id = encodeURIComponent(gr.head.id);
     const open = one || surplusExpanded.has(gr.head.id);
     if (open) anyOpen = true;
@@ -1815,15 +1880,24 @@ function renderSurplusGrid(g) {
       + dataCells(r) + "</tr>").join("");
   }).join("");
 
+  // Ranked, every row carries a full SA4 name, so the pinned column is never
+  // narrowed the way a grid of closed state rows can be.
   document.getElementById("surGridTable").classList.toggle("tight", !anyOpen);
   document.getElementById("surGridLegend").innerHTML =
     surplusLegend(!!body.querySelector("td.m-nil"));
 
   document.getElementById("surGridNote").innerHTML =
-    "<b>State rows are summed from their regions, not read from the NDIA&rsquo;s subtotals.</b> "
-    + "Surplus is regional: a state subtotal would net a shortfall in one region against a "
-    + "surplus in another and report the difference, as though nowhere were short. Every other "
-    + "panel on this site uses the published subtotals, so these rows will not match them. "
+    // Ranked there are no state rows, so the caveat that governs them has
+    // nothing to govern, and stating it anyway would only be a puzzle.
+    (ranked
+      ? "<b>Rank is the row&rsquo;s position under the current sort, nothing more.</b> "
+        + "Two regions on the same figure are in no meaningful order, and a region high on "
+        + "one column can be nowhere on another &mdash; sort by the column you mean. Group "
+        + "the grid by state to read the regions against their own state&rsquo;s total. "
+      : "<b>State rows are summed from their regions, not read from the NDIA&rsquo;s subtotals.</b> "
+        + "Surplus is regional: a state subtotal would net a shortfall in one region against a "
+        + "surplus in another and report the difference, as though nowhere were short. Every other "
+        + "panel on this site uses the published subtotals, so these rows will not match them. ")
     + "Dwellings are <b>approximated</b> &mdash; surplus places divided by the region&rsquo;s own "
     + "average places per dwelling in that category, rounded down &mdash; because the supplement "
     + "publishes places against participants and dwellings against nothing. "
@@ -1851,6 +1925,12 @@ function renderSurplusGrid(g) {
     surplusSort = (surplusSort.key === key) ? { key, dir: -surplusSort.dir }
                                             : { key, dir: key === "name" ? 1 : -1 };
     again();
+  };
+  document.getElementById("surGridGroupSwitch").onclick = e => {
+    const btn = e.target.closest("button[data-group]");
+    if (!btn) return;
+    surplusGrouped = btn.dataset.group === "state";
+    inPlace("surGridGroupSwitch", again);
   };
   document.getElementById("surGridBody").onclick = e => {
     const tog = e.target.closest("button.gtoggle");

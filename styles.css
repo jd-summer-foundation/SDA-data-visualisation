@@ -583,3 +583,13 @@ footer a { color: var(--accent); }
 @media (max-width: 700px) {
   .surplus-controls { justify-content: flex-start; margin-left: 0; }
 }
+
+/* Ranked rows: the grouping is gone, so the row carries its own position and
+   its own state. The rank is a fixed-width mono figure so the column of
+   numbers lines up rather than ragging with 1 against 88. */
+.heatgrid td.region.ranked { padding-left: 10px; font-weight: 500; }
+.rank { display: inline-block; min-width: 2.2em; margin-right: 8px;
+        font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+        text-align: right; }
+.rstate { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
+          color: var(--ink-3); margin-left: 8px; }
