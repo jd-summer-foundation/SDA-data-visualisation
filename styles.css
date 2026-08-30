@@ -49,6 +49,26 @@
   --on-map-4:    #0b0d10;
   --on-map-5:    #0b0d10;
   --on-map-6:    #ffffff;
+  /* Surplus classes: sequential, not diverging. Zero is the reference and
+     everything above it runs one way, so a ramp is the honest shape -- the
+     map's red/green/blue would imply the far end is a second kind of problem
+     when it is the same problem, further along. Amber through to deep brown,
+     deliberately nothing like the ratio scale, so the two maps cannot be
+     mistaken for one another at a glance. --surp-0 is all but blank: a region
+     with nothing spare should read as empty page, which is what makes the
+     regions holding stock findable without reading a figure. */
+  --surp-0:      #f7f8fa;
+  --surp-1:      #fbe3b0;
+  --surp-2:      #f3c169;
+  --surp-3:      #e39a34;
+  --surp-4:      #bf6f18;
+  --surp-5:      #8a4a10;
+  --on-surp-0:   #828d9c;
+  --on-surp-1:   #0b0d10;
+  --on-surp-2:   #0b0d10;
+  --on-surp-3:   #0b0d10;
+  --on-surp-4:   #ffffff;
+  --on-surp-5:   #ffffff;
   --shadow:      0 1px 2px rgba(15,19,25,.05), 0 4px 14px rgba(15,19,25,.04);
 
   --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -69,6 +89,10 @@
     --map-mesh: #0e1013;
     --on-map-1: #ffffff; --on-map-2: #ffffff; --on-map-3: #ffffff;
     --on-map-4: #0b0d10; --on-map-5: #ffffff; --on-map-6: #0b0d10;
+    --surp-0: #14171b; --surp-1: #4a3410; --surp-2: #7a5416;
+    --surp-3: #ab7620; --surp-4: #d69b3c; --surp-5: #f0c274;
+    --on-surp-0: #5d6875; --on-surp-1: #ffffff; --on-surp-2: #ffffff;
+    --on-surp-3: #0b0d10; --on-surp-4: #0b0d10; --on-surp-5: #0b0d10;
     --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
     --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
   }
@@ -86,6 +110,10 @@
     --map-mesh: #0e1013;
     --on-map-1: #ffffff; --on-map-2: #ffffff; --on-map-3: #ffffff;
     --on-map-4: #0b0d10; --on-map-5: #ffffff; --on-map-6: #0b0d10;
+    --surp-0: #14171b; --surp-1: #4a3410; --surp-2: #7a5416;
+    --surp-3: #ab7620; --surp-4: #d69b3c; --surp-5: #f0c274;
+    --on-surp-0: #5d6875; --on-surp-1: #ffffff; --on-surp-2: #ffffff;
+    --on-surp-3: #0b0d10; --on-surp-4: #0b0d10; --on-surp-5: #0b0d10;
     --over-bg: #15222c; --over-2: #8cc8ee; --over-2-bg: #1b2d3a;
   --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
 }
@@ -516,3 +544,42 @@ footer a { color: var(--accent); }
 .bseg.m5 { background: var(--map-5); } .bseg.m6 { background: var(--map-6); }
 .bseg.m-nil { background: repeating-linear-gradient(45deg,
   var(--map-nil-bg) 0 3px, var(--map-nil-ink) 3px 5px); }
+
+/* ---------- surplus view ---------- */
+
+/* The surplus scale, on the map and in the grid. Same six classes in both, so
+   a cell and a region cannot report the same count in different colours. */
+.s0 { fill: var(--surp-0); } .s1 { fill: var(--surp-1); }
+.s2 { fill: var(--surp-2); } .s3 { fill: var(--surp-3); }
+.s4 { fill: var(--surp-4); } .s5 { fill: var(--surp-5); }
+
+.msw .s0 { background: var(--surp-0); box-shadow: inset 0 0 0 1px var(--rule); }
+.msw .s1 { background: var(--surp-1); } .msw .s2 { background: var(--surp-2); }
+.msw .s3 { background: var(--surp-3); } .msw .s4 { background: var(--surp-4); }
+.msw .s5 { background: var(--surp-5); }
+.mrow i.g-surp { color: var(--surp-4); }
+
+.heatgrid td.hc.s0 { background: var(--surp-0); color: var(--on-surp-0); }
+.heatgrid td.hc.s1 { background: var(--surp-1); color: var(--on-surp-1); }
+.heatgrid td.hc.s2 { background: var(--surp-2); color: var(--on-surp-2); }
+.heatgrid td.hc.s3 { background: var(--surp-3); color: var(--on-surp-3); }
+.heatgrid td.hc.s4 { background: var(--surp-4); color: var(--on-surp-4); }
+.heatgrid td.hc.s5 { background: var(--surp-5); color: var(--on-surp-5); }
+/* A zero is a real answer, not a missing one, so it is printed rather than
+   left blank -- but quietly, because the panel exists for the cells that are
+   not zero. */
+.heatgrid td.hc.s0 { font-weight: 500; }
+/* The total column is a sum of the four beside it, so it is ruled off from
+   them -- it is on the same scale and the same ramp, but it is not a fifth
+   category and should not read as one. */
+.heatgrid td.hc.stot, .heatgrid th.stot {
+  box-shadow: inset 1px 0 0 var(--rule);
+}
+/* Three switches, not the map panel's two, so they run across rather than
+   down: stacked they push the map itself most of a screen below its own title.
+   margin-left keeps them against the right edge on the line they wrap to. */
+.surplus-controls { display: flex; flex-wrap: wrap; gap: 6px;
+                    justify-content: flex-end; margin-left: auto; }
+@media (max-width: 700px) {
+  .surplus-controls { justify-content: flex-start; margin-left: 0; }
+}

@@ -9,6 +9,11 @@
    against it -- High Physical Support has 77 of 88 regions above 1.0 and 49%
    of its places in regions at 3.0 or more, which a "more is better" scale
    reported as uniformly healthy. */
+/* The surplus view reads every design category at once by default: the
+   question it answers is "how much stock is standing spare here", and that is
+   a total before it is a breakdown. */
+const SURPLUS_ALL = "__all";
+
 const RATIO_TIGHT = 1.0;   // below this, fewer places than participants
 const RATIO_GOOD = 1.5;    // top of the balanced band
 const RATIO_HIGH = 2.5;    // beyond this, far past the recorded need
@@ -36,6 +41,14 @@ let bandWeighted = true;
    subtotals, so the grid opens as eight readable rows and the regions are
    expanded a state at a time. */
 let heatExpanded = new Set();
+
+/* Surplus view state. The threshold is a tolerance, not a target: a region is
+   only counted as holding surplus once it is this far past its own recorded
+   need, so the figure is not moved by a region sitting a place or two over. */
+let surplusThreshold = 1.05;
+let surplusCategory = SURPLUS_ALL;
+let surplusSort = { key: null, dir: -1 };
+let surplusExpanded = new Set();
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -124,6 +137,159 @@ function supplyFor(g) {
   return out;
 }
 
+
+/* ---------- surplus ---------- */
+
+/* A ratio says whether a region is long or short; it cannot say by how much,
+   because it has no units. 4.22 places per participant in Geelong High
+   Physical Support is the same number whether it stands for four spare places
+   or four hundred. This section converts the long end of that measure into the
+   unit the question "what is the plan for existing surplus SDA?" is actually
+   asked in: dwellings standing past the need recorded against them.
+
+   Three deliberate choices, each of which understates rather than overstates:
+
+   1. A tolerance, not a target. Surplus is measured past THRESHOLD x need, not
+      past need itself, so a region carrying a few places of headroom is not
+      reported as holding surplus stock. 1.05 and 1.20 are offered; 1.05 is the
+      default because it is the weaker claim of the two, and anything it does
+      not clear is not worth arguing about.
+
+   2. Substitution is directional and the donor is debited. High Physical
+      Support is defined cumulatively on top of Fully Accessible, so HPS stock
+      can cover an FA shortfall -- and when it does, those places stop being
+      HPS surplus. That is the difference between this and the waterfall
+      removed from the supply view: here the borrowed places are subtracted
+      from the lender, so the same place cannot be spare and in use at once.
+      Fully Accessible cannot substitute upwards, and nothing substitutes for
+      Improved Liveability or Robust, so those three are read on their own.
+      Across the pooled pair the total is identical to the supply view's
+      pooling; the waterfall only decides which category it is booked against.
+
+   3. Dwellings are approximated. The supplement publishes places against
+      participants and dwellings against nothing, so the only bridge between
+      them is the region's own average -- its enrolled places divided by its
+      enrolled dwellings, in that category. Surplus places are divided by that
+      average and rounded DOWN. */
+
+const SURPLUS_THRESHOLDS = [[1.05, "5% over need"], [1.2, "20% over need"]];
+/* Grid order, and the order of the map's category buttons: the two
+   substituting categories adjacent, so a row can be read across. */
+const SURPLUS_ORDER = ["Improved Liveability", "High Physical Support",
+                       "Fully Accessible", "Robust"];
+const SURPLUS_BREAKS = [1, 10, 25, 50, 100];
+
+/* Places per dwelling for one category, from the smallest geography that
+   publishes both. A region with places but no dwellings recorded in a category
+   falls back to its state and then to Australia rather than dropping out: the
+   average is a conversion factor, not a finding, and a coarser one is better
+   than none. */
+function placesPerDwelling(g, c) {
+  for (let n = g; n; n = n.parent ? BY_ID.get(n.parent) : null) {
+    const x = n.categories && n.categories[c];
+    if (x && x.enrolled_dwellings && x.enrolled_places) {
+      return x.enrolled_places / x.enrolled_dwellings;
+    }
+  }
+  return null;
+}
+
+/* The total row of a surplus record: the four categories added up. A
+   suppressed category is skipped rather than counted as zero, and the record
+   says so, because a total quietly missing a member is the one number here
+   that could be read as complete when it is not. */
+function surplusTotal(rec) {
+  let dwellings = 0, excess = 0, known = 0, partial = 0;
+  for (const c of SURPLUS_ORDER) {
+    const x = rec[c];
+    if (!x || x.dwellings === null) { partial++; continue; }
+    dwellings += x.dwellings;
+    excess += x.excess_places;
+    known++;
+  }
+  return { dwellings: known ? dwellings : null, excess_places: known ? excess : null,
+           partial, lent: rec[POOL_OF[0]] ? rec[POOL_OF[0]].lent : 0 };
+}
+
+/* One geography's surplus, by category, at the current threshold and reading.
+   Null propagates exactly as it does in figuresFor(): the NDIA publishes small
+   counts as "<11", and reading that as zero on the demand side would invent
+   surplus that may not exist. */
+function surplusFor(g, T = surplusThreshold) {
+  if (!g.has_places) return null;
+  const at = c => (g.categories && g.categories[c]) || {};
+
+  /* What High Physical Support is asked to cover before any of it counts as
+     spare. Only when substitution is allowed -- read as enrolled, each
+     category answers for its own need alone. */
+  let owed = 0;
+  if (substitution) {
+    const x = at(POOL_OF[1]);
+    owed = (x.enrolled_places == null || x.participants_with_need == null)
+      ? null
+      : Math.max(0, T * x.participants_with_need - x.enrolled_places);
+  }
+
+  const rec = {};
+  for (const c of SURPLUS_ORDER) {
+    const lent = (c === POOL_OF[0]) ? owed : 0;
+    const x = at(c);
+    const excess = (lent === null || x.enrolled_places == null || x.participants_with_need == null)
+      ? null
+      : Math.max(0, x.enrolled_places - T * x.participants_with_need - lent);
+    const ppd = placesPerDwelling(g, c);
+    rec[c] = {
+      excess_places: excess,
+      places_per_dwelling: ppd,
+      dwellings: (excess === null || !ppd) ? null : Math.floor(excess / ppd),
+      lent: lent || 0,
+    };
+  }
+  rec.total = surplusTotal(rec);
+  return rec;
+}
+
+/* Surplus summed over a set of regions. State and national rows are built this
+   way rather than from the NDIA's own subtotals, which the rest of the site
+   uses: surplus is regional by definition, and a subtotal would net a shortfall
+   in one region against a surplus in another and report the difference as
+   though nowhere were short. */
+function surplusAgg(recs) {
+  const rec = {};
+  for (const c of SURPLUS_ORDER) {
+    let dwellings = 0, excess = 0, lent = 0, known = 0, partial = 0;
+    for (const r of recs) {
+      const x = r && r[c];
+      if (!x || x.dwellings === null) { partial++; continue; }
+      dwellings += x.dwellings;
+      excess += x.excess_places;
+      lent += x.lent;
+      known++;
+    }
+    rec[c] = { dwellings: known ? dwellings : null, excess_places: known ? excess : null,
+               places_per_dwelling: null, lent, partial };
+  }
+  rec.total = surplusTotal(rec);
+  rec.total.partial = SURPLUS_ORDER.reduce((n, c) => n + (rec[c].partial || 0), 0);
+  return rec;
+}
+
+/* The categories the surplus panels show: the published comparable ones, in
+   the grid's order. Fully Accessible keeps its own column even when
+   substitution is on -- it is where the reader looks to see what High Physical
+   Support has just been made to cover. */
+const surplusCats = () => SURPLUS_ORDER.filter(c =>
+  DATA.meta.comparable_categories.indexOf(c) >= 0);
+
+/* Six classes on one ramp. Zero is its own class and reads as near-blank, so
+   the regions holding stock are the only thing on the map with colour in it. */
+function surplusClass(v) {
+  if (v === null || v === undefined) return "m-nil";
+  let i = 0;
+  while (i < SURPLUS_BREAKS.length && v >= SURPLUS_BREAKS[i]) i++;
+  return "s" + i;
+}
+
 /* ---------- formatting ---------- */
 const fmt = v => (v === null || v === undefined) ? null : Math.round(v).toLocaleString("en-AU");
 const cell = v => { const s = fmt(v); return s === null ? '<span class="nil">&mdash;</span>' : s; };
@@ -196,7 +362,7 @@ const hasData = k => (k.totals.enrolled_dwellings || 0) > 0
    wired from here and cannot come to disagree. The region grid carries no
    switch -- it shows both readings as columns instead. */
 const MODES = [["enrolled", "As enrolled"], ["substitution", "Allowing substitution"]];
-const MODE_SWITCHES = ["modeSwitch", "mapModeSwitch"];
+const MODE_SWITCHES = ["modeSwitch", "mapModeSwitch", "surModeSwitch"];
 const modeButtons = () => MODES.map(([mode, label]) =>
   `<button type="button" data-mode="${mode}" aria-pressed="`
   + `${(mode === "substitution") === substitution}">${label}</button>`).join("");
@@ -240,23 +406,27 @@ async function boot() {
   wireModeSwitch();
   wireMapCategory();
   wireBandSwitch();
+  wireSurplusSwitches();
   window.addEventListener("hashchange", routeFromHash);
   routeFromHash();
 }
 
 /* The hash is either a bare geography id — every link ever published — or
-   "vacancy!<id>". Splitting on the first "!" keeps the old links working, and
+   "<view>!<id>". Splitting on the first "!" keeps the old links working, and
    ids may themselves contain colons ("sa4:VIC - Geelong"). */
+const VIEWS = new Set(["supply", "vacancy", "surplus"]);
+
 function parseHash() {
   const raw = decodeURIComponent(location.hash.replace(/^#/, ""));
   const cut = raw.indexOf("!");
   const name = cut === -1 ? "supply" : raw.slice(0, cut);
   const id = cut === -1 ? raw : raw.slice(cut + 1);
-  return { view: name === "vacancy" ? "vacancy" : "supply", id: id || "national" };
+  return { view: VIEWS.has(name) ? name : "supply", id: id || "national" };
 }
 
+// Supply is the bare id, so every link ever published still opens where it did.
 const hashFor = (name, id) =>
-  "#" + (name === "vacancy" ? "vacancy!" : "") + encodeURIComponent(id);
+  "#" + (name === "supply" ? "" : name + "!") + encodeURIComponent(id);
 
 function routeFromHash() {
   const route = parseHash();
@@ -334,6 +504,31 @@ function wireBandSwitch() {
   });
 }
 
+
+/* The surplus view's own controls. The threshold switch is repeated on both of
+   its panels for the same reason the supply-mode switch is repeated on the
+   supply view's: a reader at the bottom of eighty-eight rows should not have
+   to scroll back to the top to change it. Both write the one variable. */
+const SURPLUS_THRESH_SWITCHES = ["surThreshSwitch", "surGridThreshSwitch"];
+function wireSurplusSwitches() {
+  for (const id of SURPLUS_THRESH_SWITCHES) {
+    document.getElementById(id).addEventListener("click", e => {
+      const btn = e.target.closest("button[data-thresh]");
+      if (!btn) return;
+      surplusThreshold = +btn.dataset.thresh;
+      inPlace(id, () => renderSurplus(current));
+    });
+  }
+  document.getElementById("surMapSwitch").addEventListener("click", e => {
+    const btn = e.target.closest("button[data-cat]");
+    if (!btn) return;
+    surplusCategory = btn.dataset.cat;
+    // Only the map changes, but its legend can gain and lose the hatch row,
+    // which moves the map itself.
+    inPlace("surMapSwitch", () => renderSurplusMap(current));
+  });
+}
+
 /* ---------- search ---------- */
 function wireSearch() {
   const input = document.getElementById("search");
@@ -400,8 +595,11 @@ function render(id) {
     btn.setAttribute("aria-pressed", String(btn.dataset.view === view)));
   document.getElementById("viewSupply").hidden = view !== "supply";
   document.getElementById("viewVacancy").hidden = view !== "vacancy";
+  document.getElementById("viewSurplus").hidden = view !== "surplus";
 
-  if (view === "vacancy") {
+  if (view === "surplus") {
+    renderSurplus(current);
+  } else if (view === "vacancy") {
     loadVacancies()
       .then(() => { if (view === "vacancy") renderVacancy(current); })
       .catch(err => {
@@ -1314,6 +1512,402 @@ function renderNotes(g) {
   ];
 
   document.getElementById("notes").innerHTML = notes.map(([tag, head, body]) =>
+    `<div class="note"><span class="note-tag ${tag}">${tag === "t-block" ? "Must read" : tag === "t-care" ? "Caution" : "Method"}</span>`
+    + `<p><b>${head}</b> ${body}</p></div>`).join("");
+}
+
+/* ---------- surplus view ---------- */
+
+function renderSurplus(g) {
+  renderSurplusTiles(g);
+  renderSurplusMap(g);
+  renderSurplusGrid(g);
+  renderSurplusNotes(g);
+}
+
+/* The surplus one geography holds. An SA4 answers for itself; Australia and a
+   state are summed from their own regions. Note this is not sa4Groups(), which
+   for an SA4 returns that region's PEERS -- right for the grid and the map,
+   which put a region among the others in its state, and quite wrong for a tile
+   that names the region itself. */
+function surplusOf(g) {
+  if (!g.has_places) return null;
+  if (g.level === "SA4") return surplusFor(g);
+  const kids = sa4Groups(g).flatMap(gr => gr.kids);
+  return kids.length ? surplusAgg(kids.map(k => surplusFor(k))) : null;
+}
+
+const threshLabel = () => SURPLUS_THRESHOLDS.find(t => t[0] === surplusThreshold)[1];
+
+function threshButtons() {
+  return SURPLUS_THRESHOLDS.map(([t, label]) =>
+    `<button type="button" data-thresh="${t}" aria-pressed="${t === surplusThreshold}">`
+    + `${label}</button>`).join("");
+}
+
+function renderSurplusTiles(g) {
+  const rec = surplusOf(g);
+  const cats = surplusCats();
+  const tiles = rec
+    ? [["Surplus dwellings", cell(rec.total.dwellings),
+        `past ${surplusThreshold.toFixed(2)} × recorded need`
+        + (rec.total.excess_places != null
+            ? ` · ${fmt(rec.total.excess_places)} places` : "")],
+       ...cats.map(c => {
+         const x = rec[c];
+         const lent = (c === POOL_OF[0] && substitution && x.lent)
+           ? `after covering ${fmt(x.lent)} Fully Accessible places` : null;
+         return [c, cell(x.dwellings),
+           lent || (x.excess_places != null ? `${fmt(x.excess_places)} places` : null)];
+       })]
+    : [["Surplus dwellings", '<span class="nil">&mdash;</span>',
+        "places are not published below SA4"]];
+
+  document.getElementById("surTiles").innerHTML = tiles.map(([k, v, note]) =>
+    `<div class="tile"><dt>${k}</dt><dd>${v}${note ? `<div class="tile-note">${note}</div>` : ""}</dd></div>`
+  ).join("");
+}
+
+/* One legend for the surplus scale, shared by the map and the grid, for the
+   same reason ratioLegend() is shared: two copies are only a way for the two
+   panels to drift apart. */
+function surplusLegend(showNil) {
+  const sw = c => '<span class="' + c + '"></span>';
+  return '<div class="mrow"><i></i><span class="msw">' + sw("s0")
+    + "</span><span>nothing spare at this threshold</span>"
+    + '<span class="mticks">0 dwellings</span></div>'
+    + '<div class="mrow"><i class="g-surp">▲</i><span class="msw">'
+    + sw("s1") + sw("s2") + "</span><span>some stock past the recorded need</span>"
+    + '<span class="mticks">1 – 10, then 10 – 25</span></div>'
+    + '<div class="mrow"><i class="g-surp">▲</i><span class="msw">'
+    + sw("s3") + sw("s4") + sw("s5")
+    + "</span><span>substantial stock past the recorded need</span>"
+    + '<span class="mticks">25 – 50, 50 – 100, then 100 and over</span></div>'
+    + (showNil
+        ? '<div class="mrow"><i></i><span class="msw">' + sw("m-nil")
+          + "</span><span>not calculable — a suppressed count on one side</span></div>"
+        : "");
+}
+
+/* Surplus dwellings for one region under the current category selection. */
+function surplusValue(rec, cat) {
+  if (!rec) return null;
+  const x = cat === SURPLUS_ALL ? rec.total : rec[cat];
+  return x ? x.dwellings : null;
+}
+
+function renderSurplusMap(g) {
+  const panel = document.getElementById("surMapPanel");
+  if (!GEO || !GEO.views || g.level === "SA3") { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const cats = surplusCats();
+  if (surplusCategory !== SURPLUS_ALL && cats.indexOf(surplusCategory) < 0) {
+    surplusCategory = SURPLUS_ALL;
+  }
+  const cat = surplusCategory;
+  const catLabel = cat === SURPLUS_ALL ? "All design categories" : cat;
+  const scope = g.level === "National" ? null : g.state;
+  const nat = GEO.views.national;
+  const inScope = id => !scope || (BY_ID.get(id) || {}).state === scope;
+
+  const recs = new Map();
+  const valueOf = id => {
+    if (!recs.has(id)) {
+      const r = BY_ID.get(id);
+      recs.set(id, r ? surplusFor(r) : null);
+    }
+    return surplusValue(recs.get(id), cat);
+  };
+
+  const region = (id, d) => {
+    if (!inScope(id)) return '<path class="m-out" d="' + d + '"/>';
+    const r = BY_ID.get(id);
+    const v = valueOf(id);
+    const rec = recs.get(id);
+    const detail = v === null
+      ? "not calculable — a suppressed count on one side"
+      : v === 0
+        ? "nothing past " + surplusThreshold.toFixed(2) + " × recorded need"
+        : fmt(v) + " surplus " + (v === 1 ? "dwelling" : "dwellings")
+          + " · " + fmt(Math.round((cat === SURPLUS_ALL ? rec.total : rec[cat]).excess_places))
+          + " places";
+    return '<a class="m-a' + (id === g.id ? " m-here" : "") + '"'
+      + ' href="' + hashFor("surplus", id) + '">'
+      + "<title>" + r.name + " — " + detail + " · " + catLabel + "</title>"
+      + '<path class="' + surplusClass(v) + '" d="' + d + '"/></a>';
+  };
+
+  const draw = (v, box, label) => {
+    const out = ['<svg viewBox="' + box + '" role="img" aria-label="' + label + '">'];
+    for (const id in v.regions) out.push(region(id, v.regions[id]));
+    out.push('<path class="m-mesh" d="' + v.mesh + '"/></svg>');
+    return out.join("");
+  };
+
+  const ids = Object.keys(nat.regions).filter(inScope);
+  const vals = ids.map(valueOf);
+  const holding = vals.filter(v => v !== null && v > 0).length;
+  const total = vals.reduce((t, v) => t + (v || 0), 0);
+  const where = scope || "Australia";
+  const label = catLabel + ", surplus dwellings by SA4 region. " + holding + " of the "
+    + ids.length + " regions in " + where + " hold stock past "
+    + surplusThreshold.toFixed(2) + " times the need recorded against them, "
+    + fmt(total) + " dwellings in all.";
+
+  document.getElementById("surMapMain").innerHTML = MAP_DEFS + draw(
+    nat, scope ? pathBox(scope, ids.map(i => nat.regions[i]))
+               : "0 0 " + nat.width + " " + nat.height, label);
+
+  const insets = scope
+    ? (STATE_INSET[scope] ? [STATE_INSET[scope]] : [])
+    : Object.keys(STATE_INSET).map(k => STATE_INSET[k]);
+  document.getElementById("surMapInsets").innerHTML = insets.map(name => {
+    const v = GEO.views["gccsa:" + name];
+    if (!v) return "";
+    return '<figure class="map-inset">'
+      + draw(v, "0 0 " + v.width + " " + v.height, name + ", " + catLabel)
+      + "<figcaption>" + name.replace("Greater ", "") + "</figcaption></figure>";
+  }).join("");
+
+  document.getElementById("surMapSwitch").innerHTML =
+    [[SURPLUS_ALL, "All categories"]].concat(cats.map(c =>
+      [c, c === POOL_OF[0] ? "HPS" : c === POOL_OF[1] ? "Fully Accessible" : c]))
+    .map(([key, label2]) =>
+      '<button type="button" data-cat="' + key + '" aria-pressed="'
+      + (key === cat) + '">' + label2 + "</button>").join("");
+  document.getElementById("surThreshSwitch").innerHTML = threshButtons();
+  document.getElementById("surModeSwitch").innerHTML = modeButtons();
+
+  document.getElementById("surMapSub").textContent =
+    fmt(total) + " surplus dwellings across " + holding + " of "
+    + (scope ? ids.length + " " + where + " regions" : "all " + ids.length + " SA4 regions")
+    + " · " + (substitution ? "allowing substitution" : "as enrolled")
+    + " · click a region to open it";
+
+  document.getElementById("surMapLegend").innerHTML =
+    surplusLegend(vals.some(v => v === null));
+
+  document.getElementById("surMapNote").innerHTML =
+    "<b>Colour shows how much stock is standing past the need recorded against it</b>, in "
+    + "dwellings &mdash; so unlike the ratio map, a blank region and a coloured one differ in "
+    + "size of surplus, not in how tight the market is. A blank region is not necessarily "
+    + "well supplied: it may be badly short. Dwellings are approximated by dividing surplus "
+    + "places by the region&rsquo;s own average places per dwelling in that category, and "
+    + "rounded down."
+    + (substitution
+        ? " High Physical Support is shown after covering the Fully Accessible shortfall in "
+          + "the same region: those places are subtracted from it, not counted twice."
+        : " Read as enrolled, so High Physical Support surplus here has not been asked to "
+          + "cover the Fully Accessible shortfall beside it.");
+}
+
+/* The same figures as the map, as counts rather than colour, every category at
+   once. The map answers "where"; this answers "how much, and in what". */
+function renderSurplusGrid(g) {
+  const panel = document.getElementById("surGridPanel");
+  const scope = g.level === "National" ? null : g.state;
+  const groups = sa4Groups(g);
+  if (!groups.length) { panel.hidden = true; return; }
+  panel.hidden = false;
+
+  const cats = surplusCats();
+  /* Rows are plain objects rather than geographies: a state row's surplus is
+     summed from its regions, not read from a subtotal, so it is not a figure
+     any geography in the file carries. */
+  const rowOf = (node, kids) => {
+    const parts = kids || [node];
+    return {
+      id: node.id, name: node.name, node,
+      sur: kids ? surplusAgg(kids.map(k => surplusFor(k))) : surplusFor(node),
+      places: parts.reduce((t, k) => t + (totalPlaces(k) || 0), 0),
+      dwellings: parts.reduce((t, k) => t + (k.totals.enrolled_dwellings || 0), 0),
+    };
+  };
+  const rows = groups.map(gr => ({
+    head: rowOf(gr.state, gr.kids),
+    kids: gr.kids.map(k => rowOf(k)),
+  }));
+
+  const cols = [
+    { key: "name", label: "Region" },
+    { key: "places", label: "Enrolled<br>places", get: r => r.places },
+    { key: "dwellings", label: "Enrolled<br>dwellings", get: r => r.dwellings },
+    ...cats.map(c => ({
+      key: c, surplus: true,
+      label: c === POOL_OF[0] ? abbrLabel("HPS", c)
+           : c === POOL_OF[1] ? abbrLabel("FA", c)
+           : c === "Improved Liveability" ? "Improved<br>Liveability" : c,
+      get: r => surplusValue(r.sur, c),
+      rec: r => r.sur && r.sur[c],
+    })),
+    { key: "total", surplus: true, total: true, label: "All<br>categories",
+      get: r => surplusValue(r.sur, SURPLUS_ALL), rec: r => r.sur && r.sur.total },
+  ];
+
+  if (surplusSort.key && !cols.some(c => c.key === surplusSort.key)) {
+    surplusSort = { key: null, dir: -1 };
+  }
+  const cmp = surplusSort.key
+    ? rowCompare(cols.find(c => c.key === surplusSort.key), surplusSort.dir)
+    : (a, b) => (surplusValue(b.sur, SURPLUS_ALL) || 0) - (surplusValue(a.sur, SURPLUS_ALL) || 0);
+  rows.forEach(r => r.kids.sort(cmp));
+  rows.sort((a, b) => cmp(a.head, b.head));
+
+  const regions = rows.reduce((n, r) => n + r.kids.length, 0);
+  document.getElementById("surGridTitle").textContent =
+    `Surplus dwellings in ${regions} SA4 regions by design category`
+    + (scope ? ` in ${rows[0].head.node.name}` : " across Australia");
+  const one = rows.length === 1;
+  document.getElementById("surGridSub").textContent =
+    `Stock past ${surplusThreshold.toFixed(2)} × the need recorded against it · `
+    + (substitution ? "allowing substitution · " : "as enrolled · ")
+    + (one ? "" : "click ▸ to open a state's regions, ")
+    + "click a column to sort, a row to open";
+
+  document.getElementById("surGridThreshSwitch").innerHTML = threshButtons();
+  // The total column is ruled off from the four it sums; headCells() is shared
+  // with the supply grid, so the class is added here rather than given to it.
+  document.getElementById("surGridHead").innerHTML = headCells(cols, surplusSort)
+    .replace('class="sortable" data-key="total"', 'class="sortable stot" data-key="total"');
+
+  const surplusCell = (col, r) => {
+    const v = col.get(r);
+    const x = col.rec(r);
+    if (v === null || v === undefined) {
+      return '<td class="hc m-nil' + (col.total ? " stot" : "")
+        + '" title="Not calculable — a count on one side is suppressed">'
+        + '<span class="sr-only">not calculable</span></td>';
+    }
+    const bits = [fmt(v) + " surplus " + (v === 1 ? "dwelling" : "dwellings")];
+    if (x.excess_places != null) bits.push(fmt(Math.round(x.excess_places)) + " places");
+    if (x.places_per_dwelling) bits.push(x.places_per_dwelling.toFixed(2) + " places per dwelling");
+    if (x.lent) bits.push("after covering " + fmt(Math.round(x.lent)) + " Fully Accessible places");
+    if (x.partial) bits.push(x.partial + " suppressed cell" + (x.partial === 1 ? "" : "s") + " left out");
+    return '<td class="hc ' + surplusClass(v) + (col.total ? " stot" : "")
+      + '" title="' + bits.join(" · ") + '">' + fmt(v)
+      + (x.partial ? '<span class="sr-only"> — partial, suppressed cells left out</span>' : "")
+      + "</td>";
+  };
+
+  const dataCells = r => cols.slice(1).map(c =>
+    c.surplus ? surplusCell(c, r) : `<td>${cell(c.get(r))}</td>`).join("");
+
+  const body = document.getElementById("surGridBody");
+  let anyOpen = false;
+  body.innerHTML = rows.map(gr => {
+    const id = encodeURIComponent(gr.head.id);
+    const open = one || surplusExpanded.has(gr.head.id);
+    if (open) anyOpen = true;
+    const head =
+      `<tr class="grouprow linked" data-id="${id}">`
+      + `<td class="region">`
+      + (one ? "" : `<button type="button" class="gtoggle" data-state="${id}"`
+        + ` aria-expanded="${open}"><span class="sr-only">${open ? "Collapse" : "Expand"} `
+        + `${gr.head.name}</span><span aria-hidden="true">${open ? "▾" : "▸"}</span></button>`)
+      + `<a href="${hashFor("surplus", gr.head.id)}">${gr.head.name}</a>`
+      + `<span class="gcount">${gr.kids.length} regions</span></td>`
+      + dataCells(gr.head) + "</tr>";
+    if (!open) return head;
+    return head + gr.kids.map(r =>
+      `<tr class="linked${r.id === g.id ? " here" : ""}" data-id="${encodeURIComponent(r.id)}">`
+      + `<td class="region sa4"><a href="${hashFor("surplus", r.id)}">${r.name}</a></td>`
+      + dataCells(r) + "</tr>").join("");
+  }).join("");
+
+  document.getElementById("surGridTable").classList.toggle("tight", !anyOpen);
+  document.getElementById("surGridLegend").innerHTML =
+    surplusLegend(!!body.querySelector("td.m-nil"));
+
+  document.getElementById("surGridNote").innerHTML =
+    "<b>State rows are summed from their regions, not read from the NDIA&rsquo;s subtotals.</b> "
+    + "Surplus is regional: a state subtotal would net a shortfall in one region against a "
+    + "surplus in another and report the difference, as though nowhere were short. Every other "
+    + "panel on this site uses the published subtotals, so these rows will not match them. "
+    + "Dwellings are <b>approximated</b> &mdash; surplus places divided by the region&rsquo;s own "
+    + "average places per dwelling in that category, rounded down &mdash; because the supplement "
+    + "publishes places against participants and dwellings against nothing. "
+    + "<b>HPS</b> is High Physical Support and <b>FA</b> is Fully Accessible."
+    + (substitution
+        ? " Allowing substitution, HPS answers for the Fully Accessible shortfall in its own "
+          + "region first, and only what is left over is counted here; the places it lends are "
+          + "subtracted from it, so no place is spare and in use at once. Nothing substitutes "
+          + "for Improved Liveability or Robust, and Fully Accessible cannot substitute upwards, "
+          + "so those three columns are unchanged by the toggle."
+        : " Read as enrolled, every category answers for its own need alone.");
+
+  const again = () => {
+    const wrap = document.getElementById("surGridWrap");
+    const top = wrap.scrollTop, left = wrap.scrollLeft;
+    renderSurplusGrid(g);
+    wrap.scrollTop = top;
+    wrap.scrollLeft = left;
+  };
+
+  document.getElementById("surGridHead").onclick = e => {
+    const th = e.target.closest("th[data-key]");
+    if (!th) return;
+    const key = th.dataset.key;
+    surplusSort = (surplusSort.key === key) ? { key, dir: -surplusSort.dir }
+                                            : { key, dir: key === "name" ? 1 : -1 };
+    again();
+  };
+  document.getElementById("surGridBody").onclick = e => {
+    const tog = e.target.closest("button.gtoggle");
+    if (tog) {
+      const sid = decodeURIComponent(tog.dataset.state);
+      if (surplusExpanded.has(sid)) surplusExpanded.delete(sid);
+      else surplusExpanded.add(sid);
+      again();
+      return;
+    }
+    if (e.target.closest("a")) return;
+    const tr = e.target.closest("tr[data-id]");
+    if (tr) go(decodeURIComponent(tr.dataset.id));
+  };
+}
+
+function renderSurplusNotes(g) {
+  const notes = [
+    ["t-block", "A surplus dwelling here is not an empty dwelling.",
+     "Enrolled places include places that are <b>already occupied</b>. What this panel measures is a "
+     + "mismatch of <b>mix</b> &mdash; stock enrolled in a category beyond the need recorded against "
+     + "that category in that region &mdash; not vacancy. A participant assessed for one category but "
+     + "living in another appears on both sides of it. The <b>Vacancy</b> view is the one that reads "
+     + "listed availability."],
+    ["t-info", "Dwellings are approximated from places.",
+     "The supplement publishes places against participants and dwellings against nothing, so surplus "
+     + "is calculated in places and converted using the region&rsquo;s own average places per dwelling "
+     + "in that category &mdash; its enrolled places over its enrolled dwellings &mdash; then rounded "
+     + "<b>down</b>. A region whose surplus sits in its larger dwellings will be overstated by this and "
+     + "one whose surplus sits in its singles understated. Hover a cell for the average used."],
+    ["t-care", `The threshold is a tolerance, not a target.`,
+     `Stock is only counted once a region is past <b>${surplusThreshold.toFixed(2)} ×</b> the need `
+     + "recorded against it, so a region carrying a little headroom is not reported as holding "
+     + "surplus. Neither cut is a policy position on how much headroom a market should carry: they "
+     + "are two readings, offered so the finding can be tested against the weaker one."],
+    ...(substitution ? [["t-info", "High Physical Support is counted after it covers Fully Accessible.",
+     "HPS is defined cumulatively on top of Fully Accessible, so HPS stock can house someone assessed "
+     + "for FA. Allowing substitution, each region&rsquo;s HPS stock is made to cover its own FA "
+     + "shortfall first and those places are <b>subtracted</b> from it &mdash; the surplus shown is what "
+     + "survives that. FA cannot substitute upwards and nothing substitutes for Improved Liveability or "
+     + "Robust. Every dwelling is still <b>enrolled</b> in one category, and SDA payment follows the "
+     + "participant&rsquo;s funded category, so this is physical suitability rather than what a provider "
+     + "would be paid."]] : [["t-care", "Read as enrolled, nothing is allowed to substitute.",
+     "Each category answers for its own need alone, so High Physical Support surplus here has not been "
+     + "asked to cover the Fully Accessible shortfall standing beside it. Switch to <b>allowing "
+     + "substitution</b> for the reading that has."]]),
+    ["t-care", "The pipeline is excluded.",
+     "This is the standing enrolled stock only. Pipeline dwellings &mdash; which the NDIA states may "
+     + "never be enrolled, or may be enrolled in a different category &mdash; would add to every surplus "
+     + "shown here, and add most where the surplus is already largest."],
+    ["t-care", "Small counts are suppressed, not zero.",
+     "Where the NDIA publishes a count below its threshold, no surplus can be formed and the cell reads "
+     + "&mdash; rather than 0. Those cells are left out of the totals beside them rather than counted as "
+     + "nothing, and a total missing one says so when hovered."],
+  ];
+
+  document.getElementById("surNotes").innerHTML = notes.map(([tag, head, body]) =>
     `<div class="note"><span class="note-tag ${tag}">${tag === "t-block" ? "Must read" : tag === "t-care" ? "Caution" : "Method"}</span>`
     + `<p><b>${head}</b> ${body}</p></div>`).join("");
 }

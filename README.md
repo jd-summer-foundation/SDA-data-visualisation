@@ -253,10 +253,96 @@ the category rather than the regions that is thin.
 
 Deep links work: `#national`, `#state:VIC`, `#sa4:ACT - Australian Capital Territory`.
 
+## The surplus view
+
+A ratio says whether a region is long or short. It cannot say by how much,
+because it has no units: 4.22 places per participant in Geelong High Physical
+Support is the same figure whether it stands for four spare places or four
+hundred. The **Surplus** view converts the long end of that measure into the
+unit the question is actually asked in — dwellings standing past the need
+recorded against them — as a map and a region grid, both reading the same
+figures.
+
+Three choices define it, and each understates rather than overstates.
+
+**A tolerance, not a target.** Stock is only counted once a region is past
+`threshold × need`, so a region carrying a place or two of headroom is not
+reported as holding surplus. Two thresholds are offered — **1.05** and **1.20**
+— and 1.05 is the default because it is the weaker claim: anything it does not
+clear is not worth arguing about. Neither cut is a position on how much headroom
+a market should carry; they exist so a finding can be tested against the softer
+reading.
+
+**Substitution is directional, and the donor is debited.** High Physical Support
+is defined cumulatively on top of Fully Accessible, so HPS stock can house
+someone assessed for FA. Allowing substitution, each region's HPS stock is made
+to cover its own FA shortfall first, and those places are *subtracted* from it:
+
+```
+fa_short   = max(0, T × FA_need − FA_places)
+HPS excess = max(0, HPS_places − T × HPS_need − fa_short)
+FA excess  = max(0, FA_places  − T × FA_need)
+```
+
+This is not the waterfall removed from the supply view. That one credited Fully
+Accessible without debiting High Physical Support, so the same places backed two
+comfortable-looking ratios at once. Here a place cannot be spare and in use
+simultaneously. Across the pooled pair the total is identical to the supply
+view's pooling — the waterfall only decides which category it is booked against,
+which is the whole point of the panel: *how much HPS is still spare after
+covering every FA shortfall in the same region?* Fully Accessible cannot
+substitute upwards, and nothing substitutes for Improved Liveability or Robust,
+so those three columns do not move with the toggle.
+
+**Dwellings are approximated.** The supplement publishes places against
+participants and dwellings against nothing, so the only bridge between them is
+the region's own average — its enrolled places over its enrolled dwellings, in
+that category. Surplus places are divided by that average and rounded **down**.
+A region whose surplus sits in its larger dwellings is overstated by this and
+one whose surplus sits in its singles understated; hovering a cell shows the
+average used. Where a region records places but no dwellings in a category, the
+average falls back to its state and then to Australia.
+
+At 1.05, allowing substitution, that gives **3,671 surplus dwellings** across
+the 88 regions: 2,515 High Physical Support, 904 Robust, 142 Improved
+Liveability and 110 Fully Accessible. At 1.20 it is 2,951. Read as enrolled —
+HPS not asked to cover anything — the 1.05 figure is 5,317. The shape of the
+finding does not depend on the cut.
+
+Two things separate this view from the rest of the site.
+
+State and national rows are **summed from their SA4 regions**, not read from the
+NDIA's published subtotals as every other panel does. Surplus is regional by
+definition: a subtotal nets a shortfall in one region against a surplus in
+another and reports the difference, as though nowhere were short. Those rows
+therefore will not reconcile with the same rows elsewhere on the site, and the
+grid says so beneath itself.
+
+The map's scale is **sequential rather than diverging**. Zero is the reference
+and everything else runs one way, so a ramp is the honest shape where the ratio
+map's red/green/blue would imply the far end is a second kind of problem. Zero
+is its own class and reads as near-blank, which is what makes the regions
+holding stock findable without reading a figure — and it is why the map is
+deliberately nothing like the ratio map in colour: the two must not be
+mistakeable for one another. It defaults to all four categories combined and
+can be focused on any one of them.
+
+A blank region on this map is not a well-supplied region. It may be badly short;
+the surplus map cannot say, and the ratio map is where that question is asked.
+Nor is a surplus dwelling an empty one — enrolled places include places already
+occupied. What this measures is a mismatch of **mix**, stock enrolled in a
+category beyond the need recorded against that category in that region. The
+Vacancy view is the one that reads listed availability. The pipeline is excluded
+throughout: it would add to every surplus shown, and add most where the surplus
+is already largest.
+
+Deep links carry the view: `#surplus!sa4:VIC - Geelong`.
+
 ## The vacancy view
 
-A toggle in the masthead switches the same page between two views of the same
-region. **Supply & demand** is the profile above. **Vacancy** answers a question
+A switch in the masthead moves the same page between three views of the same
+region. **Supply & demand** is the profile above. **Surplus** is the panel just
+described. **Vacancy** answers a question
 Supplement P cannot: what is actually sitting empty right now, and is it whole
 dwellings or single rooms?
 

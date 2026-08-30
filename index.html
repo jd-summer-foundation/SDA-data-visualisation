@@ -22,6 +22,7 @@
     <div class="viewswitch" id="viewSwitch" role="group" aria-label="Choose a view">
       <button type="button" data-view="supply" aria-pressed="true">Supply &amp; demand</button>
       <button type="button" data-view="vacancy" aria-pressed="false">Vacancy</button>
+      <button type="button" data-view="surplus" aria-pressed="false">Surplus</button>
     </div>
     <div class="picker">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true" style="color:var(--ink-3)">
@@ -295,6 +296,56 @@
       </section>
 
     </div><!-- /#viewVacancy -->
+
+    <div id="viewSurplus" hidden>
+
+    <dl class="tiles" id="surTiles"></dl>
+
+    <section class="panel" id="surMapPanel" hidden>
+      <div class="panel-head">
+        <div>
+          <div class="panel-title">Surplus dwellings by SA4 region</div>
+          <div class="panel-sub" id="surMapSub"></div>
+        </div>
+        <div class="surplus-controls">
+          <div class="levelswitch" id="surMapSwitch" role="group" aria-label="Design category"></div>
+          <div class="levelswitch" id="surThreshSwitch" role="group" aria-label="Surplus threshold"></div>
+          <div class="levelswitch" id="surModeSwitch" role="group" aria-label="How supply is counted"></div>
+        </div>
+      </div>
+      <div class="map-legend" id="surMapLegend"></div>
+      <div class="map-wrap" id="surMapMain"></div>
+      <div class="map-insets" id="surMapInsets"></div>
+      <p class="map-note" id="surMapNote"></p>
+    </section>
+
+    <section class="panel" id="surGridPanel">
+      <div class="panel-head">
+        <div>
+          <div class="panel-title" id="surGridTitle"></div>
+          <div class="panel-sub" id="surGridSub"></div>
+        </div>
+        <div class="levelswitch" id="surGridThreshSwitch" role="group" aria-label="Surplus threshold"></div>
+      </div>
+      <div class="map-legend" id="surGridLegend"></div>
+      <div class="tablewrap heatwrap" id="surGridWrap" tabindex="0" role="region" aria-label="Surplus dwellings by SA4 region and design category">
+        <table id="surGridTable" class="heatgrid">
+          <thead><tr id="surGridHead"></tr></thead>
+          <tbody id="surGridBody"></tbody>
+        </table>
+      </div>
+      <p class="map-note wide" id="surGridNote"></p>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><div>
+        <div class="panel-title">How to read these numbers</div>
+        <div class="panel-sub">What a surplus dwelling here is, and is not</div>
+      </div></div>
+      <div class="notes" id="surNotes"></div>
+    </section>
+
+    </div><!-- /#viewSurplus -->
 
     <footer>
       <p id="footNote"></p>
