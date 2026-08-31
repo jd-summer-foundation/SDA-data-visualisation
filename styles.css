@@ -268,6 +268,17 @@ tbody tr.linked:hover td.region a { color: var(--accent); text-decoration: under
 @media (min-width: 860px) { .split { grid-template-columns: 1fr 1fr; } }
 .minibars { display: flex; flex-direction: column; gap: 10px; }
 .minirow { display: grid; grid-template-columns: minmax(88px, auto) minmax(0, 1fr) 46px; align-items: center; gap: 10px; }
+/* Each row is its own grid, so its label column is sized by its own label and
+   the bars start at a different x on every row -- readable enough when the
+   labels are of a length, ragged once they are not. Sharing one set of columns
+   across the chart lines the bars up and gives every row the same baseline to
+   be judged against, which is the whole job of a bar chart. Guarded, because
+   without subgrid the rows would collapse to a single column: the ragged
+   fallback is the one this shipped with. */
+@supports (grid-template-columns: subgrid) {
+  .minibars { display: grid; grid-template-columns: minmax(88px, auto) minmax(0, 1fr) 46px; row-gap: 10px; }
+  .minirow { grid-column: 1 / -1; grid-template-columns: subgrid; }
+}
 .minirow .lbl { font-size: 13px; color: var(--ink-2); }
 .minirow .val { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; }
 .minibar { display: block; height: 13px; border-radius: 0 3px 3px 0; background: var(--accent); min-width: 2px; }
@@ -591,5 +602,8 @@ footer a { color: var(--accent); }
 .rank { display: inline-block; min-width: 2.2em; margin-right: 8px;
         font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
         text-align: right; }
-.rstate { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
-          color: var(--ink-3); margin-left: 8px; }
+/* The state a row belongs to, carried inline where the list spans states and
+   the grouping no longer says so: the ranked region grid, and the suburb chart
+   read nationally. */
+.state-tag { font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em;
+             color: var(--ink-3); margin-left: 8px; }

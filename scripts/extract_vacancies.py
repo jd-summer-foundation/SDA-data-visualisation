@@ -307,11 +307,16 @@ def build_profile(listings, geography, categories, bands):
         if rows:
             price_bands.append({"label": label, **tally(rows)})
 
+    # Keyed on suburb AND state: nine suburb names in this export appear in more
+    # than one state -- Belmont in three -- and merging them would report one
+    # bar for two places on opposite sides of the country. The state is carried
+    # through so the national ranking can say where each suburb is.
     suburbs = defaultdict(list)
     for listing in listings if detailed else []:
-        suburbs[listing["suburb"]].append(listing)
+        suburbs[(listing["suburb"], listing["state"])].append(listing)
     top_suburbs = sorted(
-        ({"suburb": name, **tally(rows)} for name, rows in suburbs.items()),
+        ({"suburb": name, "state": state, **tally(rows)}
+         for (name, state), rows in suburbs.items()),
         key=lambda row: -row["vacant_places"])[:15]
 
     enrolled_places = (sum(cell.get("enrolled_places") or 0 for cell in cats.values())
@@ -356,6 +361,9 @@ def assign_regions(listings, sda):
     unresolved_sa3 = 0
     for listing in listings:
         sa4 = sa4_by_name[listing["sa4"]]
+        # Stamped from the SA4 for the reason in this function's docstring, not
+        # from the address the listing carries.
+        listing["state"] = sa4["state"]
         grouped["national"].append(listing)
         grouped[f"state:{sa4['state']}"].append(listing)
         grouped[sa4["id"]].append(listing)

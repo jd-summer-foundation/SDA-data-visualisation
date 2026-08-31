@@ -384,7 +384,7 @@ function rankCell(i, href, name, state, showState) {
   return `<td class="region ranked">`
     + `<span class="rank" aria-hidden="true">${i + 1}</span>`
     + `<a href="${href}">${name}</a>`
-    + (showState && state ? `<span class="rstate">${state}</span>` : "")
+    + (showState && state ? `<span class="state-tag">${state}</span>` : "")
     + `</td>`;
 }
 
@@ -2480,10 +2480,19 @@ function renderVacSuburbs(p) {
   if (!p.top_suburbs.length) { panel.hidden = true; return; }
   panel.hidden = false;
 
+  /* Read nationally the fifteen bars are suburbs from anywhere in the country,
+     and a suburb name alone does not say where it is -- Beveridge and Winter
+     Valley place nobody who does not already know Melbourne. Scoped to a state
+     every row would carry the same tag, so it is only worth the ink where the
+     list actually spans states. */
+  const spansStates = new Set(p.top_suburbs.map(r => r.state)).size > 1;
+  const where = r => r.state ? `${r.suburb}, ${r.state}` : r.suburb;
+
   miniBars("vacSuburbBars", p.top_suburbs, {
     value: r => num(r, "vacant_places"),
-    label: r => r.suburb,
-    tip: r => `${r.suburb} — ${fmt(num(r, "vacant_places"))} vacant places across `
+    label: r => r.suburb
+      + (spansStates && r.state ? `<span class="state-tag">${r.state}</span>` : ""),
+    tip: r => `${where(r)} — ${fmt(num(r, "vacant_places"))} vacant places across `
       + `${fmt(num(r, "listings"))} listing${num(r, "listings") === 1 ? "" : "s"}`,
     note: r => fmt(num(r, "vacant_places")),
   });
