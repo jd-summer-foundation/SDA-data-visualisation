@@ -3,3 +3,9 @@ __pycache__/
 *.pyc
 node_modules/
 data/boundaries/
+
+# Longitudinal vacancy store. GitHub Pages serves the repository root, so
+# anything committed here is published; the snapshots carry provider names and
+# addresses that the reduced data/ CSVs deliberately omit. Raw exports must
+# never be committed at all — they carry provider email and phone.
+store/

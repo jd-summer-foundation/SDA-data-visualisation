@@ -556,6 +556,55 @@ and `Website 1`–`5`; the concordance keeps five of its 41. Rebuilding from the
 reduced files reproduces `data/vacancies.json` byte for byte, and no provider
 contact detail exists anywhere in the repository. See `data/README.md`.
 
+## Vacancy history
+
+A single export is a stock. It says 3,753 places are vacant on 24 August 2026
+and nothing about how long any of them has been. `scripts/vacancy_history.py`
+turns repeated exports into a flow — how long each vacancy lasts, and what
+predicts a long one.
+
+```sh
+python3 scripts/vacancy_history.py ingest <export> --date 2026-08-24
+python3 scripts/vacancy_history.py build
+```
+
+`ingest` normalises one export into `store/snapshots/<date>.csv`, dropping the
+contact columns on the way in. `build` recomputes `store/dwellings.csv` and
+`store/spells.csv` from every snapshot held. Snapshots are append-only and each
+derives from its source export alone, so improving the linkage improves the
+past as well as the future — nothing is baked in at ingest.
+
+**`store/` is gitignored, and must stay that way.** The repository root is the
+published site, so a committed snapshot would publish the provider names and
+addresses that the reduced `data/` CSVs deliberately omit.
+
+**Identity is the hard part.** The Housing Hub property URL ends in a
+per-listing token, carried by 86–88% of rows, and that token is the natural
+longitudinal unit. It is not durable: a provider who unpublishes and republishes
+a dwelling gets a new one, which reads as a vacancy ending and an unrelated one
+beginning. `link_relisting` repairs the obvious cases by pairing departures with
+arrivals inside the same provider-location-type cluster, count-limited so a
+cluster that lost two and gained five yields two continuations and three
+arrivals. Rows with no token are pooled to cluster level, where individual
+dwellings cannot be told apart but the combined vacant-place count still moves.
+
+How much this matters, on the two snapshots held: the raw token gives a 91-day
+exit rate of 24.1%, the conservative repair 21.0%, and matching purely on
+provider and address 16.7% — an implied median spell of 7.5, 8.8 or 11.3 months
+respectively. The spread is an artefact of identifiers, not a property of the
+market, and it cannot be resolved from outside the platform. Housing Hub's
+internal listing id would collapse it to one number.
+
+**Two snapshots support almost nothing yet, by design.** Every spell in the
+store is censored: 2,139 began before the window opened and 2,205 were still
+open when it closed, leaving zero with both ends observed. That is the correct
+result, not a bug. Duration estimates from a prevalent cohort over-sample long
+spells, so the figures above are upper bounds; unbiased estimates need *incident*
+spells — vacancies that both begin and end inside the window — which accrue only
+with more snapshots. The `left_censored`, `right_censored` and `complete` flags
+on every spell exist so that analysis can respect this rather than average over
+it.
+
 ## Publishing on GitHub Pages
 
 The site lives at the repository root and needs no build step, so Pages serves
