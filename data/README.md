@@ -45,7 +45,20 @@ with open(dst, "w", newline="", encoding="utf-8") as fh:
 Reducing changes nothing downstream: rebuilding from the cut files reproduces
 `vacancies.json` byte for byte.
 
-The NDIA Supplement P workbook is not kept here; it is published quarterly and
+## `supplements/`
+
+Past quarterly editions of NDIA Supplement P, committed so the longitudinal
+analysis can be rebuilt end to end — they are public NDIA publications, so
+serving them from the site is no concern. One file per quarter, named as the
+NDIA publishes them (`Supplement_P_SDA_<financial year>_Q<n>`).
+
+Despite the `.xlsb` extension these are **Strict OOXML** workbooks — the same
+XML format as the current edition, not Excel Binary — so the extractor's
+namespace rewrite applies. Their table layouts are not identical: the 2022-23 Q4
+edition carries 25 worksheets against 21 from 2023-24 Q1 on, so each edition's
+tables need mapping rather than assuming the current `SA4_SHEETS`.
+
+The June 2026 edition that `sda.json` is built from is not among them yet; it is
 passed to `scripts/extract_sda.py` directly.
 
 ## `List_SDA_20260824.csv`
