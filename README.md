@@ -544,6 +544,7 @@ python3 scripts/extract_panel.py            # data/supplements -> data/panel
 | `figure_p1.csv` | Figure P.1's national history as each edition states it, so revisions can be seen |
 | `validation.json` | per-edition table map, every check below, detected breaks |
 | `VALIDATION.md` | the same, written out; generated, not edited |
+| `analysis.json`, `ANALYSIS.md` | the longitudinal analysis, from `scripts/analyse_panel.py` |
 
 It covers National, State and SA4. SA3 is left out because no places can be
 formed there. Two further levels hold participants the NDIA could not place:
@@ -583,6 +584,21 @@ the WA and national rows so they still reconcile.
 Figure P.1 adds national context the SA4 tables lack: participants with SDA in
 use and eligible-not-using back to September 2022, and enrolled dwellings and
 SIL figures back to June 2020.
+
+### The analysis
+
+```sh
+python3 scripts/analyse_panel.py            # data/panel/panel.csv -> ANALYSIS.md
+```
+
+`data/panel/ANALYSIS.md` answers the four longitudinal questions from the panel:
+is the surplus lease-up or lasting, how much of the pipeline converts, where the
+waiting group is shrinking, and which regions and categories are persistently
+short or long. It says, for each, what a region-level panel can and cannot
+support. Like `VALIDATION.md` it is generated. Every figure and every
+directional claim in it is computed, and `analysis.json` holds the numbers
+behind it. The regressions are solved directly in the standard library, with
+standard errors clustered by region.
 
 ### What is checked, every quarter
 

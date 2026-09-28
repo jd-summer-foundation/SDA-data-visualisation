@@ -225,3 +225,49 @@ class PanelShape(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class AnalysisIsCurrent(unittest.TestCase):
+    """analysis.json and ANALYSIS.md are written from panel.csv alone."""
+
+    def test_analysis_rebuilds_byte_for_byte(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            subprocess.run([sys.executable, "scripts/analyse_panel.py", "data/panel", "-o", tmp],
+                           cwd=ROOT, check=True, capture_output=True, text=True)
+            for name in ("analysis.json", "ANALYSIS.md"):
+                self.assertEqual((Path(tmp) / name).read_bytes(), (PANEL / name).read_bytes(),
+                                 f"data/panel/{name} is stale: re-run analyse_panel.py")
+
+    def test_reproduces_the_single_quarter_mismatch(self):
+        # The June 2026 figures the single-quarter analysis reported.
+        a = json.loads((PANEL / "analysis.json").read_text())
+        last = a["q3"]["mismatch"][-1]
+        self.assertEqual(last["quarter"], "2026-06-30")
+        self.assertEqual((last["regions_short"], last["regions"]), (31, 86))
+        self.assertEqual(last["waiting_beyond_local_spare"], 1050)
+        self.assertEqual(last["spare_beyond_local_waiting"], 6497)
+
+    def test_estimates_are_in_range(self):
+        a = json.loads((PANEL / "analysis.json").read_text())
+        for model in a["q1"]["models"].values():
+            self.assertTrue(0 <= model["sum"] <= 1, model)
+        self.assertLess(a["q2"]["same_category"]["own"], 1)
+        rb = a["q2"]["removal_at_break"]["Total"]
+        self.assertLessEqual(rb["lower_bound"], rb["central"])
+
+
+class RegressionHelpers(unittest.TestCase):
+
+    def test_ols_recovers_a_known_line(self):
+        import analyse_panel
+        x = [[1.0, float(i)] for i in range(10)]
+        y = [2.0 + 3.0 * i for i in range(10)]
+        beta, _ = analyse_panel.ols(x, y, list(range(10)))
+        self.assertAlmostEqual(beta[0], 2.0)
+        self.assertAlmostEqual(beta[1], 3.0)
+
+    def test_classify_separates_drift_from_noise(self):
+        import analyse_panel
+        self.assertEqual(analyse_panel.classify([0, 0, 1, 2, 2]), "drifting up")
+        self.assertEqual(analyse_panel.classify([2, 1, 2, 1]), "reverses")
+        self.assertEqual(analyse_panel.classify([0, 0, 0]), "short")

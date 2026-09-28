@@ -1,0 +1,2247 @@
+{
+ "q1": {
+  "window": [
+   "2023-12-31",
+   "2026-06-30"
+  ],
+  "national": {
+   "places_added": 9503.0,
+   "in_use_added": 2547.0,
+   "absorbed_share": 0.268,
+   "spare": [
+    7481.0,
+    14437.0
+   ],
+   "spare_share_last": 0.464,
+   "waiting_last": 9014.0,
+   "absorbed_per_quarter_last_year": 366.75,
+   "quarters_to_fill": 39.4,
+   "pipeline_places_last": 11493.0
+  },
+  "models": {
+   "pooled": {
+    "lags": [
+     0.088,
+     0.081,
+     0.06,
+     0.014,
+     -0.003
+    ],
+    "sum": 0.239,
+    "se": 0.023,
+    "observations": 704,
+    "regions": 88
+   },
+   "region_effects": {
+    "lags": [
+     0.062,
+     0.073,
+     0.05,
+     0.01
+    ],
+    "sum": 0.194,
+    "se": 0.048,
+    "observations": 792,
+    "regions": 88
+   },
+   "longest_window": {
+    "lags": [
+     0.074,
+     0.09,
+     0.033,
+     0.009,
+     -0.015,
+     0.043,
+     0.007,
+     0.002
+    ],
+    "sum": 0.243,
+    "se": 0.017,
+    "observations": 440,
+    "regions": 88
+   },
+   "small_markets": {
+    "lags": [
+     0.104,
+     0.106,
+     0.046,
+     0.046
+    ],
+    "sum": 0.302,
+    "se": 0.041,
+    "observations": 261,
+    "regions": 29
+   },
+   "large_markets": {
+    "lags": [
+     0.07,
+     0.069,
+     0.065,
+     0.014
+    ],
+    "sum": 0.218,
+    "se": 0.026,
+    "observations": 270,
+    "regions": 30
+   },
+   "waiting_exceeded_spare": {
+    "lags": [
+     0.089,
+     0.085,
+     0.073,
+     0.029
+    ],
+    "sum": 0.275,
+    "se": 0.016,
+    "observations": 576,
+    "regions": 64
+   },
+   "spare_exceeded_waiting": {
+    "lags": [
+     0.066,
+     0.087,
+     0.052,
+     0.01
+    ],
+    "sum": 0.215,
+    "se": 0.024,
+    "observations": 216,
+    "regions": 24
+   }
+  },
+  "quiet_regions": {
+   "region_years": 82,
+   "regions": 34,
+   "spare_fell": 41,
+   "spare_rose": 37,
+   "share_absorbed_in_a_year": 0.004
+  },
+  "bursts": {
+   "bursts": 30,
+   "regions": 16,
+   "in_use_growth_per_burst_place": 1.027,
+   "typical_growth_per_burst_place": 0.928
+  },
+  "regions_summary": {
+   "regions_with_20_spare": 82,
+   "spare_growing": 66,
+   "spare_shrinking": 12,
+   "no_absorption": 10,
+   "median_quarters_to_fill": 38.1,
+   "fill_within_8_quarters": 0,
+   "fill_beyond_20_quarters": 58,
+   "waiting_below_spare": 55
+  },
+  "largest_spare": [
+   {
+    "geography": "sa4:VIC - Melbourne - West",
+    "places": 1663.0,
+    "spare": 1039.0,
+    "spare_share": 0.625,
+    "waiting": 187.0,
+    "new_places_per_quarter": 73.75,
+    "absorbed_per_quarter": 17.0,
+    "spare_change_per_quarter": 56.75,
+    "pipeline_places": 943.0,
+    "newbuild_share": 0.799,
+    "quarters_to_fill": 61.1
+   },
+   {
+    "geography": "sa4:SA - Adelaide - North",
+    "places": 1585.0,
+    "spare": 978.0,
+    "spare_share": 0.617,
+    "waiting": 272.0,
+    "new_places_per_quarter": 73.25,
+    "absorbed_per_quarter": 18.5,
+    "spare_change_per_quarter": 54.75,
+    "pipeline_places": 662.0,
+    "newbuild_share": 0.546,
+    "quarters_to_fill": 52.9
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - South East",
+    "places": 1345.0,
+    "spare": 663.0,
+    "spare_share": 0.493,
+    "waiting": 258.0,
+    "new_places_per_quarter": 78.0,
+    "absorbed_per_quarter": 17.75,
+    "spare_change_per_quarter": 60.25,
+    "pipeline_places": 667.0,
+    "newbuild_share": 0.642,
+    "quarters_to_fill": 37.4
+   },
+   {
+    "geography": "sa4:SA - Adelaide - South",
+    "places": 1022.0,
+    "spare": 554.0,
+    "spare_share": 0.542,
+    "waiting": 236.0,
+    "new_places_per_quarter": 28.25,
+    "absorbed_per_quarter": 11.75,
+    "spare_change_per_quarter": 16.5,
+    "pipeline_places": 392.0,
+    "newbuild_share": 0.409,
+    "quarters_to_fill": 47.1
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - North East",
+    "places": 1069.0,
+    "spare": 456.0,
+    "spare_share": 0.427,
+    "waiting": 165.0,
+    "new_places_per_quarter": 33.0,
+    "absorbed_per_quarter": 7.5,
+    "spare_change_per_quarter": 25.5,
+    "pipeline_places": 336.0,
+    "newbuild_share": 0.458,
+    "quarters_to_fill": 60.8
+   },
+   {
+    "geography": "sa4:WA - Perth - South East",
+    "places": 701.0,
+    "spare": 450.0,
+    "spare_share": 0.642,
+    "waiting": 231.0,
+    "new_places_per_quarter": 63.0,
+    "absorbed_per_quarter": 12.0,
+    "spare_change_per_quarter": 51.0,
+    "pipeline_places": 325.0,
+    "newbuild_share": 0.98,
+    "quarters_to_fill": 37.5
+   },
+   {
+    "geography": "sa4:QLD - Ipswich",
+    "places": 639.0,
+    "spare": 362.0,
+    "spare_share": 0.567,
+    "waiting": 211.0,
+    "new_places_per_quarter": 7.25,
+    "absorbed_per_quarter": 7.25,
+    "spare_change_per_quarter": 0.0,
+    "pipeline_places": 153.0,
+    "newbuild_share": 0.859,
+    "quarters_to_fill": 49.9
+   },
+   {
+    "geography": "sa4:SA - Adelaide - West",
+    "places": 556.0,
+    "spare": 357.0,
+    "spare_share": 0.642,
+    "waiting": 116.0,
+    "new_places_per_quarter": 20.5,
+    "absorbed_per_quarter": 5.25,
+    "spare_change_per_quarter": 15.25,
+    "pipeline_places": 215.0,
+    "newbuild_share": 0.43,
+    "quarters_to_fill": 68.0
+   },
+   {
+    "geography": "sa4:QLD - Logan - Beaudesert",
+    "places": 600.0,
+    "spare": 346.0,
+    "spare_share": 0.577,
+    "waiting": 119.0,
+    "new_places_per_quarter": 13.0,
+    "absorbed_per_quarter": 0.75,
+    "spare_change_per_quarter": 12.25,
+    "pipeline_places": 120.0,
+    "newbuild_share": 0.913,
+    "quarters_to_fill": 461.3
+   },
+   {
+    "geography": "sa4:WA - Perth - South West",
+    "places": 478.0,
+    "spare": 321.0,
+    "spare_share": 0.672,
+    "waiting": 121.0,
+    "new_places_per_quarter": 47.75,
+    "absorbed_per_quarter": 13.0,
+    "spare_change_per_quarter": 34.75,
+    "pipeline_places": 249.0,
+    "newbuild_share": 0.99,
+    "quarters_to_fill": 24.7
+   }
+  ],
+  "regions": [
+   {
+    "geography": "sa4:ACT - Australian Capital Territory",
+    "places": 444.0,
+    "spare": 230.0,
+    "spare_share": 0.518,
+    "waiting": 140.0,
+    "new_places_per_quarter": 7.25,
+    "absorbed_per_quarter": 3.0,
+    "spare_change_per_quarter": 4.25,
+    "pipeline_places": 76.0,
+    "newbuild_share": 0.331,
+    "quarters_to_fill": 76.7
+   },
+   {
+    "geography": "sa4:NSW - Capital Region",
+    "places": 167.0,
+    "spare": 57.0,
+    "spare_share": 0.341,
+    "waiting": 64.0,
+    "new_places_per_quarter": -1.75,
+    "absorbed_per_quarter": -1.75,
+    "spare_change_per_quarter": 0.0,
+    "pipeline_places": 9.0,
+    "newbuild_share": 0.186,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Central Coast",
+    "places": 451.0,
+    "spare": 154.0,
+    "spare_share": 0.341,
+    "waiting": 144.0,
+    "new_places_per_quarter": 7.25,
+    "absorbed_per_quarter": 7.25,
+    "spare_change_per_quarter": 0.0,
+    "pipeline_places": 127.0,
+    "newbuild_share": 0.512,
+    "quarters_to_fill": 21.2
+   },
+   {
+    "geography": "sa4:NSW - Central West",
+    "places": 338.0,
+    "spare": 149.0,
+    "spare_share": 0.441,
+    "waiting": 100.0,
+    "new_places_per_quarter": 5.5,
+    "absorbed_per_quarter": 2.75,
+    "spare_change_per_quarter": 2.75,
+    "pipeline_places": 50.0,
+    "newbuild_share": 0.337,
+    "quarters_to_fill": 54.2
+   },
+   {
+    "geography": "sa4:NSW - Coffs Harbour - Grafton",
+    "places": 99.0,
+    "spare": 22.0,
+    "spare_share": 0.222,
+    "waiting": 75.0,
+    "new_places_per_quarter": -4.25,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": -4.5,
+    "pipeline_places": 21.0,
+    "newbuild_share": 0.131,
+    "quarters_to_fill": 88.0
+   },
+   {
+    "geography": "sa4:NSW - Far West and Orana",
+    "places": 200.0,
+    "spare": 91.0,
+    "spare_share": 0.455,
+    "waiting": 58.0,
+    "new_places_per_quarter": 2.5,
+    "absorbed_per_quarter": -0.75,
+    "spare_change_per_quarter": 3.25,
+    "pipeline_places": 45.0,
+    "newbuild_share": 0.285,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Hunter Valley exc Newcastle",
+    "places": 238.0,
+    "spare": 84.0,
+    "spare_share": 0.353,
+    "waiting": 117.0,
+    "new_places_per_quarter": -2.25,
+    "absorbed_per_quarter": 2.0,
+    "spare_change_per_quarter": -4.25,
+    "pipeline_places": 126.0,
+    "newbuild_share": 0.534,
+    "quarters_to_fill": 42.0
+   },
+   {
+    "geography": "sa4:NSW - Illawarra",
+    "places": 304.0,
+    "spare": 63.0,
+    "spare_share": 0.207,
+    "waiting": 127.0,
+    "new_places_per_quarter": 2.0,
+    "absorbed_per_quarter": 4.25,
+    "spare_change_per_quarter": -2.25,
+    "pipeline_places": 113.0,
+    "newbuild_share": 0.441,
+    "quarters_to_fill": 14.8
+   },
+   {
+    "geography": "sa4:NSW - Mid North Coast",
+    "places": 223.0,
+    "spare": 76.0,
+    "spare_share": 0.341,
+    "waiting": 103.0,
+    "new_places_per_quarter": 6.0,
+    "absorbed_per_quarter": 4.25,
+    "spare_change_per_quarter": 1.75,
+    "pipeline_places": 43.0,
+    "newbuild_share": 0.404,
+    "quarters_to_fill": 17.9
+   },
+   {
+    "geography": "sa4:NSW - Murray",
+    "places": 233.0,
+    "spare": 101.0,
+    "spare_share": 0.433,
+    "waiting": 58.0,
+    "new_places_per_quarter": 2.75,
+    "absorbed_per_quarter": 1.0,
+    "spare_change_per_quarter": 1.75,
+    "pipeline_places": 45.0,
+    "newbuild_share": 0.322,
+    "quarters_to_fill": 101.0
+   },
+   {
+    "geography": "sa4:NSW - New England and North West",
+    "places": 193.0,
+    "spare": 84.0,
+    "spare_share": 0.435,
+    "waiting": 56.0,
+    "new_places_per_quarter": 3.5,
+    "absorbed_per_quarter": 2.0,
+    "spare_change_per_quarter": 1.5,
+    "pipeline_places": 68.0,
+    "newbuild_share": 0.358,
+    "quarters_to_fill": 42.0
+   },
+   {
+    "geography": "sa4:NSW - Newcastle and Lake Macquarie",
+    "places": 570.0,
+    "spare": 164.0,
+    "spare_share": 0.288,
+    "waiting": 160.0,
+    "new_places_per_quarter": 11.25,
+    "absorbed_per_quarter": 7.75,
+    "spare_change_per_quarter": 3.5,
+    "pipeline_places": 145.0,
+    "newbuild_share": 0.621,
+    "quarters_to_fill": 21.2
+   },
+   {
+    "geography": "sa4:NSW - Richmond - Tweed",
+    "places": 186.0,
+    "spare": 32.0,
+    "spare_share": 0.172,
+    "waiting": 133.0,
+    "new_places_per_quarter": -4.25,
+    "absorbed_per_quarter": -0.75,
+    "spare_change_per_quarter": -3.5,
+    "pipeline_places": 42.0,
+    "newbuild_share": 0.382,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Riverina",
+    "places": 180.0,
+    "spare": 67.0,
+    "spare_share": 0.372,
+    "waiting": 70.0,
+    "new_places_per_quarter": 2.75,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 2.5,
+    "pipeline_places": 55.0,
+    "newbuild_share": 0.494,
+    "quarters_to_fill": 268.0
+   },
+   {
+    "geography": "sa4:NSW - Southern Highlands and Shoalhaven",
+    "places": 119.0,
+    "spare": 34.0,
+    "spare_share": 0.286,
+    "waiting": 75.0,
+    "new_places_per_quarter": -0.75,
+    "absorbed_per_quarter": 0.75,
+    "spare_change_per_quarter": -1.5,
+    "pipeline_places": 69.0,
+    "newbuild_share": 0.546,
+    "quarters_to_fill": 45.3
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Baulkham Hills and Hawkesbury",
+    "places": 289.0,
+    "spare": 80.0,
+    "spare_share": 0.277,
+    "waiting": 49.0,
+    "new_places_per_quarter": 0.25,
+    "absorbed_per_quarter": 0.0,
+    "spare_change_per_quarter": 0.25,
+    "pipeline_places": 27.0,
+    "newbuild_share": 0.28,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Blacktown",
+    "places": 522.0,
+    "spare": 216.0,
+    "spare_share": 0.414,
+    "waiting": 165.0,
+    "new_places_per_quarter": 22.0,
+    "absorbed_per_quarter": 3.75,
+    "spare_change_per_quarter": 18.25,
+    "pipeline_places": 215.0,
+    "newbuild_share": 0.475,
+    "quarters_to_fill": 57.6
+   },
+   {
+    "geography": "sa4:NSW - Sydney - City and Inner South",
+    "places": 135.0,
+    "spare": 63.0,
+    "spare_share": 0.467,
+    "waiting": 69.0,
+    "new_places_per_quarter": 0.5,
+    "absorbed_per_quarter": -0.25,
+    "spare_change_per_quarter": 0.75,
+    "pipeline_places": 33.0,
+    "newbuild_share": 0.474,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Eastern Suburbs",
+    "places": 68.0,
+    "spare": 23.0,
+    "spare_share": 0.338,
+    "waiting": 46.0,
+    "new_places_per_quarter": 1.25,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 1.0,
+    "pipeline_places": 7.0,
+    "newbuild_share": 0.191,
+    "quarters_to_fill": 92.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Inner South West",
+    "places": 418.0,
+    "spare": 152.0,
+    "spare_share": 0.364,
+    "waiting": 199.0,
+    "new_places_per_quarter": 2.75,
+    "absorbed_per_quarter": 3.0,
+    "spare_change_per_quarter": -0.25,
+    "pipeline_places": 91.0,
+    "newbuild_share": 0.34,
+    "quarters_to_fill": 50.7
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Inner West",
+    "places": 145.0,
+    "spare": 50.0,
+    "spare_share": 0.345,
+    "waiting": 78.0,
+    "new_places_per_quarter": 6.0,
+    "absorbed_per_quarter": 1.5,
+    "spare_change_per_quarter": 4.5,
+    "pipeline_places": 16.0,
+    "newbuild_share": 0.462,
+    "quarters_to_fill": 33.3
+   },
+   {
+    "geography": "sa4:NSW - Sydney - North Sydney and Hornsby",
+    "places": 166.0,
+    "spare": 35.0,
+    "spare_share": 0.211,
+    "waiting": 105.0,
+    "new_places_per_quarter": 0.0,
+    "absorbed_per_quarter": 0.5,
+    "spare_change_per_quarter": -0.5,
+    "pipeline_places": 17.0,
+    "newbuild_share": 0.452,
+    "quarters_to_fill": 70.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Northern Beaches",
+    "places": 256.0,
+    "spare": 72.0,
+    "spare_share": 0.281,
+    "waiting": 67.0,
+    "new_places_per_quarter": 3.75,
+    "absorbed_per_quarter": -1.0,
+    "spare_change_per_quarter": 4.75,
+    "pipeline_places": 39.0,
+    "newbuild_share": 0.508,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Outer South West",
+    "places": 281.0,
+    "spare": 119.0,
+    "spare_share": 0.423,
+    "waiting": 125.0,
+    "new_places_per_quarter": 8.5,
+    "absorbed_per_quarter": 3.5,
+    "spare_change_per_quarter": 5.0,
+    "pipeline_places": 125.0,
+    "newbuild_share": 0.516,
+    "quarters_to_fill": 34.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Outer West and Blue Mountains",
+    "places": 671.0,
+    "spare": 289.0,
+    "spare_share": 0.431,
+    "waiting": 137.0,
+    "new_places_per_quarter": 5.5,
+    "absorbed_per_quarter": 6.5,
+    "spare_change_per_quarter": -1.0,
+    "pipeline_places": 180.0,
+    "newbuild_share": 0.574,
+    "quarters_to_fill": 44.5
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Parramatta",
+    "places": 599.0,
+    "spare": 234.0,
+    "spare_share": 0.391,
+    "waiting": 179.0,
+    "new_places_per_quarter": 1.5,
+    "absorbed_per_quarter": 5.0,
+    "spare_change_per_quarter": -3.5,
+    "pipeline_places": 217.0,
+    "newbuild_share": 0.528,
+    "quarters_to_fill": 46.8
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Ryde",
+    "places": 333.0,
+    "spare": 65.0,
+    "spare_share": 0.195,
+    "waiting": 66.0,
+    "new_places_per_quarter": 0.0,
+    "absorbed_per_quarter": 0.5,
+    "spare_change_per_quarter": -0.5,
+    "pipeline_places": 38.0,
+    "newbuild_share": 0.402,
+    "quarters_to_fill": 130.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - South West",
+    "places": 407.0,
+    "spare": 200.0,
+    "spare_share": 0.491,
+    "waiting": 198.0,
+    "new_places_per_quarter": 0.5,
+    "absorbed_per_quarter": 10.5,
+    "spare_change_per_quarter": -10.0,
+    "pipeline_places": 221.0,
+    "newbuild_share": 0.656,
+    "quarters_to_fill": 19.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Sutherland",
+    "places": 289.0,
+    "spare": 99.0,
+    "spare_share": 0.343,
+    "waiting": 74.0,
+    "new_places_per_quarter": 0.25,
+    "absorbed_per_quarter": -1.0,
+    "spare_change_per_quarter": 1.25,
+    "pipeline_places": 27.0,
+    "newbuild_share": 0.318,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:NT - Darwin",
+    "places": 255.0,
+    "spare": 161.0,
+    "spare_share": 0.631,
+    "waiting": 93.0,
+    "new_places_per_quarter": 10.75,
+    "absorbed_per_quarter": 4.75,
+    "spare_change_per_quarter": 6.0,
+    "pipeline_places": 177.0,
+    "newbuild_share": 0.824,
+    "quarters_to_fill": 33.9
+   },
+   {
+    "geography": "sa4:NT - Northern Territory - Outback",
+    "places": 63.0,
+    "spare": 37.0,
+    "spare_share": 0.587,
+    "waiting": 102.0,
+    "new_places_per_quarter": 3.0,
+    "absorbed_per_quarter": 0.0,
+    "spare_change_per_quarter": 3.0,
+    "pipeline_places": 43.0,
+    "newbuild_share": 0.508,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - East",
+    "places": 305.0,
+    "spare": 154.0,
+    "spare_share": 0.505,
+    "waiting": 80.0,
+    "new_places_per_quarter": 24.25,
+    "absorbed_per_quarter": 8.25,
+    "spare_change_per_quarter": 16.0,
+    "pipeline_places": 142.0,
+    "newbuild_share": 0.895,
+    "quarters_to_fill": 18.7
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - North",
+    "places": 213.0,
+    "spare": 88.0,
+    "spare_share": 0.413,
+    "waiting": 87.0,
+    "new_places_per_quarter": 11.5,
+    "absorbed_per_quarter": 5.0,
+    "spare_change_per_quarter": 6.5,
+    "pipeline_places": 116.0,
+    "newbuild_share": 0.69,
+    "quarters_to_fill": 17.6
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - South",
+    "places": 210.0,
+    "spare": 80.0,
+    "spare_share": 0.381,
+    "waiting": 102.0,
+    "new_places_per_quarter": 9.75,
+    "absorbed_per_quarter": 7.5,
+    "spare_change_per_quarter": 2.25,
+    "pipeline_places": 116.0,
+    "newbuild_share": 0.743,
+    "quarters_to_fill": 10.7
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - West",
+    "places": 109.0,
+    "spare": 26.0,
+    "spare_share": 0.239,
+    "waiting": 40.0,
+    "new_places_per_quarter": 3.5,
+    "absorbed_per_quarter": -1.5,
+    "spare_change_per_quarter": 5.0,
+    "pipeline_places": 6.0,
+    "newbuild_share": 0.312,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:QLD - Brisbane Inner City",
+    "places": 101.0,
+    "spare": 16.0,
+    "spare_share": 0.158,
+    "waiting": 44.0,
+    "new_places_per_quarter": 3.0,
+    "absorbed_per_quarter": 3.5,
+    "spare_change_per_quarter": -0.5,
+    "pipeline_places": 38.0,
+    "newbuild_share": 0.921,
+    "quarters_to_fill": 4.6
+   },
+   {
+    "geography": "sa4:QLD - Cairns",
+    "places": 288.0,
+    "spare": 151.0,
+    "spare_share": 0.524,
+    "waiting": 90.0,
+    "new_places_per_quarter": 15.5,
+    "absorbed_per_quarter": 5.0,
+    "spare_change_per_quarter": 10.5,
+    "pipeline_places": 101.0,
+    "newbuild_share": 0.882,
+    "quarters_to_fill": 30.2
+   },
+   {
+    "geography": "sa4:QLD - Central Queensland",
+    "places": 172.0,
+    "spare": 77.0,
+    "spare_share": 0.448,
+    "waiting": 85.0,
+    "new_places_per_quarter": 10.5,
+    "absorbed_per_quarter": 2.25,
+    "spare_change_per_quarter": 8.25,
+    "pipeline_places": 130.0,
+    "newbuild_share": 0.541,
+    "quarters_to_fill": 34.2
+   },
+   {
+    "geography": "sa4:QLD - Darling Downs - Maranoa",
+    "places": 66.0,
+    "spare": 35.0,
+    "spare_share": 0.53,
+    "waiting": 30.0,
+    "new_places_per_quarter": 3.0,
+    "absorbed_per_quarter": 1.25,
+    "spare_change_per_quarter": 1.75,
+    "pipeline_places": 6.0,
+    "newbuild_share": 0.773,
+    "quarters_to_fill": 28.0
+   },
+   {
+    "geography": "sa4:QLD - Gold Coast",
+    "places": 452.0,
+    "spare": 135.0,
+    "spare_share": 0.299,
+    "waiting": 189.0,
+    "new_places_per_quarter": 20.75,
+    "absorbed_per_quarter": 13.0,
+    "spare_change_per_quarter": 7.75,
+    "pipeline_places": 140.0,
+    "newbuild_share": 0.878,
+    "quarters_to_fill": 10.4
+   },
+   {
+    "geography": "sa4:QLD - Ipswich",
+    "places": 639.0,
+    "spare": 362.0,
+    "spare_share": 0.567,
+    "waiting": 211.0,
+    "new_places_per_quarter": 7.25,
+    "absorbed_per_quarter": 7.25,
+    "spare_change_per_quarter": 0.0,
+    "pipeline_places": 153.0,
+    "newbuild_share": 0.859,
+    "quarters_to_fill": 49.9
+   },
+   {
+    "geography": "sa4:QLD - Logan - Beaudesert",
+    "places": 600.0,
+    "spare": 346.0,
+    "spare_share": 0.577,
+    "waiting": 119.0,
+    "new_places_per_quarter": 13.0,
+    "absorbed_per_quarter": 0.75,
+    "spare_change_per_quarter": 12.25,
+    "pipeline_places": 120.0,
+    "newbuild_share": 0.913,
+    "quarters_to_fill": 461.3
+   },
+   {
+    "geography": "sa4:QLD - Mackay - Isaac - Whitsunday",
+    "places": 160.0,
+    "spare": 83.0,
+    "spare_share": 0.519,
+    "waiting": 26.0,
+    "new_places_per_quarter": 2.75,
+    "absorbed_per_quarter": 4.75,
+    "spare_change_per_quarter": -2.0,
+    "pipeline_places": 78.0,
+    "newbuild_share": 0.831,
+    "quarters_to_fill": 17.5
+   },
+   {
+    "geography": "sa4:QLD - Moreton Bay - North",
+    "places": 458.0,
+    "spare": 203.0,
+    "spare_share": 0.443,
+    "waiting": 122.0,
+    "new_places_per_quarter": 16.75,
+    "absorbed_per_quarter": 5.25,
+    "spare_change_per_quarter": 11.5,
+    "pipeline_places": 113.0,
+    "newbuild_share": 0.832,
+    "quarters_to_fill": 38.7
+   },
+   {
+    "geography": "sa4:QLD - Moreton Bay - South",
+    "places": 187.0,
+    "spare": 95.0,
+    "spare_share": 0.508,
+    "waiting": 47.0,
+    "new_places_per_quarter": 5.0,
+    "absorbed_per_quarter": 3.25,
+    "spare_change_per_quarter": 1.75,
+    "pipeline_places": 22.0,
+    "newbuild_share": 0.786,
+    "quarters_to_fill": 29.2
+   },
+   {
+    "geography": "sa4:QLD - Sunshine Coast",
+    "places": 286.0,
+    "spare": 94.0,
+    "spare_share": 0.329,
+    "waiting": 123.0,
+    "new_places_per_quarter": 14.75,
+    "absorbed_per_quarter": 6.75,
+    "spare_change_per_quarter": 8.0,
+    "pipeline_places": 82.0,
+    "newbuild_share": 0.839,
+    "quarters_to_fill": 13.9
+   },
+   {
+    "geography": "sa4:QLD - Toowoomba",
+    "places": 363.0,
+    "spare": 186.0,
+    "spare_share": 0.512,
+    "waiting": 101.0,
+    "new_places_per_quarter": 10.25,
+    "absorbed_per_quarter": 6.75,
+    "spare_change_per_quarter": 3.5,
+    "pipeline_places": 75.0,
+    "newbuild_share": 0.826,
+    "quarters_to_fill": 27.6
+   },
+   {
+    "geography": "sa4:QLD - Townsville",
+    "places": 408.0,
+    "spare": 265.0,
+    "spare_share": 0.65,
+    "waiting": 87.0,
+    "new_places_per_quarter": 21.5,
+    "absorbed_per_quarter": 4.5,
+    "spare_change_per_quarter": 17.0,
+    "pipeline_places": 50.0,
+    "newbuild_share": 0.799,
+    "quarters_to_fill": 58.9
+   },
+   {
+    "geography": "sa4:QLD - Wide Bay",
+    "places": 493.0,
+    "spare": 258.0,
+    "spare_share": 0.523,
+    "waiting": 108.0,
+    "new_places_per_quarter": 20.5,
+    "absorbed_per_quarter": 5.25,
+    "spare_change_per_quarter": 15.25,
+    "pipeline_places": 137.0,
+    "newbuild_share": 0.72,
+    "quarters_to_fill": 49.1
+   },
+   {
+    "geography": "sa4:SA - Adelaide - Central and Hills",
+    "places": 429.0,
+    "spare": 194.0,
+    "spare_share": 0.452,
+    "waiting": 105.0,
+    "new_places_per_quarter": 13.0,
+    "absorbed_per_quarter": 3.5,
+    "spare_change_per_quarter": 9.5,
+    "pipeline_places": 161.0,
+    "newbuild_share": 0.585,
+    "quarters_to_fill": 55.4
+   },
+   {
+    "geography": "sa4:SA - Adelaide - North",
+    "places": 1585.0,
+    "spare": 978.0,
+    "spare_share": 0.617,
+    "waiting": 272.0,
+    "new_places_per_quarter": 73.25,
+    "absorbed_per_quarter": 18.5,
+    "spare_change_per_quarter": 54.75,
+    "pipeline_places": 662.0,
+    "newbuild_share": 0.546,
+    "quarters_to_fill": 52.9
+   },
+   {
+    "geography": "sa4:SA - Adelaide - South",
+    "places": 1022.0,
+    "spare": 554.0,
+    "spare_share": 0.542,
+    "waiting": 236.0,
+    "new_places_per_quarter": 28.25,
+    "absorbed_per_quarter": 11.75,
+    "spare_change_per_quarter": 16.5,
+    "pipeline_places": 392.0,
+    "newbuild_share": 0.409,
+    "quarters_to_fill": 47.1
+   },
+   {
+    "geography": "sa4:SA - Adelaide - West",
+    "places": 556.0,
+    "spare": 357.0,
+    "spare_share": 0.642,
+    "waiting": 116.0,
+    "new_places_per_quarter": 20.5,
+    "absorbed_per_quarter": 5.25,
+    "spare_change_per_quarter": 15.25,
+    "pipeline_places": 215.0,
+    "newbuild_share": 0.43,
+    "quarters_to_fill": 68.0
+   },
+   {
+    "geography": "sa4:SA - Barossa - Yorke - Mid North",
+    "places": 59.0,
+    "spare": 34.0,
+    "spare_share": 0.576,
+    "waiting": 35.0,
+    "new_places_per_quarter": 6.5,
+    "absorbed_per_quarter": 1.75,
+    "spare_change_per_quarter": 4.75,
+    "pipeline_places": 51.0,
+    "newbuild_share": 0.542,
+    "quarters_to_fill": 19.4
+   },
+   {
+    "geography": "sa4:SA - South Australia - Outback",
+    "places": 57.0,
+    "spare": 41.0,
+    "spare_share": 0.719,
+    "waiting": 37.0,
+    "new_places_per_quarter": 4.25,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 4.0,
+    "pipeline_places": 61.0,
+    "newbuild_share": 0.298,
+    "quarters_to_fill": 164.0
+   },
+   {
+    "geography": "sa4:SA - South Australia - South East",
+    "places": 361.0,
+    "spare": 242.0,
+    "spare_share": 0.67,
+    "waiting": 87.0,
+    "new_places_per_quarter": 16.0,
+    "absorbed_per_quarter": 3.5,
+    "spare_change_per_quarter": 12.5,
+    "pipeline_places": 203.0,
+    "newbuild_share": 0.438,
+    "quarters_to_fill": 69.1
+   },
+   {
+    "geography": "sa4:TAS - Hobart",
+    "places": 162.0,
+    "spare": 120.0,
+    "spare_share": 0.741,
+    "waiting": 189.0,
+    "new_places_per_quarter": 20.5,
+    "absorbed_per_quarter": 6.0,
+    "spare_change_per_quarter": 14.5,
+    "pipeline_places": 194.0,
+    "newbuild_share": 0.944,
+    "quarters_to_fill": 20.0
+   },
+   {
+    "geography": "sa4:TAS - Launceston and North East",
+    "places": 127.0,
+    "spare": 61.0,
+    "spare_share": 0.48,
+    "waiting": 91.0,
+    "new_places_per_quarter": 10.75,
+    "absorbed_per_quarter": 3.0,
+    "spare_change_per_quarter": 7.75,
+    "pipeline_places": 68.0,
+    "newbuild_share": 0.748,
+    "quarters_to_fill": 20.3
+   },
+   {
+    "geography": "sa4:TAS - West and North West",
+    "places": 64.0,
+    "spare": 25.0,
+    "spare_share": 0.391,
+    "waiting": 84.0,
+    "new_places_per_quarter": 1.75,
+    "absorbed_per_quarter": 1.75,
+    "spare_change_per_quarter": 0.0,
+    "pipeline_places": 15.0,
+    "newbuild_share": 0.688,
+    "quarters_to_fill": 14.3
+   },
+   {
+    "geography": "sa4:VIC - Ballarat",
+    "places": 565.0,
+    "spare": 281.0,
+    "spare_share": 0.497,
+    "waiting": 53.0,
+    "new_places_per_quarter": 35.75,
+    "absorbed_per_quarter": 8.0,
+    "spare_change_per_quarter": 27.75,
+    "pipeline_places": 210.0,
+    "newbuild_share": 0.715,
+    "quarters_to_fill": 35.1
+   },
+   {
+    "geography": "sa4:VIC - Bendigo",
+    "places": 215.0,
+    "spare": 69.0,
+    "spare_share": 0.321,
+    "waiting": 67.0,
+    "new_places_per_quarter": 6.0,
+    "absorbed_per_quarter": 2.25,
+    "spare_change_per_quarter": 3.75,
+    "pipeline_places": 158.0,
+    "newbuild_share": 0.516,
+    "quarters_to_fill": 30.7
+   },
+   {
+    "geography": "sa4:VIC - Geelong",
+    "places": 667.0,
+    "spare": 305.0,
+    "spare_share": 0.457,
+    "waiting": 84.0,
+    "new_places_per_quarter": 44.0,
+    "absorbed_per_quarter": 10.5,
+    "spare_change_per_quarter": 33.5,
+    "pipeline_places": 311.0,
+    "newbuild_share": 0.73,
+    "quarters_to_fill": 29.0
+   },
+   {
+    "geography": "sa4:VIC - Hume",
+    "places": 201.0,
+    "spare": 68.0,
+    "spare_share": 0.338,
+    "waiting": 50.0,
+    "new_places_per_quarter": 3.75,
+    "absorbed_per_quarter": 1.25,
+    "spare_change_per_quarter": 2.5,
+    "pipeline_places": 26.0,
+    "newbuild_share": 0.204,
+    "quarters_to_fill": 54.4
+   },
+   {
+    "geography": "sa4:VIC - Latrobe - Gippsland",
+    "places": 346.0,
+    "spare": 149.0,
+    "spare_share": 0.431,
+    "waiting": 99.0,
+    "new_places_per_quarter": 10.25,
+    "absorbed_per_quarter": 0.5,
+    "spare_change_per_quarter": 9.75,
+    "pipeline_places": 137.0,
+    "newbuild_share": 0.396,
+    "quarters_to_fill": 298.0
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - Inner",
+    "places": 478.0,
+    "spare": 210.0,
+    "spare_share": 0.439,
+    "waiting": 122.0,
+    "new_places_per_quarter": 18.5,
+    "absorbed_per_quarter": 8.25,
+    "spare_change_per_quarter": 10.25,
+    "pipeline_places": 244.0,
+    "newbuild_share": 0.638,
+    "quarters_to_fill": 25.5
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - Inner East",
+    "places": 469.0,
+    "spare": 118.0,
+    "spare_share": 0.252,
+    "waiting": 85.0,
+    "new_places_per_quarter": 3.75,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 3.5,
+    "pipeline_places": 126.0,
+    "newbuild_share": 0.136,
+    "quarters_to_fill": 472.0
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - Inner South",
+    "places": 596.0,
+    "spare": 204.0,
+    "spare_share": 0.342,
+    "waiting": 92.0,
+    "new_places_per_quarter": 14.75,
+    "absorbed_per_quarter": 5.75,
+    "spare_change_per_quarter": 9.0,
+    "pipeline_places": 178.0,
+    "newbuild_share": 0.314,
+    "quarters_to_fill": 35.5
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - North East",
+    "places": 1069.0,
+    "spare": 456.0,
+    "spare_share": 0.427,
+    "waiting": 165.0,
+    "new_places_per_quarter": 33.0,
+    "absorbed_per_quarter": 7.5,
+    "spare_change_per_quarter": 25.5,
+    "pipeline_places": 336.0,
+    "newbuild_share": 0.458,
+    "quarters_to_fill": 60.8
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - North West",
+    "places": 409.0,
+    "spare": 195.0,
+    "spare_share": 0.477,
+    "waiting": 110.0,
+    "new_places_per_quarter": 16.5,
+    "absorbed_per_quarter": 4.25,
+    "spare_change_per_quarter": 12.25,
+    "pipeline_places": 178.0,
+    "newbuild_share": 0.533,
+    "quarters_to_fill": 45.9
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - Outer East",
+    "places": 679.0,
+    "spare": 189.0,
+    "spare_share": 0.278,
+    "waiting": 160.0,
+    "new_places_per_quarter": 9.75,
+    "absorbed_per_quarter": 4.25,
+    "spare_change_per_quarter": 5.5,
+    "pipeline_places": 215.0,
+    "newbuild_share": 0.219,
+    "quarters_to_fill": 44.5
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - South East",
+    "places": 1345.0,
+    "spare": 663.0,
+    "spare_share": 0.493,
+    "waiting": 258.0,
+    "new_places_per_quarter": 78.0,
+    "absorbed_per_quarter": 17.75,
+    "spare_change_per_quarter": 60.25,
+    "pipeline_places": 667.0,
+    "newbuild_share": 0.642,
+    "quarters_to_fill": 37.4
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - West",
+    "places": 1663.0,
+    "spare": 1039.0,
+    "spare_share": 0.625,
+    "waiting": 187.0,
+    "new_places_per_quarter": 73.75,
+    "absorbed_per_quarter": 17.0,
+    "spare_change_per_quarter": 56.75,
+    "pipeline_places": 943.0,
+    "newbuild_share": 0.799,
+    "quarters_to_fill": 61.1
+   },
+   {
+    "geography": "sa4:VIC - Mornington Peninsula",
+    "places": 438.0,
+    "spare": 163.0,
+    "spare_share": 0.372,
+    "waiting": 92.0,
+    "new_places_per_quarter": 19.5,
+    "absorbed_per_quarter": 7.0,
+    "spare_change_per_quarter": 12.5,
+    "pipeline_places": 180.0,
+    "newbuild_share": 0.475,
+    "quarters_to_fill": 23.3
+   },
+   {
+    "geography": "sa4:VIC - North West",
+    "places": 418.0,
+    "spare": 186.0,
+    "spare_share": 0.445,
+    "waiting": 40.0,
+    "new_places_per_quarter": 13.25,
+    "absorbed_per_quarter": -0.25,
+    "spare_change_per_quarter": 13.5,
+    "pipeline_places": 98.0,
+    "newbuild_share": 0.352,
+    "quarters_to_fill": null
+   },
+   {
+    "geography": "sa4:VIC - Shepparton",
+    "places": 198.0,
+    "spare": 76.0,
+    "spare_share": 0.384,
+    "waiting": 75.0,
+    "new_places_per_quarter": 8.75,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 8.5,
+    "pipeline_places": 62.0,
+    "newbuild_share": 0.338,
+    "quarters_to_fill": 304.0
+   },
+   {
+    "geography": "sa4:VIC - Warrnambool and South West",
+    "places": 259.0,
+    "spare": 68.0,
+    "spare_share": 0.263,
+    "waiting": 52.0,
+    "new_places_per_quarter": 5.0,
+    "absorbed_per_quarter": 1.25,
+    "spare_change_per_quarter": 3.75,
+    "pipeline_places": 80.0,
+    "newbuild_share": 0.456,
+    "quarters_to_fill": 54.4
+   },
+   {
+    "geography": "sa4:WA - Bunbury",
+    "places": 87.0,
+    "spare": 56.0,
+    "spare_share": 0.644,
+    "waiting": 53.0,
+    "new_places_per_quarter": 13.0,
+    "absorbed_per_quarter": 4.0,
+    "spare_change_per_quarter": 9.0,
+    "pipeline_places": 57.0,
+    "newbuild_share": 1.0,
+    "quarters_to_fill": 14.0
+   },
+   {
+    "geography": "sa4:WA - Mandurah",
+    "places": 208.0,
+    "spare": 161.0,
+    "spare_share": 0.774,
+    "waiting": 39.0,
+    "new_places_per_quarter": 16.5,
+    "absorbed_per_quarter": 1.75,
+    "spare_change_per_quarter": 14.75,
+    "pipeline_places": 119.0,
+    "newbuild_share": 0.971,
+    "quarters_to_fill": 92.0
+   },
+   {
+    "geography": "sa4:WA - Perth - Inner",
+    "places": 63.0,
+    "spare": 30.0,
+    "spare_share": 0.476,
+    "waiting": 50.0,
+    "new_places_per_quarter": 5.0,
+    "absorbed_per_quarter": 1.25,
+    "spare_change_per_quarter": 3.75,
+    "pipeline_places": 63.0,
+    "newbuild_share": 0.857,
+    "quarters_to_fill": 24.0
+   },
+   {
+    "geography": "sa4:WA - Perth - North East",
+    "places": 319.0,
+    "spare": 205.0,
+    "spare_share": 0.643,
+    "waiting": 177.0,
+    "new_places_per_quarter": 29.75,
+    "absorbed_per_quarter": 7.75,
+    "spare_change_per_quarter": 22.0,
+    "pipeline_places": 145.0,
+    "newbuild_share": 0.959,
+    "quarters_to_fill": 26.5
+   },
+   {
+    "geography": "sa4:WA - Perth - North West",
+    "places": 392.0,
+    "spare": 195.0,
+    "spare_share": 0.497,
+    "waiting": 235.0,
+    "new_places_per_quarter": 33.0,
+    "absorbed_per_quarter": 18.25,
+    "spare_change_per_quarter": 14.75,
+    "pipeline_places": 185.0,
+    "newbuild_share": 0.982,
+    "quarters_to_fill": 10.7
+   },
+   {
+    "geography": "sa4:WA - Perth - South East",
+    "places": 701.0,
+    "spare": 450.0,
+    "spare_share": 0.642,
+    "waiting": 231.0,
+    "new_places_per_quarter": 63.0,
+    "absorbed_per_quarter": 12.0,
+    "spare_change_per_quarter": 51.0,
+    "pipeline_places": 325.0,
+    "newbuild_share": 0.98,
+    "quarters_to_fill": 37.5
+   },
+   {
+    "geography": "sa4:WA - Perth - South West",
+    "places": 478.0,
+    "spare": 321.0,
+    "spare_share": 0.672,
+    "waiting": 121.0,
+    "new_places_per_quarter": 47.75,
+    "absorbed_per_quarter": 13.0,
+    "spare_change_per_quarter": 34.75,
+    "pipeline_places": 249.0,
+    "newbuild_share": 0.99,
+    "quarters_to_fill": 24.7
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Outback (North)",
+    "places": 3.0,
+    "spare": 2.0,
+    "spare_share": 0.667,
+    "waiting": 37.0,
+    "new_places_per_quarter": 0.75,
+    "absorbed_per_quarter": 0.25,
+    "spare_change_per_quarter": 0.5,
+    "pipeline_places": 14.0,
+    "newbuild_share": 1.0,
+    "quarters_to_fill": 8.0
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Outback (South)",
+    "places": 32.0,
+    "spare": 11.0,
+    "spare_share": 0.344,
+    "waiting": 45.0,
+    "new_places_per_quarter": 0.0,
+    "absorbed_per_quarter": 0.5,
+    "spare_change_per_quarter": -0.5,
+    "pipeline_places": 2.0,
+    "newbuild_share": 0.812,
+    "quarters_to_fill": 22.0
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Wheat Belt",
+    "places": 9.0,
+    "spare": 4.0,
+    "spare_share": 0.444,
+    "waiting": 36.0,
+    "new_places_per_quarter": 0.0,
+    "absorbed_per_quarter": 0.5,
+    "spare_change_per_quarter": -0.5,
+    "pipeline_places": 13.0,
+    "newbuild_share": 1.0,
+    "quarters_to_fill": 8.0
+   }
+  ],
+  "category_quarters": [
+   "2024-12-31",
+   "2025-03-31",
+   "2025-06-30",
+   "2025-09-30",
+   "2025-12-31",
+   "2026-03-31",
+   "2026-06-30"
+  ],
+  "category_ratios": {
+   "left_out": {
+    "Improved Liveability": [
+     0.657,
+     0.667,
+     0.668,
+     0.678,
+     0.683,
+     0.683,
+     0.676
+    ],
+    "High Physical Support": [
+     1.809,
+     1.929,
+     1.967,
+     2.152,
+     2.341,
+     2.46,
+     2.575
+    ],
+    "Robust": [
+     1.694,
+     1.752,
+     1.724,
+     1.785,
+     1.828,
+     1.886,
+     1.93
+    ],
+    "Fully Accessible": [
+     0.615,
+     0.6,
+     0.583,
+     0.561,
+     0.547,
+     0.539,
+     0.533
+    ]
+   },
+   "pro_rata": {
+    "Improved Liveability": [
+     0.49,
+     0.503,
+     0.511,
+     0.527,
+     0.539,
+     0.544,
+     0.545
+    ],
+    "High Physical Support": [
+     1.348,
+     1.454,
+     1.504,
+     1.674,
+     1.847,
+     1.958,
+     2.074
+    ],
+    "Robust": [
+     1.263,
+     1.32,
+     1.319,
+     1.388,
+     1.442,
+     1.501,
+     1.554
+    ],
+    "Fully Accessible": [
+     0.459,
+     0.452,
+     0.446,
+     0.437,
+     0.431,
+     0.429,
+     0.429
+    ]
+   }
+  },
+  "need_response": {
+   "left_out": {
+    "per_new_place": 0.02,
+    "se": 0.01
+   },
+   "pro_rata": {
+    "per_new_place": 0.005,
+    "se": 0.01
+   }
+  },
+  "category_flows": {
+   "Improved Liveability": {
+    "places_added": 571.0,
+    "need_added": 655.0,
+    "newbuild_share": 0.471
+   },
+   "High Physical Support": {
+    "places_added": 4720.0,
+    "need_added": 442.0,
+    "newbuild_share": 0.909
+   },
+   "Robust": {
+    "places_added": 779.0,
+    "need_added": 216.0,
+    "newbuild_share": 0.804
+   },
+   "Fully Accessible": {
+    "places_added": 163.0,
+    "need_added": 1130.0,
+    "newbuild_share": 0.39
+   }
+  },
+  "missing_share": [
+   0.254,
+   0.246,
+   0.235,
+   0.222,
+   0.211,
+   0.204,
+   0.195
+  ]
+ },
+ "q2": {
+  "flows": [
+   {
+    "quarter": "2023-09-30",
+    "pipeline": 4028.0,
+    "enrolled": 404.0,
+    "net_additions": 888.0
+   },
+   {
+    "quarter": "2023-12-31",
+    "pipeline": 4756.0,
+    "enrolled": 309.0,
+    "net_additions": 1037.0
+   },
+   {
+    "quarter": "2024-03-31",
+    "pipeline": 4753.0,
+    "enrolled": 323.0,
+    "net_additions": 320.0
+   },
+   {
+    "quarter": "2024-06-30",
+    "pipeline": 6082.0,
+    "enrolled": 604.0,
+    "net_additions": 1933.0
+   },
+   {
+    "quarter": "2024-09-30",
+    "pipeline": 7014.0,
+    "enrolled": 671.0,
+    "net_additions": 1603.0
+   },
+   {
+    "quarter": "2024-12-31",
+    "pipeline": 7363.0,
+    "enrolled": 649.0,
+    "net_additions": 998.0
+   },
+   {
+    "quarter": "2025-03-31",
+    "pipeline": 7673.0,
+    "enrolled": 644.0,
+    "net_additions": 954.0
+   },
+   {
+    "quarter": "2025-06-30",
+    "pipeline": 8026.0,
+    "enrolled": 294.0,
+    "net_additions": 647.0
+   },
+   {
+    "quarter": "2025-09-30",
+    "pipeline": 8332.0,
+    "enrolled": 789.0,
+    "net_additions": 1095.0
+   },
+   {
+    "quarter": "2025-12-31",
+    "pipeline": 8462.0,
+    "enrolled": 916.0,
+    "net_additions": 1046.0
+   },
+   {
+    "quarter": "2026-03-31",
+    "pipeline": 6233.0,
+    "enrolled": 506.0,
+    "net_additions": -1723.0
+   },
+   {
+    "quarter": "2026-06-30",
+    "pipeline": 6549.0,
+    "enrolled": 487.0,
+    "net_additions": 803.0
+   }
+  ],
+  "removal_at_break": {
+   "Improved Liveability": {
+    "pipeline_before": 787.0,
+    "net_additions_at_break": -128.0,
+    "prior_year_net_additions_per_quarter": 100.0,
+    "lower_bound": 128.0,
+    "central": 228.0,
+    "lower_bound_share": 0.163,
+    "central_share": 0.29
+   },
+   "High Physical Support": {
+    "pipeline_before": 5352.0,
+    "net_additions_at_break": -1125.0,
+    "prior_year_net_additions_per_quarter": 594.25,
+    "lower_bound": 1125.0,
+    "central": 1719.25,
+    "lower_bound_share": 0.21,
+    "central_share": 0.321
+   },
+   "Robust": {
+    "pipeline_before": 1645.0,
+    "net_additions_at_break": -396.0,
+    "prior_year_net_additions_per_quarter": 184.5,
+    "lower_bound": 396.0,
+    "central": 580.5,
+    "lower_bound_share": 0.241,
+    "central_share": 0.353
+   },
+   "Fully Accessible": {
+    "pipeline_before": 316.0,
+    "net_additions_at_break": -72.0,
+    "prior_year_net_additions_per_quarter": 23.0,
+    "lower_bound": 72.0,
+    "central": 95.0,
+    "lower_bound_share": 0.228,
+    "central_share": 0.301
+   },
+   "Multi-Design Category": {
+    "pipeline_before": 362.0,
+    "net_additions_at_break": -2.0,
+    "prior_year_net_additions_per_quarter": 33.75,
+    "lower_bound": 2.0,
+    "central": 35.75,
+    "lower_bound_share": 0.006,
+    "central_share": 0.099
+   },
+   "Total": {
+    "pipeline_before": 8462.0,
+    "net_additions_at_break": -1723.0,
+    "prior_year_net_additions_per_quarter": 935.5,
+    "lower_bound": 1723.0,
+    "central": 2658.5,
+    "lower_bound_share": 0.204,
+    "central_share": 0.314
+   }
+  },
+  "same_category": {
+   "own": 0.338,
+   "own_se": 0.04,
+   "other": -0.01,
+   "other_se": 0.003,
+   "observations": 3168
+  },
+  "naive_ratio": {
+   "4": [
+    {
+     "from": "2023-06-30",
+     "ratio": 0.463
+    },
+    {
+     "from": "2023-09-30",
+     "ratio": 0.473
+    },
+    {
+     "from": "2023-12-31",
+     "ratio": 0.472
+    },
+    {
+     "from": "2024-03-31",
+     "ratio": 0.54
+    },
+    {
+     "from": "2024-06-30",
+     "ratio": 0.371
+    },
+    {
+     "from": "2024-09-30",
+     "ratio": 0.339
+    },
+    {
+     "from": "2024-12-31",
+     "ratio": 0.359
+    },
+    {
+     "from": "2025-03-31",
+     "ratio": 0.326
+    },
+    {
+     "from": "2025-06-30",
+     "ratio": 0.336
+    }
+   ],
+   "8": [
+    {
+     "from": "2023-06-30",
+     "ratio": 1.1
+    },
+    {
+     "from": "2023-09-30",
+     "ratio": 1.063
+    },
+    {
+     "from": "2023-12-31",
+     "ratio": 1.028
+    },
+    {
+     "from": "2024-03-31",
+     "ratio": 1.067
+    },
+    {
+     "from": "2024-06-30",
+     "ratio": 0.815
+    }
+   ]
+  },
+  "first_cohort": {
+   "quarter": "2023-06-30",
+   "pipeline": 3544.0
+  }
+ },
+ "q3": {
+  "window": [
+   "2023-12-31",
+   "2026-06-30"
+  ],
+  "regions": 88,
+  "waiting_fell": 63,
+  "waiting_rose": 23,
+  "national_waiting_change": -1032.0,
+  "terciles": [
+   {
+    "growth": "least",
+    "regions": 29,
+    "places_added": 166.0,
+    "in_use_added": 49.0,
+    "waiting_change": -12.0,
+    "waiting_change_share": -0.006
+   },
+   {
+    "growth": "middle",
+    "regions": 29,
+    "places_added": 1867.0,
+    "in_use_added": 522.0,
+    "waiting_change": -149.0,
+    "waiting_change_share": -0.052
+   },
+   {
+    "growth": "most",
+    "regions": 30,
+    "places_added": 7470.0,
+    "in_use_added": 1985.0,
+    "waiting_change": -864.0,
+    "waiting_change_share": -0.167
+   }
+  ],
+  "spearman_absolute": -0.541,
+  "spearman_proportional": -0.596,
+  "proportional_regions": 83,
+  "waiting_per_new_place": {
+   "per_new_place": -0.114,
+   "se": 0.032
+  },
+  "need_per_new_place": {
+   "per_new_place": 0.122,
+   "se": 0.021
+  },
+  "mismatch": [
+   {
+    "quarter": "2023-12-31",
+    "regions": 84,
+    "regions_short": 60,
+    "waiting_beyond_local_spare": 3645.0,
+    "spare_beyond_local_waiting": 1192.0,
+    "waiting": 10046.0,
+    "spare": 7481.0
+   },
+   {
+    "quarter": "2024-03-31",
+    "regions": 85,
+    "regions_short": 58,
+    "waiting_beyond_local_spare": 3469.0,
+    "spare_beyond_local_waiting": 1367.0,
+    "waiting": 10053.0,
+    "spare": 7903.0
+   },
+   {
+    "quarter": "2024-06-30",
+    "regions": 85,
+    "regions_short": 54,
+    "waiting_beyond_local_spare": 2978.0,
+    "spare_beyond_local_waiting": 1947.0,
+    "waiting": 9955.0,
+    "spare": 8870.0
+   },
+   {
+    "quarter": "2024-09-30",
+    "regions": 85,
+    "regions_short": 53,
+    "waiting_beyond_local_spare": 2548.0,
+    "spare_beyond_local_waiting": 2499.0,
+    "waiting": 9891.0,
+    "spare": 9789.0
+   },
+   {
+    "quarter": "2024-12-31",
+    "regions": 85,
+    "regions_short": 48,
+    "waiting_beyond_local_spare": 2276.0,
+    "spare_beyond_local_waiting": 2952.0,
+    "waiting": 9834.0,
+    "spare": 10448.0
+   },
+   {
+    "quarter": "2025-03-31",
+    "regions": 86,
+    "regions_short": 47,
+    "waiting_beyond_local_spare": 2005.0,
+    "spare_beyond_local_waiting": 3371.0,
+    "waiting": 9662.0,
+    "spare": 10975.0
+   },
+   {
+    "quarter": "2025-06-30",
+    "regions": 86,
+    "regions_short": 47,
+    "waiting_beyond_local_spare": 1871.0,
+    "spare_beyond_local_waiting": 3505.0,
+    "waiting": 9880.0,
+    "spare": 11445.0
+   },
+   {
+    "quarter": "2025-09-30",
+    "regions": 86,
+    "regions_short": 44,
+    "waiting_beyond_local_spare": 1524.0,
+    "spare_beyond_local_waiting": 4320.0,
+    "waiting": 9756.0,
+    "spare": 12489.0
+   },
+   {
+    "quarter": "2025-12-31",
+    "regions": 86,
+    "regions_short": 39,
+    "waiting_beyond_local_spare": 1281.0,
+    "spare_beyond_local_waiting": 5194.0,
+    "waiting": 9577.0,
+    "spare": 13464.0
+   },
+   {
+    "quarter": "2026-03-31",
+    "regions": 86,
+    "regions_short": 35,
+    "waiting_beyond_local_spare": 1138.0,
+    "spare_beyond_local_waiting": 5819.0,
+    "waiting": 9370.0,
+    "spare": 14025.0
+   },
+   {
+    "quarter": "2026-06-30",
+    "regions": 86,
+    "regions_short": 31,
+    "waiting_beyond_local_spare": 1050.0,
+    "spare_beyond_local_waiting": 6497.0,
+    "waiting": 9014.0,
+    "spare": 14437.0
+   }
+  ]
+ },
+ "q4": {
+  "quarters": [
+   "2024-12-31",
+   "2025-03-31",
+   "2025-06-30",
+   "2025-09-30",
+   "2025-12-31",
+   "2026-03-31",
+   "2026-06-30"
+  ],
+  "by_category": {
+   "left_out": {
+    "Improved Liveability": {
+     "short": 66,
+     "balanced": 8,
+     "long": 2,
+     "drifting up": 2,
+     "drifting down": 3,
+     "reverses": 2,
+     "thin": 5
+    },
+    "High Physical Support": {
+     "short": 6,
+     "balanced": 5,
+     "long": 39,
+     "drifting up": 20,
+     "drifting down": 3,
+     "reverses": 9,
+     "thin": 6
+    },
+    "Robust": {
+     "short": 16,
+     "balanced": 5,
+     "long": 24,
+     "drifting up": 2,
+     "drifting down": 2,
+     "reverses": 3,
+     "thin": 36
+    },
+    "Fully Accessible": {
+     "short": 73,
+     "balanced": 2,
+     "long": 5,
+     "drifting up": 0,
+     "drifting down": 5,
+     "reverses": 2,
+     "thin": 1
+    }
+   },
+   "pro_rata": {
+    "Improved Liveability": {
+     "short": 75,
+     "balanced": 1,
+     "long": 1,
+     "drifting up": 6,
+     "drifting down": 0,
+     "reverses": 0,
+     "thin": 5
+    },
+    "High Physical Support": {
+     "short": 17,
+     "balanced": 4,
+     "long": 22,
+     "drifting up": 29,
+     "drifting down": 0,
+     "reverses": 10,
+     "thin": 6
+    },
+    "Robust": {
+     "short": 20,
+     "balanced": 1,
+     "long": 18,
+     "drifting up": 7,
+     "drifting down": 2,
+     "reverses": 4,
+     "thin": 36
+    },
+    "Fully Accessible": {
+     "short": 80,
+     "balanced": 3,
+     "long": 1,
+     "drifting up": 0,
+     "drifting down": 2,
+     "reverses": 1,
+     "thin": 1
+    }
+   }
+  },
+  "aggregate": {
+   "always short": 28,
+   "always covered": 20,
+   "short to covered": 32,
+   "covered to short": 2,
+   "reverses": 6
+  },
+  "aggregate_quarters": [
+   "2023-12-31",
+   "2026-06-30"
+  ],
+  "always_short": [
+   {
+    "geography": "sa4:NSW - Richmond - Tweed",
+    "waiting_beyond_spare": 101.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - North Sydney and Hornsby",
+    "waiting_beyond_spare": 70.0
+   },
+   {
+    "geography": "sa4:TAS - Hobart",
+    "waiting_beyond_spare": 69.0
+   },
+   {
+    "geography": "sa4:NT - Northern Territory - Outback",
+    "waiting_beyond_spare": 65.0
+   },
+   {
+    "geography": "sa4:NSW - Illawarra",
+    "waiting_beyond_spare": 64.0
+   },
+   {
+    "geography": "sa4:TAS - West and North West",
+    "waiting_beyond_spare": 59.0
+   },
+   {
+    "geography": "sa4:QLD - Gold Coast",
+    "waiting_beyond_spare": 54.0
+   },
+   {
+    "geography": "sa4:NSW - Coffs Harbour - Grafton",
+    "waiting_beyond_spare": 53.0
+   },
+   {
+    "geography": "sa4:NSW - Southern Highlands and Shoalhaven",
+    "waiting_beyond_spare": 41.0
+   },
+   {
+    "geography": "sa4:WA - Perth - North West",
+    "waiting_beyond_spare": 40.0
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Outback (North)",
+    "waiting_beyond_spare": 35.0
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Outback (South)",
+    "waiting_beyond_spare": 34.0
+   },
+   {
+    "geography": "sa4:NSW - Hunter Valley exc Newcastle",
+    "waiting_beyond_spare": 33.0
+   },
+   {
+    "geography": "sa4:WA - Western Australia - Wheat Belt",
+    "waiting_beyond_spare": 32.0
+   },
+   {
+    "geography": "sa4:TAS - Launceston and North East",
+    "waiting_beyond_spare": 30.0
+   },
+   {
+    "geography": "sa4:QLD - Sunshine Coast",
+    "waiting_beyond_spare": 29.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Inner West",
+    "waiting_beyond_spare": 28.0
+   },
+   {
+    "geography": "sa4:QLD - Brisbane Inner City",
+    "waiting_beyond_spare": 28.0
+   },
+   {
+    "geography": "sa4:NSW - Mid North Coast",
+    "waiting_beyond_spare": 27.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Eastern Suburbs",
+    "waiting_beyond_spare": 23.0
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - South",
+    "waiting_beyond_spare": 22.0
+   },
+   {
+    "geography": "sa4:WA - Perth - Inner",
+    "waiting_beyond_spare": 20.0
+   },
+   {
+    "geography": "sa4:QLD - Queensland - Outback",
+    "waiting_beyond_spare": 19.0
+   },
+   {
+    "geography": "sa4:QLD - Brisbane - West",
+    "waiting_beyond_spare": 14.0
+   },
+   {
+    "geography": "sa4:QLD - Central Queensland",
+    "waiting_beyond_spare": 8.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - City and Inner South",
+    "waiting_beyond_spare": 6.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Outer South West",
+    "waiting_beyond_spare": 6.0
+   },
+   {
+    "geography": "sa4:TAS - South East",
+    "waiting_beyond_spare": 5.0
+   }
+  ],
+  "largest_persistent_shortfalls": [
+   {
+    "geography": "sa4:QLD - Gold Coast",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.27,
+    "last": 0.246,
+    "need_last": 191.0,
+    "places_last": 47.0,
+    "gap_last": -144.0
+   },
+   {
+    "geography": "sa4:SA - Adelaide - South",
+    "category": "Improved Liveability",
+    "kind": "short",
+    "first": 0.491,
+    "last": 0.523,
+    "need_last": 258.0,
+    "places_last": 135.0,
+    "gap_last": -123.0
+   },
+   {
+    "geography": "sa4:QLD - Logan - Beaudesert",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.26,
+    "last": 0.11,
+    "need_last": 136.0,
+    "places_last": 15.0,
+    "gap_last": -121.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Parramatta",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.159,
+    "last": 0.13,
+    "need_last": 131.0,
+    "places_last": 17.0,
+    "gap_last": -114.0
+   },
+   {
+    "geography": "sa4:WA - Perth - North West",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.051,
+    "last": 0.135,
+    "need_last": 126.0,
+    "places_last": 17.0,
+    "gap_last": -109.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Inner South West",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.267,
+    "last": 0.201,
+    "need_last": 134.0,
+    "places_last": 27.0,
+    "gap_last": -107.0
+   },
+   {
+    "geography": "sa4:NSW - Sydney - Inner South West",
+    "category": "Improved Liveability",
+    "kind": "short",
+    "first": 0.263,
+    "last": 0.254,
+    "need_last": 142.0,
+    "places_last": 36.0,
+    "gap_last": -106.0
+   },
+   {
+    "geography": "sa4:QLD - Ipswich",
+    "category": "Fully Accessible",
+    "kind": "short",
+    "first": 0.402,
+    "last": 0.306,
+    "need_last": 147.0,
+    "places_last": 45.0,
+    "gap_last": -102.0
+   }
+  ],
+  "largest_persistent_surpluses": [
+   {
+    "geography": "sa4:VIC - Melbourne - West",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 3.708,
+    "last": 4.565,
+    "need_last": 170.0,
+    "places_last": 776.0,
+    "gap_last": 606.0
+   },
+   {
+    "geography": "sa4:SA - Adelaide - North",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 2.62,
+    "last": 4.126,
+    "need_last": 159.0,
+    "places_last": 656.0,
+    "gap_last": 497.0
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - South East",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 1.96,
+    "last": 3.154,
+    "need_last": 195.0,
+    "places_last": 615.0,
+    "gap_last": 420.0
+   },
+   {
+    "geography": "sa4:VIC - Melbourne - West",
+    "category": "Robust",
+    "kind": "long",
+    "first": 4.317,
+    "last": 4.617,
+    "need_last": 115.0,
+    "places_last": 531.0,
+    "gap_last": 416.0
+   },
+   {
+    "geography": "sa4:WA - Perth - South East",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 1.577,
+    "last": 3.862,
+    "need_last": 130.0,
+    "places_last": 502.0,
+    "gap_last": 372.0
+   },
+   {
+    "geography": "sa4:WA - Perth - South West",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 2.333,
+    "last": 5.208,
+    "need_last": 77.0,
+    "places_last": 401.0,
+    "gap_last": 324.0
+   },
+   {
+    "geography": "sa4:QLD - Logan - Beaudesert",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 3.918,
+    "last": 4.819,
+    "need_last": 83.0,
+    "places_last": 400.0,
+    "gap_last": 317.0
+   },
+   {
+    "geography": "sa4:VIC - Geelong",
+    "category": "High Physical Support",
+    "kind": "long",
+    "first": 2.619,
+    "last": 4.225,
+    "need_last": 89.0,
+    "places_last": 376.0,
+    "gap_last": 287.0
+   }
+  ]
+ }
+}
