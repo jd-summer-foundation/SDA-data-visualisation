@@ -64,6 +64,14 @@ let surplusGrouped = true;
    default: what is built is a fact and what is intended is not, so the
    committed reading is the one a reader lands on. */
 let surplusPipeline = false;
+/* How the participants with no recorded design category count against stock.
+   The NDIA says their category "is unable to be extracted" from its systems --
+   they are eligible, and need something, but nobody can say what. Leaving them
+   out treats a fifth of demand as needing nothing, which inflates every
+   surplus; the other two readings put them back. Left out is the default so
+   the view reads the recorded figures every other panel reads, and the notes
+   state what the other readings would change. */
+let uncatMode = "recorded";
 
 /* High Physical Support is defined cumulatively on top of Fully Accessible --
    an HPS dwelling must meet every Fully Accessible requirement plus
@@ -80,15 +88,24 @@ let surplusPipeline = false;
    categories were identical in both readings.
 
    Pooling counts Fully Accessible stock against High Physical Support need,
-   which physically does not work. In this file that never flatters anything:
-   no region of the 88 has High Physical Support below 1.0 while the pooled
-   figure reads 1.0 or above, because Fully Accessible is short almost
-   everywhere and so has no surplus to lend upwards. Pooling is also the more
-   conservative of the two -- against the waterfall it moves 14 regions down
-   from "far above" to "above" and 7 from "above" to "balanced", and none up.
-   Worth re-checking when the numbers move. */
+   which physically does not work. It flatters a region only where High
+   Physical Support alone is below 1.0 while the pooled figure reads 1.0 or
+   above -- Fully Accessible lending upwards -- and poolFlattered() counts those
+   from the data rather than the note asserting there are none. In the June
+   2026 file there are none, because Fully Accessible is short almost
+   everywhere and so has no surplus to lend. */
 const POOL_NAME = "High Physical Support + Fully Accessible";
 const POOL_OF = ["High Physical Support", "Fully Accessible"];
+
+/* SA4 regions where pooling lifts High Physical Support over 1.0 on the
+   strength of Fully Accessible stock that cannot physically house HPS need. */
+function poolFlattered() {
+  return DATA.geographies.filter(g => {
+    if (g.level !== "SA4" || !g.has_places) return false;
+    const hps = figuresFor(g, POOL_OF[0]).ratio, pool = figuresFor(g, POOL_NAME).ratio;
+    return hps !== null && pool !== null && hps < RATIO_TIGHT && pool >= RATIO_TIGHT;
+  });
+}
 
 /* The comparable categories the current supply reading is expressed in. */
 function categoriesFor() {
@@ -162,7 +179,8 @@ function supplyFor(g) {
    unit the question "what is the plan for existing surplus SDA?" is actually
    asked in: dwellings standing past the need recorded against them.
 
-   Three deliberate choices, each of which understates rather than overstates:
+   Three deliberate choices that understate rather than overstate, and one
+   assumption (4, below) that does the opposite unless the reader changes it:
 
    1. A tolerance, not a target. Surplus is measured past THRESHOLD x need, not
       past need itself, so a region carrying a few places of headroom is not
@@ -185,7 +203,52 @@ function supplyFor(g) {
       participants and dwellings against nothing, so the only bridge between
       them is the region's own average -- its enrolled places divided by its
       enrolled dwellings, in that category. Surplus places are divided by that
-      average and rounded DOWN. */
+      average and rounded DOWN.
+
+   And one that cuts the other way, which is why it is a switch rather than a
+   fixed choice: 4. The participants whose design category could not be
+   extracted from NDIA systems -- a fifth of all need -- are need all the same.
+   Read against recorded need alone they count as needing nothing, and the
+   surplus comes out high. UNCAT_MODES puts them back. */
+
+/* The three readings of the uncategorised need.
+   - recorded: left out, as every other panel reads the supplement.
+   - basic: they first take up the region's Basic places -- the NDIA folded old
+     Basic decisions into "Missing", and Basic decisions "reflected where a
+     participant was living" -- and only the remainder is spread pro-rata.
+   - prorata: spread across the four categories in proportion to each
+     category's recorded need in that region, as though category were missing
+     at random. The strictest of the three for surplus. */
+const UNCAT_MODES = [["recorded", "Left out"], ["basic", "Basic places first"],
+                     ["prorata", "Pro-rata"]];
+const UNCAT_LABEL = { recorded: "uncategorised need left out",
+                      basic: "uncategorised need after Basic places, pro-rata",
+                      prorata: "uncategorised need pro-rata" };
+
+/* Need by category for one SA4 under a reading of the uncategorised need,
+   plus how many uncategorised participants the reading allocated. Null
+   propagates as everywhere else: a suppressed count on either side leaves
+   the allocation, and so every category it touches, unknown. */
+function needFor(g, mode = uncatMode) {
+  const need = {};
+  for (const c of SURPLUS_ORDER) {
+    const x = g.categories[c];
+    need[c] = x ? x.participants_with_need : null;
+  }
+  if (mode === "recorded") return { need, allocated: 0 };
+  const missing = g.totals.need_without_category;
+  const base = SURPLUS_ORDER.reduce((t, c) => (t === null || need[c] == null) ? null : t + need[c], 0);
+  if (missing == null || base === null) {
+    for (const c of SURPLUS_ORDER) need[c] = null;
+    return { need, allocated: null };
+  }
+  const basic = (g.categories.Basic && g.categories.Basic.enrolled_places) || 0;
+  const spread = mode === "basic" ? Math.max(0, missing - basic) : missing;
+  // With no recorded need to proportion by, there is nothing to spread over.
+  if (!base || !spread) return { need, allocated: 0 };
+  for (const c of SURPLUS_ORDER) need[c] += spread * need[c] / base;
+  return { need, allocated: spread };
+}
 
 const SURPLUS_THRESHOLDS = [[1.05, "5% over need"], [1.2, "20% over need"]];
 /* Grid order, and the order of the map's category buttons: the two
@@ -241,9 +304,10 @@ function surplusTotal(rec) {
    Null propagates exactly as it does in figuresFor(): the NDIA publishes small
    counts as "<11", and reading that as zero on the demand side would invent
    surplus that may not exist. */
-function surplusFor(g, T = surplusThreshold, pipe = surplusPipeline) {
+function surplusFor(g, T = surplusThreshold, pipe = surplusPipeline, uncat = uncatMode) {
   if (!g.has_places) return null;
   const at = c => (g.categories && g.categories[c]) || {};
+  const { need, allocated } = needFor(g, uncat);
 
   /* The places a category has to answer with. Reading the pipeline in, that is
      what is built plus what is intended; a suppressed pipeline figure makes the
@@ -261,21 +325,18 @@ function surplusFor(g, T = surplusThreshold, pipe = surplusPipeline) {
      category answers for its own need alone. */
   let owed = 0;
   if (substitution) {
-    const x = at(POOL_OF[1]);
     const p = placesOf(POOL_OF[1]);
-    owed = (p === null || x.participants_with_need == null)
-      ? null
-      : Math.max(0, T * x.participants_with_need - p);
+    const n = need[POOL_OF[1]];
+    owed = (p === null || n == null) ? null : Math.max(0, T * n - p);
   }
 
   const rec = {};
   for (const c of SURPLUS_ORDER) {
     const lent = (c === POOL_OF[0]) ? owed : 0;
-    const x = at(c);
     const p = placesOf(c);
-    const excess = (lent === null || p === null || x.participants_with_need == null)
+    const excess = (lent === null || p === null || need[c] == null)
       ? null
-      : Math.max(0, p - T * x.participants_with_need - lent);
+      : Math.max(0, p - T * need[c] - lent);
     const ppd = placesPerDwelling(g, c, pipe);
     rec[c] = {
       excess_places: excess,
@@ -285,6 +346,7 @@ function surplusFor(g, T = surplusThreshold, pipe = surplusPipeline) {
     };
   }
   rec.total = surplusTotal(rec);
+  rec.allocated = allocated;
   return rec;
 }
 
@@ -310,6 +372,7 @@ function surplusAgg(recs) {
   }
   rec.total = surplusTotal(rec);
   rec.total.partial = SURPLUS_ORDER.reduce((n, c) => n + (rec[c].partial || 0), 0);
+  rec.allocated = recs.reduce((t, r) => (t === null || !r || r.allocated == null) ? null : t + r.allocated, 0);
   return rec;
 }
 
@@ -477,7 +540,11 @@ async function boot() {
 const VIEWS = new Set(["supply", "vacancy", "surplus"]);
 
 function parseHash() {
-  const raw = decodeURIComponent(location.hash.replace(/^#/, ""));
+  // A hand-typed or truncated link can carry a malformed escape ("#%"), which
+  // decodeURIComponent throws on; that should land on Australia, not a blank page.
+  let raw;
+  try { raw = decodeURIComponent(location.hash.replace(/^#/, "")); }
+  catch (err) { raw = ""; }
   const cut = raw.indexOf("!");
   const name = cut === -1 ? "supply" : raw.slice(0, cut);
   const id = cut === -1 ? raw : raw.slice(cut + 1);
@@ -491,7 +558,11 @@ const hashFor = (name, id) =>
 function routeFromHash() {
   const route = parseHash();
   view = route.view;
-  render(BY_ID.has(route.id) ? route.id : "national");
+  const id = BY_ID.has(route.id) ? route.id : "national";
+  // An id that does not exist falls back to Australia; correct the address to
+  // match, so the page never shows one place under a link to another.
+  if (id !== route.id && location.hash) history.replaceState(null, "", hashFor(view, id));
+  render(id);
 }
 
 function go(id, name = view) {
@@ -509,12 +580,18 @@ function wireViewSwitch() {
 
 /* The vacancy bundle is only fetched when someone actually asks for it, so the
    supply view still loads one file. */
-async function loadVacancies() {
-  if (VAC) return VAC;
-  const res = await fetch("data/vacancies.json");
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  VAC = await res.json();
-  return VAC;
+let vacLoading = null;
+function loadVacancies() {
+  // The promise is cached, not just the result, so navigating while the file
+  // is still arriving waits on the one request instead of starting another. A
+  // failure clears it, so the next visit tries again.
+  if (!vacLoading) {
+    vacLoading = fetch("data/vacancies.json")
+      .then(res => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+      .then(json => (VAC = json))
+      .catch(err => { vacLoading = null; throw err; });
+  }
+  return vacLoading;
 }
 
 /* Re-render while keeping one element where it was on screen. Not scrolling
@@ -571,7 +648,16 @@ function wireBandSwitch() {
    to scroll back to the top to change it. Both write the one variable. */
 const SURPLUS_THRESH_SWITCHES = ["surThreshSwitch", "surGridThreshSwitch"];
 const SURPLUS_PIPE_SWITCHES = ["surPipeSwitch", "surGridPipeSwitch"];
+const SURPLUS_UNCAT_SWITCHES = ["surUncatSwitch", "surGridUncatSwitch"];
 function wireSurplusSwitches() {
+  for (const id of SURPLUS_UNCAT_SWITCHES) {
+    document.getElementById(id).addEventListener("click", e => {
+      const btn = e.target.closest("button[data-uncat]");
+      if (!btn) return;
+      uncatMode = btn.dataset.uncat;
+      inPlace(id, () => renderSurplus(current));
+    });
+  }
   for (const id of SURPLUS_THRESH_SWITCHES) {
     document.getElementById(id).addEventListener("click", e => {
       const btn = e.target.closest("button[data-thresh]");
@@ -698,7 +784,7 @@ function renderChrome(g) {
     const label = n.level === "National" ? "Australia" : n.name;
     return i === trail.length - 1
       ? `<span class="here">${label}</span>`
-      : `<a href="#${encodeURIComponent(n.id)}">${label}</a><span aria-hidden="true">›</span>`;
+      : `<a href="${hashFor(view, n.id)}">${label}</a><span aria-hidden="true">›</span>`;
   }).join("");
 
   document.getElementById("placeName").textContent = g.level === "National" ? "Australia" : g.name;
@@ -719,6 +805,7 @@ function renderSupply(g) {
 
   const note = document.getElementById("modeNote");
   note.hidden = !(g.has_places && substitution);
+  const flattered = poolFlattered();
   note.innerHTML =
     "<b>A model, not a count.</b> High Physical Support is defined cumulatively on top of Fully "
     + "Accessible, so an HPS dwelling meets the Fully Accessible standard and could house someone "
@@ -726,8 +813,14 @@ function renderSupply(g) {
     + "stock against one body of demand &mdash; rather than as a donor and a borrower, which would "
     + "let the same places back two comfortable ratios at once. Improved Liveability and Robust are "
     + "unchanged: nothing substitutes for them. Pooling does count Fully Accessible stock against "
-    + "High Physical Support need, which is not physically possible; in this file it never flatters "
-    + "a region, because Fully Accessible is short almost everywhere. Every dwelling is still "
+    + "High Physical Support need, which is not physically possible; "
+    + (flattered.length
+        ? `in <b>${flattered.length}</b> region${flattered.length === 1 ? "" : "s"} `
+          + `(${flattered.map(r => r.name).join(", ")}) that lifts the pool to 1.0 or above while `
+          + "High Physical Support alone sits below it, so read those with care. "
+        : "in this file that never lifts a region to 1.0 or above while High Physical Support alone "
+          + "sits below it, because Fully Accessible is short almost everywhere. ")
+    + "Every dwelling is still "
     + "<b>enrolled</b> in one category, and SDA payment follows the participant&rsquo;s funded "
     + "category, so this shows physical suitability rather than what a provider would be paid.";
 
@@ -759,6 +852,12 @@ function renderTiles(g) {
   const tiles = [
     ["Enrolled dwellings", cell(t.enrolled_dwellings), null],
     ...(g.has_places ? [["Enrolled places", cell(places), "resident capacity, all categories"]] : []),
+    /* Capacity no SDA payment is being made against, from Supplement P alone:
+       no design category, no listings platform. */
+    ...(g.has_places && t.places_not_in_use != null && places
+      ? [["Places not in SDA use", cell(t.places_not_in_use),
+          `${pct(t.places_not_in_use / places, 0)} of places · enrolled places less participants using SDA`]]
+      : []),
     ["Participants with need", cell(t.participants_with_need),
       t.participants_sda_in_use != null
         ? `${fmt(t.participants_sda_in_use)} using SDA · ${fmt(t.participants_eligible_not_using)} eligible, not yet using`
@@ -934,63 +1033,112 @@ function renderChildren(g, comparable) {
   };
 }
 
+/* Indexed, because the series are in different units. Enrolled dwellings and
+   participants cannot share an axis honestly: a five-resident group home is
+   one dwelling and five places, so dwellings drawn against people put supply
+   far below demand when, counted in places, it is already above it. Each
+   series is instead drawn as growth from its own first quarter, which is the
+   comparison the chart exists for -- is stock growing faster than the people
+   using it? -- and needs no unit conversion the supplement does not publish.
+
+   Need is split into its two parts because they move in opposite directions,
+   and their sum hides that. */
 function renderTrend(g) {
   const panel = document.getElementById("trendPanel");
   const trend = DATA.national_trend;
   // The supplement publishes history only nationally, so this is the one level
   // where a trend can honestly be drawn.
   if (g.level !== "National" || !trend.quarters.length) { panel.hidden = true; return; }
-  panel.hidden = false;
 
   const q = trend.quarters;
-  const dwellings = trend.series.enrolled_dwellings || [];
-  const need = (trend.series.sda_in_use || []).map(
-    (v, i) => v + (trend.series.sda_eligible_not_using || [])[i]);
-  if (!dwellings.length || !need.length) { panel.hidden = true; return; }
+  const index = s => (s && s.length && s[0]) ? s.map(v => v == null ? null : v / s[0] * 100) : null;
+  const series = [
+    { key: "enrolled_dwellings", hue: "--accent", dash: "", l1: "Enrolled", l2: "dwellings" },
+    { key: "sda_in_use", hue: "--demand", dash: "", l1: "Participants", l2: "using SDA" },
+    { key: "sda_eligible_not_using", hue: "--demand", dash: "5 4", l1: "Eligible, not", l2: "yet using SDA" },
+  ].map(s => ({ ...s, raw: trend.series[s.key], idx: index(trend.series[s.key]) }))
+   .filter(s => s.idx);
+  if (series.length < 2) { panel.hidden = true; return; }
+  panel.hidden = false;
 
-  const W = 900, H = 300, M = { t: 22, r: 136, b: 34, l: 46 };
+  const W = 900, H = 300, M = { t: 22, r: 150, b: 34, l: 46 };
   const iw = W - M.l - M.r, ih = H - M.t - M.b;
-  const yMax = Math.ceil(Math.max(...need, ...dwellings) / 7000) * 7000;
+  const all = series.flatMap(s => s.idx.filter(v => v != null));
+  const step = 20;
+  const yMin = Math.min(100, Math.floor(Math.min(...all) / step) * step);
+  const yMax = Math.ceil(Math.max(...all) / step) * step;
   const x = i => M.l + (i / (q.length - 1)) * iw;
-  const y = v => M.t + ih - (v / yMax) * ih;
-  const line = s => s.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+  const y = v => M.t + ih - ((v - yMin) / (yMax - yMin)) * ih;
+  // A gap in a series (a quarter the figure's prose did not state) breaks the
+  // line rather than being drawn through.
+  const line = s => s.map((v, i) => v == null ? "" :
+    `${i && s[i - 1] != null ? "L" : "M"}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
   const last = q.length - 1;
-  const out = [`<svg class="trend" viewBox="0 0 ${W} ${H}" role="img" aria-label="Enrolled dwellings grew from ${fmt(dwellings[0])} to ${fmt(dwellings[last])} between ${q[0]} and ${q[last]}, while participants with an SDA need grew from ${fmt(need[0])} to ${fmt(need[last])}.">`];
+  const growth = s => s.raw[last] != null ? s.raw[last] / s.raw[0] - 1 : null;
+  const signed = v => `${v >= 0 ? "+" : "−"}${Math.abs(v * 100).toFixed(0)}%`;
 
-  for (let t = 0; t <= yMax; t += 7000) {
-    out.push(`<line class="grid-line" x1="${M.l}" y1="${y(t)}" x2="${M.l + iw}" y2="${y(t)}"/>`);
-    out.push(`<text x="${M.l - 9}" y="${y(t) + 3.5}" text-anchor="end">${t / 1000}k</text>`);
+  const out = [`<svg class="trend" viewBox="0 0 ${W} ${H}" role="img" aria-label="Growth since ${q[0]}, `
+    + `indexed to 100: ` + series.map(s => `${s.l1} ${s.l2} ${fmt(s.raw[0])} to ${fmt(s.raw[last])}`
+      + ` (${signed(growth(s))})`).join("; ") + `.">`];
+
+  for (let t = yMin; t <= yMax; t += step) {
+    out.push(`<line class="${t === 100 ? "axis-line" : "grid-line"}" x1="${M.l}" y1="${y(t)}" x2="${M.l + iw}" y2="${y(t)}"/>`);
+    out.push(`<text x="${M.l - 9}" y="${y(t) + 3.5}" text-anchor="end">${t}</text>`);
   }
-  out.push(`<line class="axis-line" x1="${M.l}" y1="${M.t + ih}" x2="${M.l + iw}" y2="${M.t + ih}"/>`);
   q.forEach((label, i) => {
     if (i % 4 === 0 || i === last)
       out.push(`<text x="${x(i)}" y="${M.t + ih + 19}" text-anchor="middle">${label}</text>`);
   });
 
-  out.push(`<path d="${line(need)}" fill="none" stroke="var(--demand)" stroke-width="2" stroke-linejoin="round"/>`);
-  out.push(`<path d="${line(dwellings)}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>`);
-
-  [[need, "--demand", "Participants", "with SDA need"],
-   [dwellings, "--accent", "Enrolled", "dwellings"]].forEach(([series, hue, l1, l2]) => {
-    out.push(`<circle cx="${x(last)}" cy="${y(series[last])}" r="4.5" fill="var(${hue})" stroke="var(--surface)" stroke-width="2"/>`);
-    out.push(`<text class="ser-label" x="${x(last) + 11}" y="${y(series[last]) - 3}">${l1}</text>`);
-    out.push(`<text class="ser-label" x="${x(last) + 11}" y="${y(series[last]) + 12}">${l2}</text>`);
-    out.push(`<text x="${x(last) + 11}" y="${y(series[last]) + 26}">${fmt(series[last])}</text>`);
-  });
+  for (const s of series) {
+    out.push(`<path d="${line(s.idx)}" fill="none" stroke="var(${s.hue})" stroke-width="2"`
+      + `${s.dash ? ` stroke-dasharray="${s.dash}"` : ""} stroke-linejoin="round"/>`);
+  }
+  /* End labels, nudged apart where two series finish close together. */
+  const ends = series.filter(s => s.idx[last] != null)
+    .map(s => ({ s, at: y(s.idx[last]) })).sort((a, b) => a.at - b.at);
+  for (let i = 1; i < ends.length; i++) ends[i].at = Math.max(ends[i].at, ends[i - 1].at + 42);
+  for (const { s, at } of ends) {
+    out.push(`<circle cx="${x(last)}" cy="${y(s.idx[last])}" r="4.5" fill="var(${s.hue})" stroke="var(--surface)" stroke-width="2"/>`);
+    out.push(`<text class="ser-label" x="${x(last) + 11}" y="${at - 3}">${s.l1}</text>`);
+    out.push(`<text class="ser-label" x="${x(last) + 11}" y="${at + 12}">${s.l2}</text>`);
+    out.push(`<text x="${x(last) + 11}" y="${at + 26}">${signed(growth(s))} · ${fmt(s.raw[last])}</text>`);
+  }
 
   q.forEach((label, i) => {
-    out.push(`<g><title>${label} — ${fmt(dwellings[i])} enrolled dwellings · ${fmt(need[i])} participants with an SDA need</title>`
-      + `<rect x="${x(i) - iw / (q.length - 1) / 2}" y="${M.t}" width="${iw / (q.length - 1)}" height="${ih}" fill="transparent"/></g>`);
+    out.push(`<g><title>${label} — ` + series.map(s => `${fmt(s.raw[i]) ?? "—"} ${s.l1.toLowerCase()} ${s.l2}`).join(" · ")
+      + `</title><rect x="${x(i) - iw / (q.length - 1) / 2}" y="${M.t}" width="${iw / (q.length - 1)}" height="${ih}" fill="transparent"/></g>`);
   });
   out.push("</svg>");
   document.getElementById("trendChart").innerHTML = out.join("");
 
-  const growth = (a, b) => `${((b / a - 1) * 100).toFixed(1)}%`;
-  document.getElementById("trendNote").innerHTML =
-    `Enrolled dwellings grew <b>${growth(dwellings[0], dwellings[last])}</b> between ${q[0]} and ${q[last]}, `
-    + `while participants with an identified SDA need rose <b>${growth(need[0], need[last])}</b>. `
-    + `Aggregate supply is catching up quickly, so the category shortfalls above are a question of `
-    + `<b>composition</b> — which design categories, in which regions — rather than volume alone.`;
+  /* Read off the series, so a new quarter cannot leave the prose asserting
+     what the chart no longer shows. */
+  const [dw, use, wait] = ["enrolled_dwellings", "sda_in_use", "sda_eligible_not_using"]
+    .map(k => series.find(s => s.key === k));
+  const spare = g.totals.places_not_in_use;
+  const places = g.totals.enrolled_places;
+  let note = `Each line is growth from ${q[0]}, indexed to 100, because dwellings and participants are `
+    + "different units and cannot honestly share an axis. ";
+  if (dw && use && growth(dw) != null && growth(use) != null) {
+    note += `Enrolled dwellings grew <b>${signed(growth(dw))}</b> to ${q[last]}; participants using SDA `
+      + `grew <b>${signed(growth(use))}</b>`
+      + (wait && growth(wait) != null
+          ? `, and those eligible but not yet using it moved <b>${signed(growth(wait))}</b>` : "")
+      + ". ";
+    if (growth(dw) > growth(use)) {
+      note += "Stock has grown faster than the number of people living in it"
+        + (spare != null && places
+            ? ` &mdash; today <b>${fmt(spare)}</b> of ${fmt(places)} enrolled places `
+              + `(${pct(spare / places, 0)}) have no SDA-funded participant in them` : "")
+        + ", so the shortfalls in particular design categories above sit beside a large body of capacity "
+        + "in others, not a shortage of stock overall.";
+    } else {
+      note += "Use has kept pace with stock, so the category shortfalls above are not offset by spare "
+        + "capacity elsewhere.";
+    }
+  }
+  document.getElementById("trendNote").innerHTML = note;
 }
 
 /* ---------- map ---------- */
@@ -1005,10 +1153,9 @@ function renderTrend(g) {
    1.5 and 2.5 are where the mass actually sits. Of the 88 regions, High
    Physical Support puts 29 between them and 35 above, and Robust 15 and 24,
    while Fully Accessible and Improved Liveability barely reach the band.
-   Breaks are fixed across the four categories so the maps stay comparable.
-
-   Note these are not ratioChip()'s cuts: the chips still read 1.25 and over
-   as simply good. */
+   Breaks are fixed across the four categories so the maps stay comparable,
+   and the upper three are the same RATIO_* constants the chips, the grid and
+   the band tally read, so every panel draws the same cut in the same place. */
 const MAP_BREAKS = [0.5, 0.75, RATIO_TIGHT, RATIO_GOOD, RATIO_HIGH];
 
 /* Which capital is worth an inset. Hobart, Darwin and Canberra are a single
@@ -1568,6 +1715,7 @@ function renderBands(g) {
 
 function renderNotes(g) {
   const cal = DATA.meta.derivation_calibration;
+  const res = DATA.meta.residents_calibration;
   const missing = g.totals.need_without_category;
   const share = (missing && g.totals.participants_with_need)
     ? (missing / g.totals.participants_with_need * 100).toFixed(0) : null;
@@ -1582,6 +1730,12 @@ function renderNotes(g) {
      `<b>${fmt(missing)}</b> of ${fmt(g.totals.participants_with_need)} participants could not have an eligible `
      + "design category extracted from NDIA systems, so they sit outside every ratio above. Where that share is "
      + "large, treat the individual category ratios as indicative."]] : []),
+    ...(g.has_places && g.totals.places_not_in_use != null ? [["t-info",
+     "Places not in SDA use are spare capacity, not vacancies.",
+     "Every participant with SDA in use occupies an enrolled place, so enrolled places less that count "
+     + "is capacity no SDA payment is being made against &mdash; measured without a design category or a "
+     + "listings platform. It is an upper bound on vacancy rather than a count of it: a place can be "
+     + "occupied by someone not funded for SDA, and a new build can be enrolled before anyone moves in."]] : []),
     ["t-care", "The pipeline is an intention, not a supply forecast.",
      "The NDIA states that pipeline dwellings may never be enrolled, may be enrolled in a different design "
      + "category, and that some already-enrolled dwellings remain in the data &mdash; overstating it. From March 2026, "
@@ -1595,7 +1749,13 @@ function renderNotes(g) {
      + `arithmetic to new builds reproduces the NDIA's published figure exactly for <b>${(cal.exact_share * 100).toFixed(1)}%</b> `
      + `of ${cal.values_checked} values, with a largest single gap of ${cal.largest_difference_places} places and a net bias of `
      + `${(cal.net_bias_on_sa4_totals * 100).toFixed(2)}% &mdash; because a dwelling's enrolled maximum residents can be `
-     + "lower than its dwelling type implies."]] : [
+     + "lower than its dwelling type implies."
+     + (res && res.regions_checked
+         ? " That check covers new builds only. Table P.6, which counts every enrolled dwelling by its "
+           + "maximum residents, covers existing and legacy stock too: the places it implies match the "
+           + `derived total within 2% in <b>${res.within_2_percent}</b> of ${res.regions_checked} SA4 regions, `
+           + `and nationally ${fmt(res.national.derived)} derived against ${fmt(res.national.from_residents)}.`
+         : "")]] : [
      ["t-info", "SA3 has no places figure.",
       "The dwelling-form cross-tabs the places derivation depends on are published at SA4 and above only, so "
       + "no places or ratio can be formed at SA3. Dwelling counts and participant need are still shown."]]),
@@ -1616,6 +1776,13 @@ function renderSurplus(g) {
   renderSurplusMap(g);
   renderSurplusGrid(g);
   renderSurplusNotes(g);
+
+  /* The one view whose state and national rows are not the NDIA's subtotals,
+     so it cannot share the supply view's footnote, which says they are. */
+  document.getElementById("footNote").textContent =
+    `Surplus is calculated SA4 by SA4 from the published tables of NDIS Supplement P, as at `
+    + `${DATA.meta.as_at}. State and national figures are summed from their regions rather than `
+    + `read from the NDIA's subtotals, so they will not match the same rows in the supply view.`;
 }
 
 /* The surplus one geography holds. An SA4 answers for itself; Australia and a
@@ -1623,16 +1790,20 @@ function renderSurplus(g) {
    for an SA4 returns that region's PEERS -- right for the grid and the map,
    which put a region among the others in its state, and quite wrong for a tile
    that names the region itself. */
-function surplusOf(g, pipe = surplusPipeline) {
+function surplusOf(g, pipe = surplusPipeline, uncat = uncatMode) {
   if (!g.has_places) return null;
-  if (g.level === "SA4") return surplusFor(g, surplusThreshold, pipe);
+  if (g.level === "SA4") return surplusFor(g, surplusThreshold, pipe, uncat);
   const kids = sa4Groups(g).flatMap(gr => gr.kids);
   return kids.length
-    ? surplusAgg(kids.map(k => surplusFor(k, surplusThreshold, pipe)))
+    ? surplusAgg(kids.map(k => surplusFor(k, surplusThreshold, pipe, uncat)))
     : null;
 }
 
-const threshLabel = () => SURPLUS_THRESHOLDS.find(t => t[0] === surplusThreshold)[1];
+function uncatButtons() {
+  return UNCAT_MODES.map(([mode, label]) =>
+    `<button type="button" data-uncat="${mode}" aria-pressed="${mode === uncatMode}">`
+    + `${label}</button>`).join("");
+}
 
 function threshButtons() {
   return SURPLUS_THRESHOLDS.map(([t, label]) =>
@@ -1681,7 +1852,12 @@ function renderSurplusTiles(g) {
          return [c, cell(x.dwellings),
            against(x, other && other[c]) || lent
            || (x.excess_places != null ? `${fmt(x.excess_places)} places` : null)];
-       })]
+       }),
+       ["No category recorded", cell(g.totals.need_without_category),
+        uncatMode === "recorded" ? "participants · left out of this reading"
+        : rec.allocated == null ? "participants · a suppressed count leaves the allocation unknown"
+        : `participants · ${fmt(rec.allocated)} counted as need`
+          + (uncatMode === "basic" ? " after Basic places" : ", pro-rata")]]
     : [["Surplus dwellings", '<span class="nil">&mdash;</span>',
         "places are not published below SA4"]];
 
@@ -1803,12 +1979,14 @@ function renderSurplusMap(g) {
   document.getElementById("surThreshSwitch").innerHTML = threshButtons();
   document.getElementById("surPipeSwitch").innerHTML = pipeButtons();
   document.getElementById("surModeSwitch").innerHTML = modeButtons();
+  document.getElementById("surUncatSwitch").innerHTML = uncatButtons();
 
   document.getElementById("surMapSub").textContent =
     fmt(total) + " surplus dwellings across " + holding + " of "
     + (scope ? ids.length + " " + where + " regions" : "all " + ids.length + " SA4 regions")
     + " · " + (surplusPipeline ? "enrolled and pipeline" : "enrolled stock only")
     + " · " + (substitution ? "allowing substitution" : "as enrolled")
+    + " · " + UNCAT_LABEL[uncatMode]
     + " · click a region to open it";
 
   document.getElementById("surMapLegend").innerHTML =
@@ -1906,6 +2084,7 @@ function renderSurplusGrid(g) {
     `Stock past ${surplusThreshold.toFixed(2)} × the need recorded against it · `
     + (surplusPipeline ? "enrolled and pipeline · " : "enrolled stock only · ")
     + (substitution ? "allowing substitution · " : "as enrolled · ")
+    + UNCAT_LABEL[uncatMode] + " · "
     + (ranked
         ? `${regions} regions ranked`
           + (surplusSort.key ? "" : " by surplus across all categories") + ", "
@@ -1915,6 +2094,7 @@ function renderSurplusGrid(g) {
   document.getElementById("surGridGroupSwitch").innerHTML = groupButtons(surplusGrouped);
   document.getElementById("surGridThreshSwitch").innerHTML = threshButtons();
   document.getElementById("surGridPipeSwitch").innerHTML = pipeButtons();
+  document.getElementById("surGridUncatSwitch").innerHTML = uncatButtons();
   // The total column is ruled off from the four it sums; headCells() is shared
   // with the supply grid, so the class is added here rather than given to it.
   document.getElementById("surGridHead").innerHTML = headCells(cols, surplusSort)
@@ -2044,7 +2224,31 @@ function renderSurplusGrid(g) {
 }
 
 function renderSurplusNotes(g) {
+  /* The whole range, whichever reading is selected: this is the assumption
+     that moves the answer most, so the reader should never have to click
+     through three buttons to learn how much. */
+  const nat = BY_ID.get("national");
+  const missing = nat.totals.need_without_category, allNeed = nat.totals.participants_with_need;
+  const byMode = UNCAT_MODES.map(([mode, label]) => {
+    const rec = surplusOf(nat, surplusPipeline, mode);
+    return { mode, label, dwellings: rec ? rec.total.dwellings : null };
+  });
+  const said = m => `<b>${fmt(byMode.find(x => x.mode === m).dwellings)}</b>`;
+  const uncatNote = (missing && allNeed) ? [[uncatMode === "recorded" ? "t-block" : "t-care",
+    `${pct(missing / allNeed, 0)} of need has no design category recorded.`,
+    `<b>${fmt(missing)}</b> of ${fmt(allNeed)} participants are eligible for SDA but, in the NDIA&rsquo;s `
+    + "words, their design category &ldquo;is unable to be extracted&rdquo; from its systems. They need "
+    + "somewhere to live all the same, and leaving them out counts them as needing nothing, which "
+    + "raises every surplus here. Nationally, at this threshold and reading, surplus is "
+    + `${said("recorded")} dwellings with them left out, ${said("basic")} if they first take up their `
+    + `region&rsquo;s Basic places and the rest are spread pro-rata, and ${said("prorata")} if all of `
+    + "them are spread across the four categories in proportion to each one&rsquo;s recorded need. "
+    + "Basic-first is the more plausible middle: the NDIA folded old Basic decisions, which "
+    + "&ldquo;reflected where a participant was living&rdquo;, into the same uncategorised count. "
+    + "Pro-rata assumes the category is missing at random, which nothing in the supplement confirms."]]
+    : [];
   const notes = [
+    ...uncatNote,
     ["t-block", "A surplus dwelling here is not an empty dwelling.",
      "Enrolled places include places that are <b>already occupied</b>. What this panel measures is a "
      + "mismatch of <b>mix</b> &mdash; stock enrolled in a category beyond the need recorded against "
@@ -2153,6 +2357,9 @@ function renderVacTiles(g, p) {
       `${fmt(p.listings)} listing${p.listings === 1 ? "" : "s"}`],
     ...(p.rate != null ? [["Share of enrolled places", pctCell(p.rate),
       `of ${fmt(p.enrolled_places)} enrolled places`]] : []),
+    // How much of this market advertises here, measured rather than warned about.
+    ...(p.listing_coverage != null ? [["Share of spare capacity listed", pctCell(p.listing_coverage),
+      `of ${fmt(p.places_not_in_use)} places not in SDA use`]] : []),
     ["In wholly empty dwellings", cell(whole),
       p.vacant_places ? `${pct(shareOf(whole, p.vacant_places), 0)} of vacant places` : null],
     ["In otherwise occupied dwellings", cell(num(p.depth.rooms, "places")),
@@ -2365,11 +2572,32 @@ function renderVacBridge(g) {
       + `because the listing-propensity problem stamped across this whole view is a property of the `
       + `<i>region</i> — a provider base that advertises more inflates every category it holds alike — `
       + `so it cancels when the comparison stays inside one region.` : "")
+    /* Stock age is the confound the region control cannot remove, and it is
+       stated beside the figure it qualifies rather than in a footnote. */
+    + (wr && wr.newbuild && wr.controlling_newbuild
+      ? `<br><br><b>Stock age runs through it.</b> Within a region, the share of a category that is new `
+        + `build predicts its vacancy at least as well (&rho; = ${wr.newbuild.r.toFixed(2)}), and the `
+        + `categories read as oversupplied are largely the recently built ones (&rho; = `
+        + `${wr.newbuild.with_ratio.toFixed(2)} between the two). Holding new-build share constant, the `
+        + `ratio's own correlation falls to <b>${wr.controlling_newbuild.r.toFixed(2)}</b> `
+        + `(p = ${wr.controlling_newbuild.p.toFixed(2)}). New stock still being leased up for the first `
+        + `time and lasting oversupply look alike in a single quarter; only whether the vacancy persists `
+        + `across quarters can tell them apart.`
+      : "")
     + (worked.length && didnt.length
       ? `<br><br>Held the other way it is much weaker. Within a single design category, comparing regions, `
         + `only ${detail(worked)} show the relationship; for ${list(didnt)} it is `
-        + `indistinguishable from zero. So this supports reading a high places-per-participant figure as `
-        + `genuine slack in a market — it does not support predicting one region's vacancy from its ratio.`
+        + `indistinguishable from zero. So a high places-per-participant figure does go with more listed `
+        + `vacancy, though part of that is lease-up — and it does not support predicting one region's `
+        + `vacancy from its ratio.`
+      : "")
+    + (corr.shared_term_null
+      ? `<br><br>Enrolled places sits on both axes, which can manufacture a correlation out of noise. `
+        + `Simulating a world where every place is equally likely to be vacant, at `
+        + `${pct(corr.shared_term_null.null_rate)}, puts &rho; at `
+        + `${corr.shared_term_null.mean >= 0 ? "+" : ""}${corr.shared_term_null.mean.toFixed(2)} `
+        + `(sd ${corr.shared_term_null.sd.toFixed(2)}), so the shared term contributes nothing material and `
+        + `the observed figure sits ${corr.shared_term_null.z.toFixed(1)} standard deviations above it.`
       : "")
     + (here.size ? ` Points in ${g.level === "National" ? "Australia" : g.name} are highlighted.` : "");
 }
@@ -2498,15 +2726,64 @@ function renderVacSuburbs(p) {
   });
 }
 
+/* The model note is written from the fitted terms, so the claim moves with the
+   export instead of standing still while the data under it changes. |z| of 2
+   is the line: roughly the 5% level, and the one a reader can check. */
+function modelNote(model) {
+  const tested = model.terms.filter(t => t.kind !== "control");
+  const quiet = tested.filter(t => Math.abs(t.z) < 2);
+  const loud = tested.filter(t => Math.abs(t.z) >= 2);
+  const name = t => t.kind === "category" ? t.term
+    : t.term.toLowerCase().replace(/\s*\(log\)$/, "");
+  const list = ts => ts.map(name).join(", ").replace(/, ([^,]*)$/, " and $1");
+  const price = loud.find(t => t.kind === "price");
+  return ["t-care", "Dwelling size explains whole-dwelling vacancy; most features do not.",
+    "It is tempting to read the category and feature charts causally. Fitting a logistic model to the "
+    + `<b>${fmt(model.n)}</b> listings for shared dwellings of two to five residents, with dwelling size `
+    + `and form held constant, ${list(quiet)} show no independent association with whether a vacancy `
+    + `is the whole dwelling (|z| &lt; 2; each category compared with ${model.reference}).`
+    + (loud.length
+        ? " " + loud.map((t, i) => `${i ? name(t) : name(t).replace(/^./, ch => ch.toUpperCase())} `
+            + `(z = ${t.z >= 0 ? "+" : ""}${t.z.toFixed(1)})`).join(", ").replace(/, ([^,]*)$/, " and $1")
+          + (loud.length === 1 ? " does." : " do.")
+          + (price
+              ? " Price per room is largely set by the NDIA&rsquo;s price limits for a category, dwelling "
+                + "type and location, and new builds price above existing stock, so a price effect is as "
+                + "likely to be newer stock still being leased up as anything about price itself."
+              : "")
+        : "")
+    + " Read those charts as description, not explanation."];
+}
+
 function renderVacNotes(g, p) {
   const meta = VAC.meta;
   const assigned = meta.match.postcode + meta.match.override;
+  const sa4Count = DATA.geographies.filter(x => x.level === "SA4" && hasData(x)).length;
+  /* The two largest markets by enrolled places, read from the data so the
+     contrast cannot go stale when a new export lands. */
+  const [bigA, bigB] = DATA.geographies
+    .filter(x => x.level === "State" && VAC.regions[x.id] && VAC.regions[x.id].rate != null)
+    .sort((a, b) => totalPlaces(b) - totalPlaces(a))
+    .slice(0, 2)
+    .map(x => ({ name: x.name, rate: VAC.regions[x.id].rate,
+                 coverage: VAC.regions[x.id].listing_coverage }))
+    .sort((a, b) => b.rate - a.rate);
   const notes = [
     ["t-block", "Housing Hub is a listings platform, not a vacancy census.",
      "Only vacancies a provider chose to advertise appear here, and providers list at very different "
-     + "rates. Victoria shows <b>17.3%</b> of its enrolled places as vacant against New South Wales' "
-     + "<b>6.0%</b> — a gap far too large to be real, and better read as a difference in how much of "
-     + "each market advertises here. Compare categories and dwelling types within a region freely; "
+     + "rates. "
+     + (bigA && bigB
+         ? `Of the two largest markets, ${bigA.name} shows <b>${pct(bigA.rate)}</b> of its enrolled `
+           + `places as vacant against ${bigB.name}'s <b>${pct(bigB.rate)}</b> — a gap better read `
+           + "as a difference in how much of each market advertises here than as a difference in "
+           + "vacancy. "
+           + (bigA.coverage != null && bigB.coverage != null
+               ? "Supplement P says as much on its own: measured against the places no SDA-funded "
+                 + `participant is using, listings account for <b>${pct(bigA.coverage, 0)}</b> of that `
+                 + `spare capacity in ${bigA.name} and <b>${pct(bigB.coverage, 0)}</b> in ${bigB.name}. `
+               : "")
+         : "")
+     + "Compare categories and dwelling types within a region freely; "
      + "compare one region against another only with this in mind."],
     ["t-info", "Whole-dwelling and single-room vacancies are derived, not published.",
      "The export gives a vacancy count and a building type. Where the count reaches the resident "
@@ -2518,19 +2795,14 @@ function renderVacNotes(g, p) {
     ["t-care", "Two dates, not one.",
      `Vacancies are as at <b>${meta.as_at}</b>; the enrolled places they are divided by are as at `
      + `<b>${meta.sda_as_at}</b>. Every rate on this page straddles those two months, and a rate is `
-     + "suppressed where fewer than 50 enrolled places sit underneath it."],
-    ["t-care", "Design category and dwelling features do not predict whole-dwelling vacancy.",
-     "It is tempting to read the category and feature charts causally. Fitting a model to the 1,910 "
-     + "shared dwellings in this export, once dwelling size and form are held constant, design "
-     + "category, onsite overnight assistance, a breakout room and price all lose any independent "
-     + "association with whether a vacancy is the whole dwelling. Dwelling size is doing nearly all "
-     + "the work. Read those two charts as description, not explanation."],
+     + `suppressed where fewer than ${fmt(meta.rate_floor)} enrolled places sit underneath it.`],
+    ...(meta.whole_dwelling_model ? [modelNote(meta.whole_dwelling_model)] : []),
     ["t-info", "Regions are assigned from postcode and suburb.",
      `The export carries no statistical geography, so each listing is matched to an SA4 through a `
      + `postcode and locality concordance. All <b>${fmt(meta.listings)}</b> listings resolved: `
      + `${fmt(meta.match.suburb)} on an exact suburb and postcode, and ${fmt(assigned)} on the postcode `
      + `alone or a hand-checked correction. Vacancy appears in `
-     + `<b>${meta.regions_with_vacancy.SA4}</b> of the 88 SA4 regions.`],
+     + `<b>${meta.regions_with_vacancy.SA4}</b> of the ${sa4Count} SA4 regions.`],
     ["t-care", "No rate below SA4.",
      "Supplement P publishes the dwelling cross-tabs the places derivation needs at SA4 and above "
      + `only, so SA3 pages show counts and the whole-versus-rooms split but no rate. `

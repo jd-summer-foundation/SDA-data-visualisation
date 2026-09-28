@@ -129,8 +129,8 @@
 
     <section class="panel" id="trendPanel" hidden>
       <div class="panel-head"><div>
-        <div class="panel-title">Enrolled dwellings against participants with an SDA need</div>
-        <div class="panel-sub">National, by quarter &middot; recovered from Figure P.1</div>
+        <div class="panel-title">Growth in stock against growth in the people using it</div>
+        <div class="panel-sub">National, by quarter, indexed to 100 at the first quarter &middot; recovered from Figure P.1</div>
       </div></div>
       <div id="trendChart"></div>
       <p class="trend-note" id="trendNote"></p>
@@ -233,7 +233,7 @@
             <div class="panel-title">Vacant places by dwelling form</div>
             <div class="panel-sub">Share of each form&rsquo;s vacancy that is the whole dwelling</div>
           </div></div>
-          <div class="minibars" id="vacFormBars"></div>
+          <div class="stackbars" id="vacFormBars"></div>
         </section>
         <section class="panel" id="vacFeaturePanel">
           <div class="panel-head"><div>
@@ -313,6 +313,7 @@
           <div class="levelswitch" id="surThreshSwitch" role="group" aria-label="Surplus threshold"></div>
           <div class="levelswitch" id="surPipeSwitch" role="group" aria-label="Whether the pipeline is counted"></div>
           <div class="levelswitch" id="surModeSwitch" role="group" aria-label="How supply is counted"></div>
+          <div class="levelswitch" id="surUncatSwitch" role="group" aria-label="How participants with no recorded design category are counted"></div>
         </div>
       </div>
       <div class="map-legend" id="surMapLegend"></div>
@@ -331,6 +332,7 @@
           <div class="levelswitch" id="surGridGroupSwitch" role="group" aria-label="How the regions are arranged"></div>
           <div class="levelswitch" id="surGridThreshSwitch" role="group" aria-label="Surplus threshold"></div>
           <div class="levelswitch" id="surGridPipeSwitch" role="group" aria-label="Whether the pipeline is counted"></div>
+          <div class="levelswitch" id="surGridUncatSwitch" role="group" aria-label="How participants with no recorded design category are counted"></div>
         </div>
       </div>
       <div class="map-legend" id="surGridLegend"></div>

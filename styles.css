@@ -304,7 +304,7 @@ footer p { font-family: var(--mono); font-size: 11px; line-height: 1.7; color: v
 footer a { color: var(--accent); }
 
 .levelswitch[hidden] { display: none; }
-.levelswitch { display: inline-flex; background: var(--ground); border: 1px solid var(--rule); border-radius: 7px; padding: 2px; gap: 2px; }
+.levelswitch { display: inline-flex; flex-wrap: wrap; max-width: 100%; background: var(--ground); border: 1px solid var(--rule); border-radius: 7px; padding: 2px; gap: 2px; }
 .levelswitch button {
   font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
   background: none; border: 0; border-radius: 5px; padding: 5px 11px; cursor: pointer; color: var(--ink-3);
@@ -340,6 +340,12 @@ footer a { color: var(--accent); }
 /* ---------- stacked depth bars ---------- */
 .stackbars { display: flex; flex-direction: column; gap: 13px; }
 .stackrow { display: grid; grid-template-columns: minmax(104px, auto) minmax(0, 1fr) 92px; align-items: center; gap: 11px; }
+/* Aligned across rows for the same reason as .minibars above: dwelling-form
+   labels run from "House" to "Villa / Duplex / Townhouse". */
+@supports (grid-template-columns: subgrid) {
+  .stackbars { display: grid; grid-template-columns: minmax(104px, auto) minmax(0, 1fr) 92px; row-gap: 13px; }
+  .stackrow { grid-column: 1 / -1; grid-template-columns: subgrid; }
+}
 .stackrow.total { padding-bottom: 13px; margin-bottom: 3px; border-bottom: 1px solid var(--rule-soft); }
 .stackrow.total .lbl, .stackrow.total .val { font-weight: 700; color: var(--ink); }
 .stackrow .lbl { font-size: 13px; color: var(--ink-2); }
@@ -425,7 +431,9 @@ footer a { color: var(--accent); }
 /* The pattern is defined once and referenced by every map on the page --
    url(#id) resolves document-wide, so repeating the defs per svg would only
    duplicate ids. */
-.m-defs { position: absolute; width: 0; height: 0; }
+/* Qualified so it outranks .map-wrap svg { width: 100% }, which otherwise
+   gives this invisible SVG the map's full width and scrolls a phone sideways. */
+.map-wrap svg.m-defs, .m-defs { position: absolute; width: 0; height: 0; }
 
 .msw .m1 { background: var(--map-1); } .msw .m2 { background: var(--map-2); }
 .msw .m3 { background: var(--map-3); } .msw .m4 { background: var(--map-4); }

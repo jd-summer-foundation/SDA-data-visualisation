@@ -8,6 +8,7 @@ and derives the one measure the NDIA does not publish directly: SDA *places*
 is comparable with participant demand.
 
 Usage:  python3 scripts/extract_sda.py <workbook.xlsx> [-o data/]
+        python3 scripts/extract_sda.py --rederive data/sda.json
 """
 from __future__ import annotations
 
@@ -17,8 +18,6 @@ import re
 import shutil
 import zipfile
 from pathlib import Path
-
-import openpyxl
 
 # Strict OOXML uses purl.oclc.org namespaces; openpyxl only understands the
 # transitional schemas. Rewriting the namespace URIs is a lossless fix.
@@ -448,6 +447,95 @@ def calibrate_derivation(nodes, sa4_tables):
     }
 
 
+# Table P.6's columns, and the resident count each stands for. "6+" is taken as
+# exactly 6, as the dwelling-form derivation also does, so the two share that
+# one understatement and this check cannot see it.
+RESIDENT_COUNTS = {"1 Resident": 1, "2 Residents": 2, "3 Residents": 3,
+                   "4 Residents": 4, "5 Residents": 5, "6+ Residents": 6}
+
+
+def residents_places(node):
+    """Places implied by a node's dwellings-by-maximum-residents row, or None
+    where any cell of it is suppressed (a partial row would read low)."""
+    row = node.get("max_residents") or {}
+    if any(row.get(label) is None for label in RESIDENT_COUNTS):
+        return None
+    return sum(row[label] * count for label, count in RESIDENT_COUNTS.items())
+
+
+def calibrate_against_residents(nodes):
+    """Check derived places against Table P.6, over every build type at once.
+
+    calibrate_derivation() can only test new builds, because P.7 publishes
+    places for new builds alone -- which leaves the derivation for existing and
+    legacy stock (P.12) an extrapolation. P.6 closes that gap from another side:
+    it counts every enrolled dwelling by its enrolled maximum residents, so
+    dwellings x residents summed across it is total places, independently of
+    the dwelling-form labels the derivation reads. It has no design category,
+    so it checks each region's total rather than any one category.
+    """
+    checked = within = 0
+    worst, worst_region = 0.0, None
+    national = None
+    for node in nodes:
+        if not node["has_places"] or node["level"] not in ("SA4", "National"):
+            continue
+        expected = residents_places(node)
+        derived = sum(c["enrolled_places"] or 0 for c in node["categories"].values())
+        if node["level"] == "National":
+            national = {"derived": derived, "from_residents": expected}
+            continue
+        if not expected:
+            continue
+        checked += 1
+        gap = derived - expected
+        if abs(gap) <= 0.02 * expected:
+            within += 1
+        if abs(gap) > abs(worst):
+            worst, worst_region = gap, node["id"]
+    return {
+        "regions_checked": checked,
+        "within_2_percent": within,
+        "largest_difference_places": worst,
+        "largest_difference_region": worst_region,
+        "national": national,
+    }
+
+
+def add_occupancy(nodes):
+    """Each geography's enrolled places, and how many no SDA-funded participant uses.
+
+    Participants with SDA in use can only be living in an enrolled place, so
+    enrolled places less that count is capacity no SDA payment is being made
+    against. It needs no design category and no listings platform, which makes
+    it the one measure of spare stock that is independent of both. It is not a
+    vacancy count: a place can be occupied by someone not funded for SDA, and a
+    new build can be enrolled before it is tenanted.
+    """
+    for node in nodes:
+        totals = node["totals"]
+        if not node["has_places"]:
+            totals["enrolled_places"] = None
+            totals["places_not_in_use"] = None
+            continue
+        places = sum(c["enrolled_places"] or 0 for c in node["categories"].values())
+        in_use = totals.get("participants_sda_in_use")
+        totals["enrolled_places"] = places
+        totals["places_not_in_use"] = places - in_use if in_use is not None else None
+
+
+def derive(bundle):
+    """Measures computed from the extracted records alone, not the workbook.
+
+    Kept apart from assemble() so they can be re-applied to an existing
+    sda.json with --rederive: the workbook is not committed, and a change to a
+    derivation should not have to wait for someone to fetch it again.
+    """
+    add_occupancy(bundle["geographies"])
+    bundle["meta"]["residents_calibration"] = calibrate_against_residents(bundle["geographies"])
+    return bundle
+
+
 def national_summary(nodes):
     national = next(n for n in nodes if n["id"] == "national")
     summary = {}
@@ -463,12 +551,47 @@ def national_summary(nodes):
     return summary
 
 
+def report_derived(bundle):
+    """Print what derive() added, for either build path."""
+    res = bundle["meta"]["residents_calibration"]
+    nat = res["national"] or {}
+    print(f"  derivation vs P.6 maximum residents (all build types): "
+          f"{res['within_2_percent']}/{res['regions_checked']} SA4s within 2%, largest gap "
+          f"{res['largest_difference_places']:+.0f} places ({res['largest_difference_region']}); "
+          f"national {nat.get('derived', 0):.0f} derived vs {nat.get('from_residents') or 0:.0f}")
+    totals = next(n for n in bundle["geographies"] if n["id"] == "national")["totals"]
+    if totals["places_not_in_use"] is not None:
+        print(f"  places not in use by an SDA-funded participant: "
+              f"{totals['places_not_in_use']:.0f} of {totals['enrolled_places']:.0f} "
+              f"({totals['places_not_in_use'] / totals['enrolled_places']:.1%})")
+
+
+def rederive(path: Path):
+    """Re-apply derive() to an existing sda.json in place."""
+    bundle = derive(json.loads(path.read_text()))
+    path.write_text(json.dumps(bundle, separators=(",", ":")))
+    print(f"re-derived {path}  ({path.stat().st_size / 1024:.0f} KB)")
+    report_derived(bundle)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("workbook", type=Path)
+    parser.add_argument("workbook", type=Path, nargs="?")
     parser.add_argument("-o", "--out", type=Path, default=Path("data"))
+    parser.add_argument("--rederive", type=Path, metavar="SDA_JSON",
+                        help="re-apply the derived measures to an existing sda.json "
+                             "instead of reading a workbook")
     args = parser.parse_args()
+    if args.rederive:
+        rederive(args.rederive)
+        return
+    if not args.workbook:
+        parser.error("a workbook is required unless --rederive is given")
     args.out.mkdir(parents=True, exist_ok=True)
+
+    # Imported here rather than at the top: --rederive, and the tests that use
+    # it, never open a workbook and should not need openpyxl installed.
+    import openpyxl
 
     converted = args.out / "_transitional.xlsx"
     to_transitional(args.workbook, converted)
@@ -497,6 +620,7 @@ def main():
         "national_summary": national_summary(nodes),
         "geographies": nodes,
     }
+    derive(bundle)
 
     target = args.out / "sda.json"
     target.write_text(json.dumps(bundle, separators=(",", ":")))
@@ -515,6 +639,7 @@ def main():
           f"({calibration['exact_share']:.1%}), largest gap "
           f"{calibration['largest_difference_places']:.0f} places, net bias "
           f"{calibration['net_bias_on_sa4_totals']:+.3%}")
+    report_derived(bundle)
     for category, cell in bundle["national_summary"].items():
         print(f"  {category:<24} places={cell['enrolled_places']:>7.0f}"
               f"  need={cell['participants_with_need']:>6.0f}"

@@ -43,11 +43,20 @@ places and a net bias of **+0.08%** across SA4 totals. It is not an identity,
 because a dwelling's enrolled maximum residents can be lower than its dwelling
 type implies.
 
-That margin is tight enough to trust the same arithmetic on existing and legacy
-stock (P.12) and on the pipeline (P.16), where no published places figure exists.
+That check covers new builds only, so on its own it leaves existing and legacy
+stock (P.12) an extrapolation. **Table P.6 closes that gap.** It counts every
+enrolled dwelling, of every build type, by its enrolled maximum residents, so
+dwellings × residents summed across it is total places, independently of the
+dwelling-form labels the derivation reads. It matches the derived total within
+2% in **85 of 86** SA4 regions that hold stock (the other is 66 against 64), and
+nationally **31,081 derived against 31,065**. The one thing neither check can see
+is that both count "6+ residents" as exactly six. P.6 carries no design
+category, so it tests each region's total rather than any single category.
+
 Where P.7 does exist, the extractor uses the NDIA's own figure rather than the
-derived one. `calibrate_derivation` recomputes this on every build, so a change
-in the workbook's shape shows up immediately.
+derived one. `calibrate_derivation` and `calibrate_against_residents` recompute
+both checks on every build, so a change in the workbook's shape shows up
+immediately.
 
 Sanity checks that hold for the 2025-26 Q4 file: summing the 88 SA4 regions gives
 14,235 enrolled dwellings and 25,658 participants with an SDA need, both matching
@@ -68,6 +77,29 @@ identified need, places per participant, and the pipeline, broken down by design
 category — plus build-type and resident-count breakdowns, a sortable table
 of the child regions that doubles as an undersupply ranking, and the region grid
 described below.
+
+### Places not in SDA use
+
+Every participant with SDA in use occupies an enrolled place, so **enrolled
+places less participants using SDA** is capacity no SDA payment is being made
+against. It needs no design category and no listings platform, which makes it
+the one measure of spare stock independent of both. Nationally it is **14,437
+of 31,081 places, 46%**. It is an upper bound on vacancy, not a count of it: a
+place can be occupied by someone not funded for SDA, and a new build can be
+enrolled before anyone moves in. The tiles show it at every level with places.
+
+### The national trend
+
+Figure P.1's thirteen quarters are drawn as **growth indexed to 100** at the first
+quarter, not as dwellings against participants. The two are different units — the
+point this README opens on — and drawn on one axis they put supply (14,235
+dwellings) far below need (25,658 participants) when, counted in places (31,081),
+it is already above it. Indexed, the chart asks the question it is for: from June
+2023 to June 2026 enrolled dwellings grew **+80%**, participants using SDA
+**+19%**, and participants eligible but not yet using SDA moved **−9%**. Need is
+split into those two parts because they move in opposite directions. The note
+under the chart is written from the series, so a new quarter cannot leave it
+stating something the lines no longer show.
 
 ### As enrolled, or allowing substitution
 
@@ -275,7 +307,9 @@ unit the question is actually asked in — dwellings standing past the need
 recorded against them — as a map and a region grid, both reading the same
 figures.
 
-Three choices define it, and each understates rather than overstates.
+Three choices define it that understate rather than overstate, and one
+assumption that does the opposite unless the reader changes it — which is why it
+is a switch.
 
 **A tolerance, not a target.** Stock is only counted once a region is past
 `threshold × need`, so a region carrying a place or two of headroom is not
@@ -320,6 +354,29 @@ the 88 regions: 2,515 High Physical Support, 904 Robust, 142 Improved
 Liveability and 110 Fully Accessible. At 1.20 it is 2,951. Read as enrolled —
 HPS not asked to cover anything — the 1.05 figure is 5,317. The shape of the
 finding does not depend on the cut.
+
+**The uncategorised need is a switch, because it moves the answer most.** 4,991
+participants (19%) are eligible for SDA but their design category, in the NDIA's
+words, "is unable to be extracted" from its systems. Read against recorded need
+alone they count as needing nothing, which raises every surplus. Three readings
+are offered:
+
+| Reading | What the uncategorised participants do | Surplus at 1.05, substitution |
+| --- | --- | --- |
+| **Left out** (default) | nothing — recorded need only, as every other panel reads it | 3,671 |
+| **Basic places first** | take up their region's Basic places; the remainder is spread pro-rata | 3,315 |
+| **Pro-rata** | are spread across the four categories in proportion to each one's recorded need | 2,701 |
+
+Basic-first is the more plausible middle: the NDIA folded old Basic decisions,
+which "reflected where a participant was living", into the same uncategorised
+count, and nationally Basic holds 5,941 places against those 4,991 people.
+Pro-rata assumes the category is missing at random, which nothing in the
+supplement confirms. Either way the range is wider than the threshold's (3,671
+to 2,951), and the Improved Liveability and Fully Accessible shortfalls barely
+move under any of them. The notes under the grid state all three national
+figures live, whichever is selected. Left out is the default only so this view
+reads the same recorded figures the rest of the site does; `uncatMode` in
+`app.js` is the one line to change if you would rather it led with another.
 
 Two things separate this view from the rest of the site.
 
@@ -432,23 +489,41 @@ Which comparison that correlation is made *across* matters more than the
 coefficient, and it cuts both ways:
 
 - **Within a region it is stronger: &rho; = 0.50** (70 points across the 20 SA4s
-  carrying three or more categories, permutation p = 0.0005). This is the
-  load-bearing version. Listing propensity — the caveat stamped across the whole
-  view — is a property of the *region*: a provider base that advertises more
-  inflates every category it holds alike, so it cancels when the comparison
-  stays inside one SA4. The relationship surviving that control is much better
-  evidence than the pooled figure.
+  carrying three or more categories, permutation p = 0.0005). Listing
+  propensity — the caveat stamped across the whole view — is a property of the
+  *region*: a provider base that advertises more inflates every category it
+  holds alike, so it cancels when the comparison stays inside one SA4.
+- **But stock age runs through it.** Within a region, a category's new-build
+  share predicts its vacancy at least as well (&rho; = 0.60), and the categories
+  read as oversupplied are largely the recently built ones (&rho; = 0.51 between
+  the two; High Physical Support is 91% new build). Holding new-build share
+  constant, the ratio's own correlation falls to **0.29** (p = 0.05). Stock still
+  being leased up for the first time and lasting oversupply look the same in a
+  single quarter. The two cannot be fully separated — much of the oversupply
+  exists *because* of the recent building — but only whether the vacancy
+  persists across quarters can tell a lease-up blip from a surplus.
 - **Within a design category it largely disappears.** Comparing regions inside
-  one category, only High Physical Support (&rho; = 0.30) and Robust
-  (&rho; = 0.46) show it; Improved Liveability and Fully Accessible are
-  indistinguishable from zero.
+  one category, only High Physical Support (&rho; = 0.30, p = 0.02) shows it
+  clearly; Robust (&rho; = 0.46) is marginal at p = 0.05 on 18 points, and
+  Improved Liveability and Fully Accessible are indistinguishable from zero.
 
-So it supports reading a high `places_per_participant` as genuine slack in a
-market. It does not support predicting any single region's vacancy from it.
+So a high `places_per_participant` does go with more listed vacancy, though part
+of that is lease-up. It does not support predicting any single region's vacancy
+from it. Adding earlier quarters of Supplement P, so the same regions and
+categories can be followed over time, is what would settle the lease-up
+question.
 
-The extractor recomputes all of this on every build and asserts that at least 15
-regions carry three or more categories, so a thinner future export fails rather
-than publishing a coefficient derived from a handful of regions.
+The extractor recomputes all of this on every build — the stock-age partial and
+the shared-term simulation below included — and asserts that at least 15 regions
+carry three or more categories, so a thinner future export fails rather than
+publishing a coefficient derived from a handful of regions.
+
+A second check needs no design category at all: across 83 SA4s, listed vacancy
+as a share of enrolled places tracks **places not in SDA use** as a share
+(&rho; = 0.46, 0.52 excluding Victoria). Dividing one by the other measures
+listing coverage directly — Housing Hub carries **39%** of Victoria's spare
+capacity, 17% of New South Wales' and 4% of the ACT's — and the vacancy tiles
+show it for every region.
 
 ## Usage
 
@@ -463,7 +538,7 @@ Writes `data/sda.json` (~1 MB) containing:
 
 | Key | Contents |
 | --- | --- |
-| `meta` | as-at date, category lists, source notes, derivation calibration |
+| `meta` | as-at date, category lists, source notes, both derivation checks (`derivation_calibration` against P.7, `residents_calibration` against P.6) |
 | `national_trend` | 13 quarters × 6 series recovered from Figure P.1 |
 | `national_summary` | places, need, pipeline and ratio per design category |
 | `geographies` | one record per geography, all four levels, identical shape |
@@ -471,7 +546,33 @@ Writes `data/sda.json` (~1 MB) containing:
 Each geography carries `categories` (per design category: `enrolled_dwellings`,
 `enrolled_places`, `pipeline_dwellings`, `pipeline_places`,
 `participants_with_need`, `places_per_participant`), `totals`, `build_types` and
-`max_residents`, plus `parent` for the hierarchy.
+`max_residents`, plus `parent` for the hierarchy. `totals` includes
+`enrolled_places` and `places_not_in_use` wherever places can be formed.
+
+The derived measures that need only the extracted records — places not in SDA
+use, and the P.6 check — live in `derive()` and can be re-applied to an existing
+file without the workbook, which is not committed:
+
+```sh
+python3 scripts/extract_sda.py --rederive data/sda.json
+```
+
+Re-running it on a current file changes nothing, which the tests check.
+
+### Tests
+
+```sh
+python3 -m unittest discover tests      # committed JSON matches the extractors
+node tests/smoke.js                      # every view in Chromium, desktop and phone
+```
+
+The first rebuilds `vacancies.json` and re-derives `sda.json` and fails if
+either differs byte for byte from what is committed, then sanity-checks the
+derived statistics. The second needs Playwright (`npm install --no-save
+playwright && npx playwright install chromium`; with a global install, prefix
+`NODE_PATH="$(npm root -g)"`). It fails on any page error, on horizontal
+scrolling at 390px, and on a handful of specific regressions. Both run on every
+push in `.github/workflows/checks.yml`.
 
 ### Boundaries
 
@@ -520,7 +621,7 @@ loads one file:
 
 | Key | Contents |
 | --- | --- |
-| `meta` | as-at dates, listing and place totals, how each listing matched, price-band cut-points, the bridge correlation |
+| `meta` | as-at dates, listing and place totals, how each listing matched, the rate floor, price-band cut-points, the bridge correlation (with its stock-age control and shared-term null), the coverage check and the whole-dwelling model |
 | `regions` | one profile per geography id — `national`, `state:*`, `sa4:*`, `sa3:*` — keyed to match `sda.json` |
 | `bridge` | SA4 &times; design category: vacancy rate against `places_per_participant` |
 
@@ -614,11 +715,12 @@ repository private and preview locally until you decide to publish.
 
 - **Housing Hub is a listings platform, not a vacancy census.** Only vacancies a
   provider chose to advertise appear, and providers advertise at very different
-  rates. Victoria shows 17.3% of its enrolled places as vacant against New South
-  Wales' 6.0% — a gap far too large to be real, and better read as a difference
-  in how much of each market lists here. Compare categories and dwelling types
-  within a region freely; compare regions against each other only with this in
-  mind.
+  rates. Victoria shows 17.4% of its enrolled places as vacant against New South
+  Wales' 5.9% — a gap better read as a difference in how much of each market
+  lists here, and Supplement P confirms it: listings are 39% of Victoria's places
+  not in SDA use and 17% of New South Wales'. Compare categories and dwelling
+  types within a region freely; compare regions against each other only with
+  this in mind.
 - **Every rate straddles two dates.** Vacancies are as at 24 August 2026, the
   enrolled places they are divided by as at 30 June 2026. A rate is suppressed
   where fewer than 50 enrolled places sit under it.
@@ -626,20 +728,27 @@ repository private and preview locally until you decide to publish.
   published at SA4 and above only, so SA3 pages show counts and the
   whole-versus-rooms split but no rate. 30 listings sit in a locality with no SA3
   counterpart in the supplement and are counted at SA4 and above only.
-- **Design category and dwelling features do not predict whole-dwelling
-  vacancy.** Fitting a logistic model to the 1,910 shared dwellings in the
-  export, once dwelling size and form are held constant, design category, onsite
-  overnight assistance, a breakout room and price all lose any independent
-  association with whether a vacancy is the whole dwelling (|z| &le; 1.6).
-  Dwelling size is doing nearly all the work. The category and feature charts are
-  description, not explanation.
+- **Dwelling size explains whole-dwelling vacancy; most features do not.**
+  `whole_dwelling_model` fits a logistic model to the 1,879 listings for shared
+  dwellings of two to five residents that carry a price (6+ legacy stock and
+  Multi-Design Category are left out, having no whole-dwelling vacancies at all).
+  With size and form held constant, onsite overnight assistance, a breakout
+  room, fire sprinklers, and Robust, Fully Accessible and Basic against High
+  Physical Support show no independent association (|z| < 2). **Price does
+  (z = +4.2)**, and Improved Liveability narrowly (z = +2.2). An earlier version
+  of this README said price lost its association too; no specification tried
+  reproduces that. Price per room is largely set by the NDIA's price limits, and
+  new builds price above existing stock, so the price effect is as likely to be
+  lease-up as price. The category and feature charts are description, not
+  explanation.
 - **A region with no listings is not a region with no vacancy.** Two SA4s and
   108 SA3s have nothing listed; the vacancy view says so explicitly rather than
   showing a zero.
 - **The bridge correlation is not an artefact of its shared term.** Enrolled
   places appears on both axes — numerator of `places_per_participant`,
   denominator of the vacancy rate — which can manufacture correlation out of
-  noise. Simulating a world where vacancy is a constant 15.2% independent of the
-  ratio puts the measured &rho; at **+0.007** (sd 0.091), so the shared term
-  introduces no material bias in either direction and the observed 0.40 sits
-  4.3 standard deviations above that null.
+  noise. `shared_term_null` simulates a world where every place is equally
+  likely to be vacant, at the pooled 15.2%, and redraws each point's vacancies
+  1,000 times: the measured &rho; comes out at **+0.004** (sd 0.088), so the
+  shared term introduces no material bias in either direction and the observed
+  0.40 sits 4.5 standard deviations above that null.
