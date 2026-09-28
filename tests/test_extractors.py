@@ -2,10 +2,11 @@
 
 Run from the repository root:  python3 -m unittest discover tests
 
-The Supplement P workbook is not committed, so sda.json cannot be rebuilt from
-scratch here. What can be checked is that its derived measures are current --
-re-applying them changes nothing -- and that vacancies.json, whose inputs are
-all committed, rebuilds byte for byte.
+sda.json is rebuilt from the committed June 2026 workbook and compared byte for
+byte (skipped where openpyxl is not installed, since only that path opens a
+workbook); its derived measures are also checked to be current on their own,
+which needs no openpyxl. vacancies.json, whose inputs are all committed,
+rebuilds byte for byte.
 """
 import json
 import shutil
@@ -20,6 +21,14 @@ DATA = ROOT / "data"
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import extract_sda  # noqa: E402
+
+try:
+    import openpyxl  # noqa: F401
+    HAVE_OPENPYXL = True
+except ImportError:
+    HAVE_OPENPYXL = False
+
+WORKBOOK = DATA / "supplements" / "Supplement_P_SDA_2025-26_Q4.xlsx"
 
 
 def run(*args, cwd=ROOT):
@@ -36,6 +45,14 @@ class CommittedDataIsCurrent(unittest.TestCase):
             run("scripts/extract_sda.py", "--rederive", str(copy))
             self.assertEqual(copy.read_bytes(), (DATA / "sda.json").read_bytes(),
                              "sda.json is stale: run extract_sda.py --rederive data/sda.json")
+
+    @unittest.skipUnless(HAVE_OPENPYXL, "openpyxl not installed")
+    def test_sda_rebuilds_from_workbook(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/extract_sda.py", str(WORKBOOK.relative_to(ROOT)), "-o", tmp)
+            self.assertEqual((Path(tmp) / "sda.json").read_bytes(),
+                             (DATA / "sda.json").read_bytes(),
+                             "sda.json does not match a fresh build from the workbook")
 
     def test_vacancies_rebuild_byte_for_byte(self):
         with tempfile.TemporaryDirectory() as tmp:
