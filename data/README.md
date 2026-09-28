@@ -52,11 +52,17 @@ analysis can be rebuilt end to end — they are public NDIA publications, so
 serving them from the site is no concern. One file per quarter, named as the
 NDIA publishes them (`Supplement_P_SDA_<financial year>_Q<n>`).
 
-Despite the `.xlsb` extension these are **Strict OOXML** workbooks — the same
-XML format as the current edition, not Excel Binary — so the extractor's
-namespace rewrite applies. Their table layouts are not identical: the 2022-23 Q4
-edition carries 25 worksheets against 21 from 2023-24 Q1 on, so each edition's
-tables need mapping rather than assuming the current `SA4_SHEETS`.
+Editions up to 2024-25 Q3 carry an `.xlsb` extension and later ones `.xlsx`,
+but every one is a **Strict OOXML** workbook — the same XML format as the current
+edition, not Excel Binary — so the extractor's namespace rewrite applies. Their
+table layouts are not identical: worksheet counts run from 19 (2024-25 Q1) to
+25 (2022-23 Q4), so each edition's tables need mapping rather than assuming the
+current `SA4_SHEETS`.
+
+2024-25 Q3 is 14 MB where the others are about 1 MB: one worksheet expands to
+85 MB of XML, most likely formatting applied across a very large empty range.
+Expect it to read slowly row by row, and stop at the last populated row rather
+than trusting the sheet's reported dimensions.
 
 The June 2026 edition that `sda.json` is built from is not among them yet; it is
 passed to `scripts/extract_sda.py` directly.
