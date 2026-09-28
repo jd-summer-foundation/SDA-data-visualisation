@@ -271,3 +271,50 @@ class RegressionHelpers(unittest.TestCase):
         self.assertEqual(analyse_panel.classify([0, 0, 1, 2, 2]), "drifting up")
         self.assertEqual(analyse_panel.classify([2, 1, 2, 1]), "reverses")
         self.assertEqual(analyse_panel.classify([0, 0, 0]), "short")
+
+
+class TimeseriesIsCurrent(unittest.TestCase):
+    """data/timeseries.json feeds time/ and is built from the panel alone."""
+
+    def test_rebuilds_byte_for_byte(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / "timeseries.json"
+            subprocess.run([sys.executable, "scripts/build_timeseries.py", "data/panel", "-o", str(out)],
+                           cwd=ROOT, check=True, capture_output=True, text=True)
+            self.assertEqual(out.read_bytes(), (ROOT / "data" / "timeseries.json").read_bytes(),
+                             "data/timeseries.json is stale: re-run build_timeseries.py")
+
+    def test_headlines_carry_the_analysis_numbers(self):
+        ts = json.loads((ROOT / "data" / "timeseries.json").read_text())
+        a = json.loads((PANEL / "analysis.json").read_text())
+        story = {s["id"]: s for s in ts["story"]}
+        n = a["q1"]["national"]
+        self.assertIn(f"{n['places_added']:,.0f} places were added", story["supply"]["evidence"])
+        self.assertIn(f"{a['q1']['models']['pooled']['sum']:.2f} people", story["absorption"]["evidence"])
+        last = a["q3"]["mismatch"][-1]
+        self.assertIn(f"{last['regions_short']} regions", story["mismatch"]["evidence"])
+        self.assertIn(f"{last['spare_beyond_local_waiting']:,.0f}", story["mismatch"]["evidence"])
+
+    def test_headlines_follow_the_numbers(self):
+        # The conclusion is chosen from the data: a shrinking surplus must not
+        # be headlined as growing.
+        import build_timeseries
+        self.assertEqual(build_timeseries.growth_words(100, 190), "nearly doubled")
+        self.assertEqual(build_timeseries.growth_words(100, 80), "fell 20%")
+        a = json.loads((PANEL / "analysis.json").read_text())
+        a["q1"]["national"]["spare"] = [14000, 9000]
+        p = build_timeseries.Panel(PANEL / "panel.csv")
+        ts = build_timeseries.build(PANEL)
+        story = build_timeseries.story(p, a, ts["geographies"]["national"], p.quarters)
+        self.assertTrue(story[0]["headline"].startswith("The surplus is shrinking"))
+
+    def test_series_align_to_the_quarters(self):
+        ts = json.loads((ROOT / "data" / "timeseries.json").read_text())
+        n = len(ts["meta"]["quarters"])
+        for geo, g in ts["geographies"].items():
+            for key, values in g["series"].items():
+                self.assertEqual(len(values), n, (geo, key))
+        nat = ts["geographies"]["national"]["series"]
+        start = ts["meta"]["quarters"].index(ts["meta"]["in_use_from"])
+        self.assertTrue(all(v is None for v in nat["in_use"][:start]))
+        self.assertTrue(all(v is not None for v in nat["in_use"][start:]))

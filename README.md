@@ -600,6 +600,26 @@ directional claim in it is computed, and `analysis.json` holds the numbers
 behind it. The regressions are solved directly in the standard library, with
 standard errors clustered by region.
 
+### The time-based interface (`time/`)
+
+A second, simpler site built around time sits in `time/`, beside the explorer,
+which is unchanged. It is being built in milestones (see `docs/ui-plan.md`);
+the first is the Australia page. That page has five sections, each headed by a
+conclusion and followed by its evidence:
+the surplus, take-up of new places, design categories, the pipeline and the
+location mismatch. A state table follows. Every chart has one y-axis, a
+crosshair tooltip on hover and on the arrow keys, and a table behind it. The
+*as enrolled / allowing substitution* switch pools High Physical Support with
+Fully Accessible.
+
+```sh
+python3 scripts/build_timeseries.py         # panel + analysis -> data/timeseries.json
+```
+
+The headlines are chosen in that script from the numbers ("the surplus is
+growing" becomes "shrinking" if spare places fall), so the page never asserts
+what the data no longer shows. Live at `…/SDA-data-visualisation/time/`.
+
 ### What is checked, every quarter
 
 All of it holds in every edition. The report lists each figure.

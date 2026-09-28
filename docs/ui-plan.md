@@ -1,6 +1,6 @@
 # Phase 3: a time-based interface — proposal
 
-Status: **proposal for discussion**. Nothing here is built yet. It follows the
+Status: **agreed**, with the decisions recorded at the end. Being built in `time/`. It follows the
 analysis in `data/panel/ANALYSIS.md`, and every number quoted below comes from
 there.
 
@@ -120,7 +120,7 @@ colour is never the only channel.
 | --- | --- | --- |
 | **Housing Hub vacancy view** | **Drop.** Keep `vacancies.json` and its README section as a record. | A single snapshot, from a listings platform whose coverage varies about tenfold between states (4% of spare capacity in the ACT, 39% in Victoria). It cannot be put on a time axis. The panel's places-not-in-use series now does its job over time. |
 | **SA3 pages** | **Drop.** | No places can be formed at SA3, so there is no spare, ratio or absorption, which is everything the new interface is about. The median SA3 also has too few participants to trend. |
-| **Substitution toggle** | **Drop the toggle, keep the fact.** HPS and FA sit side by side in the small multiples, and a one-line note under them gives the pooled HPS + FA ratio. | It doubles every category view for one relationship. Pooled, the pattern does not change: HPS is long and FA short in the same places. |
+| **Substitution toggle** | **Kept** (decision 1). *As enrolled* shows HPS and FA separately; *allowing substitution* shows them as one pooled HPS + FA series and status. It applies to the category charts and the league table's chips. | — |
 | **Dwelling conversion in the surplus view** | **Drop.** Everything is in places and people. | It is an approximation (the average places per dwelling, rounded down) layered on the derived places. The time views never need dwellings. |
 | **Region heat grid** | **Drop.** The league table's four category chips replace it. | The grid shows one quarter's ratio for 88 × 6 cells. The chips show seven quarters' persistence per cell, which is the question now asked. |
 | Choropleth map *(not on your list)* | **Defer.** Not in v1. | A map of one quarter's ratio adds little once the league table ranks and filters. If wanted later, it could map one time measure, such as change in spare. |
@@ -159,22 +159,25 @@ test.
 
 ### Milestones, each a reviewable PR
 
-1. **Data file and the Australia page.**
+1. **Data file and the Australia page.** *Done:* `scripts/build_timeseries.py`,
+   `time/`, and smoke checks at two widths in both themes and both readings.
 2. **Region pages.**
 3. **League table and presets.**
 4. **Accessibility and phone polish.** Then a decision on replacing the root
    site. If we replace it, the old explorer moves to `classic/` so existing links
    keep working, or bare links redirect.
 
-## Decisions I need from you
+## Decisions
 
-1. **The drop list.** Are you happy to lose all five of your candidates, plus the
-   map (deferred) and the single-quarter sensitivities?
-2. **The one toggle.** Keep "need as recorded / spread pro-rata" as a visible
-   toggle, or show pro-rata only as a dashed line and note?
-3. **State pages.** Is a filter plus a small subtotal table enough, or do you
-   want state pages?
-4. **Audience and tone.** Should headlines be neutral, as drafted ("places grew by
-   9,503; people using SDA by 2,547"), or state the conclusion ("the surplus is
-   lasting")? Neutral is safer for a public site. The conclusion is clearer
-   for policy readers.
+Agreed on 29 September 2026:
+
+1. **Drop list: agreed, except the substitution toggle, which stays.** It is one
+   global switch, *as enrolled / allowing substitution*, across the category
+   charts and the league table.
+2. **Pro-rata is a dashed line and a note**, not a toggle.
+3. **States are a filter** plus a small subtotal table on the Australia page. There
+   are no state pages.
+4. **Headlines state the conclusion** ("the surplus is lasting"), with the evidence
+   in the sentence after. Each conclusion is chosen by the build script from the
+   numbers, and flips if the numbers do. So a new quarter cannot leave a
+   headline asserting what the data no longer shows.

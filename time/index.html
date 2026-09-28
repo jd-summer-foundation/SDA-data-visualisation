@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SDA Over Time</title>
+<meta name="description" content="How Specialist Disability Accommodation supply, use, need and pipeline have moved across thirteen quarters, nationally and for every SA4 region.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%226%22 fill=%22%232a78d6%22/%3E%3Cpath d=%22M6 22 L12 17 L18 19 L26 9%22 stroke=%22white%22 stroke-width=%223%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <a class="brand-name" href="#/">SDA over time</a>
+      <div class="brand-sub" id="brandSub">Loading&hellip;</div>
+    </div>
+    <nav class="tabs" aria-label="Views">
+      <a href="#/" id="tabAustralia" aria-current="page">Australia</a>
+      <span class="tab-soon" title="Next milestone">Regions</span>
+      <span class="tab-soon" title="Next milestone">League table</span>
+    </nav>
+    <div class="controls">
+      <div class="switch" id="subSwitch" role="group" aria-label="How supply is counted">
+        <button type="button" data-sub="enrolled" aria-pressed="true">As enrolled</button>
+        <button type="button" data-sub="substitution" aria-pressed="false">Allowing substitution</button>
+      </div>
+      <button type="button" class="theme" id="themeButton" aria-label="Colour theme: follows your system">
+        <span aria-hidden="true">◐</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <p class="loading" id="loading">Loading data&hellip;</p>
+  <div id="page" hidden></div>
+</main>
+
+<footer class="foot">
+  <p>Figures from thirteen editions of the NDIA's <em>Supplement P: Specialist Disability
+  Accommodation</em>, June 2023 to June 2026. Places are derived from dwelling counts;
+  see <a href="../data/panel/VALIDATION.md">how each quarter was checked</a> and
+  <a href="../data/panel/ANALYSIS.md">the full analysis</a>.
+  The <a href="../">single-quarter explorer</a> is unchanged.</p>
+</footer>
+
+<div class="tip" id="tip" aria-hidden="true" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
