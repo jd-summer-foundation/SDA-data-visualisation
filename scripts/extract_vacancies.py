@@ -83,6 +83,10 @@ RESIDENT_LABELS = {1: "1 Resident", 2: "2 Residents", 3: "3 Residents",
 # than a list of the listings themselves.
 DETAIL_MIN_LISTINGS = 20
 
+# A vacancy rate is only formed over at least this many enrolled places. Below
+# it, one listing more or less moves the rate by whole percentage points.
+RATE_FLOOR = 50
+
 
 def parse_building_type(raw):
     """Return (dwelling form, resident capacity) for a Housing Hub building type."""
@@ -232,7 +236,7 @@ def tally(listings):
     return {key: value for key, value in counts.items() if value}
 
 
-def rate(vacant, enrolled, floor=50):
+def rate(vacant, enrolled, floor=RATE_FLOOR):
     """Vacant places as a share of enrolled places, suppressed on thin bases."""
     if not enrolled or enrolled < floor:
         return None
@@ -322,12 +326,17 @@ def build_profile(listings, geography, categories, bands):
     enrolled_places = (sum(cell.get("enrolled_places") or 0 for cell in cats.values())
                        if has_places else None)
     vacant_places = sum(x["vacancy"] for x in listings)
+    # Capacity no SDA-funded participant is using, from Supplement P alone; the
+    # share of it that turns up listed is how much of this market advertises.
+    spare = (geography.get("totals") or {}).get("places_not_in_use") if has_places else None
 
     return {
         "listings": len(listings),
         "vacant_places": vacant_places,
         "enrolled_places": enrolled_places,
         "rate": rate(vacant_places, enrolled_places, floor=1) if has_places else None,
+        "places_not_in_use": spare,
+        "listing_coverage": rate(vacant_places, spare) if spare and spare > 0 else None,
         "depth": {
             "whole": {"listings": sum(1 for x in listings if x["is_whole"]),
                       "places": sum(x["whole_places"] for x in listings)},
@@ -392,7 +401,7 @@ def build_bridge(grouped, sda, categories):
             cell = geography["categories"].get(name) or {}
             enrolled = cell.get("enrolled_places")
             ratio = cell.get("places_per_participant")
-            if not enrolled or enrolled < 50 or ratio is None:
+            if not enrolled or enrolled < RATE_FLOOR or ratio is None:
                 continue
             vacant = sum(x["vacancy"] for x in listings if x["category"] == name)
             points.append({
@@ -404,6 +413,9 @@ def build_bridge(grouped, sda, categories):
                 "enrolled_places": enrolled,
                 "rate": round(vacant / enrolled, 4),
                 "places_per_participant": ratio,
+                # How much of the category is new build, which is where stock
+                # still being leased up for the first time sits.
+                "newbuild_share": round((cell.get("newbuild_places") or 0) / enrolled, 4),
             })
     return sorted(points, key=lambda p: (p["state"], p["region"], p["category"]))
 
@@ -463,6 +475,17 @@ def within_region_correlation(bridge, shuffles=4000):
     test that reshuffles vacancy ranks within a region only, preserving both the
     grouping and the marginal distributions; the Fisher approximation would
     assume independent observations that centring has already used up.
+
+    It also reports the one confound the region control cannot remove: stock
+    age. A category that is mostly new build is still being leased up for the
+    first time, and the categories Supplement P reads as oversupplied are
+    largely the ones built recently -- High Physical Support is nine-tenths new
+    build -- so "oversupplied" and "newly built" arrive together. The same
+    centred ranks give the new-build share's own correlation with vacancy, and
+    the ratio's correlation once new-build share is partialled out. The two
+    cannot be fully separated -- much of the oversupply exists *because* of the
+    recent building -- but the partial says how much of the relationship
+    survives without leaning on lease-up.
     """
     groups = defaultdict(list)
     for point in bridge:
@@ -471,29 +494,52 @@ def within_region_correlation(bridge, shuffles=4000):
     if len(groups) < 2:
         return None
 
-    def pooled(rng=None):
-        xs, ys = [], []
+    def centred(values):
+        r = ranks(values)
+        m = sum(r) / len(r)
+        return [v - m for v in r]
+
+    # Fixed per region; only the vacancy ranks are shuffled.
+    xs = [v for g in groups for v in centred([p["places_per_participant"] for p in g])]
+    zs = [v for g in groups for v in centred([p["newbuild_share"] for p in g])]
+    r_xz = correlate(xs, zs)
+
+    def stats(rng=None):
+        ys = []
         for group in groups:
-            gx = ranks([p["places_per_participant"] for p in group])
             gy = ranks([p["rate"] for p in group])
             if rng:
                 rng.shuffle(gy)
-            mx, my = sum(gx) / len(gx), sum(gy) / len(gy)
-            xs += [x - mx for x in gx]
+            my = sum(gy) / len(gy)
             ys += [y - my for y in gy]
-        return correlate(xs, ys)
+        r_xy, r_zy = correlate(xs, ys), correlate(zs, ys)
+        return r_xy, r_zy, partial(r_xy, r_xz, r_zy)
 
-    observed = pooled()
+    observed = stats()
     # Seeded locally: a module-level seed would be a side effect on an otherwise
     # pure extractor, and the build needs to be reproducible.
     rng = random.Random(0)
-    beats = sum(1 for _ in range(shuffles) if abs(pooled(rng)) >= abs(observed))
+    beats = [0, 0, 0]
+    for _ in range(shuffles):
+        for i, value in enumerate(stats(rng)):
+            if abs(value) >= abs(observed[i]):
+                beats[i] += 1
+    p = [round((b + 1) / (shuffles + 1), 4) for b in beats]
     return {
-        "r": round(observed, 3),
+        "r": round(observed[0], 3),
         "points": sum(len(g) for g in groups),
         "regions": len(groups),
-        "p": round((beats + 1) / (shuffles + 1), 4),
+        "p": p[0],
+        "newbuild": {"r": round(observed[1], 3), "p": p[1],
+                     "with_ratio": round(r_xz, 3)},
+        "controlling_newbuild": {"r": round(observed[2], 3), "p": p[2]},
     }
+
+
+def partial(r_xy, r_xz, r_zy):
+    """Correlation of x and y with z partialled out of both."""
+    den = ((1 - r_xz ** 2) * (1 - r_zy ** 2)) ** 0.5
+    return (r_xy - r_xz * r_zy) / den if den else None
 
 
 def category_correlations(bridge, categories):
@@ -540,6 +586,155 @@ def ratio_tertiles(bridge):
     return out
 
 
+def binomial(rng, n, p):
+    """One Binomial(n, p) draw by inversion. Stdlib only, and deterministic
+    across Python versions, which random.binomialvariate (3.12+) is not."""
+    q = 1 - p
+    pmf = q ** n
+    if pmf == 0:  # far beyond any enrolled count here; normal fallback
+        return max(0, min(n, round(rng.gauss(n * p, (n * p * q) ** 0.5))))
+    u, k, cdf = rng.random(), 0, pmf
+    while u > cdf and k < n:
+        pmf *= (n - k) / (k + 1) * p / q
+        k += 1
+        cdf += pmf
+    return k
+
+
+def shared_term_null(bridge, observed, sims=1000):
+    """What the bridge correlation looks like when vacancy has nothing to do with it.
+
+    Enrolled places sits on both axes -- numerator of places per participant,
+    denominator of the vacancy rate -- and a shared term can manufacture a
+    correlation out of noise. So simulate the null directly: every point keeps
+    its own enrolled places and ratio, and its vacancies are drawn as though
+    every place in the country were equally likely to be vacant, at the pooled
+    rate. Whatever correlation survives that is the shared term's alone.
+    """
+    base = sum(p["vacant_places"] for p in bridge) / sum(p["enrolled_places"] for p in bridge)
+    rng = random.Random(1)
+    draws = []
+    for _ in range(sims):
+        draws.append(spearman([
+            (p["places_per_participant"],
+             binomial(rng, int(round(p["enrolled_places"])), base) / p["enrolled_places"])
+            for p in bridge]))
+    mean = sum(draws) / sims
+    sd = (sum((d - mean) ** 2 for d in draws) / (sims - 1)) ** 0.5
+    return {"null_rate": round(base, 4), "sims": sims, "mean": round(mean, 3),
+            "sd": round(sd, 3), "z": round((observed - mean) / sd, 1) if sd else None}
+
+
+def solve(matrix, vector):
+    """Gauss-Jordan with partial pivoting. The systems here are 16 x 16."""
+    n = len(matrix)
+    m = [row[:] + [vector[i]] for i, row in enumerate(matrix)]
+    for c in range(n):
+        pivot = max(range(c, n), key=lambda r: abs(m[r][c]))
+        m[c], m[pivot] = m[pivot], m[c]
+        for r in range(n):
+            if r != c and m[r][c]:
+                f = m[r][c] / m[c][c]
+                for k in range(c, n + 1):
+                    m[r][k] -= f * m[c][k]
+    return [m[i][n] / m[i][i] for i in range(n)]
+
+
+def logistic(rows, outcome):
+    """Logistic regression by iteratively reweighted least squares.
+
+    Returns (coefficients, standard errors). Rows carry an intercept column.
+    """
+    k = len(rows[0])
+    beta = [0.0] * k
+    for _ in range(100):
+        prob = [1 / (1 + math.exp(-sum(b * x for b, x in zip(beta, row)))) for row in rows]
+        weight = [p * (1 - p) for p in prob]
+        info = [[sum(w * row[a] * row[b] for w, row in zip(weight, rows)) for b in range(k)]
+                for a in range(k)]
+        score = [sum((y - p) * row[a] for y, p, row in zip(outcome, prob, rows)) for a in range(k)]
+        step = solve(info, score)
+        beta = [b + s for b, s in zip(beta, step)]
+        if max(abs(s) for s in step) < 1e-9:
+            break
+    se = [solve(info, [1.0 if i == j else 0.0 for i in range(k)])[j] ** 0.5 for j in range(k)]
+    return beta, se
+
+
+def whole_dwelling_model(listings):
+    """Does anything beyond dwelling size predict that a vacancy is the whole dwelling?
+
+    Fitted over listings for shared dwellings -- two to five residents, where
+    "whole" and "a room" are both possible -- with a price. Two groups are left
+    out because neither has a single whole-dwelling vacancy, which would send
+    their coefficients to infinity: the 6+ legacy dwellings and Multi-Design
+    Category. Group home is not its own term because in this export it is
+    exactly the four- and five-resident listings, so capacity already carries it.
+
+    Size and form are the controls. Design category, the three features and
+    log price are what is tested, each holding the others constant. Price is
+    largely set by the NDIA's price limits for a category, dwelling type and
+    location, and new builds price above existing stock, so a price effect is
+    as likely to be stock age as anything about price itself.
+    """
+    rows = [x for x in listings
+            if 2 <= x["capacity"] <= 5 and x["price"]
+            and x["category"] != "Multi-Design Category"]
+    log_price = [math.log(x["price"]) for x in rows]
+    mu = sum(log_price) / len(log_price)
+    sd = (sum((v - mu) ** 2 for v in log_price) / len(log_price)) ** 0.5
+    terms = [
+        ("control", "3 residents", lambda x: x["capacity"] == 3),
+        ("control", "4 residents", lambda x: x["capacity"] == 4),
+        ("control", "5 residents", lambda x: x["capacity"] == 5),
+        ("control", "Villa / Duplex / Townhouse", lambda x: x["form"].startswith("Villa")),
+        ("control", "Apartment", lambda x: x["form"] == "Apartment"),
+        # High Physical Support, the largest category, is the reference.
+        ("category", "Robust", lambda x: x["category"] == "Robust"),
+        ("category", "Improved Liveability", lambda x: x["category"] == "Improved Liveability"),
+        ("category", "Fully Accessible", lambda x: x["category"] == "Fully Accessible"),
+        ("category", "Basic", lambda x: x["category"] == "Basic"),
+    ] + [("feature", name, lambda x, name=name: x["features"][name]) for _, name in FEATURES]
+    design = [[1.0] + [1.0 if test(x) else 0.0 for _, _, test in terms]
+              + [(math.log(x["price"]) - mu) / sd] for x in rows]
+    beta, se = logistic(design, [1.0 if x["is_whole"] else 0.0 for x in rows])
+    labels = [(kind, name) for kind, name, _ in terms] + [("price", "Price per room (log)")]
+    return {
+        "n": len(rows),
+        "whole_share": round(sum(1 for x in rows if x["is_whole"]) / len(rows), 4),
+        "reference": "High Physical Support",
+        "terms": [{"kind": kind, "term": name, "coef": round(b, 3), "z": round(b / s, 2)}
+                  for (kind, name), b, s in zip(labels, beta[1:], se[1:])],
+    }
+
+
+def coverage_check(regions, sda):
+    """Housing Hub listings against places no SDA-funded participant uses.
+
+    Supplement P gives each region enrolled places and participants with SDA in
+    use, so the difference is spare capacity measured without a listings
+    platform. Two things follow. Whether listed vacancy rises where that
+    capacity does is a check on Housing Hub that listing propensity cannot
+    manufacture on its own. And listed vacancy over that capacity is a direct
+    estimate of how much of each market advertises here -- the caveat that
+    otherwise has to be stated as a warning, stated as a number.
+    """
+    pairs, pairs_ex_vic = [], []
+    for g in sda["geographies"]:
+        if g["level"] != "SA4" or g["name"] == "Other" or not g["has_places"]:
+            continue
+        places, spare = g["totals"].get("enrolled_places"), g["totals"].get("places_not_in_use")
+        if not places or places < RATE_FLOOR or spare is None:
+            continue
+        listed = regions.get(g["id"], {}).get("vacant_places", 0)
+        pair = (spare / places, listed / places)
+        pairs.append(pair)
+        if g["state"] != "VIC":
+            pairs_ex_vic.append(pair)
+    return {"spearman": spearman(pairs), "spearman_excluding_vic": spearman(pairs_ex_vic),
+            "regions": len(pairs)}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("vacancies", type=Path)
@@ -583,6 +778,9 @@ def main():
     within_region = within_region_correlation(bridge)
     by_category = category_correlations(bridge, comparable)
     tertiles = ratio_tertiles(bridge)
+    shared_term = shared_term_null(bridge, correlation)
+    model = whole_dwelling_model(listings)
+    coverage = coverage_check(regions, sda)
 
     # A within-region figure computed over a handful of regions would be noise
     # wearing a decimal point, and it is the panel's load-bearing claim.
@@ -604,8 +802,11 @@ def main():
                 "SA3": sum(1 for k in regions if k.startswith("sa3:")),
             },
             "sa3_unresolved_listings": unresolved_sa3,
+            "rate_floor": RATE_FLOOR,
             "price_bands": [{"label": label, "from": low, "to": high}
                             for label, low, high in bands],
+            "coverage_check": coverage,
+            "whole_dwelling_model": model,
             "bridge_correlation": {
                 "spearman": correlation,
                 "spearman_excluding_vic": without_vic,
@@ -613,6 +814,7 @@ def main():
                 "within_region": within_region,
                 "by_category": by_category,
                 "tertiles": tertiles,
+                "shared_term_null": shared_term,
             },
         },
         "regions": regions,
@@ -641,6 +843,20 @@ def main():
           f"({without_vic} excluding VIC)")
     print(f"    within region: r={within_region['r']} over {within_region['points']} points "
           f"in {within_region['regions']} SA4s, permutation p={within_region['p']}")
+    wr_nb, wr_ctl = within_region["newbuild"], within_region["controlling_newbuild"]
+    print(f"    within region, new-build share: r={wr_nb['r']} (p={wr_nb['p']}); "
+          f"ratio controlling for it: r={wr_ctl['r']} (p={wr_ctl['p']})")
+    print(f"    shared-term null: rho={shared_term['mean']:+.3f} (sd {shared_term['sd']}) "
+          f"at a constant {shared_term['null_rate']:.1%}; observed is {shared_term['z']} sd above")
+    print(f"  listed vacancy vs places not in use, across {coverage['regions']} SA4s: "
+          f"rho={coverage['spearman']} ({coverage['spearman_excluding_vic']} excluding VIC)")
+    for region_id in sorted(k for k in regions if k.startswith("state:")):
+        cov = regions[region_id]["listing_coverage"]
+        print(f"    {region_id:<10} listing coverage "
+              + (f"{cov:.1%}" if cov is not None else "n/a"))
+    tested = [t for t in model["terms"] if t["kind"] != "control"]
+    print(f"  whole-dwelling model over {model['n']} shared dwellings: " + "  ".join(
+        f"{t['term']}={t['z']:+.1f}" for t in tested))
     print("    within category: " + "  ".join(
         f"{row['category'].split()[0]}={row['r']:+.2f}(p={row['p']})" for row in by_category))
     print("    by ratio third: " + "  ".join(
