@@ -16,6 +16,7 @@ private.
 | `supplements/` | NDIA Supplement P, one workbook per quarter | June 2023 – June 2026 |
 | `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
+| `panel/` | Built by `scripts/extract_panel.py` from every workbook in `supplements/` | June 2023 – June 2026 |
 
 ## Both CSVs are reduced before committing
 
@@ -75,6 +76,27 @@ python3 scripts/extract_sda.py data/supplements/Supplement_P_SDA_2025-26_Q4.xlsx
 ```
 
 and the tests rebuild it from there and compare byte for byte.
+
+`scripts/extract_panel.py` reads all thirteen into `panel/`, identifying each
+table by its caption and header rather than its number. `panel/VALIDATION.md`
+records, edition by edition, which sheet holds which table, what reconciles and
+where the series breaks. Worth knowing before reading any one edition by hand:
+
+- **Participant tables change three times.** Need by design category is
+  published only in 2022-23 Q4 and 2023-24 Q1 (as legacy-CRM "seeking SDA", a
+  different concept) and from 2024-25 Q2. The status table has three schemes,
+  and only the last two split SDA in use from eligible-not-using.
+- **2023-24 Q2 and Q3 mis-caption their SA3 Table P.18** as the old "seeking
+  SDA" table; the header shows it is the not-using table.
+- **Five editions (2022-23 Q4 – 2023-24 Q4) repeat a region row** in the
+  cross-tabs: Wide Bay, Newcastle and Lake Macquarie, Toowoomba. The repeats are
+  identical.
+- **2024-25 Q2's Figure P.1 prose** labels the eligible-not-using series "active
+  participants with SDA supports" and omits SDA in use; its chart has both.
+- **Figure P.1 in 2023-24 Q2 and Q4** ends a quarter before the edition's own
+  date.
+- **2025-26 Q1–Q3 P.7** publishes zero new-build places for Wheat Belt, where
+  P.11 lists six new-build dwellings.
 
 ## `List_SDA_20260824.csv`
 

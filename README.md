@@ -438,9 +438,12 @@ pipeline_places) / (enrolled_dwellings + pipeline_dwellings)` — because the
 supplement publishes both sides of the pipeline and a pipeline dwelling is not
 the same size as an enrolled one. Where `pipeline_dwellings` is suppressed the
 enrolled average stands in. And a suppressed `pipeline_places` makes the whole
-category unknown rather than counting as nothing coming: 8 of the 88 regions are
-affected, and reading them as zero would report a thin region as safe on the
-strength of a number nobody published.
+category unknown rather than counting as nothing coming, since reading it as
+zero would report a thin region as safe on the strength of a number nobody
+published. In practice no SA4 region is affected: the only rows without pipeline
+figures are the eight unplaced `<State> - Other` rows, which hold participants
+but no stock, and no SA4-level table in any of the thirteen editions carries a
+suppressed cell (see the quarterly panel below).
 
 The grid carries a **Pipeline dwellings** column in both readings — it is the
 fact that makes the two worth comparing — and the tiles carry both figures at
@@ -525,6 +528,90 @@ listing coverage directly — Housing Hub carries **39%** of Victoria's spare
 capacity, 17% of New South Wales' and 4% of the ACT's — and the vacancy tiles
 show it for every region.
 
+## The quarterly panel
+
+`sda.json` is one quarter. `data/panel/` holds all thirteen editions in
+`data/supplements/`, June 2023 to June 2026, as one tidy table so the same
+region and category can be followed over time:
+
+```sh
+python3 scripts/extract_panel.py            # data/supplements -> data/panel
+```
+
+| File | Contents |
+| --- | --- |
+| `panel.csv` | one row per figure: `as_at, geography, level, state, category, measure, value, flag, source` (~90,000 rows) |
+| `figure_p1.csv` | Figure P.1's national history as each edition states it, so revisions can be seen |
+| `validation.json` | per-edition table map, every check below, detected breaks |
+| `VALIDATION.md` | the same, written out; generated, not edited |
+
+It covers National, State and SA4. SA3 is left out because no places can be
+formed there. Two further levels hold participants the NDIA could not place:
+`Other` (the `<State> - Other` rows, participants with no SA4) and `Unknown`
+(no state). Neither is a region, and neither has stock.
+
+**Nothing is keyed on a table number.** Tables move: need by category is P.12 in
+2022-23 Q4, P.10 a quarter later, and absent for four quarters after that.
+`classify` names each sheet from its caption and header, and a heading it has
+never seen stops the build. The header wins over the caption, because two SA3
+tables in 2023-24 carry the previous table's caption. Where a table's columns
+change meaning, the map records a *scheme*, and the panel gives the measures
+different names (`legacy_participants_seeking` is not `participants_with_need`),
+so the break cannot be summed across.
+
+**The conventions are `sda.json`'s.** Places are P.7's published new-build places
+plus existing/legacy dwellings × residents from P.12. Places not in SDA use is
+enrolled places less participants with SDA in use. Every row keeps its `source`
+table. A test holds the June 2026 quarter equal to `sda.json` cell for cell. One
+deliberate departure: in 2025-26 Q1–Q3, P.7 publishes **zero** new-build places
+for Wheat Belt High Physical Support and Robust, where P.11 lists six new-build
+dwellings (nine places either side of those quarters). There the derivation
+stands in, flagged `p7_zero_with_dwellings`, and the correction is carried up to
+the WA and national rows so they still reconcile.
+
+### What the thirteen quarters support
+
+| Measure at SA4 | Quarters | Break |
+| --- | --- | --- |
+| Enrolled dwellings and places, by category | all 13 | none |
+| Pipeline dwellings and places, by category | all 13 | 2025-26 Q3: pipeline dwellings not progressed within 36 months removed; national pipeline falls 26% (8,462 → 6,233) in one quarter |
+| Participants with SDA in use; eligible, not yet using | 11, from Dec 2023 | 2023-24 Q2–Q4 publish it as two columns (funded not in use + additional eligible), harmonised by summing; the legacy CRM split before that is not comparable |
+| Places not in SDA use | 11, from Dec 2023 | follows the line above |
+| Participants with need, by design category | 7, from Dec 2024 | none published Dec 2023 – Sep 2024; in 2024-25 Q3, 77 Basic decisions are folded into "Missing" |
+| Participants *seeking* SDA, by category (legacy CRM) | 2 | a different concept; do not join to the above |
+
+Figure P.1 adds national context the SA4 tables lack: participants with SDA in
+use and eligible-not-using back to September 2022, and enrolled dwellings and
+SIL figures back to June 2020.
+
+### What is checked, every quarter
+
+All of it holds in every edition. The report lists each figure.
+
+- **Reconciliation.** SA4 (plus `Other`) rows sum to their state, and states
+  (plus `Unknown`) to the national row, for every measure: 0 mismatches.
+- **Identities between tables.** P.4 and P.6 totals equal P.5's. P.5 by category
+  equals the new-build plus existing/legacy cross-tab dwellings. P.8 equals the
+  pipeline cross-tab. Categories sum to their totals. Status columns add up,
+  and need by category totals to the status table. 0 mismatches.
+- **The places derivation.** Against P.7 it reproduces 96–99% of new-build
+  values exactly, with net bias within ±0.12% (−0.73% in 2023-24 Q2). Against
+  P.6 it lands within 2% in all but one or two SA4s, and nationally within
+  17 places.
+- **Regions.** The same 88 SA4 names in every edition's stock tables: no renames
+  or splits. The unplaced `Other` rows grow from three states to all eight.
+- **Figure P.1.** Each edition's latest quarter matches its own tables. Across
+  editions, 129 of 137 overlapping points agree. Of the rest, one is a
+  restatement (September 2022 in-use, 13,328 then 13,238). Seven come from
+  2024-25 Q2, whose accessibility prose labels the eligible-not-using series
+  "active participants with SDA supports"; the chart, which is checked against
+  the prose wherever it can be read, shows the mislabel. Two editions' figures
+  (2023-24 Q2 and Q4) stop a quarter short of the edition's own date.
+- **Format.** No SA4-level cell in any edition is suppressed. Five editions
+  repeat a region row in a cross-tab; each repeat is identical and is dropped.
+  A non-identical repeat would fail the build. The existing/legacy cross-tab
+  carries 16,322 empty `ColumnN` headers, and the reader stops at the first.
+
 ## Usage
 
 The supplement extractor:
@@ -566,9 +653,10 @@ python3 -m unittest discover tests      # committed JSON matches the extractors
 node tests/smoke.js                      # every view in Chromium, desktop and phone
 ```
 
-The first rebuilds `vacancies.json` and re-derives `sda.json` and fails if
-either differs byte for byte from what is committed, then sanity-checks the
-derived statistics. The second needs Playwright (`npm install --no-save
+The first rebuilds `vacancies.json`, re-derives `sda.json` and rebuilds the
+quarterly panel from all thirteen workbooks (about 30 seconds), and fails if any
+differs byte for byte from what is committed; it then checks that every quarter
+reconciles and that the panel's June 2026 quarter equals `sda.json`. The second needs Playwright (`npm install --no-save
 playwright && npx playwright install chromium`; with a global install, prefix
 `NODE_PATH="$(npm root -g)"`). It fails on any page error, on horizontal
 scrolling at 390px, and on a handful of specific regressions. Both run on every
@@ -689,8 +777,9 @@ repository private and preview locally until you decide to publish.
 - **A fifth of demand has no design category.** 4,991 of 25,658 participants
   (19.5%) sit in P.10's "Missing" column. Large enough to move any ratio.
 - **Suppressed cells are not zeros.** Small counts publish as `<11`, `<5`, `n/a`
-  (54 cells in this file). `parse_value` returns `None` plus the disclosed
-  ceiling so they are never summed as zero.
+  (54 cells in this file, all in Table P.1, which is keyed on Service Districts
+  and not read). `parse_value` returns `None` plus the disclosed ceiling so they
+  are never summed as zero, should an SA4 table ever carry one.
 - **The pipeline is an intention, not a forecast.** The NDIA states pipeline
   dwellings may never be enrolled, may be enrolled in a different category, and
   may already be enrolled but not yet removed from the data.
