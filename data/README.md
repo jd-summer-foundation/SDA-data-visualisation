@@ -13,7 +13,8 @@ private.
 | --- | --- | --- |
 | `List_SDA_20260824.csv` | Housing Hub SDA vacancy export | 24 August 2026 |
 | `australian_postcodes.csv` | Postcode / locality to statistical-area concordance | — |
-| `sda.json` | Built by `scripts/extract_sda.py` from NDIA Supplement P | 30 June 2026 |
+| `supplements/` | NDIA Supplement P, one workbook per quarter | June 2023 – June 2026 |
+| `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
 
 ## Both CSVs are reduced before committing
@@ -53,8 +54,9 @@ serving them from the site is no concern. One file per quarter, named as the
 NDIA publishes them (`Supplement_P_SDA_<financial year>_Q<n>`).
 
 Editions up to 2024-25 Q3 carry an `.xlsb` extension and later ones `.xlsx`,
-but every one is a **Strict OOXML** workbook — the same XML format as the current
-edition, not Excel Binary — so the extractor's namespace rewrite applies. Their
+but none is Excel Binary: every one is an XML workbook, and all but 2025-26 Q2
+are **Strict OOXML**. That one is ordinary transitional OOXML, which the
+extractor's namespace rewrite passes through unchanged. Their
 table layouts are not identical: worksheet counts run from 19 (2024-25 Q1) to
 25 (2022-23 Q4), so each edition's tables need mapping rather than assuming the
 current `SA4_SHEETS`.
@@ -64,8 +66,15 @@ current `SA4_SHEETS`.
 Expect it to read slowly row by row, and stop at the last populated row rather
 than trusting the sheet's reported dimensions.
 
-The June 2026 edition that `sda.json` is built from is not among them yet; it is
-passed to `scripts/extract_sda.py` directly.
+The thirteen editions run from 2022-23 Q4 (June 2023) to 2025-26 Q4 (June 2026),
+all published after the NDIA changed its SA boundary definitions in March 2023
+(see the main README). The last is the edition `sda.json` is built from:
+
+```sh
+python3 scripts/extract_sda.py data/supplements/Supplement_P_SDA_2025-26_Q4.xlsx
+```
+
+and the tests rebuild it from there and compare byte for byte.
 
 ## `List_SDA_20260824.csv`
 
