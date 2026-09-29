@@ -161,7 +161,12 @@ test.
 
 1. **Data file and the Australia page.** *Done:* `scripts/build_timeseries.py`,
    `time/`, and smoke checks at two widths in both themes and both readings.
-2. **Region pages.**
+2. **Region pages.** *Done:* `#/region/<name>` for all 88 SA4s, each with a
+   headline chosen in the build script from the region's figures, tiles with
+   sparklines, the supply chart, category small multiples following the
+   substitution switch, and national ranks. The Regions tab is the index,
+   filterable by state and searchable, with each region's headline beneath its
+   name. The State table on the Australia page links into it.
 3. **League table and presets.**
 4. **Accessibility and phone polish.** Then a decision on replacing the root
    site. If we replace it, the old explorer moves to `classic/` so existing links

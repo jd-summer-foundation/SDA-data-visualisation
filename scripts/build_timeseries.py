@@ -252,6 +252,67 @@ def story(p, a, nat, quarters):
     return sections
 
 
+def region_summary(record, labels, in_use_from):
+    """A region page's headline and evidence, chosen from its own figures.
+
+    The order of the tests is the order of what matters: people waiting beyond
+    the spare places first, then which way the spare places are moving."""
+    s = record["series"]
+    spare, wait, places = s["spare"][-1], s["waiting"][-1], s["places"][-1]
+    if not places:
+        if wait:
+            return {"headline": "There is no enrolled SDA here, and people are waiting",
+                    "evidence": f"{wait:,} people are eligible but not yet using SDA, and the "
+                                f"region has no enrolled places to offer them."}
+        return {"headline": "There is no enrolled SDA here",
+                "evidence": "The supplement reports no enrolled places in this region."}
+    if spare is None or wait is None:
+        return {"headline": "Too little data to measure here",
+                "evidence": "Participant figures are not published for this region."}
+    spare0 = s["spare"][-5]
+    change = spare - spare0
+    qtf = record.get("quarters_to_fill")
+    since = labels[in_use_from]
+    lines = []
+    if wait > max(spare, 0):
+        head = "More people are waiting here than there are spare places"
+        lines.append(f"{wait:,} people are eligible but not yet using SDA, against {max(spare, 0):,} "
+                     f"spare places: {wait - max(spare, 0):,} beyond local capacity.")
+    else:
+        if change > max(5, 0.05 * abs(spare0)):
+            head = "The surplus here is growing"
+        elif change < -max(5, 0.05 * abs(spare0)):
+            head = "The surplus here is shrinking"
+        else:
+            head = "The surplus here is holding steady"
+        lines.append(f"{spare:,} places ({spare / places:.0%}) have no SDA-funded resident, "
+                     f"{'up' if change >= 0 else 'down'} {abs(change):,} in a year, against "
+                     f"{wait:,} people waiting.")
+        if qtf:
+            lines.append(f"At last year's take-up it would take {qtf:.0f} quarters to fill them.")
+        elif spare > 0:
+            lines.append("Nobody was added to SDA use here over the last year.")
+    status = record.get("waiting_status")
+    if status == "always short":
+        lines.append(f"Waiting has exceeded spare places in every quarter since {since}.")
+    elif status == "short to covered":
+        lines.append(f"Waiting exceeded spare places earlier, but no longer; the series starts {since}.")
+    elif status == "covered to short":
+        lines.append("Spare places used to cover everyone waiting, and no longer do.")
+    return {"headline": head, "evidence": " ".join(lines)}
+
+
+def add_ranks(geos):
+    """National position on spare places and on quarters to fill, 1 = most."""
+    sa4 = [g for g, r in geos.items() if r["level"] == "SA4"]
+    for key, get in (("spare", lambda r: r["series"]["spare"][-1]),
+                     ("quarters_to_fill", lambda r: r.get("quarters_to_fill"))):
+        ranked = sorted((g for g in sa4 if get(geos[g]) is not None),
+                        key=lambda g: (-get(geos[g]), g))
+        for i, g in enumerate(ranked, 1):
+            geos[g].setdefault("rank", {})[key] = [i, len(ranked)]
+
+
 def build(panel_dir: Path):
     p = Panel(panel_dir / "panel.csv")
     a = json.loads((panel_dir / "analysis.json").read_text())
@@ -275,8 +336,12 @@ def build(panel_dir: Path):
             record["quarters_to_fill"] = r["quarters_to_fill"]
             record["spare_change_per_quarter"] = r["spare_change_per_quarter"]
             record["absorbed_per_quarter"] = r["absorbed_per_quarter"]
+        if level == "SA4":
+            record.update(region_summary(record, [month(q) for q in quarters],
+                                         quarters.index(a["q1"]["window"][0])))
         geos[geo] = record
 
+    add_ranks(geos)
     nat = geos["national"]
     return {
         "meta": {
