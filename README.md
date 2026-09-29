@@ -604,8 +604,10 @@ standard errors clustered by region.
 
 A second, simpler site built around time sits in `time/`, beside the explorer,
 which is unchanged. It is being built in milestones (see `docs/ui-plan.md`):
-the Australia page, the region pages and the league table (`time/#/league`) are
-done, and accessibility and phone polish come last.
+the Australia page, the region pages, the league table (`time/#/league`) and an
+accessibility pass are done. The explorer stays at the root by decision; the two
+link to each other. The smoke test audits every `time/` view with axe-core
+(WCAG 2.2 AA) when it is installed, as it is in CI.
 Region pages live at `time/#/region/<State> - <Name>` and the index at
 `time/#/regions`, filterable by state. That page has five sections, each headed by a
 conclusion and followed by its evidence:
@@ -696,7 +698,7 @@ The first rebuilds `vacancies.json`, re-derives `sda.json` and rebuilds the
 quarterly panel from all thirteen workbooks (about 30 seconds), and fails if any
 differs byte for byte from what is committed; it then checks that every quarter
 reconciles and that the panel's June 2026 quarter equals `sda.json`. The second needs Playwright (`npm install --no-save
-playwright && npx playwright install chromium`; with a global install, prefix
+playwright axe-core && npx playwright install chromium`; with a global install, prefix
 `NODE_PATH="$(npm root -g)"`). It fails on any page error, on horizontal
 scrolling at 390px, and on a handful of specific regressions. Both run on every
 push in `.github/workflows/checks.yml`.
