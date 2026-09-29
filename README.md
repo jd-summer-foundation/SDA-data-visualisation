@@ -604,7 +604,8 @@ standard errors clustered by region.
 
 A second, simpler site built around time sits in `time/`, beside the explorer,
 which is unchanged. It is being built in milestones (see `docs/ui-plan.md`):
-the Australia page and the region pages are done, and the league table is next.
+the Australia page, the region pages and the league table (`time/#/league`) are
+done, and accessibility and phone polish come last.
 Region pages live at `time/#/region/<State> - <Name>` and the index at
 `time/#/regions`, filterable by state. That page has five sections, each headed by a
 conclusion and followed by its evidence:

@@ -195,3 +195,45 @@ tr.group th { text-align: left; font-family: var(--mono); font-size: 11px; lette
 @supports not (grid-template-rows: subgrid) {
   .multiples figcaption { min-height: 44px; }
 }
+
+/* ---------- the league table ---------- */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+table.league th button.sort {
+  font: inherit; font-weight: 600; color: inherit; background: none; border: 0; padding: 4px 0;
+  cursor: pointer; text-align: inherit; white-space: nowrap; min-height: 28px;
+}
+table.league th[aria-sort] button.sort { color: var(--ink); }
+table.league td.rank, table.league th.rank { color: var(--ink-3); width: 2.5em; text-align: right; }
+table.league .trend-cell { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+table.league .trend-cell .spark { width: 64px; height: 20px; flex: none; }
+table.league th.cat, table.league td.cat { text-align: center; }
+.status.compact { padding: 1px 6px; }
+.chips-key { margin-top: 6px; }
+@media (max-width: 1100px) { .status.compact .hide-narrow { display: none; } }
+
+/* Below 900px each row becomes a card: the region on top, every figure
+   labelled beneath it, so nothing scrolls sideways. */
+@media (max-width: 900px) {
+  table.league thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  table.league, table.league tbody, table.league tr { display: block; }
+  table.league tr { border: 1px solid var(--rule); border-radius: 10px; padding: 8px 10px; margin: 0 0 10px; }
+  table.league td, table.league th[scope="row"] { display: flex; justify-content: space-between; gap: 12px; border: 0; padding: 3px 0; white-space: normal; text-align: right; }
+  table.league td::before { content: attr(data-label); color: var(--ink-3); font-size: 12px; text-align: left; }
+  table.league th[scope="row"] { display: block; text-align: left; font-size: 15px; }
+  table.league td.rank { display: none; }
+}
+@media (max-width: 900px) { table.league .status.compact .hide-narrow { display: inline; } }
+.tablewrap { position: relative; }   /* keeps .sr-only labels inside the scroll box */
+table.league th[scope="row"] { text-align: left; }
+table.league thead th { white-space: normal; vertical-align: bottom; line-height: 1.25; }
+table.league th button.sort { white-space: normal; text-align: right; }
+table.league thead th:nth-child(2) button.sort { text-align: left; }
+table.league td { padding: 5px 6px; }
+/* In the table the chips are glyph-only (the key above carries the words, and
+   each chip its full text on hover and for screen readers), and names wrap. */
+table.league .status.compact .hide-narrow { display: none; }
+table.league th[scope="row"] { white-space: normal; min-width: 150px; }
+table.league td .status:not(.compact) { white-space: normal; }
+table.league thead th:nth-child(2) { text-align: left; }
+.tabs { flex-wrap: wrap; }
+.tabs a, .tab-soon { white-space: nowrap; }
