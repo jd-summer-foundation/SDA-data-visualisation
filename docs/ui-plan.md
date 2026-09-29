@@ -172,9 +172,22 @@ test.
    state filter (all kept in the link). Category chips follow the substitution
    switch and are glyph-only in the table, with a key above. It fits its box
    from 1024px; below 900px each row becomes a labelled card.
-4. **Accessibility and phone polish.** Then a decision on replacing the root
-   site. If we replace it, the old explorer moves to `classic/` so existing links
-   keep working, or bare links redirect.
+4. **Accessibility and phone polish.** *Done:*
+   - **Audit.** Every view passes an axe-core audit (WCAG 2.2 AA plus best
+     practice) in both themes at 1280 and 390px, which the smoke test now runs.
+   - **Contrast.** Light-mode muted text and link text are darkened to clear
+     4.5:1. A text-only link colour is kept separate from the chart blue.
+   - **Keyboard.** A skip link comes first, and navigating moves focus to the
+     new page's heading. Scrolling tables are focusable regions.
+   - **Charts.** Each chart describes each series from its first value to its
+     last. A tap shows a value and a lifting finger does not remove it.
+     Scrolling closes a pointer tooltip but not a keyboard one.
+   - **Layout.** Forced-colours (Windows high contrast) styles are in place.
+     There is a tighter masthead on small phones, with short switch labels
+     below 360px, and reflow is checked at 320px.
+
+   **Decision (29 September 2026): the explorer stays at the site root.** The
+   time-based interface stays at `time/`, and each links to the other.
 
 ## Decisions
 

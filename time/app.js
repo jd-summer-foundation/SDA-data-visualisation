@@ -75,6 +75,9 @@ function showTip(x, y, head, rows) {
   t.style.top = `${top}px`;
 }
 const hideTip = () => { tip().hidden = true; };
+// Who opened the tooltip: scrolling closes one opened by pointer or touch, but
+// not one opened from the keyboard, since focusing a chart can itself scroll.
+let tipByKey = false;
 
 /* ---------- charts ---------- */
 /* A line chart with one y-axis. series: [{name, values, color, dash, label}].
@@ -99,7 +102,7 @@ function lineChart(opts) {
     const Y = v => M.t + (H - M.t - M.b) * (1 - Math.min(v, yMax) / yMax);
     const yFmt = opts.yFmt || (v => fmt(v));
     const svg = sv("svg", { viewBox: `0 0 ${width} ${H}`, role: "img", tabindex: 0,
-                            "aria-label": opts.aria || opts.title || "" });
+                            "aria-label": describe(opts.aria || opts.title || "", opts.labels, opts.series, yFmt) });
 
     if (opts.bands) {
       const top = Math.min(yMax, 1e9);
@@ -185,8 +188,12 @@ function lineChart(opts) {
       const x = (evt.clientX - r.left) * width / r.width;
       return Math.max(0, Math.min(n - 1, Math.round((x - M.l) / ((width - M.l - M.r) / Math.max(1, n - 1)))));
     };
-    svg.addEventListener("pointermove", e => place(nearest(e), e.clientX, e.clientY));
-    svg.addEventListener("pointerleave", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
+    svg.addEventListener("pointermove", e => { tipByKey = false; place(nearest(e), e.clientX, e.clientY); });
+    svg.addEventListener("pointerdown", e => { tipByKey = false; place(nearest(e), e.clientX, e.clientY); });
+    svg.addEventListener("pointerleave", e => {
+      if (e.pointerType === "touch") return;   // a finger lifting is not leaving
+      cross.setAttribute("visibility", "hidden"); hideTip();
+    });
     svg.addEventListener("keydown", e => {
       if (!["ArrowLeft", "ArrowRight", "Home", "End", "Escape"].includes(e.key)) return;
       e.preventDefault();
@@ -194,6 +201,7 @@ function lineChart(opts) {
       const next = e.key === "Home" ? 0 : e.key === "End" ? n - 1
         : Math.max(0, Math.min(n - 1, (at < 0 ? n - 1 : at) + (e.key === "ArrowRight" ? 1 : -1)));
       const r = svg.getBoundingClientRect();
+      tipByKey = true;
       place(next, r.left + X(next) * r.width / width, r.top + M.t * r.height / H);
     });
     svg.addEventListener("blur", () => { cross.setAttribute("visibility", "hidden"); hideTip(); });
@@ -218,7 +226,8 @@ function columnChart(opts) {
     const slot = (width - M.l - M.r) / n;
     const bw = Math.min(24, slot * 0.6);
     const yFmt = opts.yFmt || (v => fmt(v));
-    const svg = sv("svg", { viewBox: `0 0 ${width} ${H}`, role: "img", tabindex: 0, "aria-label": opts.aria || "" });
+    const svg = sv("svg", { viewBox: `0 0 ${width} ${H}`, role: "img", tabindex: 0,
+      "aria-label": describe(opts.aria || "", opts.labels, [{ name: opts.name, values: opts.values }], yFmt) });
     const grid = sv("g", { class: "grid" }), axis = sv("g", { class: "axis" });
     for (const t of ticks(hi)) {
       grid.append(sv("line", { x1: M.l, x2: width - M.r, y1: Y(t), y2: Y(t) }));
@@ -263,12 +272,14 @@ function columnChart(opts) {
     };
     const reset = () => { bars.forEach(b => b.bar.style.opacity = 1); hideTip(); };
     svg.addEventListener("pointermove", e => {
+      tipByKey = false;
       const r = svg.getBoundingClientRect();
       const x = (e.clientX - r.left) * width / r.width;
       const k = bars.reduce((best, b, j) => Math.abs(b.cx - x) < Math.abs(bars[best].cx - x) ? j : best, 0);
       place(k, e.clientX, e.clientY);
     });
-    svg.addEventListener("pointerleave", reset);
+    svg.addEventListener("pointerdown", e => svg.dispatchEvent(new PointerEvent("pointermove", e)));
+    svg.addEventListener("pointerleave", e => { if (e.pointerType !== "touch") reset(); });
     svg.addEventListener("blur", reset);
     svg.addEventListener("keydown", e => {
       if (!["ArrowLeft", "ArrowRight", "Escape"].includes(e.key)) return;
@@ -276,6 +287,7 @@ function columnChart(opts) {
       if (e.key === "Escape") return reset();
       const k = Math.max(0, Math.min(bars.length - 1, (at < 0 ? 0 : at + (e.key === "ArrowRight" ? 1 : -1))));
       const r = svg.getBoundingClientRect();
+      tipByKey = true;
       place(k, r.left + bars[k].cx * r.width / width, r.top + bars[k].y * r.height / H);
     });
     box.replaceChildren(svg);
@@ -283,6 +295,18 @@ function columnChart(opts) {
   renders.push(draw);
   requestAnimationFrame(draw);
   return box;
+}
+
+/* What a chart shows, in words, for a screen reader: each series from its
+   first published value to its last. The table behind the chart has the rest. */
+function describe(title, labels, series, yFmt) {
+  const parts = series.map(s => {
+    const known = s.values.map((v, i) => [v, i]).filter(([v]) => v != null);
+    if (!known.length) return null;
+    const [a, i] = known[0], [b, j] = known.at(-1);
+    return `${s.name}: ${yFmt(a, true)} in ${labels[i]} to ${yFmt(b, true)} in ${labels[j]}`;
+  }).filter(Boolean);
+  return [title, ...parts].filter(Boolean).join(". ") + ".";
 }
 
 function legend(items) {
@@ -295,7 +319,7 @@ function legend(items) {
 function numbers(headers, rows) {
   return el("details", { class: "numbers" },
     el("summary", { text: "Show the numbers" }),
-    el("div", { class: "tablewrap" },
+    el("div", { class: "tablewrap", tabindex: 0, role: "region", "aria-label": `Numbers: ${headers.slice(1).join(", ")}` },
       el("table", {},
         el("thead", {}, el("tr", {}, headers.map(h => el("th", { scope: "col", text: h })))),
         el("tbody", {}, rows.map(r => el("tr", {}, r.map((c, i) =>
@@ -511,7 +535,7 @@ function australia() {
   page.push(el("section", { class: "section", id: "states", "aria-labelledby": "states-h" },
     el("h2", { id: "states-h", text: "By state" }),
     el("p", { class: "evidence", text: `Latest quarter, ${L[last]}, with the change in spare places over the year. Each state opens its regions.` }),
-    el("div", { class: "tablewrap" }, el("table", {},
+    el("div", { class: "tablewrap", tabindex: 0, role: "region", "aria-label": "States" }, el("table", {},
       el("thead", {}, el("tr", {}, ["State", "Places", "Spare", "Share", "Spare, change in a year", "Eligible, not yet using", "Pipeline places"]
         .map(h => el("th", { scope: "col", text: h })))),
       el("tbody", {}, states.map(([, g]) => {
@@ -587,7 +611,7 @@ function regionsIndex(route) {
     el("section", { class: "section", id: "regionList" },
       el("div", { class: "filters" }, stateSwitch, search),
       count,
-      el("div", { class: "tablewrap" }, el("table", { class: "regions" },
+      el("div", { class: "tablewrap", tabindex: 0, role: "region", "aria-label": "Regions" }, el("table", { class: "regions" },
         el("thead", {}, el("tr", {}, ["Region", "Spare places", "In a year", "Waiting"].map(h => el("th", { scope: "col", text: h })))),
         tbody))),
   ];
@@ -787,7 +811,7 @@ function league(route) {
       note, count,
       el("ul", { class: "legend chips-key" },
         ["short", "drifting down", "balanced", "drifting up", "long", "reverses", "thin"].map(s => el("li", {}, chip(s, null, true)))),
-      el("div", { class: "tablewrap" }, el("table", { class: "league" }, thead, tbody)),
+      el("div", { class: "tablewrap", tabindex: 0, role: "region", "aria-label": "League table" }, el("table", { class: "league" }, thead, tbody)),
       el("p", { class: "caveat", text: "Quarters to fill: today's spare places at last year's net take-up, with no further building; blank where nobody was added to SDA use. Category statuses use need as recorded, over the seven quarters it has been published, and read “too few” where any quarter had under 10 participants." })),
   ];
 }
@@ -829,7 +853,13 @@ function render() {
   document.getElementById("page").replaceChildren(...page);
   // A new page starts at the top; the switch re-renders in place.
   const path = location.hash.split("?")[0];
-  if (lastPath !== null && path !== lastPath) window.scrollTo(0, 0);
+  if (lastPath !== null && path !== lastPath) {
+    window.scrollTo(0, 0);
+    // Move focus to the new page's heading, so a screen reader announces it
+    // and the next Tab starts from the top of the page, not the old link.
+    const h1 = document.querySelector("#page h1");
+    if (h1) { h1.setAttribute("tabindex", "-1"); h1.focus({ preventScroll: true }); }
+  }
   lastPath = path;
 }
 
@@ -873,6 +903,15 @@ async function boot() {
     render();
   });
   window.addEventListener("hashchange", render);
+  // The skip link cannot be a #fragment, because fragments are routes here.
+  document.getElementById("skip").addEventListener("click", e => {
+    e.preventDefault();
+    const h1 = document.querySelector("#page h1") || document.getElementById("main");
+    h1.setAttribute("tabindex", "-1");
+    h1.focus();
+  });
+  window.addEventListener("scroll", () => { if (!tipByKey) hideTip(); }, { passive: true });
+  document.addEventListener("pointerdown", e => { if (!e.target.closest(".chart svg")) hideTip(); });
   let pending = 0;
   window.addEventListener("resize", () => {
     cancelAnimationFrame(pending);

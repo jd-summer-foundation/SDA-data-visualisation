@@ -8,6 +8,8 @@
    Needs Playwright and a Chromium it can find:
      npm install --no-save playwright && npx playwright install chromium
      node tests/smoke.js
+   With axe-core installed too (npm install --no-save axe-core), the time/
+   views are also audited for WCAG 2.2 AA.
    If Playwright is installed globally instead:
      NODE_PATH="$(npm root -g)" node tests/smoke.js
 */
@@ -16,7 +18,11 @@
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
-const { chromium } = require("playwright");
+const { chromium, devices } = require("playwright");
+// axe-core audits the time-based interface; optional so the smoke test still
+// runs where only Playwright is installed, but CI installs both.
+let AXE = null;
+try { AXE = fs.readFileSync(require.resolve("axe-core/axe.min.js"), "utf8"); } catch (e) { /* not installed */ }
 
 const ROOT = path.resolve(__dirname, "..");
 const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css",
@@ -127,6 +133,8 @@ const TOGGLES = [
         // Hover and keyboard both reach the tooltip.
         const supply = await p.$("#supply svg");
         await supply.scrollIntoViewIfNeeded();
+        // Scrolling hides the tooltip by design; let the scroll event land first.
+        await p.waitForTimeout(150);
         const box = await supply.boundingBox();
         await p.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.5);
         if (await p.$eval("#tip", t => t.hidden)) fail(`${label}: hovering a chart shows no tooltip`);
@@ -267,6 +275,71 @@ const TOGGLES = [
     if (catCols !== 3) fail(`substitution league has ${catCols} category columns`);
     console.log("  ok   league presets, sorting, filter and substitution");
     await p.close();
+  }
+
+  // Accessibility of the time-based interface.
+  if (AXE) {
+    for (const width of [1280, 390]) {
+      for (const scheme of ["light", "dark"]) {
+        const p = await page(width, scheme);
+        for (const hash of ["#/", "#/?sub=1", "#/regions", "#/region/VIC - Melbourne - West", "#/league", "#/league?preset=short&sub=1"]) {
+          await p.goto(base + "time/" + hash);
+          await p.waitForFunction(() => document.querySelector("#page h1"));
+          await p.waitForTimeout(150);
+          await p.evaluate(() => document.querySelectorAll("details").forEach(d => { d.open = true; }));
+          await p.addScriptTag({ content: AXE });
+          const violations = await p.evaluate(async () => (await axe.run(document, { runOnly: { type: "tag",
+            values: ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"] } }))
+            .violations.map(v => `${v.id} (${v.nodes.length}): ${v.nodes[0].target.join(" ")}`));
+          if (violations.length) fail(`axe, time/${hash} ${scheme} ${width}px: ${violations.join("; ")}`);
+        }
+        await p.close();
+      }
+    }
+    console.log("  ok   axe: every time/ view, both themes, both widths");
+  } else {
+    console.log("  skip axe (axe-core not installed)");
+  }
+  {
+    const p = await page(1280);
+    await p.goto(base + "time/#/");
+    await p.waitForSelector("#supply svg");
+    await p.keyboard.press("Tab");
+    if (await p.evaluate(() => document.activeElement.id) !== "skip") fail("the first Tab does not reach the skip link");
+    await p.keyboard.press("Enter");
+    if (await p.evaluate(() => document.activeElement.tagName) !== "H1") fail("the skip link does not move focus to the heading");
+    await p.click("#tabLeague");
+    await p.waitForSelector("table.league tbody tr");
+    if (await p.evaluate(() => document.activeElement.tagName) !== "H1") fail("navigating does not move focus to the new page's heading");
+    await p.goto(base + "time/#/");
+    await p.waitForSelector("#supply svg");
+    if (!/to [\d,]+ in Jun 2026/.test(await p.$eval("#supply .chart svg", s => s.getAttribute("aria-label"))))
+      fail("charts do not describe their first and last values");
+    await p.close();
+    // A tap shows the value and a lifting finger does not take it away.
+    const ctx = await browser.newContext({ ...devices["iPhone 13"] });
+    const t = await ctx.newPage();
+    await t.route(/fonts\.(googleapis|gstatic)\.com/, r => r.abort());
+    await t.goto(base + "time/#/");
+    const chart = await t.waitForSelector("#supply .chart svg");
+    await chart.scrollIntoViewIfNeeded();
+    await t.waitForTimeout(100);
+    const box = await chart.boundingBox();
+    await t.touchscreen.tap(box.x + box.width / 2, box.y + box.height / 2);
+    await t.waitForTimeout(100);
+    if (await t.$eval("#tip", el => el.hidden)) fail("tapping a chart shows no value");
+    await ctx.close();
+    // Reflow at 320px (WCAG 1.4.10).
+    const n = await page(320);
+    for (const hash of ["#/", "#/regions", "#/region/NSW - Sydney - Baulkham Hills and Hawkesbury", "#/league"]) {
+      await n.goto(base + "time/" + hash);
+      await n.waitForFunction(() => document.querySelector("#page h1"));
+      await n.waitForTimeout(150);
+      const over = await n.evaluate(() => document.scrollingElement.scrollWidth - innerWidth);
+      if (over > 0) fail(`time/${hash} overflows by ${over}px at 320px`);
+    }
+    await n.close();
+    console.log("  ok   skip link, focus on navigation, chart descriptions, tap, 320px reflow");
   }
 
   // Regressions fixed once and worth keeping fixed.

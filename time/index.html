@@ -14,6 +14,7 @@
 <body>
 
 <header class="topbar">
+  <a class="skip" id="skip" href="#/">Skip to content</a>
   <div class="topbar-in">
     <div class="brand">
       <a class="brand-name" href="#/">SDA over time</a>
@@ -27,8 +28,8 @@
     </nav>
     <div class="controls">
       <div class="switch" id="subSwitch" role="group" aria-label="How supply is counted">
-        <button type="button" data-sub="enrolled" aria-pressed="true">As enrolled</button>
-        <button type="button" data-sub="substitution" aria-pressed="false">Allowing substitution</button>
+        <button type="button" data-sub="enrolled" aria-pressed="true" aria-label="As enrolled"><span class="full">As enrolled</span><span class="brief" aria-hidden="true">Enrolled</span></button>
+        <button type="button" data-sub="substitution" aria-pressed="false" aria-label="Allowing substitution"><span class="full">Allowing substitution</span><span class="brief" aria-hidden="true">Substitution</span></button>
       </div>
       <button type="button" class="theme" id="themeButton" aria-label="Colour theme: follows your system">
         <span aria-hidden="true">◐</span>
