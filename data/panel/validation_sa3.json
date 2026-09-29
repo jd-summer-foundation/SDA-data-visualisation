@@ -674,10 +674,12 @@
   "median_per_sa4": 3,
   "max_per_sa4": 10,
   "sa4_with_one": 2,
-  "by_basis": {
-   "ASGS 2021 name, placed by hand": 31,
-   "postcode concordance": 305
-  }
+  "spellings": [
+   {
+    "supplement_p": "ACT - Urriarra - Namadgi",
+    "asgs_2021": "ACT - Uriarra - Namadgi"
+   }
+  ]
  },
  "usability": [
   {

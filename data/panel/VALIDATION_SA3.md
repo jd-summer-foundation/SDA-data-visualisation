@@ -25,12 +25,11 @@ Not published at SA3:
 
 ## SA3 to SA4
 
-336 SA3 regions, in 88 SA4s (median 3 per SA4, at most 10; 2 SA4s are a single SA3). Supplement P names the SA3 but not its SA4, so each is placed from:
+336 SA3 regions, in 88 SA4s (median 3 per SA4, at most 10; 2 SA4s are a single SA3). Supplement P names the SA3 but not its SA4 and gives no codes; both come from the ABS ASGS 2021 allocation file (`data/asgs_2021_sa2.csv`), joined on state and SA3 name. Where Supplement P spells an SA3 differently:
 
-| Basis | SA3 regions |
+| Supplement P | ASGS 2021 |
 | --- | --- |
-| ASGS 2021 name, placed by hand | 31 |
-| postcode concordance | 305 |
+| ACT - Urriarra - Namadgi | ACT - Uriarra - Namadgi |
 
 Every placement is tested by the reconciliation below: an SA3 in the wrong SA4 leaves two SA4s that no longer sum.
 

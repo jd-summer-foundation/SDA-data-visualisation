@@ -588,13 +588,13 @@ SIL figures back to June 2020.
 ### The SA3 panel
 
 ```sh
-python3 scripts/extract_panel_sa3.py        # data/supplements + panel.csv -> data/panel
+python3 scripts/extract_panel_sa3.py        # data/supplements + panel.csv + ASGS -> data/panel
 ```
 
 | File | Contents |
 | --- | --- |
 | `panel_sa3.csv` | the 336 SA3 regions (and `Other` rows), in `panel.csv`'s columns |
-| `sa3_sa4.csv` | each SA3's SA4, and whether the postcode concordance or a hand placement put it there |
+| `sa3_sa4.csv` | each SA3's SA4, with both ASGS 2021 codes |
 | `validation_sa3.json`, `VALIDATION_SA3.md` | what SA3 carries, the mapping, the checks, the table map |
 
 SA3 publishes **dwellings** by design category, dwellings by build type and by
@@ -605,14 +605,13 @@ no new-build split by category and no places not in SDA use. Places from
 dwellings by maximum residents is the only places figure, and it is a total.
 No SA3 cell is suppressed.
 
-Supplement P names each SA3 but not its SA4. The postcode concordance places
-305; its SA3 names predate ASGS 2021, so the 31 SA3s created or renamed in 2021
-are placed by hand in `ASGS_2021_SA3`. Neither is trusted: the build fails
-unless SA3 figures sum exactly to the SA4 panel for every measure, category and
-edition, and SA3 plus `Other` rows sum to the state rows. An SA3 placed in the
-wrong SA4 breaks two SA4s, which is how the one error in the first hand
-placement (Camden, which ASGS 2021 puts in Sydney – Outer South West) was found.
-The ABS ASGS 2021 allocation file would replace both sources.
+Supplement P names each SA3 but not its SA4, and gives no codes. Both come from
+the ABS ASGS 2021 allocation file (`data/asgs_2021_sa2.csv`), joined on state
+and SA3 name; the one name Supplement P spells differently (`Urriarra`, for
+`Uriarra - Namadgi`) is listed in `SUPPLEMENT_SPELLINGS`. The join is checked,
+not trusted: the build fails unless SA3 figures sum exactly to the SA4 panel
+for every measure, category and edition, and SA3 plus `Other` rows sum to the
+state rows. An SA3 placed in the wrong SA4 breaks two SA4s.
 
 Read SA3 against SA4 with care. Participants are counted where they live, so a
 move between two SA3s of one SA4 is take-up at SA3 and nothing at SA4.

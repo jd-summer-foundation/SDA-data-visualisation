@@ -62,6 +62,8 @@ class Sa3Mapping(unittest.TestCase):
             self.assertIn(r["sa4"], sa4, r)
             self.assertTrue(r["sa4"].startswith(f"sa4:{r['state']} - "), r)
         self.assertEqual({r["sa4"] for r in mapping}, sa4)
+        self.assertEqual(len({r["sa3_code"] for r in mapping}), 336)
+        self.assertEqual(len({r["sa4_code"] for r in mapping}), 88)
 
     def test_same_sa3_as_sda_json(self):
         sda = json.loads((ROOT / "data" / "sda.json").read_text())
@@ -139,14 +141,23 @@ class Sa3Units(unittest.TestCase):
     def test_unplaced_sa3_fails(self):
         import extract_panel_sa3 as x
         sa4 = {r["sa4"] for r in read("sa3_sa4.csv")}
-        labels = list(x.ASGS_2021_SA3)
-        self.assertEqual(len(x.sa3_parents(labels, {}, sa4)), 31)
+        asgs = {"VIC - Geelong": ("20301", "Geelong", "203"),
+                "ACT - Uriarra - Namadgi": ("80111", "Australian Capital Territory", "801")}
+        labels = ["VIC - Geelong", "ACT - Urriarra - Namadgi"]
+        got = x.sa3_parents(labels, asgs, sa4)
+        self.assertEqual(got["VIC - Geelong"], ("sa4:VIC - Geelong", "20301", "203"))
+        self.assertEqual(got["ACT - Urriarra - Namadgi"][0],
+                         "sa4:ACT - Australian Capital Territory")
         with self.assertRaisesRegex(ValueError, "VIC - Nowhere"):
-            x.sa3_parents(labels + ["VIC - Nowhere"], {}, sa4)
-        # A concordance that puts an SA3 in two SA4s is not guessed between.
-        two = {"Geelong": {"sa4:VIC - Geelong", "sa4:VIC - Ballarat"}}
-        with self.assertRaisesRegex(ValueError, "VIC - Geelong"):
-            x.sa3_parents(labels + ["VIC - Geelong"], two, sa4)
+            x.sa3_parents(labels + ["VIC - Nowhere"], asgs, sa4)
+        # An SA4 the SA4 panel does not know is not accepted either.
+        with self.assertRaisesRegex(ValueError, "not in the SA4 panel"):
+            x.sa3_parents(labels, {**asgs, "VIC - Geelong": ("20301", "Nowhere", "299")}, sa4)
+
+    def test_codes_nest(self):
+        # ASGS codes are hierarchical: an SA3 code starts with its SA4's.
+        for r in read("sa3_sa4.csv"):
+            self.assertTrue(r["sa3_code"].startswith(r["sa4_code"]), r)
 
     def test_geography_keeps_sa4_ids_by_default(self):
         import extract_panel

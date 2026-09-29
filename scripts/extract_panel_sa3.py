@@ -15,18 +15,18 @@ so there are no enrolled places by category and no places not in SDA use at
 SA3. Places from dwellings by maximum residents (6+ counted as six) is the
 only places measure, and it is a total.
 
-Supplement P names each SA3 but not its SA4. The parent is taken from the
-postcode concordance, whose `sa3name`/`sa4name` columns predate ASGS 2021, so
-the SA3s created or renamed in 2021 are placed by `ASGS_2021_SA3`. Neither
-source is trusted on its own: the build fails unless every SA3 figure sums to
-its SA4's figure in the SA4 panel, for every measure, category and edition.
+Supplement P names each SA3 but not its SA4, and gives no codes. Both come
+from the ABS ASGS Edition 3 (2021) allocation file, data/asgs_2021_sa2.csv,
+joined on state and SA3 name. The join is checked, not trusted: the build
+fails unless every SA3 figure sums to its SA4's figure in the SA4 panel, for
+every measure, category and edition.
 
 Usage:  python3 scripts/extract_panel_sa3.py [data/supplements] [-o data/panel]
 
 Reads data/panel/panel.csv (build it first) and writes, into the output
 directory:
   panel_sa3.csv       the SA3 panel, in panel.csv's columns
-  sa3_sa4.csv         each SA3's SA4, and where that came from
+  sa3_sa4.csv         each SA3's SA4, with both ASGS 2021 codes
   validation_sa3.json the mapping, the reconciliation and the table map
   VALIDATION_SA3.md   the same, written out for reading
 """
@@ -48,46 +48,18 @@ from extract_panel import (
     read_edition,
     write_csv,
 )
-from extract_vacancies import canonical_sa4
 from validate_panel import TOLERANCE
 
-# SA3s whose ASGS 2021 name the postcode concordance does not carry: created
-# in 2021 (Molonglo, Camden, Rouse Hill - McGraths Hill) or renamed or split
-# from a 2016 SA3. Each is checked by the reconciliation, which failed with
-# Camden under Sydney - South West; ASGS 2021 places it in Outer South West.
-ASGS_2021_SA3 = {
-    "ACT - Canberra East": "Australian Capital Territory",
-    "ACT - Molonglo": "Australian Capital Territory",
-    "ACT - Urriarra - Namadgi": "Australian Capital Territory",
-    "ACT - Woden Valley": "Australian Capital Territory",
-    "NSW - Camden": "Sydney - Outer South West",
-    "NSW - Goulburn - Mulwaree": "Capital Region",
-    "NSW - Illawarra Catchment Reserve": "Illawarra",
-    "NSW - Rouse Hill - McGraths Hill": "Sydney - Baulkham Hills and Hawkesbury",
-    "NSW - Young - Yass": "Capital Region",
-    "QLD - Bald Hills - Everton Park": "Brisbane - North",
-    "QLD - Beenleigh": "Logan - Beaudesert",
-    "QLD - Biloela": "Central Queensland",
-    "QLD - Broadbeach - Burleigh": "Gold Coast",
-    "QLD - Buderim": "Sunshine Coast",
-    "QLD - Caloundra": "Sunshine Coast",
-    "QLD - Gladstone": "Central Queensland",
-    "QLD - Gold Coast - North": "Gold Coast",
-    "QLD - Hervey Bay": "Wide Bay",
-    "QLD - Kenmore - Brookfield - Moggill": "Brisbane - West",
-    "QLD - Nambour": "Sunshine Coast",
-    "QLD - Noosa Hinterland": "Sunshine Coast",
-    "QLD - The Gap - Enoggera": "Brisbane - West",
-    "QLD - The Hills District": "Moreton Bay - South",
-    "SA - Gawler - Two Wells": "Adelaide - North",
-    "SA - Holdfast Bay": "Adelaide - South",
-    "TAS - Brighton": "Hobart",
-    "VIC - Colac - Corangamite": "Warrnambool and South West",
-    "VIC - Warrnambool": "Warrnambool and South West",
-    "WA - Armadale": "Perth - South East",
-    "WA - East Pilbara": "Western Australia - Outback (North)",
-    "WA - West Pilbara": "Western Australia - Outback (North)",
+STATE_ABBREVIATIONS = {
+    "Australian Capital Territory": "ACT", "New South Wales": "NSW",
+    "Northern Territory": "NT", "Queensland": "QLD", "South Australia": "SA",
+    "Tasmania": "TAS", "Victoria": "VIC", "Western Australia": "WA",
 }
+
+# Supplement P's spelling where it differs from ASGS 2021's. Every edition
+# writes "Urriarra"; the ABS, the ACT Government and the locality itself
+# write "Uriarra".
+SUPPLEMENT_SPELLINGS = {"ACT - Urriarra - Namadgi": "ACT - Uriarra - Namadgi"}
 
 LEVEL_ORDER = {"SA3": 0, "Other": 1}
 EXAMPLES = 5
@@ -132,43 +104,47 @@ def read_sa4_panel(path: Path):
     return values, sa4
 
 
-def concordance_parents(path: Path, sa4_ids):
-    """SA3 name -> the SA4 ids the postcode concordance puts it in."""
-    parents = defaultdict(set)
-    with path.open(encoding="utf-8-sig", newline="") as fh:
+def read_asgs(path: Path):
+    """ASGS 2021 SA3s as '<STATE> - <name>' -> (SA3 code, SA4 name, SA4 code).
+
+    Read from the ABS SA2 allocation file. The non-spatial SA3s ('No usual
+    address', 'Migratory - Offshore - Shipping') and Other Territories are
+    kept, harmlessly: Supplement P publishes none of them.
+    """
+    sa3 = {}
+    with path.open(encoding="utf-8", newline="") as fh:
         for row in csv.DictReader(fh):
-            sa3 = row["sa3name"].strip()
-            sa4 = canonical_sa4(row["sa4name"].strip(), sa3)
-            geo = f"sa4:{row['state'].strip()} - {sa4}"
-            if sa3 and geo in sa4_ids:
-                parents[sa3].add(geo)
-    return parents
+            state = STATE_ABBREVIATIONS.get(row["STATE_NAME_2021"])
+            if state is None:
+                continue
+            entry = (row["SA3_CODE_2021"], row["SA4_NAME_2021"], row["SA4_CODE_2021"])
+            label = f"{state} - {row['SA3_NAME_2021']}"
+            if sa3.setdefault(label, entry) != entry:
+                raise ValueError(f"{label}: two SA3 codes or SA4s in the allocation file")
+    return sa3
 
 
-def sa3_parents(labels, concordance, sa4_ids):
-    """Place every published SA3 in exactly one SA4, or fail.
+def sa3_parents(labels, asgs, sa4_ids):
+    """Place every SA3 Supplement P publishes in its ASGS 2021 SA4, or fail.
 
-    The concordance's own state is used, not the SA3 label's: border
-    postcodes carry the neighbouring state, but an SA3 name joined to an SA4
-    in another state would simply find no parent and stop the build.
+    Returns label -> (SA4 id, SA3 code, SA4 code). An SA3 the allocation file
+    does not know, or an SA4 the SA4 panel does not know, stops the build
+    rather than being guessed at.
     """
     mapping = {}
     for label in labels:
-        state, name = label.split(" - ", 1)
-        if label in ASGS_2021_SA3:
-            geo = f"sa4:{state} - {ASGS_2021_SA3[label]}"
-            if geo not in sa4_ids:
-                raise ValueError(f"{label}: ASGS_2021_SA3 names an unknown SA4 {geo}")
-            mapping[label] = (geo, "ASGS 2021 name, placed by hand")
-            continue
-        found = {g for g in concordance.get(name, ()) if g.startswith(f"sa4:{state} - ")}
-        if len(found) != 1:
-            raise ValueError(f"{label}: concordance gives {sorted(found) or 'no SA4'}; "
-                             "add it to ASGS_2021_SA3")
-        mapping[label] = (found.pop(), "postcode concordance")
-    unused = set(ASGS_2021_SA3) - set(labels)
+        key = SUPPLEMENT_SPELLINGS.get(label, label)
+        if key not in asgs:
+            raise ValueError(f"{label}: not an ASGS 2021 SA3; if it is a spelling, "
+                             "add it to SUPPLEMENT_SPELLINGS")
+        sa3_code, sa4_name, sa4_code = asgs[key]
+        geo = f"sa4:{label.split(' - ', 1)[0]} - {sa4_name}"
+        if geo not in sa4_ids:
+            raise ValueError(f"{label}: ASGS 2021 SA4 {geo} is not in the SA4 panel")
+        mapping[label] = (geo, sa3_code, sa4_code)
+    unused = set(SUPPLEMENT_SPELLINGS) - set(labels)
     if unused:
-        raise ValueError(f"ASGS_2021_SA3 entries no edition publishes: {sorted(unused)}")
+        raise ValueError(f"SUPPLEMENT_SPELLINGS entries no edition publishes: {sorted(unused)}")
     return mapping
 
 
@@ -271,9 +247,11 @@ def to_markdown(report):
     out += ["", "## SA3 to SA4", "",
             f"{m['sa3']} SA3 regions, in {m['sa4']} SA4s (median {m['median_per_sa4']} "
             f"per SA4, at most {m['max_per_sa4']}; {m['sa4_with_one']} SA4s are a single "
-            "SA3). Supplement P names the SA3 but not its SA4, so each is placed from:", "",
-            "| Basis | SA3 regions |", "| --- | --- |"]
-    out += [f"| {basis} | {n} |" for basis, n in m["by_basis"].items()]
+            "SA3). Supplement P names the SA3 but not its SA4 and gives no codes; both come "
+            "from the ABS ASGS 2021 allocation file (`data/asgs_2021_sa2.csv`), joined on "
+            "state and SA3 name. Where Supplement P spells an SA3 differently:", "",
+            "| Supplement P | ASGS 2021 |", "| --- | --- |"]
+    out += [f"| {x['supplement_p']} | {x['asgs_2021']} |" for x in m["spellings"]]
     out += ["", "Every placement is tested by the reconciliation below: an SA3 in the wrong "
             "SA4 leaves two SA4s that no longer sum.", "",
             "## Checks per quarter", "",
@@ -315,12 +293,12 @@ def main():
     parser.add_argument("supplements", type=Path, nargs="?", default=Path("data/supplements"))
     parser.add_argument("-o", "--out", type=Path, default=Path("data/panel"))
     parser.add_argument("--sa4-panel", type=Path, default=Path("data/panel/panel.csv"))
-    parser.add_argument("--postcodes", type=Path, default=Path("data/australian_postcodes.csv"))
+    parser.add_argument("--asgs", type=Path, default=Path("data/asgs_2021_sa2.csv"))
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
 
     sa4_values, sa4_ids = read_sa4_panel(args.sa4_panel)
-    concordance = concordance_parents(args.postcodes, sa4_ids)
+    asgs = read_asgs(args.asgs)
 
     paths = sorted(p for p in args.supplements.iterdir()
                    if re.search(r"Supplement_P_SDA_\d{4}-\d{2}_Q\d\.xls[xb]$", p.name))
@@ -333,7 +311,7 @@ def main():
 
     labels = sorted({g[4:] for _, p in editions for g, (_, lvl, _) in p.geos.items()
                      if lvl == "SA3"})
-    mapping = sa3_parents(labels, concordance, sa4_ids)
+    mapping = sa3_parents(labels, asgs, sa4_ids)
 
     rows, per_edition, previous = [], [], None
     for edition, panel in editions:
@@ -354,18 +332,19 @@ def main():
         previous = present
 
     write_csv(args.out / "panel_sa3.csv", PANEL_COLUMNS, rows)
-    write_csv(args.out / "sa3_sa4.csv", ["state", "sa3", "sa4", "basis"],
-              [[label.split(" - ", 1)[0], f"sa3:{label}", sa4, basis]
-               for label, (sa4, basis) in sorted(mapping.items())])
+    write_csv(args.out / "sa3_sa4.csv", ["state", "sa3", "sa3_code", "sa4", "sa4_code"],
+              [[label.split(" - ", 1)[0], f"sa3:{label}", sa3_code, sa4, sa4_code]
+               for label, (sa4, sa3_code, sa4_code) in sorted(mapping.items())])
 
-    children = Counter(sa4 for sa4, _ in mapping.values())
+    children = Counter(sa4 for sa4, _, _ in mapping.values())
     counts = sorted(children.values())
     report = {
         "editions": per_edition,
         "mapping": {"sa3": len(mapping), "sa4": len(children),
                     "median_per_sa4": counts[len(counts) // 2], "max_per_sa4": counts[-1],
                     "sa4_with_one": sum(n == 1 for n in counts),
-                    "by_basis": dict(sorted(Counter(b for _, b in mapping.values()).items()))},
+                    "spellings": [{"supplement_p": k, "asgs_2021": v}
+                                  for k, v in sorted(SUPPLEMENT_SPELLINGS.items())]},
         "usability": [{"label": label, "measure": measure, "editions": [
             e["edition"] for e, p in editions
             if any(p.geos[g][1] == "SA3" and v is not None
