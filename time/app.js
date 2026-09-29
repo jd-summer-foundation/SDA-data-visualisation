@@ -310,6 +310,7 @@ const statusChip = s => el("span", { class: `status ${s.replace(" ", "-")}`, tex
 
 /* ---------- routes ---------- */
 /* #/                       Australia
+   #/league?preset=short    the league table, with preset, state and sort
    #/regions?state=VIC      the region index, optionally filtered
    #/region/VIC - Geelong   one SA4
    Any of them takes ?sub=1 for the substitution reading, so a link carries it. */
@@ -322,6 +323,7 @@ function parseRoute() {
   const m = decoded.match(/^\/region\/(.+)$/);
   if (m) return { view: "region", id: `sa4:${m[1]}`, params };
   if (/^\/regions\/?$/.test(decoded)) return { view: "regions", params };
+  if (/^\/league\/?$/.test(decoded)) return { view: "league", params };
   return { view: "australia", params };
 }
 
@@ -631,13 +633,178 @@ function regionPage(route) {
     el("section", { class: "section", id: "position", "aria-labelledby": "position-h" },
       el("h2", { id: "position-h", text: "Where it sits nationally" }),
       el("p", { class: "evidence", text: rankLine.length ? `${rankLine.join("; ")}.` : "Not ranked: no spare places are measured here." }),
-      el("p", {}, el("a", { href: href("/regions", { state: g.state }), text: `Other regions in ${g.state}` }))),
+      el("p", {}, el("a", { href: href("/league", { state: g.state }), text: `${g.state} in the league table` }), " · ",
+        el("a", { href: href("/league"), text: "All regions ranked" }), " · ",
+        el("a", { href: href("/regions", { state: g.state }), text: `Other regions in ${g.state}` }))),
   ];
 }
 
 function ordinal(n) {
   const s = ["th", "st", "nd", "rd"], v = n % 100;
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
+/* ---------- the league table: persistent against temporary ---------- */
+/* One row per SA4, ranked by whichever column is sorted. Two presets answer
+   the questions the page exists for; each is a filter plus a sort, so the
+   same table serves both and the link records which is showing. */
+const WAIT_STATUS = {
+  "always short": "▼ short throughout", "short to covered": "↗ now covered",
+  "covered to short": "↘ now short", "always covered": "▲ covered throughout", reverses: "↔ back and forth",
+};
+const PRESETS = {
+  "": { label: "All regions", sort: "spare", dir: "desc", keep: () => true },
+  long: { label: "Persistently long", sort: "spare", dir: "desc",
+          note: "Spare places grew over the last year and have covered everyone waiting locally since at least the start of that year.",
+          keep: r => r.change > 0 && ["always covered", "short to covered"].includes(r.waitStatus) },
+  short: { label: "Persistently short", sort: "beyond", dir: "desc",
+           note: "More people waiting than spare places in every quarter since participants were first counted.",
+           keep: r => r.waitStatus === "always short" },
+};
+
+function leagueRows() {
+  const last = DATA.meta.labels.length - 1;
+  return Object.entries(DATA.geographies).filter(([, g]) => g.level === "SA4").map(([id, g]) => {
+    const s = g.series;
+    const spare = s.spare[last], wait = s.waiting[last], places = s.places[last];
+    const before = s.spare[last - 4];
+    return {
+      id, g, spare, wait, places,
+      share: places ? spare / places : null,
+      change: spare != null && before != null ? spare - before : null,
+      qtf: g.quarters_to_fill ?? null,
+      beyond: spare != null && wait != null ? Math.max(0, wait - Math.max(spare, 0)) : null,
+      waitStatus: g.waiting_status,
+    };
+  });
+}
+
+function league(route) {
+  const L = DATA.meta.labels;
+  const cats = shownCategories();
+  let state = STATES.includes(route.params.get("state")) ? route.params.get("state") : "";
+  let preset = PRESETS[route.params.get("preset")] ? route.params.get("preset") : "";
+  let sort = route.params.get("sort") || PRESETS[preset].sort;
+  let dir = route.params.get("dir") === "asc" ? "asc" : route.params.get("dir") === "desc" ? "desc" : PRESETS[preset].dir;
+  const all = leagueRows();
+
+  const COLS = [
+    { key: "name", label: "Region", get: r => r.g.name, text: true },
+    { key: "spare", label: "Spare places", get: r => r.spare },
+    { key: "share", label: "Share of places", get: r => r.share },
+    { key: "change", label: "Change in a year", get: r => r.change },
+    { key: "qtf", label: "Quarters to fill", get: r => r.qtf },
+    { key: "beyond", label: "Waiting beyond spare", get: r => r.beyond },
+  ];
+  const col = COLS.find(c => c.key === sort) || COLS[1];
+
+  const tbody = el("tbody");
+  const thead = el("thead");
+  const count = el("p", { class: "chart-sub", role: "status" });
+  const note = el("p", { class: "evidence" });
+
+  const keep = () => history.replaceState(null, "", href("/league",
+    { state, preset, sort: sort === PRESETS[preset].sort ? "" : sort,
+      dir: dir === PRESETS[preset].dir && sort === PRESETS[preset].sort ? "" : dir }));
+
+  const header = () => {
+    thead.replaceChildren(el("tr", {},
+      el("th", { scope: "col", class: "rank", text: "#" }),
+      ...COLS.map(c => el("th", { scope: "col", "aria-sort": c.key === sort ? (dir === "asc" ? "ascending" : "descending") : null },
+        el("button", { type: "button", class: "sort", "data-sort": c.key,
+                       text: `${c.label}${c.key === sort ? (dir === "asc" ? " ↑" : " ↓") : ""}` }))),
+      el("th", { scope: "col", text: `Waiting vs spare, since ${L[DATA.meta.quarters.indexOf(DATA.meta.in_use_from)]}` }),
+      ...cats.map(c => el("th", { scope: "col", class: "cat", title: c, text: SHORT_CAT[c] || c }))));
+  };
+
+  const fill = () => {
+    const shown = all.filter(r => (!state || r.g.state === state) && PRESETS[preset].keep(r));
+    const c = COLS.find(x => x.key === sort) || col;
+    shown.sort((a, b) => {
+      const x = c.get(a), y = c.get(b);
+      if (x == null && y == null) return a.g.name.localeCompare(b.g.name);
+      if (x == null) return 1;
+      if (y == null) return -1;
+      const d = c.text ? String(x).localeCompare(String(y)) : x - y;
+      return (dir === "asc" ? d : -d) || a.g.name.localeCompare(b.g.name);
+    });
+    tbody.replaceChildren(...shown.map((r, i) => el("tr", {},
+      el("td", { class: "rank", "data-label": "Rank", text: String(i + 1) }),
+      el("th", { scope: "row", "data-label": "Region" },
+        el("a", { href: regionHref(r.id), text: r.g.name }), el("span", { class: "row-note", text: r.g.state })),
+      el("td", { "data-label": "Spare places", text: fmt(r.spare) }),
+      el("td", { "data-label": "Share of places", text: pct(r.share) }),
+      el("td", { "data-label": "Change in a year", class: "trend" }, el("div", { class: "trend-cell" },
+        el("span", { text: r.change == null ? "—" : `${r.change >= 0 ? "+" : "−"}${fmt(Math.abs(r.change))}` }),
+        spark(r.g.series.spare, C.places))),
+      el("td", { "data-label": "Quarters to fill", text: r.qtf == null ? "—" : fmt(r.qtf) }),
+      el("td", { "data-label": "Waiting beyond spare", text: fmt(r.beyond) }),
+      el("td", { "data-label": "Waiting vs spare" },
+        r.waitStatus ? el("span", { class: `status ${r.waitStatus.includes("short") && !r.waitStatus.includes("covered") ? "short" : r.waitStatus === "always covered" ? "long" : ""}`, text: WAIT_STATUS[r.waitStatus] || r.waitStatus }) : "—"),
+      ...cats.map(c => el("td", { class: "cat", "data-label": c }, chip(r.g.categories[c].status, c))))));
+    count.textContent = `${shown.length} of ${all.length} regions${state ? ` in ${state}` : ""}, ranked by ${c.label.toLowerCase()}, ${dir === "asc" ? "lowest" : "highest"} first.`;
+    note.textContent = PRESETS[preset].note || "Every SA4 region. Sort by any column; the presets pick out the regions whose position has held.";
+    document.title = `SDA over time: League table${preset ? ` (${PRESETS[preset].label.toLowerCase()})` : ""}`;
+  };
+
+  thead.addEventListener("click", e => {
+    const b = e.target.closest("button[data-sort]");
+    if (!b) return;
+    if (b.dataset.sort === sort) dir = dir === "asc" ? "desc" : "asc";
+    else { sort = b.dataset.sort; dir = sort === "name" ? "asc" : "desc"; }
+    header(); fill(); keep();
+    thead.querySelector(`button[data-sort="${sort}"]`).focus();
+  });
+
+  const presetSwitch = el("div", { class: "switch wrap", role: "group", "aria-label": "Preset" },
+    Object.entries(PRESETS).map(([k, p]) => el("button", { type: "button", "data-preset": k, "aria-pressed": String(k === preset), text: p.label })));
+  presetSwitch.addEventListener("click", e => {
+    const b = e.target.closest("button[data-preset]");
+    if (!b) return;
+    preset = b.dataset.preset;
+    sort = PRESETS[preset].sort; dir = PRESETS[preset].dir;
+    presetSwitch.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    header(); fill(); keep();
+  });
+  const stateSwitch = el("div", { class: "switch wrap", role: "group", "aria-label": "Filter by state" },
+    ["", ...STATES].map(st => el("button", { type: "button", "data-state": st, "aria-pressed": String(st === state), text: st || "All" })));
+  stateSwitch.addEventListener("click", e => {
+    const b = e.target.closest("button[data-state]");
+    if (!b) return;
+    state = b.dataset.state;
+    stateSwitch.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    fill(); keep();
+  });
+  header(); fill();
+
+  return [
+    el("div", { class: "intro" },
+      el("div", { class: "kicker", text: `${all.length} SA4 regions · ${L.at(-1)}` }),
+      el("h1", { text: "League table: persistent or temporary?" }),
+      el("p", { text: "Which regions are long or short, and whether it has held. Spare places and waiting are the latest quarter; the status columns cover every quarter each measure has been published." })),
+    el("section", { class: "section", id: "league" },
+      el("div", { class: "filters" }, presetSwitch, stateSwitch),
+      note, count,
+      el("ul", { class: "legend chips-key" },
+        ["short", "drifting down", "balanced", "drifting up", "long", "reverses", "thin"].map(s => el("li", {}, chip(s, null, true)))),
+      el("div", { class: "tablewrap" }, el("table", { class: "league" }, thead, tbody)),
+      el("p", { class: "caveat", text: "Quarters to fill: today's spare places at last year's net take-up, with no further building; blank where nobody was added to SDA use. Category statuses use need as recorded, over the seven quarters it has been published, and read “too few” where any quarter had under 10 participants." })),
+  ];
+}
+
+const SHORT_CAT = { "Improved Liveability": "IL", "High Physical Support": "HPS", "Robust": "Robust",
+                    "Fully Accessible": "FA", "HPS + FA": "HPS + FA" };
+
+/* A compact status chip: glyph always, word on wide screens, full text for
+   screen readers and on hover, so colour is never the only channel. */
+function chip(status, category, withWord = false) {
+  const full = STATUS[status] || status;
+  const [glyph, ...word] = full.split(" ");
+  const cls = status.replace(" ", "-");
+  return el("span", { class: `status compact ${cls}`, title: category ? `${category}: ${full}` : full },
+    el("span", { "aria-hidden": "true", text: status === "thin" ? "·" : glyph }),
+    el("span", { class: withWord ? "chip-word" : "chip-word hide-narrow", text: status === "thin" ? full : word.join(" ") }),
+    category ? el("span", { class: "sr-only", text: `${category}: ${full}` }) : null);
 }
 
 /* ---------- wiring ---------- */
@@ -649,14 +816,16 @@ function render() {
   substitution = route.params.get("sub") === "1";
   document.querySelectorAll("#subSwitch button").forEach(b =>
     b.setAttribute("aria-pressed", String((b.dataset.sub === "substitution") === substitution)));
-  const tab = route.view === "australia" ? "tabAustralia" : "tabRegions";
+  const tab = { australia: "tabAustralia", league: "tabLeague" }[route.view] || "tabRegions";
   document.querySelectorAll(".tabs a[id]").forEach(a => {
     if (a.id === tab) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   });
   document.getElementById("tabAustralia").href = href("/");
   document.getElementById("tabRegions").href = href("/regions");
+  document.getElementById("tabLeague").href = href("/league");
   const page = route.view === "region" ? regionPage(route)
-    : route.view === "regions" ? regionsIndex(route) : australia();
+    : route.view === "regions" ? regionsIndex(route)
+    : route.view === "league" ? league(route) : australia();
   document.getElementById("page").replaceChildren(...page);
   // A new page starts at the top; the switch re-renders in place.
   const path = location.hash.split("?")[0];

@@ -167,7 +167,11 @@ test.
    substitution switch, and national ranks. The Regions tab is the index,
    filterable by state and searchable, with each region's headline beneath its
    name. The State table on the Australia page links into it.
-3. **League table and presets.**
+3. **League table and presets.** *Done:* `#/league`, sortable on every numeric
+   column, with *persistently long* and *persistently short* presets and the
+   state filter (all kept in the link). Category chips follow the substitution
+   switch and are glyph-only in the table, with a key above. It fits its box
+   from 1024px; below 900px each row becomes a labelled card.
 4. **Accessibility and phone polish.** Then a decision on replacing the root
    site. If we replace it, the old explorer moves to `classic/` so existing links
    keep working, or bare links redirect.

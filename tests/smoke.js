@@ -212,6 +212,63 @@ const TOGGLES = [
     await p.close();
   }
 
+  // The league table.
+  for (const width of [1280, 1024, 390]) {
+    for (const scheme of ["light", "dark"]) {
+      const p = await page(width, scheme);
+      for (const hash of ["#/league", "#/league?preset=short", "#/league?preset=long&sub=1", "#/league?state=QLD&sort=qtf"]) {
+        const label = `time/${hash} ${scheme} ${width}px`;
+        await p.goto(base + "time/" + hash);
+        await p.waitForSelector("table.league tbody tr");
+        await p.waitForTimeout(100);
+        const over = await p.evaluate(() => document.scrollingElement.scrollWidth - innerWidth);
+        if (over > 0) fail(`${label} overflows by ${over}px`);
+        if (width >= 1024) {
+          const fit = await p.evaluate(() => document.querySelector("table.league").scrollWidth
+                                             - document.querySelector("#league .tablewrap").clientWidth);
+          if (fit > 0) fail(`${label}: table is ${fit}px wider than its box`);
+        }
+        if (p.errors.length) fail(`${label}: ${p.errors.join(" / ")}`);
+        p.errors = [];
+        console.log(`  ok   ${label}`);
+      }
+      await p.close();
+    }
+  }
+  {
+    const p = await page(1280);
+    const rows = () => p.$$eval("table.league tbody tr", r => r.length);
+    await p.goto(base + "time/#/league");
+    await p.waitForSelector("table.league tbody tr");
+    if (await rows() !== 88) fail(`league shows ${await rows()} regions, expected 88`);
+    // Presets agree with the data they claim to select.
+    const short = await p.evaluate(() => Object.values(DATA.geographies)
+      .filter(g => g.level === "SA4" && g.waiting_status === "always short").length);
+    await p.click("#league button[data-preset=short]");
+    if (await rows() !== short) fail(`short preset shows ${await rows()}, data has ${short}`);
+    if (!(await p.evaluate(() => location.hash)).includes("preset=short")) fail("preset is not in the link");
+    await p.click("#league button[data-preset=long]");
+    const changes = await p.$$eval("table.league tbody td.trend span", s => s.map(x => x.textContent));
+    if (!changes.length || changes.some(t => !t.startsWith("+") || t === "+0")) fail(`long preset includes regions whose spare did not grow: ${changes.join(" ")}`);
+    // Sorting by name, then reversing it.
+    await p.click("#league button[data-preset='']");
+    await p.click("button.sort[data-sort=name]");
+    const first = await p.textContent("table.league tbody tr:first-child th a");
+    const names = await p.evaluate(() => Object.values(DATA.geographies).filter(g => g.level === "SA4").map(g => g.name).sort((a, b) => a.localeCompare(b)));
+    if (first !== names[0]) fail(`sorted by name, first is ${first}, expected ${names[0]}`);
+    await p.click("button.sort[data-sort=name]");
+    if (await p.getAttribute("th:has(button[data-sort=name])", "aria-sort") !== "descending") fail("second click does not reverse the sort");
+    if (!(await p.evaluate(() => location.hash)).includes("sort=name")) fail("sort is not in the link");
+    // State filter; substitution pools two category columns into one.
+    await p.goto(base + "time/#/league?state=TAS&sub=1");
+    await p.waitForSelector("table.league tbody tr");
+    if (await rows() !== 4) fail(`TAS league shows ${await rows()} regions`);
+    const catCols = await p.$$eval("table.league thead th.cat", t => t.length);
+    if (catCols !== 3) fail(`substitution league has ${catCols} category columns`);
+    console.log("  ok   league presets, sorting, filter and substitution");
+    await p.close();
+  }
+
   // Regressions fixed once and worth keeping fixed.
   const p = await page(1280);
 
