@@ -77,6 +77,8 @@ a { color: var(--accent); }
 }
 .tabs a[aria-current="page"] { background: var(--surface-2); color: var(--ink); }
 .tab-soon { color: var(--ink-3); font-weight: 500; cursor: default; }
+.tabs a.tab-out { color: var(--accent); font-weight: 500; }
+.tabs a.tab-out::before { content: "← "; }
 .controls { display: flex; align-items: center; gap: 8px; }
 .switch { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; padding: 2px; background: var(--surface); }
 .switch button {

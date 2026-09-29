@@ -164,6 +164,14 @@ const TOGGLES = [
     fail("surplus view shows the supply view's footnote");
   }
 
+  // The two sites link to each other.
+  await open(p, "#national");
+  await p.click("a.viewlink");
+  await p.waitForSelector("#supply svg");
+  if (!p.url().endsWith("/time/")) fail(`"Over time" link lands on ${p.url()}`);
+  await p.click("a.tab-out");
+  await p.waitForFunction(() => !document.getElementById("view").hidden);
+
   await open(p, "#vacancy!national");
   const bar = await p.$eval("#vacFormBars .stackbar", el => el.getBoundingClientRect().width);
   if (bar < 50) fail(`dwelling-form bars have collapsed to ${bar}px`);
