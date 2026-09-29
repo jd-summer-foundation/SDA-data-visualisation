@@ -1,0 +1,4096 @@
+{
+ "editions": [
+  {
+   "edition": "2022-23 Q4",
+   "source": "Supplement_P_SDA_2022-23_Q4.xlsb",
+   "as_at": "2023-06-30",
+   "figure_p1_quarters": [
+    "2020-06-30",
+    "2023-06-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "inkind_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "inkind_max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "legacy_crm",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "seeking_legacy",
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "inkind_existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.19",
+     "role": "inkind_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.20",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.21",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "legacy_crm",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.22",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "seeking_legacy",
+     "columns": 7
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {
+    "Table P.13": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.14": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.20": [
+     "NSW - Newcastle and Lake Macquarie",
+     "QLD - Toowoomba"
+    ]
+   },
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 590,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 79,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 395,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 101,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 436,
+     "exact_share": 0.9909,
+     "largest_difference_places": 1.0,
+     "net_bias": 0.00058
+    },
+    "p6": {
+     "regions_checked": 84,
+     "within_2_percent": 83,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 20470.0,
+     "national_from_max_residents": 20454.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 7925.0,
+     "table": 7925.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_with_sda_supports",
+     "figure": 23092.0,
+     "table": 23092.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": []
+  },
+  {
+   "edition": "2023-24 Q1",
+   "source": "Supplement_P_SDA_2023-24_Q1.xlsb",
+   "as_at": "2023-09-30",
+   "figure_p1_quarters": [
+    "2020-09-30",
+    "2023-09-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "legacy_crm",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "seeking_legacy",
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "legacy_crm",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "seeking_legacy",
+     "columns": 7
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {
+    "Table P.11": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.12": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.16": [
+     "NSW - Newcastle and Lake Macquarie",
+     "QLD - Toowoomba"
+    ]
+   },
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 584,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 73,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 389,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 101,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 434,
+     "exact_share": 0.9864,
+     "largest_difference_places": 1.0,
+     "net_bias": 0.00053
+    },
+    "p6": {
+     "regions_checked": 84,
+     "within_2_percent": 83,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 21019.0,
+     "national_from_max_residents": 21003.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 8299.0,
+     "table": 8299.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_with_sda_supports",
+     "figure": 23277.0,
+     "table": 23277.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": []
+  },
+  {
+   "edition": "2023-24 Q2",
+   "source": "Supplement_P_SDA_2023-24_Q2.xlsb",
+   "as_at": "2023-12-31",
+   "figure_p1_quarters": [
+    "2020-09-30",
+    "2023-09-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "not_using",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "not_using",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 2
+    }
+   ],
+   "flagged_cells_sa4_tables": 1,
+   "duplicate_rows_dropped": {
+    "Table P.11": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.12": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.16": [
+     "NSW - Newcastle and Lake Macquarie",
+     "QLD - Toowoomba"
+    ]
+   },
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 544,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 68,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 291,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 204,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "not-using table = status 'SDA not in use'",
+     "compared": 102,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 428,
+     "exact_share": 0.9727,
+     "largest_difference_places": 35.0,
+     "net_bias": -0.00728
+    },
+    "p6": {
+     "regions_checked": 84,
+     "within_2_percent": 83,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 21578.0,
+     "national_from_max_residents": 21562.0
+    }
+   },
+   "figure_vs_tables": [],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback",
+    "sa4:WA - Bunbury",
+    "sa4:WA - Western Australia - Outback (North)"
+   ]
+  },
+  {
+   "edition": "2023-24 Q3",
+   "source": "Supplement_P_SDA_2023-24_Q3.xlsb",
+   "as_at": "2024-03-31",
+   "figure_p1_quarters": [
+    "2021-03-31",
+    "2024-03-31"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "not_using",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "not_using",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 2
+    }
+   ],
+   "flagged_cells_sa4_tables": 3,
+   "duplicate_rows_dropped": {
+    "Table P.11": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.12": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.16": [
+     "NSW - Newcastle and Lake Macquarie",
+     "QLD - Toowoomba"
+    ]
+   },
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 544,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 68,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 291,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 204,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "not-using table = status 'SDA not in use'",
+     "compared": 102,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 436,
+     "exact_share": 0.9909,
+     "largest_difference_places": 1.0,
+     "net_bias": 0.00046
+    },
+    "p6": {
+     "regions_checked": 85,
+     "within_2_percent": 84,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 21991.0,
+     "national_from_max_residents": 21975.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 8886.0,
+     "table": 8886.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_with_sda_supports",
+     "figure": 22022.0,
+     "table": 22022.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback",
+    "sa4:WA - Bunbury",
+    "sa4:WA - Western Australia - Outback (North)"
+   ]
+  },
+  {
+   "edition": "2023-24 Q4",
+   "source": "Supplement_P_SDA_2023-24_Q4.xlsb",
+   "as_at": "2024-06-30",
+   "figure_p1_quarters": [
+    "2021-03-31",
+    "2024-03-31"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "not_using",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 2
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "funding_split",
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "not_using",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 2
+    }
+   ],
+   "flagged_cells_sa4_tables": 3,
+   "duplicate_rows_dropped": {
+    "Table P.11": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.12": [
+     "QLD - Wide Bay"
+    ],
+    "Table P.16": [
+     "NSW - Newcastle and Lake Macquarie",
+     "QLD - Toowoomba"
+    ]
+   },
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 544,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 68,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 291,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 204,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "not-using table = status 'SDA not in use'",
+     "compared": 102,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 434,
+     "exact_share": 0.9864,
+     "largest_difference_places": 2.0,
+     "net_bias": 0.00041
+    },
+    "p6": {
+     "regions_checked": 85,
+     "within_2_percent": 84,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 23049.0,
+     "national_from_max_residents": 23033.0
+    }
+   },
+   "figure_vs_tables": [],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback",
+    "sa4:WA - Bunbury",
+    "sa4:WA - Western Australia - Outback (North)"
+   ]
+  },
+  {
+   "edition": "2024-25 Q1",
+   "source": "Supplement_P_SDA_2024-25_Q1.xlsb",
+   "as_at": "2024-09-30",
+   "figure_p1_quarters": [
+    "2021-09-30",
+    "2024-09-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 520,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 65,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 291,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 102,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 433,
+     "exact_share": 0.9841,
+     "largest_difference_places": 2.0,
+     "net_bias": 0.00082
+    },
+    "p6": {
+     "regions_checked": 85,
+     "within_2_percent": 84,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 24079.0,
+     "national_from_max_residents": 24063.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 10120.0,
+     "table": 10120.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 14290.0,
+     "table": 14290.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9891.0,
+     "table": 9891.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback"
+   ]
+  },
+  {
+   "edition": "2024-25 Q2",
+   "source": "Supplement_P_SDA_2024-25_Q2.xlsb",
+   "as_at": "2024-12-31",
+   "figure_p1_quarters": [
+    "2021-12-31",
+    "2024-12-31"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision_with_basic",
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision_with_basic",
+     "columns": 7
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 576,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 72,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 431,
+     "exact_share": 0.9795,
+     "largest_difference_places": 2.0,
+     "net_bias": 0.00091
+    },
+    "p6": {
+     "regions_checked": 85,
+     "within_2_percent": 84,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 25136.0,
+     "national_from_max_residents": 25120.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 10749.0,
+     "table": 10749.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 0,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": [
+     {
+      "prose_label": "participants_with_sda_supports",
+      "is_actually": "participants_eligible_not_using",
+      "quarters": 10
+     }
+    ]
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback",
+    "sa4:WA - Bunbury"
+   ]
+  },
+  {
+   "edition": "2024-25 Q3",
+   "source": "Supplement_P_SDA_2024-25_Q3.xlsb",
+   "as_at": "2025-03-31",
+   "figure_p1_quarters": [
+    "2022-03-31",
+    "2025-03-31"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 568,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 71,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 430,
+     "exact_share": 0.9773,
+     "largest_difference_places": 2.0,
+     "net_bias": 0.00076
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 26074.0,
+     "national_from_max_residents": 26058.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 11360.0,
+     "table": 11360.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 15099.0,
+     "table": 15099.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9662.0,
+     "table": 9662.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 11,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback"
+   ]
+  },
+  {
+   "edition": "2024-25 Q4",
+   "source": "Supplement_P_SDA_2024-25_Q4.xlsx",
+   "as_at": "2025-06-30",
+   "figure_p1_quarters": [
+    "2022-06-30",
+    "2025-06-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 568,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 71,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 106,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 431,
+     "exact_share": 0.9795,
+     "largest_difference_places": 1.0,
+     "net_bias": 0.00051
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 6.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 26622.0,
+     "national_from_max_residents": 26605.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 11642.0,
+     "table": 11642.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 15177.0,
+     "table": 15177.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9880.0,
+     "table": 9880.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 12,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback"
+   ]
+  },
+  {
+   "edition": "2025-26 Q1",
+   "source": "Supplement_P_SDA_2025-26_Q1.xlsx",
+   "as_at": "2025-09-30",
+   "figure_p1_quarters": [
+    "2022-09-30",
+    "2025-09-30"
+   ],
+   "p7_zero_with_dwellings": [
+    "sa4:WA - Western Australia - Wheat Belt High Physical Support",
+    "sa4:WA - Western Australia - Wheat Belt Robust",
+    "sa4:WA - Western Australia - Wheat Belt Total"
+   ],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 568,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 71,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 106,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 428,
+     "exact_share": 0.9727,
+     "largest_difference_places": 7.0,
+     "net_bias": 0.00111
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 6.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 28007.0,
+     "national_from_max_residents": 27990.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 12396.0,
+     "table": 12396.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 15518.0,
+     "table": 15518.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9756.0,
+     "table": 9756.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 65,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": [
+    "sa4:QLD - Queensland - Outback"
+   ]
+  },
+  {
+   "edition": "2025-26 Q2",
+   "source": "Supplement_P_SDA_2025-26_Q2.xlsx",
+   "as_at": "2025-12-31",
+   "figure_p1_quarters": [
+    "2022-12-31",
+    "2025-12-31"
+   ],
+   "p7_zero_with_dwellings": [
+    "sa4:WA - Western Australia - Wheat Belt High Physical Support",
+    "sa4:WA - Western Australia - Wheat Belt Robust",
+    "sa4:WA - Western Australia - Wheat Belt Total"
+   ],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 568,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 71,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 106,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 426,
+     "exact_share": 0.9682,
+     "largest_difference_places": 7.0,
+     "net_bias": 0.0012
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 6.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 29389.0,
+     "national_from_max_residents": 29372.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 13297.0,
+     "table": 13297.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 15925.0,
+     "table": 15925.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9577.0,
+     "table": 9577.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 52,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": []
+  },
+  {
+   "edition": "2025-26 Q3",
+   "source": "Supplement_P_SDA_2025-26_Q3.xlsx",
+   "as_at": "2026-03-31",
+   "figure_p1_quarters": [
+    "2023-03-31",
+    "2026-03-31"
+   ],
+   "p7_zero_with_dwellings": [
+    "sa4:WA - Western Australia - Wheat Belt High Physical Support",
+    "sa4:WA - Western Australia - Wheat Belt Robust",
+    "sa4:WA - Western Australia - Wheat Belt Total"
+   ],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 56
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 552,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 69,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 485,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 106,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 426,
+     "exact_share": 0.9682,
+     "largest_difference_places": 7.0,
+     "net_bias": 0.00113
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 6.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 30288.0,
+     "national_from_max_residents": 30271.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 13779.0,
+     "table": 13779.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 16263.0,
+     "table": 16263.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9370.0,
+     "table": 9370.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 65,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": []
+  },
+  {
+   "edition": "2025-26 Q4",
+   "source": "Supplement_P_SDA_2025-26_Q4.xlsx",
+   "as_at": "2026-06-30",
+   "figure_p1_quarters": [
+    "2023-06-30",
+    "2026-06-30"
+   ],
+   "p7_zero_with_dwellings": [],
+   "table_map": [
+    {
+     "sheet": "Table P.1",
+     "role": "participants_by_service_district",
+     "level": "Service District",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.2",
+     "role": "committed_supports_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.3",
+     "role": "providers_by_state",
+     "level": "State",
+     "scheme": null,
+     "columns": 1
+    },
+    {
+     "sheet": "Table P.4",
+     "role": "build_types",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.5",
+     "role": "stock_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.6",
+     "role": "max_residents",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.7",
+     "role": "newbuild_places",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.8",
+     "role": "pipeline_categories",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.9",
+     "role": "demand_status",
+     "level": "SA4",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.10",
+     "role": "demand_categories",
+     "level": "SA4",
+     "scheme": "eligible_decision",
+     "columns": 6
+    },
+    {
+     "sheet": "Table P.11",
+     "role": "newbuild_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 73
+    },
+    {
+     "sheet": "Table P.12",
+     "role": "existing_legacy_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 61
+    },
+    {
+     "sheet": "Table P.13",
+     "role": "build_types",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 5
+    },
+    {
+     "sheet": "Table P.14",
+     "role": "stock_categories",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.15",
+     "role": "max_residents",
+     "level": "SA3",
+     "scheme": null,
+     "columns": 7
+    },
+    {
+     "sheet": "Table P.16",
+     "role": "pipeline_detail",
+     "level": "SA4",
+     "scheme": null,
+     "columns": 56
+    },
+    {
+     "sheet": "Table P.17",
+     "role": "demand_status",
+     "level": "SA3",
+     "scheme": "in_use_eligible",
+     "columns": 3
+    },
+    {
+     "sheet": "Table P.18",
+     "role": "demand_categories",
+     "level": "SA3",
+     "scheme": "eligible_decision",
+     "columns": 6
+    }
+   ],
+   "flagged_cells_sa4_tables": 0,
+   "duplicate_rows_dropped": {},
+   "hierarchy": [
+    {
+     "check": "SA4 + Other = state",
+     "compared": 552,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "states + Unknown = national",
+     "compared": 69,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "identities": [
+    {
+     "check": "P.4 build types sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.6 resident counts sum to P.5 total",
+     "compared": 97,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.5 = new-build + existing/legacy cross-tab dwellings, by category",
+     "compared": 582,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "P.8 = pipeline cross-tab dwellings, by category",
+     "compared": 485,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "categories sum to Total (dwellings, new-build places, pipeline, need)",
+     "compared": 396,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "status columns add up",
+     "compared": 106,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "need by category total = status total",
+     "compared": 105,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "calibration": {
+    "p7": {
+     "values_checked": 440,
+     "exact": 423,
+     "exact_share": 0.9614,
+     "largest_difference_places": 2.0,
+     "net_bias": 0.00075
+    },
+    "p6": {
+     "regions_checked": 86,
+     "within_2_percent": 85,
+     "largest_difference_places": 5.0,
+     "largest_difference_region": "sa4:SA - Adelaide - North",
+     "national_derived": 31081.0,
+     "national_from_max_residents": 31065.0
+    }
+   },
+   "figure_vs_tables": [
+    {
+     "series": "enrolled_dwellings",
+     "figure": 14235.0,
+     "table": 14235.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_sda_in_use",
+     "figure": 16644.0,
+     "table": 16644.0,
+     "agrees": true
+    },
+    {
+     "series": "participants_eligible_not_using",
+     "figure": 9014.0,
+     "table": 9014.0,
+     "agrees": true
+    }
+   ],
+   "figure_prose_vs_chart": {
+    "agree": 65,
+    "disagree": [],
+    "disagree_count": 0,
+    "mislabelled": []
+   },
+   "sa4_with_negative_places_not_in_use": []
+  }
+ ],
+ "usability": [
+  {
+   "family": "Enrolled dwellings by category",
+   "measure": "enrolled_dwellings",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Enrolled places by category",
+   "measure": "enrolled_places",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Pipeline dwellings by category",
+   "measure": "pipeline_dwellings",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Pipeline places by category",
+   "measure": "pipeline_places",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Participants with SDA in use",
+   "measure": "participants_sda_in_use",
+   "editions": [
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Participants eligible, not yet using",
+   "measure": "participants_eligible_not_using",
+   "editions": [
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Participants with need by category",
+   "measure": "participants_with_need",
+   "editions": [
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "family": "Participants seeking SDA by category (legacy CRM)",
+   "measure": "legacy_participants_seeking",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1"
+   ]
+  },
+  {
+   "family": "Places not in SDA use",
+   "measure": "places_not_in_use",
+   "editions": [
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  }
+ ],
+ "table_breaks": [
+  {
+   "edition": "2023-24 Q1",
+   "role": "inkind_categories",
+   "change": "table absent"
+  },
+  {
+   "edition": "2023-24 Q1",
+   "role": "inkind_existing_legacy_detail",
+   "change": "table absent"
+  },
+  {
+   "edition": "2023-24 Q1",
+   "role": "inkind_max_residents",
+   "change": "table absent"
+  },
+  {
+   "edition": "2023-24 Q2",
+   "role": "demand_categories",
+   "change": "table absent"
+  },
+  {
+   "edition": "2023-24 Q2",
+   "role": "not_using",
+   "change": "table appears"
+  },
+  {
+   "edition": "2023-24 Q2",
+   "role": "demand_status",
+   "change": "scheme legacy_crm -> funding_split"
+  },
+  {
+   "edition": "2023-24 Q2",
+   "role": "demand_status",
+   "change": "columns changed",
+   "dropped": [
+    "Participants in an SDA dwelling and no evidence of seeking an alternative (legacy CRM data)",
+    "Participants in an SDA dwelling, seeking alternative (legacy CRM data)",
+    "Additional Participants eligible for SDA (legacy CRM data)"
+   ],
+   "added": [
+    "Participants with SDA funding, SDA in use",
+    "Participants with SDA funding, SDA not in use",
+    "Additional Participants eligible for SDA"
+   ],
+   "dropped_national_before": null
+  },
+  {
+   "edition": "2024-25 Q1",
+   "role": "not_using",
+   "change": "table absent"
+  },
+  {
+   "edition": "2024-25 Q1",
+   "role": "demand_status",
+   "change": "scheme funding_split -> in_use_eligible"
+  },
+  {
+   "edition": "2024-25 Q1",
+   "role": "demand_status",
+   "change": "columns changed",
+   "dropped": [
+    "Participants with SDA funding, SDA in use",
+    "Participants with SDA funding, SDA not in use",
+    "Participants with SDA funding",
+    "Additional Participants eligible for SDA",
+    "Total Participants with SDA funding or an SDA need"
+   ],
+   "added": [
+    "Participants with SDA in use",
+    "Participants SDA eligible, not yet using SDA",
+    "Total Participants with SDA in use or SDA eligible (not yet using SDA)"
+   ],
+   "dropped_national_before": null
+  },
+  {
+   "edition": "2024-25 Q2",
+   "role": "demand_categories",
+   "change": "table appears"
+  },
+  {
+   "edition": "2024-25 Q2",
+   "role": "demand_categories",
+   "change": "scheme seeking_legacy -> eligible_decision_with_basic"
+  },
+  {
+   "edition": "2024-25 Q2",
+   "role": "demand_categories",
+   "change": "columns changed",
+   "dropped": [
+    "Not Defined",
+    "Total participants seeking SDA (legacy CRM data)",
+    "Percentage of participants seeking SDA dwellings"
+   ],
+   "added": [
+    "Basic",
+    "Missing",
+    "Total participants with an SDA need"
+   ],
+   "dropped_national_before": null
+  },
+  {
+   "edition": "2024-25 Q3",
+   "role": "demand_categories",
+   "change": "scheme eligible_decision_with_basic -> eligible_decision"
+  },
+  {
+   "edition": "2024-25 Q3",
+   "role": "demand_categories",
+   "change": "columns changed",
+   "dropped": [
+    "Basic"
+   ],
+   "added": [],
+   "dropped_national_before": null
+  },
+  {
+   "edition": "2025-26 Q3",
+   "role": "pipeline_categories",
+   "change": "columns changed",
+   "dropped": [
+    "Basic"
+   ],
+   "added": [],
+   "dropped_national_before": 0.0
+  },
+  {
+   "edition": "2025-26 Q3",
+   "role": "pipeline_detail",
+   "change": "columns changed",
+   "dropped": [
+    "Apartment, 1 bedroom, 1 resident - Basic",
+    "Apartment, 2 bedrooms, 1 resident - Basic",
+    "Apartment, 2 bedrooms, 2 residents - Basic",
+    "Apartment, 3 bedrooms, 2 residents - Basic",
+    "Group home, 4 residents - Basic",
+    "Group home, 5 residents - Basic",
+    "House, 2 residents - Basic",
+    "House, 3 residents - Basic",
+    "Villa/Duplex/Townhouse, 1 resident - Basic",
+    "Villa/Duplex/Townhouse, 2 residents - Basic",
+    "Villa/Duplex/Townhouse, 3 residents - Basic",
+    "Legacy Stock, 6+ residents  - Basic",
+    "Legacy Stock, 6+ residents  - Improved Liveability",
+    "Legacy Stock, 6+ residents  - High Physical Support",
+    "Legacy Stock, 6+ residents  - Robust",
+    "Legacy Stock, 6+ residents  - Fully Accessible",
+    "Legacy Stock, 6+ residents  - Multi-Design Category"
+   ],
+   "added": [],
+   "dropped_national_before": 0.0
+  }
+ ],
+ "announcements": [
+  {
+   "edition": "2023-24 Q1",
+   "announcement": "In-kind dwellings phased out; in-kind tables dropped after 2022-23 Q4"
+  },
+  {
+   "edition": "2023-24 Q2",
+   "announcement": "Participant status re-based on evidence of SDA use (payments, bookings, address)"
+  },
+  {
+   "edition": "2024-25 Q1",
+   "announcement": "Status table reduced to 'SDA in use' and 'eligible, not yet using'"
+  },
+  {
+   "edition": "2024-25 Q2",
+   "announcement": "Need by design category re-introduced, from the latest eligible SDA decision"
+  },
+  {
+   "edition": "2024-25 Q3",
+   "announcement": "Basic decisions folded into 'Missing'"
+  },
+  {
+   "edition": "2024-25 Q3",
+   "announcement": "Participant data as at 2 April rather than 31 March (Services Australia incident)"
+  },
+  {
+   "edition": "2025-26 Q4",
+   "announcement": "Pipeline dwellings not progressed within 36 months removed from 30 March 2026"
+  }
+ ],
+ "regions": [
+  {
+   "edition": "2022-23 Q4",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2023-24 Q1",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2023-24 Q2",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:TAS",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2023-24 Q3",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:TAS",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2023-24 Q4",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:TAS",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2024-25 Q1",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NT",
+    "other:QLD",
+    "other:TAS",
+    "other:VIC"
+   ]
+  },
+  {
+   "edition": "2024-25 Q2",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2024-25 Q3",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2024-25 Q4",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:ACT",
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2025-26 Q1",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:ACT",
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2025-26 Q2",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:ACT",
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2025-26 Q3",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:ACT",
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  },
+  {
+   "edition": "2025-26 Q4",
+   "sa4_in_stock_tables": 88,
+   "sa4_anywhere": 88,
+   "added": [],
+   "removed": [],
+   "unplaced_other_rows": [
+    "other:ACT",
+    "other:NSW",
+    "other:NT",
+    "other:QLD",
+    "other:SA",
+    "other:TAS",
+    "other:VIC",
+    "other:WA"
+   ]
+  }
+ ],
+ "figure_p1_revisions": {
+  "overlapping_points": 137,
+  "agreeing": 129,
+  "revised": [
+   {
+    "series": "participants_sda_in_use",
+    "quarter": "2022-09-30",
+    "reports": [
+     {
+      "edition": "2024-25 Q1",
+      "value": 13328.0
+     },
+     {
+      "edition": "2024-25 Q3",
+      "value": 13238.0
+     },
+     {
+      "edition": "2024-25 Q4",
+      "value": 13238.0
+     },
+     {
+      "edition": "2025-26 Q1",
+      "value": 13238.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2022-09-30",
+    "reports": [
+     {
+      "edition": "2022-23 Q4",
+      "value": 20920.0
+     },
+     {
+      "edition": "2023-24 Q1",
+      "value": 20920.0
+     },
+     {
+      "edition": "2023-24 Q2",
+      "value": 20920.0
+     },
+     {
+      "edition": "2023-24 Q3",
+      "value": 20920.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 20920.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 8584.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2022-12-31",
+    "reports": [
+     {
+      "edition": "2022-23 Q4",
+      "value": 22069.0
+     },
+     {
+      "edition": "2023-24 Q1",
+      "value": 22069.0
+     },
+     {
+      "edition": "2023-24 Q2",
+      "value": 22069.0
+     },
+     {
+      "edition": "2023-24 Q3",
+      "value": 22069.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 22069.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 9315.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2023-03-31",
+    "reports": [
+     {
+      "edition": "2022-23 Q4",
+      "value": 22680.0
+     },
+     {
+      "edition": "2023-24 Q1",
+      "value": 22680.0
+     },
+     {
+      "edition": "2023-24 Q2",
+      "value": 22680.0
+     },
+     {
+      "edition": "2023-24 Q3",
+      "value": 22680.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 22680.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 9670.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2023-06-30",
+    "reports": [
+     {
+      "edition": "2022-23 Q4",
+      "value": 23092.0
+     },
+     {
+      "edition": "2023-24 Q1",
+      "value": 23092.0
+     },
+     {
+      "edition": "2023-24 Q2",
+      "value": 23092.0
+     },
+     {
+      "edition": "2023-24 Q3",
+      "value": 23092.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 23092.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 9853.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2023-09-30",
+    "reports": [
+     {
+      "edition": "2023-24 Q1",
+      "value": 23277.0
+     },
+     {
+      "edition": "2023-24 Q2",
+      "value": 23277.0
+     },
+     {
+      "edition": "2023-24 Q3",
+      "value": 23277.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 23277.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 10151.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2023-12-31",
+    "reports": [
+     {
+      "edition": "2023-24 Q3",
+      "value": 23058.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 23058.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 10091.0
+     }
+    ]
+   },
+   {
+    "series": "participants_with_sda_supports",
+    "quarter": "2024-03-31",
+    "reports": [
+     {
+      "edition": "2023-24 Q3",
+      "value": 22022.0
+     },
+     {
+      "edition": "2023-24 Q4",
+      "value": 22022.0
+     },
+     {
+      "edition": "2024-25 Q2",
+      "value": 10054.0
+     }
+    ]
+   }
+  ]
+ },
+ "national_series": [
+  {
+   "edition": "2022-23 Q4",
+   "as_at": "2023-06-30",
+   "enrolled_dwellings:Total": 7925.0,
+   "enrolled_places:Total": 20470.0,
+   "places_from_max_residents:Total": 20454.0,
+   "pipeline_dwellings:Total": 3544.0,
+   "pipeline_places:Total": 6405.0,
+   "participants_sda_in_use:Total": null,
+   "participants_eligible_not_using:Total": null,
+   "participants_total_need:Total": null,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": null
+  },
+  {
+   "edition": "2023-24 Q1",
+   "as_at": "2023-09-30",
+   "enrolled_dwellings:Total": 8299.0,
+   "enrolled_places:Total": 21019.0,
+   "places_from_max_residents:Total": 21003.0,
+   "pipeline_dwellings:Total": 4028.0,
+   "pipeline_places:Total": 7356.0,
+   "participants_sda_in_use:Total": null,
+   "participants_eligible_not_using:Total": null,
+   "participants_total_need:Total": null,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": null
+  },
+  {
+   "edition": "2023-24 Q2",
+   "as_at": "2023-12-31",
+   "enrolled_dwellings:Total": 8590.0,
+   "enrolled_places:Total": 21578.0,
+   "places_from_max_residents:Total": 21562.0,
+   "pipeline_dwellings:Total": 4756.0,
+   "pipeline_places:Total": 8683.0,
+   "participants_sda_in_use:Total": 14097.0,
+   "participants_eligible_not_using:Total": 10046.0,
+   "participants_total_need:Total": 24143.0,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": 7481.0
+  },
+  {
+   "edition": "2023-24 Q3",
+   "as_at": "2024-03-31",
+   "enrolled_dwellings:Total": 8886.0,
+   "enrolled_places:Total": 21991.0,
+   "places_from_max_residents:Total": 21975.0,
+   "pipeline_dwellings:Total": 4753.0,
+   "pipeline_places:Total": 8580.0,
+   "participants_sda_in_use:Total": 14088.0,
+   "participants_eligible_not_using:Total": 10053.0,
+   "participants_total_need:Total": 24141.0,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": 7903.0
+  },
+  {
+   "edition": "2023-24 Q4",
+   "as_at": "2024-06-30",
+   "enrolled_dwellings:Total": 9487.0,
+   "enrolled_places:Total": 23049.0,
+   "places_from_max_residents:Total": 23033.0,
+   "pipeline_dwellings:Total": 6082.0,
+   "pipeline_places:Total": 11204.0,
+   "participants_sda_in_use:Total": 14179.0,
+   "participants_eligible_not_using:Total": 9955.0,
+   "participants_total_need:Total": 24134.0,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": 8870.0
+  },
+  {
+   "edition": "2024-25 Q1",
+   "as_at": "2024-09-30",
+   "enrolled_dwellings:Total": 10120.0,
+   "enrolled_places:Total": 24079.0,
+   "places_from_max_residents:Total": 24063.0,
+   "pipeline_dwellings:Total": 7014.0,
+   "pipeline_places:Total": 12890.0,
+   "participants_sda_in_use:Total": 14290.0,
+   "participants_eligible_not_using:Total": 9891.0,
+   "participants_total_need:Total": 24181.0,
+   "participants_with_need:Missing": null,
+   "places_not_in_use:Total": 9789.0
+  },
+  {
+   "edition": "2024-25 Q2",
+   "as_at": "2024-12-31",
+   "enrolled_dwellings:Total": 10749.0,
+   "enrolled_places:Total": 25136.0,
+   "places_from_max_residents:Total": 25120.0,
+   "pipeline_dwellings:Total": 7363.0,
+   "pipeline_places:Total": 13110.0,
+   "participants_sda_in_use:Total": 14688.0,
+   "participants_eligible_not_using:Total": 9834.0,
+   "participants_total_need:Total": 24522.0,
+   "participants_with_need:Missing": 6221.0,
+   "places_not_in_use:Total": 10448.0
+  },
+  {
+   "edition": "2024-25 Q3",
+   "as_at": "2025-03-31",
+   "enrolled_dwellings:Total": 11360.0,
+   "enrolled_places:Total": 26074.0,
+   "places_from_max_residents:Total": 26058.0,
+   "pipeline_dwellings:Total": 7673.0,
+   "pipeline_places:Total": 14078.0,
+   "participants_sda_in_use:Total": 15099.0,
+   "participants_eligible_not_using:Total": 9662.0,
+   "participants_total_need:Total": 24761.0,
+   "participants_with_need:Missing": 6099.0,
+   "places_not_in_use:Total": 10975.0
+  },
+  {
+   "edition": "2024-25 Q4",
+   "as_at": "2025-06-30",
+   "enrolled_dwellings:Total": 11642.0,
+   "enrolled_places:Total": 26622.0,
+   "places_from_max_residents:Total": 26605.0,
+   "pipeline_dwellings:Total": 8026.0,
+   "pipeline_places:Total": 14658.0,
+   "participants_sda_in_use:Total": 15177.0,
+   "participants_eligible_not_using:Total": 9880.0,
+   "participants_total_need:Total": 25057.0,
+   "participants_with_need:Missing": 5894.0,
+   "places_not_in_use:Total": 11445.0
+  },
+  {
+   "edition": "2025-26 Q1",
+   "as_at": "2025-09-30",
+   "enrolled_dwellings:Total": 12396.0,
+   "enrolled_places:Total": 28007.0,
+   "places_from_max_residents:Total": 27990.0,
+   "pipeline_dwellings:Total": 8332.0,
+   "pipeline_places:Total": 15203.0,
+   "participants_sda_in_use:Total": 15518.0,
+   "participants_eligible_not_using:Total": 9756.0,
+   "participants_total_need:Total": 25274.0,
+   "participants_with_need:Missing": 5618.0,
+   "places_not_in_use:Total": 12489.0
+  },
+  {
+   "edition": "2025-26 Q2",
+   "as_at": "2025-12-31",
+   "enrolled_dwellings:Total": 13297.0,
+   "enrolled_places:Total": 29389.0,
+   "places_from_max_residents:Total": 29372.0,
+   "pipeline_dwellings:Total": 8462.0,
+   "pipeline_places:Total": 15392.0,
+   "participants_sda_in_use:Total": 15925.0,
+   "participants_eligible_not_using:Total": 9577.0,
+   "participants_total_need:Total": 25502.0,
+   "participants_with_need:Missing": 5381.0,
+   "places_not_in_use:Total": 13464.0
+  },
+  {
+   "edition": "2025-26 Q3",
+   "as_at": "2026-03-31",
+   "enrolled_dwellings:Total": 13779.0,
+   "enrolled_places:Total": 30288.0,
+   "places_from_max_residents:Total": 30271.0,
+   "pipeline_dwellings:Total": 6233.0,
+   "pipeline_places:Total": 10949.0,
+   "participants_sda_in_use:Total": 16263.0,
+   "participants_eligible_not_using:Total": 9370.0,
+   "participants_total_need:Total": 25633.0,
+   "participants_with_need:Missing": 5231.0,
+   "places_not_in_use:Total": 14025.0
+  },
+  {
+   "edition": "2025-26 Q4",
+   "as_at": "2026-06-30",
+   "enrolled_dwellings:Total": 14235.0,
+   "enrolled_places:Total": 31081.0,
+   "places_from_max_residents:Total": 31065.0,
+   "pipeline_dwellings:Total": 6549.0,
+   "pipeline_places:Total": 11493.0,
+   "participants_sda_in_use:Total": 16644.0,
+   "participants_eligible_not_using:Total": 9014.0,
+   "participants_total_need:Total": 25658.0,
+   "participants_with_need:Missing": 4991.0,
+   "places_not_in_use:Total": 14437.0
+  }
+ ]
+}

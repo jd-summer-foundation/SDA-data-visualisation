@@ -25,7 +25,7 @@ const TYPES = { ".html": "text/html", ".js": "text/javascript", ".css": "text/cs
 function serve() {
   const server = http.createServer((req, res) => {
     const url = decodeURIComponent(new URL(req.url, "http://x").pathname);
-    const file = path.join(ROOT, url === "/" ? "index.html" : url);
+    const file = path.join(ROOT, url.endsWith("/") ? url + "index.html" : url);
     if (!file.startsWith(ROOT) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) {
       res.writeHead(404); res.end(); return;
     }
@@ -59,8 +59,8 @@ const TOGGLES = [
   const failures = [];
   const fail = msg => { failures.push(msg); console.log("  FAIL " + msg); };
 
-  async function page(width) {
-    const p = await browser.newPage({ viewport: { width, height: 900 } });
+  async function page(width, colorScheme = "light") {
+    const p = await browser.newPage({ viewport: { width, height: 900 }, colorScheme });
     // Fonts are the one external request; blocking them keeps the test offline.
     await p.route(/fonts\.(googleapis|gstatic)\.com/, r => r.abort());
     p.errors = [];
@@ -97,6 +97,57 @@ const TOGGLES = [
       console.log(`  ok   ${hash}`);
     }
     await p.close();
+  }
+
+  // The time-based interface in time/ (docs/ui-plan.md), both themes, both
+  // readings of supply, desktop and phone.
+  for (const width of [1280, 390]) {
+    for (const scheme of ["light", "dark"]) {
+      const p = await page(width, scheme);
+      for (const hash of ["#/", "#/?sub=1"]) {
+        const label = `time/${hash} ${scheme} ${width}px`;
+        await p.goto(base + "time/" + hash);
+        // A hash-only change re-renders in place, so wait for the page to show
+        // the reading asked for, not just for a chart to exist.
+        const sub = hash.includes("sub=1");
+        await p.waitForFunction(want => {
+          const b = document.querySelector("#subSwitch button[data-sub=substitution]");
+          return b && b.getAttribute("aria-pressed") === String(want)
+            && document.querySelectorAll("#categories .multiples figure svg").length === (want ? 3 : 4);
+        }, sub);
+        await p.waitForTimeout(150);
+        const sections = await p.$$eval("#page .section", s => s.length);
+        if (sections !== 6) fail(`${label}: ${sections} sections, expected 6`);
+        const charts = await p.$$eval("#page .chart svg", s => s.length);
+        const tables = await p.$$eval("#page details.numbers table", t => t.length);
+        if (charts < 8) fail(`${label}: only ${charts} charts drew`);
+        if (tables < 5) fail(`${label}: only ${tables} tables behind the charts`);
+        const multiples = await p.$$eval("#categories .multiples figure", f => f.length);
+        if (multiples !== (sub ? 3 : 4)) fail(`${label}: ${multiples} category charts`);
+        // Hover and keyboard both reach the tooltip.
+        const supply = await p.$("#supply svg");
+        await supply.scrollIntoViewIfNeeded();
+        const box = await supply.boundingBox();
+        await p.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.5);
+        if (await p.$eval("#tip", t => t.hidden)) fail(`${label}: hovering a chart shows no tooltip`);
+        await p.mouse.move(0, 0);
+        await p.focus("#pipeline svg");
+        await p.keyboard.press("ArrowLeft");
+        if (await p.$eval("#tip", t => t.hidden)) fail(`${label}: arrow keys on a chart show no tooltip`);
+        const over = await p.evaluate(() => document.scrollingElement.scrollWidth - innerWidth);
+        if (over > 0) fail(`${label} overflows by ${over}px`);
+        if (p.errors.length) fail(`${label}: ${p.errors.join(" / ")}`);
+        p.errors = [];
+        console.log(`  ok   ${label}`);
+      }
+      // The toggle re-renders in place and carries into the link.
+      await p.goto(base + "time/#/");
+      await p.waitForSelector("#supply svg");
+      await p.click("#subSwitch button[data-sub=substitution]");
+      if (!(await p.evaluate(() => location.hash)).includes("sub=1")) fail("the substitution toggle is not in the link");
+      if (!/HPS \+ FA/.test(await p.textContent("#categories h2"))) fail("substitution does not change the category headline");
+      await p.close();
+    }
   }
 
   // Regressions fixed once and worth keeping fixed.

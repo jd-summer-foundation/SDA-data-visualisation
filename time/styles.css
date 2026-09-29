@@ -1,0 +1,156 @@
+/* The time-based interface. Tokens are the explorer's (../styles.css), so the
+   two read as one site; the series slots are the validated reference palette's
+   first three, which is where the explorer's accent and demand colours already
+   come from. Validated all-pairs in both modes; aqua is under 3:1 on white, so
+   every chart carries direct labels and a table (the palette's relief rule). */
+:root {
+  color-scheme: light;
+  --ground:    #f6f7f9;
+  --surface:   #ffffff;
+  --surface-2: #eef1f5;
+  --ink:       #0f1319;
+  --ink-2:     #4b5461;
+  --ink-3:     #6b7584;
+  --rule:      #dde2e8;
+  --rule-soft: #e9edf1;
+  --accent:    #2a78d6;
+  --s-places:  #2a78d6;
+  --s-use:     #1baf7a;
+  --s-need:    #eb6834;
+  --band-short: rgba(208, 59, 59, .08);
+  --band-long:  rgba(42, 120, 214, .08);
+  --short:     #c03434;
+  --long:      #1d5fae;
+  --shadow: 0 1px 2px rgba(15,19,25,.05), 0 4px 14px rgba(15,19,25,.04);
+  --sans:  "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0e1013; --surface: #171a1f; --surface-2: #1f242b;
+    --ink: #f2f4f7; --ink-2: #a6b0bd; --ink-3: #8e99a8;
+    --rule: #2c323a; --rule-soft: #21262c;
+    --accent: #3987e5;
+    --s-places: #3987e5; --s-use: #199e70; --s-need: #d95926;
+    --band-short: rgba(228, 106, 106, .10); --band-long: rgba(57, 135, 229, .10);
+    --short: #ec8585; --long: #7fb4f2;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0e1013; --surface: #171a1f; --surface-2: #1f242b;
+  --ink: #f2f4f7; --ink-2: #a6b0bd; --ink-3: #8e99a8;
+  --rule: #2c323a; --rule-soft: #21262c;
+  --accent: #3987e5;
+  --s-places: #3987e5; --s-use: #199e70; --s-need: #d95926;
+  --band-short: rgba(228, 106, 106, .10); --band-long: rgba(57, 135, 229, .10);
+  --short: #ec8585; --long: #7fb4f2;
+  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 4px 14px rgba(0,0,0,.25);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--ground); color: var(--ink);
+  font-family: var(--sans); font-size: 15px; line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+/* ---------- masthead ---------- */
+.topbar { background: var(--surface); border-bottom: 1px solid var(--rule); position: sticky; top: 0; z-index: 5; }
+.topbar-in {
+  max-width: 1080px; margin: 0 auto; padding: 10px 16px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px;
+}
+.brand { margin-right: auto; }
+.brand-name { font-weight: 700; font-size: 17px; color: var(--ink); text-decoration: none; }
+.brand-sub { font-family: var(--mono); font-size: 10.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.tabs { display: flex; gap: 4px; }
+.tabs a, .tab-soon {
+  font-size: 14px; font-weight: 600; padding: 6px 10px; border-radius: 6px;
+  text-decoration: none; color: var(--ink-2);
+}
+.tabs a[aria-current="page"] { background: var(--surface-2); color: var(--ink); }
+.tab-soon { color: var(--ink-3); font-weight: 500; cursor: default; }
+.controls { display: flex; align-items: center; gap: 8px; }
+.switch { display: inline-flex; border: 1px solid var(--rule); border-radius: 7px; padding: 2px; background: var(--surface); }
+.switch button {
+  font: 600 13px var(--sans); color: var(--ink-2); background: none; border: 0;
+  padding: 5px 9px; border-radius: 5px; cursor: pointer; min-height: 30px;
+}
+.switch button[aria-pressed="true"] { background: var(--surface-2); color: var(--ink); }
+.theme {
+  font-size: 16px; width: 34px; height: 34px; border-radius: 7px; cursor: pointer;
+  border: 1px solid var(--rule); background: var(--surface); color: var(--ink-2);
+}
+
+/* ---------- page ---------- */
+main { max-width: 1080px; margin: 0 auto; padding: 24px 16px 40px; }
+.loading { color: var(--ink-3); }
+.intro h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 5vw, 36px); line-height: 1.15; margin: 4px 0 8px; }
+.intro p { color: var(--ink-2); max-width: 64ch; margin: 0 0 8px; }
+.kicker { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+
+.section {
+  background: var(--surface); border: 1px solid var(--rule); border-radius: 12px;
+  box-shadow: var(--shadow); padding: 20px; margin: 20px 0;
+}
+.section h2 { font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 3.6vw, 25px); line-height: 1.25; margin: 2px 0 8px; }
+.evidence { color: var(--ink-2); margin: 0 0 14px; max-width: 70ch; }
+.caveat { font-size: 13px; color: var(--ink-3); margin: 10px 0 0; max-width: 80ch; }
+.pair { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 720px) { .pair { grid-template-columns: 1fr 1fr; } }
+.multiples { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; }
+@media (min-width: 900px) { .multiples.four { grid-template-columns: repeat(4, 1fr); } .multiples.three { grid-template-columns: repeat(3, 1fr); } }
+
+figure { margin: 0; min-width: 0; }
+figcaption, .chart-title { font-size: 13px; font-weight: 600; color: var(--ink); margin: 0 0 4px; }
+.chart-sub { font-size: 12px; color: var(--ink-3); margin: -2px 0 6px; }
+.chart { position: relative; width: 100%; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart svg:focus-visible { outline-offset: 4px; }
+.axis text, .lbl { font-family: var(--sans); font-size: 11px; fill: var(--ink-3); font-variant-numeric: tabular-nums; }
+.lbl.strong { fill: var(--ink); font-weight: 600; }
+.grid line { stroke: var(--rule-soft); stroke-width: 1; shape-rendering: crispEdges; }
+.axis .base { stroke: var(--rule); }
+.cross { stroke: var(--ink-3); stroke-width: 1; }
+.rule-break { stroke: var(--ink-3); stroke-width: 1; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 12.5px; color: var(--ink-2); margin: 0 0 8px; padding: 0; list-style: none; }
+.legend li { display: inline-flex; align-items: center; gap: 6px; }
+.key { display: inline-block; width: 16px; height: 0; border-top: 2px solid currentColor; }
+.key.dash { border-top-style: dashed; }
+.key.swatch { height: 10px; border: 0; border-radius: 2px; }
+
+.status { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; padding: 1px 7px; border-radius: 10px; background: var(--surface-2); color: var(--ink-2); white-space: nowrap; }
+.status.short, .status.drifting-down { color: var(--short); }
+.status.long, .status.drifting-up { color: var(--long); }
+
+details.numbers { margin-top: 10px; font-size: 13px; }
+details.numbers summary { cursor: pointer; color: var(--ink-2); font-weight: 600; min-height: 24px; }
+.tablewrap { overflow-x: auto; margin-top: 8px; }
+table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; width: 100%; }
+th, td { padding: 5px 8px; text-align: right; border-bottom: 1px solid var(--rule-soft); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { color: var(--ink-3); font-weight: 600; font-size: 12px; }
+
+.tip {
+  position: fixed; z-index: 10; pointer-events: none; background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 8px; box-shadow: var(--shadow);
+  padding: 8px 10px; font-size: 12.5px; min-width: 150px; max-width: 260px;
+}
+.tip .t-head { font-weight: 600; color: var(--ink-2); margin-bottom: 4px; }
+.tip .t-row { display: flex; align-items: center; gap: 8px; }
+.tip .t-row b { font-variant-numeric: tabular-nums; color: var(--ink); min-width: 48px; }
+.tip .t-row span { color: var(--ink-3); }
+
+.foot { max-width: 1080px; margin: 0 auto; padding: 0 16px 40px; font-size: 13px; color: var(--ink-3); }
+
+/* On a phone the masthead wraps to two rows; pinned, it would eat a quarter of
+   the screen, so it scrolls away instead. */
+@media (max-width: 600px) { .topbar { position: static; } }
