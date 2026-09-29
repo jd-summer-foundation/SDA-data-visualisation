@@ -336,6 +336,16 @@ footer a { color: var(--accent); }
   color: var(--ink-3); white-space: nowrap;
 }
 .viewswitch button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
+/* The time-based interface is another page, so it is a link beside the view
+   switch rather than a fourth toggle inside it. */
+.viewlink {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 6px; flex: none; white-space: nowrap;
+  padding: 7px 12px; border: 1px solid var(--rule); border-radius: 7px;
+  color: var(--accent); text-decoration: none; background: var(--surface);
+}
+.viewlink:hover { background: var(--accent-soft); }
+.viewlink .new { font-size: 9px; padding: 1px 5px; border-radius: 4px; background: var(--accent); color: var(--surface); }
 
 /* ---------- stacked depth bars ---------- */
 .stackbars { display: flex; flex-direction: column; gap: 13px; }

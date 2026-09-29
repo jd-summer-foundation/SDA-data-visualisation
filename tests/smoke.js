@@ -150,6 +150,68 @@ const TOGGLES = [
     }
   }
 
+  // Region pages and the region index.
+  for (const width of [1280, 390]) {
+    for (const scheme of ["light", "dark"]) {
+      const p = await page(width, scheme);
+      for (const hash of ["#/regions", "#/regions?state=NSW", "#/region/VIC - Melbourne - West",
+                          "#/region/NSW - Richmond - Tweed?sub=1", "#/region/QLD - Queensland - Outback"]) {
+        const label = `time/${hash} ${scheme} ${width}px`;
+        await p.goto(base + "time/" + hash);
+        await p.waitForFunction(() => document.querySelector("#page h1"));
+        await p.waitForTimeout(150);
+        if (hash.startsWith("#/region/")) {
+          const figs = await p.$$eval("#categories .multiples figure svg", f => f.length);
+          if (figs !== (hash.includes("sub=1") ? 3 : 4)) fail(`${label}: ${figs} category charts`);
+          if (!(await p.$$eval(".tiles .tile", t => t.length) === 3)) fail(`${label}: tiles missing`);
+          if (!(await p.textContent(".intro .lead")).trim()) fail(`${label}: no headline`);
+        }
+        const over = await p.evaluate(() => document.scrollingElement.scrollWidth - innerWidth);
+        if (over > 0) fail(`${label} overflows by ${over}px`);
+        if (p.errors.length) fail(`${label}: ${p.errors.join(" / ")}`);
+        p.errors = [];
+        console.log(`  ok   ${label}`);
+      }
+      await p.close();
+    }
+  }
+  {
+    const p = await page(1280);
+    // The filter, the search and the link all agree.
+    await p.goto(base + "time/#/regions");
+    await p.waitForSelector("table.regions tbody tr");
+    await p.click("#regionList button[data-state=TAS]");
+    let rows = await p.$$eval("table.regions tbody tr:not(.group)", r => r.length);
+    if (rows !== 4) fail(`TAS filter shows ${rows} regions, expected 4`);
+    if (!(await p.evaluate(() => location.hash)).includes("state=TAS")) fail("state filter is not in the link");
+    await p.click("#regionList button[data-state='']");
+    await p.fill("#regionSearch", "geelong");
+    rows = await p.$$eval("table.regions tbody tr:not(.group)", r => r.length);
+    if (rows !== 1) fail(`searching "geelong" shows ${rows} regions`);
+    // A region link keeps the substitution reading.
+    await p.goto(base + "time/#/regions?sub=1");
+    await p.waitForSelector("table.regions tbody a");
+    await p.click("table.regions tbody a >> nth=0");
+    await p.waitForSelector("#categories .multiples figure svg");
+    if (!(await p.evaluate(() => location.hash)).includes("sub=1")) fail("region link drops the substitution reading");
+    // An unknown region says so rather than failing.
+    await p.goto(base + "time/#/region/Nowhere");
+    await p.waitForFunction(() => document.querySelector("#page h1"));
+    if (!/No such region/.test(await p.textContent("#page h1"))) fail("unknown region does not say so");
+    // Every SA4 page renders cleanly.
+    const ids = await p.evaluate(() => Object.keys(DATA.geographies).filter(g => g.startsWith("sa4:")));
+    for (const id of ids) {
+      await p.goto(base + "time/#/region/" + encodeURIComponent(id.slice(4)));
+      await p.waitForFunction(() => document.querySelector("#page h1"));
+      await p.waitForTimeout(40);
+      const over = await p.evaluate(() => document.scrollingElement.scrollWidth - innerWidth);
+      if (over > 0 || p.errors.length) fail(`${id}: overflow ${over}px ${p.errors.join(" / ")}`);
+      p.errors = [];
+    }
+    console.log(`  ok   all ${ids.length} region pages`);
+    await p.close();
+  }
+
   // Regressions fixed once and worth keeping fixed.
   const p = await page(1280);
 
@@ -163,6 +225,14 @@ const TOGGLES = [
   if (/published subtotals/.test(await p.textContent("#footNote"))) {
     fail("surplus view shows the supply view's footnote");
   }
+
+  // The two sites link to each other.
+  await open(p, "#national");
+  await p.click("a.viewlink");
+  await p.waitForSelector("#supply svg");
+  if (!p.url().endsWith("/time/")) fail(`"Over time" link lands on ${p.url()}`);
+  await p.click("a.tab-out");
+  await p.waitForFunction(() => !document.getElementById("view").hidden);
 
   await open(p, "#vacancy!national");
   const bar = await p.$eval("#vacFormBars .stackbar", el => el.getBoundingClientRect().width);

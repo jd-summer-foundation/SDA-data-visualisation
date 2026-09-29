@@ -318,3 +318,26 @@ class TimeseriesIsCurrent(unittest.TestCase):
         start = ts["meta"]["quarters"].index(ts["meta"]["in_use_from"])
         self.assertTrue(all(v is None for v in nat["in_use"][:start]))
         self.assertTrue(all(v is not None for v in nat["in_use"][start:]))
+
+    def test_region_headlines_follow_their_numbers(self):
+        ts = json.loads((ROOT / "data" / "timeseries.json").read_text())
+        short = 0
+        for geo, g in ts["geographies"].items():
+            if g["level"] != "SA4":
+                continue
+            s = g["series"]
+            spare, wait, places = s["spare"][-1], s["waiting"][-1], s["places"][-1]
+            self.assertTrue(g["headline"] and g["evidence"], geo)
+            if not places:
+                self.assertIn("no enrolled SDA", g["headline"], geo)
+            elif wait > max(spare, 0):
+                short += 1
+                self.assertIn("waiting here", g["headline"], geo)
+            else:
+                change = spare - s["spare"][-5]
+                word = "growing" if change > 0 else "shrinking" if change < 0 else "steady"
+                if abs(change) > max(5, 0.05 * abs(s["spare"][-5])):
+                    self.assertIn(word, g["headline"], geo)
+        # The same count the analysis reports for the latest quarter.
+        a = json.loads((PANEL / "analysis.json").read_text())
+        self.assertEqual(short, a["q3"]["mismatch"][-1]["regions_short"])
