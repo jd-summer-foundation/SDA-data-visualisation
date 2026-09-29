@@ -1,0 +1,337 @@
+state,sa3,sa3_code,sa4,sa4_code
+ACT,sa3:ACT - Belconnen,80101,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Canberra East,80103,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Gungahlin,80104,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Molonglo,80110,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - North Canberra,80105,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - South Canberra,80106,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Tuggeranong,80107,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Urriarra - Namadgi,80111,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Weston Creek,80108,sa4:ACT - Australian Capital Territory,801
+ACT,sa3:ACT - Woden Valley,80109,sa4:ACT - Australian Capital Territory,801
+NSW,sa3:NSW - Albury,10901,sa4:NSW - Murray,109
+NSW,sa3:NSW - Armidale,11001,sa4:NSW - New England and North West,110
+NSW,sa3:NSW - Auburn,12501,sa4:NSW - Sydney - Parramatta,125
+NSW,sa3:NSW - Bankstown,11901,sa4:NSW - Sydney - Inner South West,119
+NSW,sa3:NSW - Bathurst,10301,sa4:NSW - Central West,103
+NSW,sa3:NSW - Baulkham Hills,11501,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,115
+NSW,sa3:NSW - Blacktown,11601,sa4:NSW - Sydney - Blacktown,116
+NSW,sa3:NSW - Blacktown - North,11602,sa4:NSW - Sydney - Blacktown,116
+NSW,sa3:NSW - Blue Mountains,12401,sa4:NSW - Sydney - Outer West and Blue Mountains,124
+NSW,sa3:NSW - Blue Mountains - South,12402,sa4:NSW - Sydney - Outer West and Blue Mountains,124
+NSW,sa3:NSW - Botany,11701,sa4:NSW - Sydney - City and Inner South,117
+NSW,sa3:NSW - Bourke - Cobar - Coonamble,10501,sa4:NSW - Far West and Orana,105
+NSW,sa3:NSW - Bringelly - Green Valley,12701,sa4:NSW - Sydney - South West,127
+NSW,sa3:NSW - Broken Hill and Far West,10502,sa4:NSW - Far West and Orana,105
+NSW,sa3:NSW - Camden,12301,sa4:NSW - Sydney - Outer South West,123
+NSW,sa3:NSW - Campbelltown (NSW),12302,sa4:NSW - Sydney - Outer South West,123
+NSW,sa3:NSW - Canada Bay,12001,sa4:NSW - Sydney - Inner West,120
+NSW,sa3:NSW - Canterbury,11902,sa4:NSW - Sydney - Inner South West,119
+NSW,sa3:NSW - Carlingford,12502,sa4:NSW - Sydney - Parramatta,125
+NSW,sa3:NSW - Chatswood - Lane Cove,12101,sa4:NSW - Sydney - North Sydney and Hornsby,121
+NSW,sa3:NSW - Clarence Valley,10401,sa4:NSW - Coffs Harbour - Grafton,104
+NSW,sa3:NSW - Coffs Harbour,10402,sa4:NSW - Coffs Harbour - Grafton,104
+NSW,sa3:NSW - Cronulla - Miranda - Caringbah,12801,sa4:NSW - Sydney - Sutherland,128
+NSW,sa3:NSW - Dapto - Port Kembla,10701,sa4:NSW - Illawarra,107
+NSW,sa3:NSW - Dubbo,10503,sa4:NSW - Far West and Orana,105
+NSW,sa3:NSW - Dural - Wisemans Ferry,11502,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,115
+NSW,sa3:NSW - Eastern Suburbs - North,11801,sa4:NSW - Sydney - Eastern Suburbs,118
+NSW,sa3:NSW - Eastern Suburbs - South,11802,sa4:NSW - Sydney - Eastern Suburbs,118
+NSW,sa3:NSW - Fairfield,12702,sa4:NSW - Sydney - South West,127
+NSW,sa3:NSW - Gosford,10201,sa4:NSW - Central Coast,102
+NSW,sa3:NSW - Goulburn - Mulwaree,10105,sa4:NSW - Capital Region,101
+NSW,sa3:NSW - Great Lakes,10801,sa4:NSW - Mid North Coast,108
+NSW,sa3:NSW - Griffith - Murrumbidgee (West),11301,sa4:NSW - Riverina,113
+NSW,sa3:NSW - Hawkesbury,11503,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,115
+NSW,sa3:NSW - Hornsby,12102,sa4:NSW - Sydney - North Sydney and Hornsby,121
+NSW,sa3:NSW - Hurstville,11903,sa4:NSW - Sydney - Inner South West,119
+NSW,sa3:NSW - Illawarra Catchment Reserve,10702,sa4:NSW - Illawarra,107
+NSW,sa3:NSW - Inverell - Tenterfield,11002,sa4:NSW - New England and North West,110
+NSW,sa3:NSW - Kempsey - Nambucca,10802,sa4:NSW - Mid North Coast,108
+NSW,sa3:NSW - Kiama - Shellharbour,10703,sa4:NSW - Illawarra,107
+NSW,sa3:NSW - Kogarah - Rockdale,11904,sa4:NSW - Sydney - Inner South West,119
+NSW,sa3:NSW - Ku-ring-gai,12103,sa4:NSW - Sydney - North Sydney and Hornsby,121
+NSW,sa3:NSW - Lachlan Valley,10302,sa4:NSW - Central West,103
+NSW,sa3:NSW - Lake Macquarie - East,11101,sa4:NSW - Newcastle and Lake Macquarie,111
+NSW,sa3:NSW - Lake Macquarie - West,11102,sa4:NSW - Newcastle and Lake Macquarie,111
+NSW,sa3:NSW - Leichhardt,12002,sa4:NSW - Sydney - Inner West,120
+NSW,sa3:NSW - Lithgow - Mudgee,10303,sa4:NSW - Central West,103
+NSW,sa3:NSW - Liverpool,12703,sa4:NSW - Sydney - South West,127
+NSW,sa3:NSW - Lord Howe Island,10803,sa4:NSW - Mid North Coast,108
+NSW,sa3:NSW - Lower Hunter,10601,sa4:NSW - Hunter Valley exc Newcastle,106
+NSW,sa3:NSW - Lower Murray,10902,sa4:NSW - Murray,109
+NSW,sa3:NSW - Maitland,10602,sa4:NSW - Hunter Valley exc Newcastle,106
+NSW,sa3:NSW - Manly,12201,sa4:NSW - Sydney - Northern Beaches,122
+NSW,sa3:NSW - Marrickville - Sydenham - Petersham,11702,sa4:NSW - Sydney - City and Inner South,117
+NSW,sa3:NSW - Merrylands - Guildford,12503,sa4:NSW - Sydney - Parramatta,125
+NSW,sa3:NSW - Moree - Narrabri,11003,sa4:NSW - New England and North West,110
+NSW,sa3:NSW - Mount Druitt,11603,sa4:NSW - Sydney - Blacktown,116
+NSW,sa3:NSW - Newcastle,11103,sa4:NSW - Newcastle and Lake Macquarie,111
+NSW,sa3:NSW - North Sydney - Mosman,12104,sa4:NSW - Sydney - North Sydney and Hornsby,121
+NSW,sa3:NSW - Orange,10304,sa4:NSW - Central West,103
+NSW,sa3:NSW - Parramatta,12504,sa4:NSW - Sydney - Parramatta,125
+NSW,sa3:NSW - Pennant Hills - Epping,12601,sa4:NSW - Sydney - Ryde,126
+NSW,sa3:NSW - Penrith,12403,sa4:NSW - Sydney - Outer West and Blue Mountains,124
+NSW,sa3:NSW - Pittwater,12202,sa4:NSW - Sydney - Northern Beaches,122
+NSW,sa3:NSW - Port Macquarie,10804,sa4:NSW - Mid North Coast,108
+NSW,sa3:NSW - Port Stephens,10603,sa4:NSW - Hunter Valley exc Newcastle,106
+NSW,sa3:NSW - Queanbeyan,10102,sa4:NSW - Capital Region,101
+NSW,sa3:NSW - Richmond - Windsor,12404,sa4:NSW - Sydney - Outer West and Blue Mountains,124
+NSW,sa3:NSW - Richmond Valley - Coastal,11201,sa4:NSW - Richmond - Tweed,112
+NSW,sa3:NSW - Richmond Valley - Hinterland,11202,sa4:NSW - Richmond - Tweed,112
+NSW,sa3:NSW - Rouse Hill - McGraths Hill,11504,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,115
+NSW,sa3:NSW - Ryde - Hunters Hill,12602,sa4:NSW - Sydney - Ryde,126
+NSW,sa3:NSW - Shoalhaven,11401,sa4:NSW - Southern Highlands and Shoalhaven,114
+NSW,sa3:NSW - Snowy Mountains,10103,sa4:NSW - Capital Region,101
+NSW,sa3:NSW - South Coast,10104,sa4:NSW - Capital Region,101
+NSW,sa3:NSW - Southern Highlands,11402,sa4:NSW - Southern Highlands and Shoalhaven,114
+NSW,sa3:NSW - St Marys,12405,sa4:NSW - Sydney - Outer West and Blue Mountains,124
+NSW,sa3:NSW - Strathfield - Burwood - Ashfield,12003,sa4:NSW - Sydney - Inner West,120
+NSW,sa3:NSW - Sutherland - Menai - Heathcote,12802,sa4:NSW - Sydney - Sutherland,128
+NSW,sa3:NSW - Sydney Inner City,11703,sa4:NSW - Sydney - City and Inner South,117
+NSW,sa3:NSW - Tamworth - Gunnedah,11004,sa4:NSW - New England and North West,110
+NSW,sa3:NSW - Taree - Gloucester,10805,sa4:NSW - Mid North Coast,108
+NSW,sa3:NSW - Tumut - Tumbarumba,11302,sa4:NSW - Riverina,113
+NSW,sa3:NSW - Tweed Valley,11203,sa4:NSW - Richmond - Tweed,112
+NSW,sa3:NSW - Upper Hunter,10604,sa4:NSW - Hunter Valley exc Newcastle,106
+NSW,sa3:NSW - Upper Murray exc. Albury,10903,sa4:NSW - Murray,109
+NSW,sa3:NSW - Wagga Wagga,11303,sa4:NSW - Riverina,113
+NSW,sa3:NSW - Warringah,12203,sa4:NSW - Sydney - Northern Beaches,122
+NSW,sa3:NSW - Wollondilly,12303,sa4:NSW - Sydney - Outer South West,123
+NSW,sa3:NSW - Wollongong,10704,sa4:NSW - Illawarra,107
+NSW,sa3:NSW - Wyong,10202,sa4:NSW - Central Coast,102
+NSW,sa3:NSW - Young - Yass,10106,sa4:NSW - Capital Region,101
+NT,sa3:NT - Alice Springs,70201,sa4:NT - Northern Territory - Outback,702
+NT,sa3:NT - Barkly,70202,sa4:NT - Northern Territory - Outback,702
+NT,sa3:NT - Daly - Tiwi - West Arnhem,70203,sa4:NT - Northern Territory - Outback,702
+NT,sa3:NT - Darwin City,70101,sa4:NT - Darwin,701
+NT,sa3:NT - Darwin Suburbs,70102,sa4:NT - Darwin,701
+NT,sa3:NT - East Arnhem,70204,sa4:NT - Northern Territory - Outback,702
+NT,sa3:NT - Katherine,70205,sa4:NT - Northern Territory - Outback,702
+NT,sa3:NT - Litchfield,70103,sa4:NT - Darwin,701
+NT,sa3:NT - Palmerston,70104,sa4:NT - Darwin,701
+QLD,sa3:QLD - Bald Hills - Everton Park,30201,sa4:QLD - Brisbane - North,302
+QLD,sa3:QLD - Beaudesert,31101,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Beenleigh,31102,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Biloela,30804,sa4:QLD - Central Queensland,308
+QLD,sa3:QLD - Bowen Basin - North,31201,sa4:QLD - Mackay - Isaac - Whitsunday,312
+QLD,sa3:QLD - Bribie - Beachmere,31301,sa4:QLD - Moreton Bay - North,313
+QLD,sa3:QLD - Brisbane Inner,30501,sa4:QLD - Brisbane Inner City,305
+QLD,sa3:QLD - Brisbane Inner - East,30502,sa4:QLD - Brisbane Inner City,305
+QLD,sa3:QLD - Brisbane Inner - North,30503,sa4:QLD - Brisbane Inner City,305
+QLD,sa3:QLD - Brisbane Inner - West,30504,sa4:QLD - Brisbane Inner City,305
+QLD,sa3:QLD - Broadbeach - Burleigh,30901,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Browns Plains,31103,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Buderim,31601,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Bundaberg,31901,sa4:QLD - Wide Bay,319
+QLD,sa3:QLD - Burnett,31902,sa4:QLD - Wide Bay,319
+QLD,sa3:QLD - Caboolture,31302,sa4:QLD - Moreton Bay - North,313
+QLD,sa3:QLD - Caboolture Hinterland,31303,sa4:QLD - Moreton Bay - North,313
+QLD,sa3:QLD - Cairns - North,30601,sa4:QLD - Cairns,306
+QLD,sa3:QLD - Cairns - South,30602,sa4:QLD - Cairns,306
+QLD,sa3:QLD - Caloundra,31602,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Capalaba,30101,sa4:QLD - Brisbane - East,301
+QLD,sa3:QLD - Carindale,30301,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Centenary,30401,sa4:QLD - Brisbane - West,304
+QLD,sa3:QLD - Central Highlands (Qld),30801,sa4:QLD - Central Queensland,308
+QLD,sa3:QLD - Charters Towers - Ayr - Ingham,31801,sa4:QLD - Townsville,318
+QLD,sa3:QLD - Chermside,30202,sa4:QLD - Brisbane - North,302
+QLD,sa3:QLD - Cleveland - Stradbroke,30102,sa4:QLD - Brisbane - East,301
+QLD,sa3:QLD - Coolangatta,30902,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Darling Downs (West) - Maranoa,30701,sa4:QLD - Darling Downs - Maranoa,307
+QLD,sa3:QLD - Darling Downs - East,30702,sa4:QLD - Darling Downs - Maranoa,307
+QLD,sa3:QLD - Far North,31501,sa4:QLD - Queensland - Outback,315
+QLD,sa3:QLD - Forest Lake - Oxley,31001,sa4:QLD - Ipswich,310
+QLD,sa3:QLD - Gladstone,30805,sa4:QLD - Central Queensland,308
+QLD,sa3:QLD - Gold Coast - North,30903,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Gold Coast Hinterland,30904,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Granite Belt,30703,sa4:QLD - Darling Downs - Maranoa,307
+QLD,sa3:QLD - Gympie - Cooloola,31903,sa4:QLD - Wide Bay,319
+QLD,sa3:QLD - Hervey Bay,31904,sa4:QLD - Wide Bay,319
+QLD,sa3:QLD - Holland Park - Yeronga,30302,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Innisfail - Cassowary Coast,30603,sa4:QLD - Cairns,306
+QLD,sa3:QLD - Ipswich Hinterland,31002,sa4:QLD - Ipswich,310
+QLD,sa3:QLD - Ipswich Inner,31003,sa4:QLD - Ipswich,310
+QLD,sa3:QLD - Jimboomba,31104,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Kenmore - Brookfield - Moggill,30402,sa4:QLD - Brisbane - West,304
+QLD,sa3:QLD - Loganlea - Carbrook,31105,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Mackay,31202,sa4:QLD - Mackay - Isaac - Whitsunday,312
+QLD,sa3:QLD - Maroochy,31603,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Maryborough,31905,sa4:QLD - Wide Bay,319
+QLD,sa3:QLD - Mt Gravatt,30303,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Mudgeeraba - Tallebudgera,30905,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Nambour,31607,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Narangba - Burpengary,31304,sa4:QLD - Moreton Bay - North,313
+QLD,sa3:QLD - Nathan,30304,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Nerang,30906,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Noosa,31605,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Noosa Hinterland,31608,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - North Lakes,31402,sa4:QLD - Moreton Bay - South,314
+QLD,sa3:QLD - Nundah,30203,sa4:QLD - Brisbane - North,302
+QLD,sa3:QLD - Ormeau - Oxenford,30907,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Outback - North,31502,sa4:QLD - Queensland - Outback,315
+QLD,sa3:QLD - Outback - South,31503,sa4:QLD - Queensland - Outback,315
+QLD,sa3:QLD - Port Douglas - Daintree,30604,sa4:QLD - Cairns,306
+QLD,sa3:QLD - Redcliffe,31305,sa4:QLD - Moreton Bay - North,313
+QLD,sa3:QLD - Robina,30908,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Rockhampton,30803,sa4:QLD - Central Queensland,308
+QLD,sa3:QLD - Rocklea - Acacia Ridge,30305,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Sandgate,30204,sa4:QLD - Brisbane - North,302
+QLD,sa3:QLD - Sherwood - Indooroopilly,30403,sa4:QLD - Brisbane - West,304
+QLD,sa3:QLD - Southport,30909,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Springfield - Redbank,31004,sa4:QLD - Ipswich,310
+QLD,sa3:QLD - Springwood - Kingston,31106,sa4:QLD - Logan - Beaudesert,311
+QLD,sa3:QLD - Strathpine,31403,sa4:QLD - Moreton Bay - South,314
+QLD,sa3:QLD - Sunnybank,30306,sa4:QLD - Brisbane - South,303
+QLD,sa3:QLD - Sunshine Coast Hinterland,31606,sa4:QLD - Sunshine Coast,316
+QLD,sa3:QLD - Surfers Paradise,30910,sa4:QLD - Gold Coast,309
+QLD,sa3:QLD - Tablelands (East) - Kuranda,30605,sa4:QLD - Cairns,306
+QLD,sa3:QLD - The Gap - Enoggera,30404,sa4:QLD - Brisbane - West,304
+QLD,sa3:QLD - The Hills District,31401,sa4:QLD - Moreton Bay - South,314
+QLD,sa3:QLD - Toowoomba,31701,sa4:QLD - Toowoomba,317
+QLD,sa3:QLD - Townsville,31802,sa4:QLD - Townsville,318
+QLD,sa3:QLD - Whitsunday,31203,sa4:QLD - Mackay - Isaac - Whitsunday,312
+QLD,sa3:QLD - Wynnum - Manly,30103,sa4:QLD - Brisbane - East,301
+SA,sa3:SA - Adelaide City,40101,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Adelaide Hills,40102,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Barossa,40501,sa4:SA - Barossa - Yorke - Mid North,405
+SA,sa3:SA - Burnside,40103,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Campbelltown (SA),40104,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Charles Sturt,40401,sa4:SA - Adelaide - West,404
+SA,sa3:SA - Eyre Peninsula and South West,40601,sa4:SA - South Australia - Outback,406
+SA,sa3:SA - Fleurieu - Kangaroo Island,40701,sa4:SA - South Australia - South East,407
+SA,sa3:SA - Gawler - Two Wells,40201,sa4:SA - Adelaide - North,402
+SA,sa3:SA - Holdfast Bay,40301,sa4:SA - Adelaide - South,403
+SA,sa3:SA - Limestone Coast,40702,sa4:SA - South Australia - South East,407
+SA,sa3:SA - Lower North,40502,sa4:SA - Barossa - Yorke - Mid North,405
+SA,sa3:SA - Marion,40302,sa4:SA - Adelaide - South,403
+SA,sa3:SA - Mid North,40503,sa4:SA - Barossa - Yorke - Mid North,405
+SA,sa3:SA - Mitcham,40303,sa4:SA - Adelaide - South,403
+SA,sa3:SA - Murray and Mallee,40703,sa4:SA - South Australia - South East,407
+SA,sa3:SA - Norwood - Payneham - St Peters,40105,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Onkaparinga,40304,sa4:SA - Adelaide - South,403
+SA,sa3:SA - Outback - North and East,40602,sa4:SA - South Australia - Outback,406
+SA,sa3:SA - Playford,40202,sa4:SA - Adelaide - North,402
+SA,sa3:SA - Port Adelaide - East,40203,sa4:SA - Adelaide - North,402
+SA,sa3:SA - Port Adelaide - West,40402,sa4:SA - Adelaide - West,404
+SA,sa3:SA - Prospect - Walkerville,40106,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - Salisbury,40204,sa4:SA - Adelaide - North,402
+SA,sa3:SA - Tea Tree Gully,40205,sa4:SA - Adelaide - North,402
+SA,sa3:SA - Unley,40107,sa4:SA - Adelaide - Central and Hills,401
+SA,sa3:SA - West Torrens,40403,sa4:SA - Adelaide - West,404
+SA,sa3:SA - Yorke Peninsula,40504,sa4:SA - Barossa - Yorke - Mid North,405
+TAS,sa3:TAS - Brighton,60101,sa4:TAS - Hobart,601
+TAS,sa3:TAS - Burnie - Ulverstone,60401,sa4:TAS - West and North West,604
+TAS,sa3:TAS - Central Highlands (Tas.),60301,sa4:TAS - South East,603
+TAS,sa3:TAS - Devonport,60402,sa4:TAS - West and North West,604
+TAS,sa3:TAS - Hobart - North East,60102,sa4:TAS - Hobart,601
+TAS,sa3:TAS - Hobart - North West,60103,sa4:TAS - Hobart,601
+TAS,sa3:TAS - Hobart - South and West,60104,sa4:TAS - Hobart,601
+TAS,sa3:TAS - Hobart Inner,60105,sa4:TAS - Hobart,601
+TAS,sa3:TAS - Huon - Bruny Island,60302,sa4:TAS - South East,603
+TAS,sa3:TAS - Launceston,60201,sa4:TAS - Launceston and North East,602
+TAS,sa3:TAS - Meander Valley - West Tamar,60202,sa4:TAS - Launceston and North East,602
+TAS,sa3:TAS - North East,60203,sa4:TAS - Launceston and North East,602
+TAS,sa3:TAS - Sorell - Dodges Ferry,60106,sa4:TAS - Hobart,601
+TAS,sa3:TAS - South East Coast,60303,sa4:TAS - South East,603
+TAS,sa3:TAS - West Coast,60403,sa4:TAS - West and North West,604
+VIC,sa3:VIC - Ballarat,20101,sa4:VIC - Ballarat,201
+VIC,sa3:VIC - Banyule,20901,sa4:VIC - Melbourne - North East,209
+VIC,sa3:VIC - Barwon - West,20301,sa4:VIC - Geelong,203
+VIC,sa3:VIC - Baw Baw,20501,sa4:VIC - Latrobe - Gippsland,205
+VIC,sa3:VIC - Bayside,20801,sa4:VIC - Melbourne - Inner South,208
+VIC,sa3:VIC - Bendigo,20201,sa4:VIC - Bendigo,202
+VIC,sa3:VIC - Boroondara,20701,sa4:VIC - Melbourne - Inner East,207
+VIC,sa3:VIC - Brimbank,21301,sa4:VIC - Melbourne - West,213
+VIC,sa3:VIC - Brunswick - Coburg,20601,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Campaspe,21601,sa4:VIC - Shepparton,216
+VIC,sa3:VIC - Cardinia,21201,sa4:VIC - Melbourne - South East,212
+VIC,sa3:VIC - Casey - North,21202,sa4:VIC - Melbourne - South East,212
+VIC,sa3:VIC - Casey - South,21203,sa4:VIC - Melbourne - South East,212
+VIC,sa3:VIC - Colac - Corangamite,21703,sa4:VIC - Warrnambool and South West,217
+VIC,sa3:VIC - Creswick - Daylesford - Ballan,20102,sa4:VIC - Ballarat,201
+VIC,sa3:VIC - Dandenong,21204,sa4:VIC - Melbourne - South East,212
+VIC,sa3:VIC - Darebin - North,20902,sa4:VIC - Melbourne - North East,209
+VIC,sa3:VIC - Darebin - South,20602,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Essendon,20603,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Frankston,21401,sa4:VIC - Mornington Peninsula,214
+VIC,sa3:VIC - Geelong,20302,sa4:VIC - Geelong,203
+VIC,sa3:VIC - Gippsland - East,20502,sa4:VIC - Latrobe - Gippsland,205
+VIC,sa3:VIC - Gippsland - South West,20503,sa4:VIC - Latrobe - Gippsland,205
+VIC,sa3:VIC - Glen Eira,20802,sa4:VIC - Melbourne - Inner South,208
+VIC,sa3:VIC - Glenelg - Southern Grampians,21701,sa4:VIC - Warrnambool and South West,217
+VIC,sa3:VIC - Grampians,21501,sa4:VIC - North West,215
+VIC,sa3:VIC - Heathcote - Castlemaine - Kyneton,20202,sa4:VIC - Bendigo,202
+VIC,sa3:VIC - Hobsons Bay,21302,sa4:VIC - Melbourne - West,213
+VIC,sa3:VIC - Keilor,21001,sa4:VIC - Melbourne - North West,210
+VIC,sa3:VIC - Kingston,20803,sa4:VIC - Melbourne - Inner South,208
+VIC,sa3:VIC - Knox,21101,sa4:VIC - Melbourne - Outer East,211
+VIC,sa3:VIC - Latrobe Valley,20504,sa4:VIC - Latrobe - Gippsland,205
+VIC,sa3:VIC - Loddon - Elmore,20203,sa4:VIC - Bendigo,202
+VIC,sa3:VIC - Macedon Ranges,21002,sa4:VIC - Melbourne - North West,210
+VIC,sa3:VIC - Manningham - East,21102,sa4:VIC - Melbourne - Outer East,211
+VIC,sa3:VIC - Manningham - West,20702,sa4:VIC - Melbourne - Inner East,207
+VIC,sa3:VIC - Maribyrnong,21303,sa4:VIC - Melbourne - West,213
+VIC,sa3:VIC - Maroondah,21103,sa4:VIC - Melbourne - Outer East,211
+VIC,sa3:VIC - Maryborough - Pyrenees,20103,sa4:VIC - Ballarat,201
+VIC,sa3:VIC - Melbourne City,20604,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Melton - Bacchus Marsh,21304,sa4:VIC - Melbourne - West,213
+VIC,sa3:VIC - Mildura,21502,sa4:VIC - North West,215
+VIC,sa3:VIC - Moira,21602,sa4:VIC - Shepparton,216
+VIC,sa3:VIC - Monash,21205,sa4:VIC - Melbourne - South East,212
+VIC,sa3:VIC - Moreland - North,21003,sa4:VIC - Melbourne - North West,210
+VIC,sa3:VIC - Mornington Peninsula,21402,sa4:VIC - Mornington Peninsula,214
+VIC,sa3:VIC - Murray River - Swan Hill,21503,sa4:VIC - North West,215
+VIC,sa3:VIC - Nillumbik - Kinglake,20903,sa4:VIC - Melbourne - North East,209
+VIC,sa3:VIC - Port Phillip,20605,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Shepparton,21603,sa4:VIC - Shepparton,216
+VIC,sa3:VIC - Stonnington - East,20804,sa4:VIC - Melbourne - Inner South,208
+VIC,sa3:VIC - Stonnington - West,20606,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Sunbury,21004,sa4:VIC - Melbourne - North West,210
+VIC,sa3:VIC - Surf Coast - Bellarine Peninsula,20303,sa4:VIC - Geelong,203
+VIC,sa3:VIC - Tullamarine - Broadmeadows,21005,sa4:VIC - Melbourne - North West,210
+VIC,sa3:VIC - Upper Goulburn Valley,20401,sa4:VIC - Hume,204
+VIC,sa3:VIC - Wangaratta - Benalla,20402,sa4:VIC - Hume,204
+VIC,sa3:VIC - Warrnambool,21704,sa4:VIC - Warrnambool and South West,217
+VIC,sa3:VIC - Wellington,20505,sa4:VIC - Latrobe - Gippsland,205
+VIC,sa3:VIC - Whitehorse - East,21104,sa4:VIC - Melbourne - Outer East,211
+VIC,sa3:VIC - Whitehorse - West,20703,sa4:VIC - Melbourne - Inner East,207
+VIC,sa3:VIC - Whittlesea - Wallan,20904,sa4:VIC - Melbourne - North East,209
+VIC,sa3:VIC - Wodonga - Alpine,20403,sa4:VIC - Hume,204
+VIC,sa3:VIC - Wyndham,21305,sa4:VIC - Melbourne - West,213
+VIC,sa3:VIC - Yarra,20607,sa4:VIC - Melbourne - Inner,206
+VIC,sa3:VIC - Yarra Ranges,21105,sa4:VIC - Melbourne - Outer East,211
+WA,sa3:WA - Albany,50901,sa4:WA - Western Australia - Wheat Belt,509
+WA,sa3:WA - Armadale,50601,sa4:WA - Perth - South East,506
+WA,sa3:WA - Augusta - Margaret River - Busselton,50101,sa4:WA - Bunbury,501
+WA,sa3:WA - Bayswater - Bassendean,50401,sa4:WA - Perth - North East,504
+WA,sa3:WA - Belmont - Victoria Park,50602,sa4:WA - Perth - South East,506
+WA,sa3:WA - Bunbury,50102,sa4:WA - Bunbury,501
+WA,sa3:WA - Canning,50603,sa4:WA - Perth - South East,506
+WA,sa3:WA - Cockburn,50701,sa4:WA - Perth - South West,507
+WA,sa3:WA - Cottesloe - Claremont,50301,sa4:WA - Perth - Inner,503
+WA,sa3:WA - East Pilbara,51002,sa4:WA - Western Australia - Outback (North),510
+WA,sa3:WA - Esperance,51101,sa4:WA - Western Australia - Outback (South),511
+WA,sa3:WA - Fremantle,50702,sa4:WA - Perth - South West,507
+WA,sa3:WA - Gascoyne,51102,sa4:WA - Western Australia - Outback (South),511
+WA,sa3:WA - Goldfields,51103,sa4:WA - Western Australia - Outback (South),511
+WA,sa3:WA - Gosnells,50604,sa4:WA - Perth - South East,506
+WA,sa3:WA - Joondalup,50501,sa4:WA - Perth - North West,505
+WA,sa3:WA - Kalamunda,50605,sa4:WA - Perth - South East,506
+WA,sa3:WA - Kimberley,51001,sa4:WA - Western Australia - Outback (North),510
+WA,sa3:WA - Kwinana,50703,sa4:WA - Perth - South West,507
+WA,sa3:WA - Mandurah,50201,sa4:WA - Mandurah,502
+WA,sa3:WA - Manjimup,50103,sa4:WA - Bunbury,501
+WA,sa3:WA - Melville,50704,sa4:WA - Perth - South West,507
+WA,sa3:WA - Mid West,51104,sa4:WA - Western Australia - Outback (South),511
+WA,sa3:WA - Mundaring,50402,sa4:WA - Perth - North East,504
+WA,sa3:WA - Perth City,50302,sa4:WA - Perth - Inner,503
+WA,sa3:WA - Rockingham,50705,sa4:WA - Perth - South West,507
+WA,sa3:WA - Serpentine - Jarrahdale,50606,sa4:WA - Perth - South East,506
+WA,sa3:WA - South Perth,50607,sa4:WA - Perth - South East,506
+WA,sa3:WA - Stirling,50502,sa4:WA - Perth - North West,505
+WA,sa3:WA - Swan,50403,sa4:WA - Perth - North East,504
+WA,sa3:WA - Wanneroo,50503,sa4:WA - Perth - North West,505
+WA,sa3:WA - West Pilbara,51003,sa4:WA - Western Australia - Outback (North),510
+WA,sa3:WA - Wheat Belt - North,50902,sa4:WA - Western Australia - Wheat Belt,509
+WA,sa3:WA - Wheat Belt - South,50903,sa4:WA - Western Australia - Wheat Belt,509

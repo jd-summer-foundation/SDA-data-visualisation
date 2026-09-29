@@ -1,0 +1,798 @@
+{
+ "editions": [
+  {
+   "edition": "2022-23 Q4",
+   "as_at": "2023-06-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2576,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 238,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 238,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.16",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.17",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.18",
+     "scheme": null
+    },
+    "inkind_categories": {
+     "sheet": "Table P.19",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.21",
+     "scheme": "legacy_crm"
+    },
+    "demand_categories": {
+     "sheet": "Table P.22",
+     "scheme": "seeking_legacy"
+    }
+   }
+  },
+  {
+   "edition": "2023-24 Q1",
+   "as_at": "2023-09-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2552,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 232,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 232,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "legacy_crm"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "seeking_legacy"
+    }
+   }
+  },
+  {
+   "edition": "2023-24 Q2",
+   "as_at": "2023-12-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2112,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "funding_split"
+    },
+    "not_using": {
+     "sheet": "Table P.18",
+     "scheme": null
+    }
+   }
+  },
+  {
+   "edition": "2023-24 Q3",
+   "as_at": "2024-03-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2112,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {
+    "not_using:unavailable": 12
+   },
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "funding_split"
+    },
+    "not_using": {
+     "sheet": "Table P.18",
+     "scheme": null
+    }
+   }
+  },
+  {
+   "edition": "2023-24 Q4",
+   "as_at": "2024-06-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2112,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 192,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {
+    "not_using:unavailable": 12
+   },
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "funding_split"
+    },
+    "not_using": {
+     "sheet": "Table P.18",
+     "scheme": null
+    }
+   }
+  },
+  {
+   "edition": "2024-25 Q1",
+   "as_at": "2024-09-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 1848,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 168,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 168,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.12",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.16",
+     "scheme": "in_use_eligible"
+    }
+   }
+  },
+  {
+   "edition": "2024-25 Q2",
+   "as_at": "2024-12-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2464,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 224,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 224,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision_with_basic"
+    }
+   }
+  },
+  {
+   "edition": "2024-25 Q3",
+   "as_at": "2025-03-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  },
+  {
+   "edition": "2024-25 Q4",
+   "as_at": "2025-06-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  },
+  {
+   "edition": "2025-26 Q1",
+   "as_at": "2025-09-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  },
+  {
+   "edition": "2025-26 Q2",
+   "as_at": "2025-12-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  },
+  {
+   "edition": "2025-26 Q3",
+   "as_at": "2026-03-31",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  },
+  {
+   "edition": "2025-26 Q4",
+   "as_at": "2026-06-30",
+   "sa3_regions": 336,
+   "added": [],
+   "removed": [],
+   "checks": [
+    {
+     "check": "SA3 = SA4 panel",
+     "compared": 2376,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "SA3 + Other = state (SA3 table)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    },
+    {
+     "check": "state (SA3 table) = state (SA4 panel)",
+     "compared": 216,
+     "mismatched": 0,
+     "examples": []
+    }
+   ],
+   "incomplete": 0,
+   "flags": {},
+   "tables": {
+    "build_types": {
+     "sheet": "Table P.13",
+     "scheme": null
+    },
+    "stock_categories": {
+     "sheet": "Table P.14",
+     "scheme": null
+    },
+    "max_residents": {
+     "sheet": "Table P.15",
+     "scheme": null
+    },
+    "demand_status": {
+     "sheet": "Table P.17",
+     "scheme": "in_use_eligible"
+    },
+    "demand_categories": {
+     "sheet": "Table P.18",
+     "scheme": "eligible_decision"
+    }
+   }
+  }
+ ],
+ "mapping": {
+  "sa3": 336,
+  "sa4": 88,
+  "median_per_sa4": 3,
+  "max_per_sa4": 10,
+  "sa4_with_one": 2,
+  "spellings": [
+   {
+    "supplement_p": "ACT - Urriarra - Namadgi",
+    "asgs_2021": "ACT - Uriarra - Namadgi"
+   }
+  ]
+ },
+ "usability": [
+  {
+   "label": "Enrolled dwellings by category",
+   "measure": "enrolled_dwellings",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "New-build dwellings (all categories)",
+   "measure": "dwellings_new_build",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "Places from dwellings by maximum residents (total)",
+   "measure": "places_from_max_residents",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1",
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "Participants with SDA in use",
+   "measure": "participants_sda_in_use",
+   "editions": [
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "Participants eligible, not yet using",
+   "measure": "participants_eligible_not_using",
+   "editions": [
+    "2023-24 Q2",
+    "2023-24 Q3",
+    "2023-24 Q4",
+    "2024-25 Q1",
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "Participants with need by category",
+   "measure": "participants_with_need",
+   "editions": [
+    "2024-25 Q2",
+    "2024-25 Q3",
+    "2024-25 Q4",
+    "2025-26 Q1",
+    "2025-26 Q2",
+    "2025-26 Q3",
+    "2025-26 Q4"
+   ]
+  },
+  {
+   "label": "Participants seeking SDA by category (legacy CRM)",
+   "measure": "legacy_participants_seeking",
+   "editions": [
+    "2022-23 Q4",
+    "2023-24 Q1"
+   ]
+  }
+ ]
+}
