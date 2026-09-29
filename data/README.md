@@ -16,7 +16,7 @@ private.
 | `supplements/` | NDIA Supplement P, one workbook per quarter | June 2023 – June 2026 |
 | `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
-| `panel/` | Built by `scripts/extract_panel.py` from every workbook in `supplements/` | June 2023 – June 2026 |
+| `panel/` | Built by `scripts/extract_panel.py` (SA4) and `scripts/extract_panel_sa3.py` (SA3) from every workbook in `supplements/` | June 2023 – June 2026 |
 
 ## Both CSVs are reduced before committing
 
@@ -111,7 +111,13 @@ Worth reporting upstream.
 
 ## `australian_postcodes.csv`
 
-One row per postcode/locality pair, used to place each listing in an SA4 and SA3.
+One row per postcode/locality pair, used to place each listing in an SA4 and SA3,
+and each Supplement P SA3 in its SA4.
+
+**Its SA3 names predate ASGS 2021**, which Supplement P uses. 31 of Supplement
+P's 336 SA3s are not in it (Molonglo, Camden, Hervey Bay, …); the SA3 panel
+places them by hand and proves the placement by reconciliation. Vacancy
+listings in those SA3s get the older SA3 name, or none.
 
 **The `*_2021` columns are corrupt — which is why they are not among the columns
 kept.** `SA4_NAME_2021`, `SA3_NAME_2021` and `SA4_CODE_2021` held only 21

@@ -1,0 +1,337 @@
+state,sa3,sa4,basis
+ACT,sa3:ACT - Belconnen,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - Canberra East,sa4:ACT - Australian Capital Territory,"ASGS 2021 name, placed by hand"
+ACT,sa3:ACT - Gungahlin,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - Molonglo,sa4:ACT - Australian Capital Territory,"ASGS 2021 name, placed by hand"
+ACT,sa3:ACT - North Canberra,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - South Canberra,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - Tuggeranong,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - Urriarra - Namadgi,sa4:ACT - Australian Capital Territory,"ASGS 2021 name, placed by hand"
+ACT,sa3:ACT - Weston Creek,sa4:ACT - Australian Capital Territory,postcode concordance
+ACT,sa3:ACT - Woden Valley,sa4:ACT - Australian Capital Territory,"ASGS 2021 name, placed by hand"
+NSW,sa3:NSW - Albury,sa4:NSW - Murray,postcode concordance
+NSW,sa3:NSW - Armidale,sa4:NSW - New England and North West,postcode concordance
+NSW,sa3:NSW - Auburn,sa4:NSW - Sydney - Parramatta,postcode concordance
+NSW,sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,postcode concordance
+NSW,sa3:NSW - Bathurst,sa4:NSW - Central West,postcode concordance
+NSW,sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,postcode concordance
+NSW,sa3:NSW - Blacktown,sa4:NSW - Sydney - Blacktown,postcode concordance
+NSW,sa3:NSW - Blacktown - North,sa4:NSW - Sydney - Blacktown,postcode concordance
+NSW,sa3:NSW - Blue Mountains,sa4:NSW - Sydney - Outer West and Blue Mountains,postcode concordance
+NSW,sa3:NSW - Blue Mountains - South,sa4:NSW - Sydney - Outer West and Blue Mountains,postcode concordance
+NSW,sa3:NSW - Botany,sa4:NSW - Sydney - City and Inner South,postcode concordance
+NSW,sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,postcode concordance
+NSW,sa3:NSW - Bringelly - Green Valley,sa4:NSW - Sydney - South West,postcode concordance
+NSW,sa3:NSW - Broken Hill and Far West,sa4:NSW - Far West and Orana,postcode concordance
+NSW,sa3:NSW - Camden,sa4:NSW - Sydney - Outer South West,"ASGS 2021 name, placed by hand"
+NSW,sa3:NSW - Campbelltown (NSW),sa4:NSW - Sydney - Outer South West,postcode concordance
+NSW,sa3:NSW - Canada Bay,sa4:NSW - Sydney - Inner West,postcode concordance
+NSW,sa3:NSW - Canterbury,sa4:NSW - Sydney - Inner South West,postcode concordance
+NSW,sa3:NSW - Carlingford,sa4:NSW - Sydney - Parramatta,postcode concordance
+NSW,sa3:NSW - Chatswood - Lane Cove,sa4:NSW - Sydney - North Sydney and Hornsby,postcode concordance
+NSW,sa3:NSW - Clarence Valley,sa4:NSW - Coffs Harbour - Grafton,postcode concordance
+NSW,sa3:NSW - Coffs Harbour,sa4:NSW - Coffs Harbour - Grafton,postcode concordance
+NSW,sa3:NSW - Cronulla - Miranda - Caringbah,sa4:NSW - Sydney - Sutherland,postcode concordance
+NSW,sa3:NSW - Dapto - Port Kembla,sa4:NSW - Illawarra,postcode concordance
+NSW,sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,postcode concordance
+NSW,sa3:NSW - Dural - Wisemans Ferry,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,postcode concordance
+NSW,sa3:NSW - Eastern Suburbs - North,sa4:NSW - Sydney - Eastern Suburbs,postcode concordance
+NSW,sa3:NSW - Eastern Suburbs - South,sa4:NSW - Sydney - Eastern Suburbs,postcode concordance
+NSW,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,postcode concordance
+NSW,sa3:NSW - Gosford,sa4:NSW - Central Coast,postcode concordance
+NSW,sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,"ASGS 2021 name, placed by hand"
+NSW,sa3:NSW - Great Lakes,sa4:NSW - Mid North Coast,postcode concordance
+NSW,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,postcode concordance
+NSW,sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,postcode concordance
+NSW,sa3:NSW - Hornsby,sa4:NSW - Sydney - North Sydney and Hornsby,postcode concordance
+NSW,sa3:NSW - Hurstville,sa4:NSW - Sydney - Inner South West,postcode concordance
+NSW,sa3:NSW - Illawarra Catchment Reserve,sa4:NSW - Illawarra,"ASGS 2021 name, placed by hand"
+NSW,sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,postcode concordance
+NSW,sa3:NSW - Kempsey - Nambucca,sa4:NSW - Mid North Coast,postcode concordance
+NSW,sa3:NSW - Kiama - Shellharbour,sa4:NSW - Illawarra,postcode concordance
+NSW,sa3:NSW - Kogarah - Rockdale,sa4:NSW - Sydney - Inner South West,postcode concordance
+NSW,sa3:NSW - Ku-ring-gai,sa4:NSW - Sydney - North Sydney and Hornsby,postcode concordance
+NSW,sa3:NSW - Lachlan Valley,sa4:NSW - Central West,postcode concordance
+NSW,sa3:NSW - Lake Macquarie - East,sa4:NSW - Newcastle and Lake Macquarie,postcode concordance
+NSW,sa3:NSW - Lake Macquarie - West,sa4:NSW - Newcastle and Lake Macquarie,postcode concordance
+NSW,sa3:NSW - Leichhardt,sa4:NSW - Sydney - Inner West,postcode concordance
+NSW,sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,postcode concordance
+NSW,sa3:NSW - Liverpool,sa4:NSW - Sydney - South West,postcode concordance
+NSW,sa3:NSW - Lord Howe Island,sa4:NSW - Mid North Coast,postcode concordance
+NSW,sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,postcode concordance
+NSW,sa3:NSW - Lower Murray,sa4:NSW - Murray,postcode concordance
+NSW,sa3:NSW - Maitland,sa4:NSW - Hunter Valley exc Newcastle,postcode concordance
+NSW,sa3:NSW - Manly,sa4:NSW - Sydney - Northern Beaches,postcode concordance
+NSW,sa3:NSW - Marrickville - Sydenham - Petersham,sa4:NSW - Sydney - City and Inner South,postcode concordance
+NSW,sa3:NSW - Merrylands - Guildford,sa4:NSW - Sydney - Parramatta,postcode concordance
+NSW,sa3:NSW - Moree - Narrabri,sa4:NSW - New England and North West,postcode concordance
+NSW,sa3:NSW - Mount Druitt,sa4:NSW - Sydney - Blacktown,postcode concordance
+NSW,sa3:NSW - Newcastle,sa4:NSW - Newcastle and Lake Macquarie,postcode concordance
+NSW,sa3:NSW - North Sydney - Mosman,sa4:NSW - Sydney - North Sydney and Hornsby,postcode concordance
+NSW,sa3:NSW - Orange,sa4:NSW - Central West,postcode concordance
+NSW,sa3:NSW - Parramatta,sa4:NSW - Sydney - Parramatta,postcode concordance
+NSW,sa3:NSW - Pennant Hills - Epping,sa4:NSW - Sydney - Ryde,postcode concordance
+NSW,sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,postcode concordance
+NSW,sa3:NSW - Pittwater,sa4:NSW - Sydney - Northern Beaches,postcode concordance
+NSW,sa3:NSW - Port Macquarie,sa4:NSW - Mid North Coast,postcode concordance
+NSW,sa3:NSW - Port Stephens,sa4:NSW - Hunter Valley exc Newcastle,postcode concordance
+NSW,sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,postcode concordance
+NSW,sa3:NSW - Richmond - Windsor,sa4:NSW - Sydney - Outer West and Blue Mountains,postcode concordance
+NSW,sa3:NSW - Richmond Valley - Coastal,sa4:NSW - Richmond - Tweed,postcode concordance
+NSW,sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,postcode concordance
+NSW,sa3:NSW - Rouse Hill - McGraths Hill,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,"ASGS 2021 name, placed by hand"
+NSW,sa3:NSW - Ryde - Hunters Hill,sa4:NSW - Sydney - Ryde,postcode concordance
+NSW,sa3:NSW - Shoalhaven,sa4:NSW - Southern Highlands and Shoalhaven,postcode concordance
+NSW,sa3:NSW - Snowy Mountains,sa4:NSW - Capital Region,postcode concordance
+NSW,sa3:NSW - South Coast,sa4:NSW - Capital Region,postcode concordance
+NSW,sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,postcode concordance
+NSW,sa3:NSW - St Marys,sa4:NSW - Sydney - Outer West and Blue Mountains,postcode concordance
+NSW,sa3:NSW - Strathfield - Burwood - Ashfield,sa4:NSW - Sydney - Inner West,postcode concordance
+NSW,sa3:NSW - Sutherland - Menai - Heathcote,sa4:NSW - Sydney - Sutherland,postcode concordance
+NSW,sa3:NSW - Sydney Inner City,sa4:NSW - Sydney - City and Inner South,postcode concordance
+NSW,sa3:NSW - Tamworth - Gunnedah,sa4:NSW - New England and North West,postcode concordance
+NSW,sa3:NSW - Taree - Gloucester,sa4:NSW - Mid North Coast,postcode concordance
+NSW,sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,postcode concordance
+NSW,sa3:NSW - Tweed Valley,sa4:NSW - Richmond - Tweed,postcode concordance
+NSW,sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,postcode concordance
+NSW,sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,postcode concordance
+NSW,sa3:NSW - Wagga Wagga,sa4:NSW - Riverina,postcode concordance
+NSW,sa3:NSW - Warringah,sa4:NSW - Sydney - Northern Beaches,postcode concordance
+NSW,sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,postcode concordance
+NSW,sa3:NSW - Wollongong,sa4:NSW - Illawarra,postcode concordance
+NSW,sa3:NSW - Wyong,sa4:NSW - Central Coast,postcode concordance
+NSW,sa3:NSW - Young - Yass,sa4:NSW - Capital Region,"ASGS 2021 name, placed by hand"
+NT,sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,postcode concordance
+NT,sa3:NT - Barkly,sa4:NT - Northern Territory - Outback,postcode concordance
+NT,sa3:NT - Daly - Tiwi - West Arnhem,sa4:NT - Northern Territory - Outback,postcode concordance
+NT,sa3:NT - Darwin City,sa4:NT - Darwin,postcode concordance
+NT,sa3:NT - Darwin Suburbs,sa4:NT - Darwin,postcode concordance
+NT,sa3:NT - East Arnhem,sa4:NT - Northern Territory - Outback,postcode concordance
+NT,sa3:NT - Katherine,sa4:NT - Northern Territory - Outback,postcode concordance
+NT,sa3:NT - Litchfield,sa4:NT - Darwin,postcode concordance
+NT,sa3:NT - Palmerston,sa4:NT - Darwin,postcode concordance
+QLD,sa3:QLD - Bald Hills - Everton Park,sa4:QLD - Brisbane - North,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Beaudesert,sa4:QLD - Logan - Beaudesert,postcode concordance
+QLD,sa3:QLD - Beenleigh,sa4:QLD - Logan - Beaudesert,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Biloela,sa4:QLD - Central Queensland,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Bowen Basin - North,sa4:QLD - Mackay - Isaac - Whitsunday,postcode concordance
+QLD,sa3:QLD - Bribie - Beachmere,sa4:QLD - Moreton Bay - North,postcode concordance
+QLD,sa3:QLD - Brisbane Inner,sa4:QLD - Brisbane Inner City,postcode concordance
+QLD,sa3:QLD - Brisbane Inner - East,sa4:QLD - Brisbane Inner City,postcode concordance
+QLD,sa3:QLD - Brisbane Inner - North,sa4:QLD - Brisbane Inner City,postcode concordance
+QLD,sa3:QLD - Brisbane Inner - West,sa4:QLD - Brisbane Inner City,postcode concordance
+QLD,sa3:QLD - Broadbeach - Burleigh,sa4:QLD - Gold Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Browns Plains,sa4:QLD - Logan - Beaudesert,postcode concordance
+QLD,sa3:QLD - Buderim,sa4:QLD - Sunshine Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Bundaberg,sa4:QLD - Wide Bay,postcode concordance
+QLD,sa3:QLD - Burnett,sa4:QLD - Wide Bay,postcode concordance
+QLD,sa3:QLD - Caboolture,sa4:QLD - Moreton Bay - North,postcode concordance
+QLD,sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,postcode concordance
+QLD,sa3:QLD - Cairns - North,sa4:QLD - Cairns,postcode concordance
+QLD,sa3:QLD - Cairns - South,sa4:QLD - Cairns,postcode concordance
+QLD,sa3:QLD - Caloundra,sa4:QLD - Sunshine Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Capalaba,sa4:QLD - Brisbane - East,postcode concordance
+QLD,sa3:QLD - Carindale,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Centenary,sa4:QLD - Brisbane - West,postcode concordance
+QLD,sa3:QLD - Central Highlands (Qld),sa4:QLD - Central Queensland,postcode concordance
+QLD,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,postcode concordance
+QLD,sa3:QLD - Chermside,sa4:QLD - Brisbane - North,postcode concordance
+QLD,sa3:QLD - Cleveland - Stradbroke,sa4:QLD - Brisbane - East,postcode concordance
+QLD,sa3:QLD - Coolangatta,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,postcode concordance
+QLD,sa3:QLD - Darling Downs - East,sa4:QLD - Darling Downs - Maranoa,postcode concordance
+QLD,sa3:QLD - Far North,sa4:QLD - Queensland - Outback,postcode concordance
+QLD,sa3:QLD - Forest Lake - Oxley,sa4:QLD - Ipswich,postcode concordance
+QLD,sa3:QLD - Gladstone,sa4:QLD - Central Queensland,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Gold Coast - North,sa4:QLD - Gold Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Gold Coast Hinterland,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Granite Belt,sa4:QLD - Darling Downs - Maranoa,postcode concordance
+QLD,sa3:QLD - Gympie - Cooloola,sa4:QLD - Wide Bay,postcode concordance
+QLD,sa3:QLD - Hervey Bay,sa4:QLD - Wide Bay,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Holland Park - Yeronga,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Innisfail - Cassowary Coast,sa4:QLD - Cairns,postcode concordance
+QLD,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,postcode concordance
+QLD,sa3:QLD - Ipswich Inner,sa4:QLD - Ipswich,postcode concordance
+QLD,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,postcode concordance
+QLD,sa3:QLD - Kenmore - Brookfield - Moggill,sa4:QLD - Brisbane - West,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Loganlea - Carbrook,sa4:QLD - Logan - Beaudesert,postcode concordance
+QLD,sa3:QLD - Mackay,sa4:QLD - Mackay - Isaac - Whitsunday,postcode concordance
+QLD,sa3:QLD - Maroochy,sa4:QLD - Sunshine Coast,postcode concordance
+QLD,sa3:QLD - Maryborough,sa4:QLD - Wide Bay,postcode concordance
+QLD,sa3:QLD - Mt Gravatt,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Mudgeeraba - Tallebudgera,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Nambour,sa4:QLD - Sunshine Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Narangba - Burpengary,sa4:QLD - Moreton Bay - North,postcode concordance
+QLD,sa3:QLD - Nathan,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Nerang,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Noosa,sa4:QLD - Sunshine Coast,postcode concordance
+QLD,sa3:QLD - Noosa Hinterland,sa4:QLD - Sunshine Coast,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - North Lakes,sa4:QLD - Moreton Bay - South,postcode concordance
+QLD,sa3:QLD - Nundah,sa4:QLD - Brisbane - North,postcode concordance
+QLD,sa3:QLD - Ormeau - Oxenford,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Outback - North,sa4:QLD - Queensland - Outback,postcode concordance
+QLD,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,postcode concordance
+QLD,sa3:QLD - Port Douglas - Daintree,sa4:QLD - Cairns,postcode concordance
+QLD,sa3:QLD - Redcliffe,sa4:QLD - Moreton Bay - North,postcode concordance
+QLD,sa3:QLD - Robina,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Rockhampton,sa4:QLD - Central Queensland,postcode concordance
+QLD,sa3:QLD - Rocklea - Acacia Ridge,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Sandgate,sa4:QLD - Brisbane - North,postcode concordance
+QLD,sa3:QLD - Sherwood - Indooroopilly,sa4:QLD - Brisbane - West,postcode concordance
+QLD,sa3:QLD - Southport,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Springfield - Redbank,sa4:QLD - Ipswich,postcode concordance
+QLD,sa3:QLD - Springwood - Kingston,sa4:QLD - Logan - Beaudesert,postcode concordance
+QLD,sa3:QLD - Strathpine,sa4:QLD - Moreton Bay - South,postcode concordance
+QLD,sa3:QLD - Sunnybank,sa4:QLD - Brisbane - South,postcode concordance
+QLD,sa3:QLD - Sunshine Coast Hinterland,sa4:QLD - Sunshine Coast,postcode concordance
+QLD,sa3:QLD - Surfers Paradise,sa4:QLD - Gold Coast,postcode concordance
+QLD,sa3:QLD - Tablelands (East) - Kuranda,sa4:QLD - Cairns,postcode concordance
+QLD,sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,"ASGS 2021 name, placed by hand"
+QLD,sa3:QLD - Toowoomba,sa4:QLD - Toowoomba,postcode concordance
+QLD,sa3:QLD - Townsville,sa4:QLD - Townsville,postcode concordance
+QLD,sa3:QLD - Whitsunday,sa4:QLD - Mackay - Isaac - Whitsunday,postcode concordance
+QLD,sa3:QLD - Wynnum - Manly,sa4:QLD - Brisbane - East,postcode concordance
+SA,sa3:SA - Adelaide City,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Barossa,sa4:SA - Barossa - Yorke - Mid North,postcode concordance
+SA,sa3:SA - Burnside,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Campbelltown (SA),sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Charles Sturt,sa4:SA - Adelaide - West,postcode concordance
+SA,sa3:SA - Eyre Peninsula and South West,sa4:SA - South Australia - Outback,postcode concordance
+SA,sa3:SA - Fleurieu - Kangaroo Island,sa4:SA - South Australia - South East,postcode concordance
+SA,sa3:SA - Gawler - Two Wells,sa4:SA - Adelaide - North,"ASGS 2021 name, placed by hand"
+SA,sa3:SA - Holdfast Bay,sa4:SA - Adelaide - South,"ASGS 2021 name, placed by hand"
+SA,sa3:SA - Limestone Coast,sa4:SA - South Australia - South East,postcode concordance
+SA,sa3:SA - Lower North,sa4:SA - Barossa - Yorke - Mid North,postcode concordance
+SA,sa3:SA - Marion,sa4:SA - Adelaide - South,postcode concordance
+SA,sa3:SA - Mid North,sa4:SA - Barossa - Yorke - Mid North,postcode concordance
+SA,sa3:SA - Mitcham,sa4:SA - Adelaide - South,postcode concordance
+SA,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,postcode concordance
+SA,sa3:SA - Norwood - Payneham - St Peters,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Onkaparinga,sa4:SA - Adelaide - South,postcode concordance
+SA,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,postcode concordance
+SA,sa3:SA - Playford,sa4:SA - Adelaide - North,postcode concordance
+SA,sa3:SA - Port Adelaide - East,sa4:SA - Adelaide - North,postcode concordance
+SA,sa3:SA - Port Adelaide - West,sa4:SA - Adelaide - West,postcode concordance
+SA,sa3:SA - Prospect - Walkerville,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - Salisbury,sa4:SA - Adelaide - North,postcode concordance
+SA,sa3:SA - Tea Tree Gully,sa4:SA - Adelaide - North,postcode concordance
+SA,sa3:SA - Unley,sa4:SA - Adelaide - Central and Hills,postcode concordance
+SA,sa3:SA - West Torrens,sa4:SA - Adelaide - West,postcode concordance
+SA,sa3:SA - Yorke Peninsula,sa4:SA - Barossa - Yorke - Mid North,postcode concordance
+TAS,sa3:TAS - Brighton,sa4:TAS - Hobart,"ASGS 2021 name, placed by hand"
+TAS,sa3:TAS - Burnie - Ulverstone,sa4:TAS - West and North West,postcode concordance
+TAS,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,postcode concordance
+TAS,sa3:TAS - Devonport,sa4:TAS - West and North West,postcode concordance
+TAS,sa3:TAS - Hobart - North East,sa4:TAS - Hobart,postcode concordance
+TAS,sa3:TAS - Hobart - North West,sa4:TAS - Hobart,postcode concordance
+TAS,sa3:TAS - Hobart - South and West,sa4:TAS - Hobart,postcode concordance
+TAS,sa3:TAS - Hobart Inner,sa4:TAS - Hobart,postcode concordance
+TAS,sa3:TAS - Huon - Bruny Island,sa4:TAS - South East,postcode concordance
+TAS,sa3:TAS - Launceston,sa4:TAS - Launceston and North East,postcode concordance
+TAS,sa3:TAS - Meander Valley - West Tamar,sa4:TAS - Launceston and North East,postcode concordance
+TAS,sa3:TAS - North East,sa4:TAS - Launceston and North East,postcode concordance
+TAS,sa3:TAS - Sorell - Dodges Ferry,sa4:TAS - Hobart,postcode concordance
+TAS,sa3:TAS - South East Coast,sa4:TAS - South East,postcode concordance
+TAS,sa3:TAS - West Coast,sa4:TAS - West and North West,postcode concordance
+VIC,sa3:VIC - Ballarat,sa4:VIC - Ballarat,postcode concordance
+VIC,sa3:VIC - Banyule,sa4:VIC - Melbourne - North East,postcode concordance
+VIC,sa3:VIC - Barwon - West,sa4:VIC - Geelong,postcode concordance
+VIC,sa3:VIC - Baw Baw,sa4:VIC - Latrobe - Gippsland,postcode concordance
+VIC,sa3:VIC - Bayside,sa4:VIC - Melbourne - Inner South,postcode concordance
+VIC,sa3:VIC - Bendigo,sa4:VIC - Bendigo,postcode concordance
+VIC,sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,postcode concordance
+VIC,sa3:VIC - Brimbank,sa4:VIC - Melbourne - West,postcode concordance
+VIC,sa3:VIC - Brunswick - Coburg,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Campaspe,sa4:VIC - Shepparton,postcode concordance
+VIC,sa3:VIC - Cardinia,sa4:VIC - Melbourne - South East,postcode concordance
+VIC,sa3:VIC - Casey - North,sa4:VIC - Melbourne - South East,postcode concordance
+VIC,sa3:VIC - Casey - South,sa4:VIC - Melbourne - South East,postcode concordance
+VIC,sa3:VIC - Colac - Corangamite,sa4:VIC - Warrnambool and South West,"ASGS 2021 name, placed by hand"
+VIC,sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,postcode concordance
+VIC,sa3:VIC - Dandenong,sa4:VIC - Melbourne - South East,postcode concordance
+VIC,sa3:VIC - Darebin - North,sa4:VIC - Melbourne - North East,postcode concordance
+VIC,sa3:VIC - Darebin - South,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Essendon,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Frankston,sa4:VIC - Mornington Peninsula,postcode concordance
+VIC,sa3:VIC - Geelong,sa4:VIC - Geelong,postcode concordance
+VIC,sa3:VIC - Gippsland - East,sa4:VIC - Latrobe - Gippsland,postcode concordance
+VIC,sa3:VIC - Gippsland - South West,sa4:VIC - Latrobe - Gippsland,postcode concordance
+VIC,sa3:VIC - Glen Eira,sa4:VIC - Melbourne - Inner South,postcode concordance
+VIC,sa3:VIC - Glenelg - Southern Grampians,sa4:VIC - Warrnambool and South West,postcode concordance
+VIC,sa3:VIC - Grampians,sa4:VIC - North West,postcode concordance
+VIC,sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,postcode concordance
+VIC,sa3:VIC - Hobsons Bay,sa4:VIC - Melbourne - West,postcode concordance
+VIC,sa3:VIC - Keilor,sa4:VIC - Melbourne - North West,postcode concordance
+VIC,sa3:VIC - Kingston,sa4:VIC - Melbourne - Inner South,postcode concordance
+VIC,sa3:VIC - Knox,sa4:VIC - Melbourne - Outer East,postcode concordance
+VIC,sa3:VIC - Latrobe Valley,sa4:VIC - Latrobe - Gippsland,postcode concordance
+VIC,sa3:VIC - Loddon - Elmore,sa4:VIC - Bendigo,postcode concordance
+VIC,sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,postcode concordance
+VIC,sa3:VIC - Manningham - East,sa4:VIC - Melbourne - Outer East,postcode concordance
+VIC,sa3:VIC - Manningham - West,sa4:VIC - Melbourne - Inner East,postcode concordance
+VIC,sa3:VIC - Maribyrnong,sa4:VIC - Melbourne - West,postcode concordance
+VIC,sa3:VIC - Maroondah,sa4:VIC - Melbourne - Outer East,postcode concordance
+VIC,sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,postcode concordance
+VIC,sa3:VIC - Melbourne City,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Melton - Bacchus Marsh,sa4:VIC - Melbourne - West,postcode concordance
+VIC,sa3:VIC - Mildura,sa4:VIC - North West,postcode concordance
+VIC,sa3:VIC - Moira,sa4:VIC - Shepparton,postcode concordance
+VIC,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,postcode concordance
+VIC,sa3:VIC - Moreland - North,sa4:VIC - Melbourne - North West,postcode concordance
+VIC,sa3:VIC - Mornington Peninsula,sa4:VIC - Mornington Peninsula,postcode concordance
+VIC,sa3:VIC - Murray River - Swan Hill,sa4:VIC - North West,postcode concordance
+VIC,sa3:VIC - Nillumbik - Kinglake,sa4:VIC - Melbourne - North East,postcode concordance
+VIC,sa3:VIC - Port Phillip,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Shepparton,sa4:VIC - Shepparton,postcode concordance
+VIC,sa3:VIC - Stonnington - East,sa4:VIC - Melbourne - Inner South,postcode concordance
+VIC,sa3:VIC - Stonnington - West,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Sunbury,sa4:VIC - Melbourne - North West,postcode concordance
+VIC,sa3:VIC - Surf Coast - Bellarine Peninsula,sa4:VIC - Geelong,postcode concordance
+VIC,sa3:VIC - Tullamarine - Broadmeadows,sa4:VIC - Melbourne - North West,postcode concordance
+VIC,sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,postcode concordance
+VIC,sa3:VIC - Wangaratta - Benalla,sa4:VIC - Hume,postcode concordance
+VIC,sa3:VIC - Warrnambool,sa4:VIC - Warrnambool and South West,"ASGS 2021 name, placed by hand"
+VIC,sa3:VIC - Wellington,sa4:VIC - Latrobe - Gippsland,postcode concordance
+VIC,sa3:VIC - Whitehorse - East,sa4:VIC - Melbourne - Outer East,postcode concordance
+VIC,sa3:VIC - Whitehorse - West,sa4:VIC - Melbourne - Inner East,postcode concordance
+VIC,sa3:VIC - Whittlesea - Wallan,sa4:VIC - Melbourne - North East,postcode concordance
+VIC,sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,postcode concordance
+VIC,sa3:VIC - Wyndham,sa4:VIC - Melbourne - West,postcode concordance
+VIC,sa3:VIC - Yarra,sa4:VIC - Melbourne - Inner,postcode concordance
+VIC,sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,postcode concordance
+WA,sa3:WA - Albany,sa4:WA - Western Australia - Wheat Belt,postcode concordance
+WA,sa3:WA - Armadale,sa4:WA - Perth - South East,"ASGS 2021 name, placed by hand"
+WA,sa3:WA - Augusta - Margaret River - Busselton,sa4:WA - Bunbury,postcode concordance
+WA,sa3:WA - Bayswater - Bassendean,sa4:WA - Perth - North East,postcode concordance
+WA,sa3:WA - Belmont - Victoria Park,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - Bunbury,sa4:WA - Bunbury,postcode concordance
+WA,sa3:WA - Canning,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - Cockburn,sa4:WA - Perth - South West,postcode concordance
+WA,sa3:WA - Cottesloe - Claremont,sa4:WA - Perth - Inner,postcode concordance
+WA,sa3:WA - East Pilbara,sa4:WA - Western Australia - Outback (North),"ASGS 2021 name, placed by hand"
+WA,sa3:WA - Esperance,sa4:WA - Western Australia - Outback (South),postcode concordance
+WA,sa3:WA - Fremantle,sa4:WA - Perth - South West,postcode concordance
+WA,sa3:WA - Gascoyne,sa4:WA - Western Australia - Outback (South),postcode concordance
+WA,sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),postcode concordance
+WA,sa3:WA - Gosnells,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - Joondalup,sa4:WA - Perth - North West,postcode concordance
+WA,sa3:WA - Kalamunda,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - Kimberley,sa4:WA - Western Australia - Outback (North),postcode concordance
+WA,sa3:WA - Kwinana,sa4:WA - Perth - South West,postcode concordance
+WA,sa3:WA - Mandurah,sa4:WA - Mandurah,postcode concordance
+WA,sa3:WA - Manjimup,sa4:WA - Bunbury,postcode concordance
+WA,sa3:WA - Melville,sa4:WA - Perth - South West,postcode concordance
+WA,sa3:WA - Mid West,sa4:WA - Western Australia - Outback (South),postcode concordance
+WA,sa3:WA - Mundaring,sa4:WA - Perth - North East,postcode concordance
+WA,sa3:WA - Perth City,sa4:WA - Perth - Inner,postcode concordance
+WA,sa3:WA - Rockingham,sa4:WA - Perth - South West,postcode concordance
+WA,sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - South Perth,sa4:WA - Perth - South East,postcode concordance
+WA,sa3:WA - Stirling,sa4:WA - Perth - North West,postcode concordance
+WA,sa3:WA - Swan,sa4:WA - Perth - North East,postcode concordance
+WA,sa3:WA - Wanneroo,sa4:WA - Perth - North West,postcode concordance
+WA,sa3:WA - West Pilbara,sa4:WA - Western Australia - Outback (North),"ASGS 2021 name, placed by hand"
+WA,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,postcode concordance
+WA,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,postcode concordance

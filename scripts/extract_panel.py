@@ -221,8 +221,12 @@ def read_body(ws, header):
     return rows, notes, duplicates
 
 
-def read_edition(path: Path, workdir: Path):
-    """Open one edition and read every SA4-level table the panel needs."""
+def read_edition(path: Path, workdir: Path, level: str = "SA4"):
+    """Open one edition and read every table the panel needs at one level.
+
+    `level` is "SA4" for the main panel or "SA3" for extract_panel_sa3.py. The
+    SA3 read skips Figure P.1's chart, which only the SA4 report checks.
+    """
     import openpyxl
 
     converted = to_transitional(path, workdir / (path.stem + ".xlsx"))
@@ -235,16 +239,16 @@ def read_edition(path: Path, workdir: Path):
         found = classify(caption, header)
         if not found:
             continue
-        role, level, scheme = found
-        entry = {"sheet": ws.title, "role": role, "level": level, "scheme": scheme,
+        role, table_level, scheme = found
+        entry = {"sheet": ws.title, "role": role, "level": table_level, "scheme": scheme,
                  "caption": caption, "columns": header[1:]}
         table_map.append(entry)
-        if role == "stock_categories" and level == "SA4":
+        if role == "stock_categories" and table_level == level:
             as_at = as_at_date(caption)
-        if level != "SA4":
+        if table_level != level:
             continue
         if role in tables:
-            raise ValueError(f"{path.name}: two SA4 tables classified as {role}")
+            raise ValueError(f"{path.name}: two {level} tables classified as {role}")
         rows, notes, duplicates = read_body(ws, header)
         tables[role] = {**entry, "rows": rows, "notes": notes, "duplicates": duplicates}
 
@@ -262,7 +266,7 @@ def read_edition(path: Path, workdir: Path):
         "tables": tables,
         "figure_prose": figure_prose,
         "intro": intro,
-        "chart_trend": extract_national_trend(path, ()),
+        "chart_trend": extract_national_trend(path, ()) if level == "SA4" else None,
     }
 
 
@@ -342,12 +346,13 @@ def chart_series(chart_trend):
 # From tables to panel records
 # --------------------------------------------------------------------------
 
-def geography(label: str):
+def geography(label: str, level: str = "SA4"):
     """(id, level, state) for a row label, matching sda.json's ids.
 
-    '<STATE> - Other' rows appear only in the participant tables and hold
+    '<STATE> - Other' rows appear only in the SA4 participant tables and hold
     participants the NDIA could not place in an SA4; 'Missing' holds those
-    it could not place in a state. Neither is a region.
+    it could not place in a state. Neither is a region. SA3 tables carry an
+    '- Other' row in every table, and it is zero in the stock tables.
     """
     if label == "Total":
         return "national", "National", None
@@ -361,7 +366,7 @@ def geography(label: str):
             raise ValueError(f"unrecognised state in {label!r}")
         if name == "Other":
             return f"other:{state}", "Other", state
-        return f"sa4:{label}", "SA4", state
+        return f"{level.lower()}:{label}", level, state
     raise ValueError(f"unrecognised geography {label!r}")
 
 
@@ -395,6 +400,8 @@ BUILD_TYPE_COLUMNS = {
     "legacy": "dwellings_legacy",
     "new build": "dwellings_new_build",
     "new build (refurbished)": "dwellings_new_build_refurbished",
+    # The SA3 table heads the same column "New Build (Refurbishment)".
+    "new build (refurbishment)": "dwellings_new_build_refurbished",
     "total": None,
 }
 
@@ -444,15 +451,16 @@ def crosstab(values, flags):
 class Panel:
     """Records for one edition, keyed (geography, category, measure)."""
 
-    def __init__(self):
+    def __init__(self, level="SA4"):
         self.records = {}
         self.geos = {}
+        self.level = level
 
     def put(self, label_or_geo, category, measure, value, flag, source):
         if isinstance(label_or_geo, tuple):
             geo = label_or_geo
         else:
-            geo = geography(label_or_geo)
+            geo = geography(label_or_geo, self.level)
         self.geos[geo[0]] = geo
         self.records[(geo[0], category, measure)] = (value, flag or "", source)
 
@@ -464,7 +472,7 @@ class Panel:
         return (geo_id, category, measure) in self.records
 
 
-def build_panel(edition):
+def build_panel(edition, level="SA4"):
     """Turn one edition's tables into panel records.
 
     Published figures keep the table they came from in `source`. Derived ones
@@ -472,9 +480,13 @@ def build_panel(edition):
     places are P.7's published new-build places plus existing/legacy
     dwellings x residents from P.12, and places not in SDA use is enrolled
     places less participants with SDA in use.
+
+    At SA3 neither P.7 nor the cross-tabs are published, so enrolled places
+    (by category or in total) and places not in SDA use cannot be derived;
+    places from dwellings by maximum residents is the only places measure.
     """
     tables = edition["tables"]
-    panel = Panel()
+    panel = Panel(level)
 
     def sheet(role):
         return tables[role]["sheet"].replace("Table ", "")
@@ -566,7 +578,7 @@ def build_panel(edition):
         p7 = tables.get("newbuild_places")
         corrections = []
         for label in tables["existing_legacy_detail"]["rows"]:
-            geo = geography(label)
+            geo = geography(label, level)
             newbuild = detail.get(("newbuild_detail", label), {})
             existing = detail[("existing_legacy_detail", label)]
             total, complete, corrected = 0.0, True, None
