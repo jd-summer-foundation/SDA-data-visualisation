@@ -2872,6 +2872,133 @@
    }
   }
  },
+ "border": {
+  "pairs": 431,
+  "clusters": 187,
+  "cross": {
+   "combined:full": {
+    "pairs": 409,
+    "clusters": 186,
+    "factor": {
+     "b": 36.3521,
+     "se": 31.7253
+    },
+    "cost": {
+     "b": -21.1129,
+     "se": 9.4371
+    },
+    "p_flip": 0.2669,
+    "wide_pairs": 139,
+    "decided": 139,
+    "higher_side_more": 70
+   },
+   "combined:early": {
+    "pairs": 304,
+    "clusters": 152,
+    "factor": {
+     "b": 24.8455,
+     "se": 41.4926
+    },
+    "cost": {
+     "b": -27.7481,
+     "se": 13.5793
+    },
+    "p_flip": 0.5577,
+    "wide_pairs": 95,
+    "decided": 95,
+    "higher_side_more": 45
+   },
+   "combined:late": {
+    "pairs": 401,
+    "clusters": 186,
+    "factor": {
+     "b": 38.3939,
+     "se": 34.199
+    },
+    "cost": {
+     "b": -21.1741,
+     "se": 10.4008
+    },
+    "p_flip": 0.2785,
+    "wide_pairs": 136,
+    "decided": 136,
+    "higher_side_more": 73
+   },
+   "new_build:full": {
+    "pairs": 409,
+    "clusters": 186,
+    "factor": {
+     "b": -42.2976,
+     "se": 18.2303
+    },
+    "cost": {
+     "b": -14.015,
+     "se": 9.0392
+    },
+    "p_flip": 0.0364,
+    "wide_pairs": 221,
+    "decided": 219,
+    "higher_side_more": 93
+   },
+   "new_build:early": {
+    "pairs": 304,
+    "clusters": 152,
+    "factor": {
+     "b": -7.8872,
+     "se": 25.7563
+    },
+    "cost": {
+     "b": -23.9586,
+     "se": 13.105
+    },
+    "p_flip": 0.76,
+    "wide_pairs": 159,
+    "decided": 159,
+    "higher_side_more": 70
+   },
+   "new_build:late": {
+    "pairs": 401,
+    "clusters": 186,
+    "factor": {
+     "b": -53.3749,
+     "se": 19.4444
+    },
+    "cost": {
+     "b": -12.5759,
+     "se": 9.8965
+    },
+    "p_flip": 0.015,
+    "wide_pairs": 217,
+    "decided": 215,
+    "higher_side_more": 82
+   }
+  },
+  "did": {
+   "pairs": 293,
+   "clusters": 151,
+   "b": -38.3002,
+   "se": 28.0468,
+   "p_flip": 0.1934,
+   "gap_change_median": 0.0409,
+   "gap_change_max": 0.3977,
+   "gap_change_ge_0_05": 116
+  },
+  "gap_correlation": 0.6535,
+  "windows": {
+   "full": [
+    "2023-06-30",
+    "2026-06-30"
+   ],
+   "early": [
+    "2023-06-30",
+    "2024-06-30"
+   ],
+   "late": [
+    "2024-06-30",
+    "2026-06-30"
+   ]
+  }
+ },
  "totals": {
   "new_build": 6511.0,
   "hps": 4509.0,

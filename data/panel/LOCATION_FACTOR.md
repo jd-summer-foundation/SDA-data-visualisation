@@ -19,7 +19,7 @@ The SDA amount is a base amount times a location factor set per SA4 and building
 - **Robust (enrolled).** Within SA4s, the SDA-minus-approvals share has a mean rank correlation with relative cost of -0.15 (permutation p = 0.202, 30 SA4s): no detectable lean. SDA alone -0.17, approvals alone +0.06. The fixed-effects regression puts the cost coefficient at -59.36 (± 17.51) share points per log point, net of approvals and need.
 - **Against house approvals only**, the fairer comparator for SDA's houses and villas, the new-build lean is -0.16 (p = 0.041).
 - **Placebos** (share minus population share, against relative cost). New build -0.13 (p = 0.096); existing stock, which predates NDIS pricing, -0.13 (p = 0.116); legacy stock +0.00 (p = 0.980, only 13 SA4s).
-- **Not tested: whether providers respond to the factor itself.** That needs the border test, which needs the factors in force in 2021-22 to 2025-26. Nothing here can say providers chase the factor, only whether SDA sits on cheaper land than other building.
+- **Across SA4 borders** (409 pairs), the factor gap on the SDA-per-approval gap: +36.35 (± 31.73) per log point with the pre-2023 factors (p = 0.267), -42.30 (± 18.23) with the post-2023 ones (p = 0.036); before and after the July 2023 re-set, -38.30 (± 28.05) (p = 0.193).
 
 ## What the evidence supports
 
@@ -28,8 +28,9 @@ The SDA amount is a base amount times a location factor set per SA4 and building
 3. **It is only moderately robust.** The rank result stays below p = 0.05 in 3 of 6 variants; it weakens in: Without Victoria (-0.12, p 0.153); Without the 5 SA4s building most (-0.15, p 0.061); Without growth corridors (-0.15, p 0.069). The regression coefficient is negative in 7 of 7 specifications and beyond two standard errors in 3; the multinomial's is negative in 7 and beyond two standard errors in 7 (it weights SA4s by how much they built). Every lag from 0 to 8 quarters gives the same sign.
 4. **The placebo does not clear it.** Measured against population, new build leans to cheap SA3s by -0.13 (p = 0.096); existing stock, built before NDIS pricing, by -0.13 (p = 0.116). Neither clears p = 0.05 on this measure, but they are the same size: there is no sign that the new-build lean is new. Accessible housing for this cohort may always have sat on cheaper land within SA4s. Legacy stock (13 SA4s, +0.00) is too thin to say anything.
 5. **No dose-response.** If margin drove the lean, it would steepen where cost spreads wider within the SA4. The interaction is +11.14 (± 18.00) per SD of spread, the wrong sign and within two standard errors of zero.
+6. **Across borders, SDA leans to the *lower*-factor side, not the higher.** Across 409 SA4-border pairs, with the cost gap controlled, the factor-gap coefficient over the whole window is +36.35 (± 31.73) (p 0.267) with the pre-2023 factors and -42.30 (± 18.23) (p 0.036) with the post-2023 ones; 0 of 6 factor-by-window combinations are positive at p < 0.05 and 2 negative. The before-and-after comparison, which holds land fixed, gives -38.30 (± 28.05) (p 0.193). A higher factor usually marks dearer land, and the only cost control is a 2021 median mortgage, so a negative coefficient most likely means the factor gap is picking up land cost the control misses: more evidence that SDA goes where land is cheap, not that it chases the factor.
 
-**In sum:** "New SDA leans toward cheap SA3s within SA4s more than general building does" is supported by the rank test and the regressions, but partly because general building leans toward SA3s the Census measure reads as dear, the pre-NDIS placebo leans the same way, and there is no dose-response, so the lean cannot be attributed to the location factor's margin. "Providers respond to the location factor" is not tested and needs the border test on the factors in force at the time.
+**In sum:** "New SDA leans toward cheap SA3s within SA4s more than general building does" is supported by the rank test and the regressions, but partly because general building leans toward SA3s the Census measure reads as dear, the pre-NDIS placebo leans the same way, and there is no dose-response, so the lean cannot be attributed to the location factor's margin. "Providers respond to the location factor" is not supported by the border test either: where a border separates two prices, building does not follow the higher one, and with the post-2023 factors it leans to the lower.
 
 ## 1. Within-SA4 rank test
 
@@ -65,7 +66,20 @@ A coefficient of -25.6 means an SA3 10% dearer than its SA4's mean takes 2.4 sha
 
 ## 3. Across SA4 borders
 
-**Not run.** It asks whether more SDA per approval is built on the higher-factor side of an SA4 border, which isolates the factor from land cost only if the factors are those in force when building was committed, about 2021-22 to 2025-26. Only the 2026-27 edition is in hand, and it implements the 2022-23 SDA Pricing Review, so it may differ. The pair list with factors on each side is ready (`location_factor_pairs.csv`); the test runs once the past editions are added to `data/pricing/`.
+Adjacent SA3s either side of an SA4 border (431 pairs sharing at least 0.5 km of border, with cost data, across 187 SA4 borders). For each pair: the side's share of the pair's new SDA minus its share of the pair's approvals (percentage points), against the log gap in the location factor and the log gap in median mortgage. The factor is each SA4's factors weighted by a building-type mix common to both sides (the two SA4s' new-build growth), so the gap is price, not mix. Standard errors are clustered by SA4 border; the permutation flips the factor gap's sign border by border, after partialling out the cost gap. The pre-2023 factors applied to all stock; since 1 July 2023 new builds have their own. Sites committed before mid-2023 faced the first set.
+
+| Factors | New SDA over | Pairs | Factor gap (per log point) | Permutation p | Cost gap | Pairs with a factor gap ≥ 5%: higher side builds more per approval |
+| --- | --- | --- | --- | --- | --- | --- |
+| Combined table, to June 2023 | Jun 2023–Jun 2026 | 409 | +36.35 (± 31.73) | 0.267 | -21.11 (± 9.44) | 70 of 139 |
+| Combined table, to June 2023 | Jun 2023–Jun 2024 | 304 | +24.85 (± 41.49) | 0.558 | -27.75 (± 13.58) | 45 of 95 |
+| Combined table, to June 2023 | Jun 2024–Jun 2026 | 401 | +38.39 (± 34.20) | 0.279 | -21.17 (± 10.40) | 73 of 136 |
+| New-build table, from July 2023 | Jun 2023–Jun 2026 | 409 | -42.30 (± 18.23) | 0.036 | -14.01 (± 9.04) | 93 of 219 |
+| New-build table, from July 2023 | Jun 2023–Jun 2024 | 304 | -7.89 (± 25.76) | 0.760 | -23.96 (± 13.10) | 70 of 159 |
+| New-build table, from July 2023 | Jun 2024–Jun 2026 | 401 | -53.37 (± 19.44) | 0.015 | -12.58 (± 9.90) | 82 of 215 |
+
+**Before and after the re-set.** The two sets of factor gaps are related (rank correlation +0.65 across pairs) but not the same: across the 293 pairs with new SDA in both windows, the July 2023 re-set moved the factor gap by a median 0.041 log points (at most 0.40; 116 pairs by 5% or more). The change in a pair's SDA gap from Jun 2023–Jun 2024 to Jun 2024–Jun 2026 on the change in its factor gap: -38.30 (± 28.05) (permutation p 0.193, 151 SA4 borders). Land either side is held fixed in this comparison.
+
+**What it can support.** Whether, where an SA4 border separates two prices, building follows the price rather than the land. **What it cannot.** A two-year development lag means much of what was enrolled over Jun 2024–Jun 2026 was committed before the July 2023 factors were known, so the after window is only partly after. Pairs overlap (an SA3 sits in several), which the clustering allows for only in part.
 
 ## 4. Placebos: stock that predates NDIS pricing
 
@@ -125,4 +139,4 @@ Victoria holds 51% of Robust growth, 29% of High Physical Support and 32% of new
 - **Providers weigh more than margin:** proximity to participants, services, transport and hospitals. Need share controls for the first only.
 - **Ecological.** Every figure compares SA3 totals. It says where SDA was built relative to other building, not why any provider chose any site.
 - **The outcome is a net change in published totals.** HPS and Robust enrolled dwellings include existing dwellings newly enrolled, and SA3 has no building-type split.
-- **No claim about the factor itself.** A lean toward cheap SA3s is consistent with the location-factor incentive but also with any reason to build on cheap land. "Providers respond to the location factor" needs the border test.
+- **The factor and land cost move together.** A higher factor usually marks dearer land, so across a border the factor gap is not independent of land cost, and the only cost control is the 2021 Census median. The before-and-after comparison avoids this but has only two years of after, much of it committed before the new factors were known; it is worth re-running as quarters are added.

@@ -1,9 +1,546 @@
 {
  "pricing": {
   "editions": [
+   "2021-22",
+   "2022-23",
+   "2023-24",
+   "2024-25",
+   "2025-26",
    "2026-27"
   ],
   "latest": "2026-27",
+  "history": {
+   "versions": [
+    {
+     "edition": "2021-22",
+     "version": "1.0",
+     "valid_from": "2021-07-01",
+     "released": "2021-07-01"
+    },
+    {
+     "edition": "2021-22",
+     "version": "2.0",
+     "valid_from": "2021-09-20",
+     "released": "2021-10-14"
+    },
+    {
+     "edition": "2021-22",
+     "version": "3.0",
+     "valid_from": "2022-03-20",
+     "released": "2022-03-30"
+    },
+    {
+     "edition": "2022-23",
+     "version": "1.0",
+     "valid_from": "2022-07-01",
+     "released": "2022-06-30"
+    },
+    {
+     "edition": "2022-23",
+     "version": "1.1",
+     "valid_from": "2023-03-20",
+     "released": "2023-03-05"
+    },
+    {
+     "edition": "2023-24",
+     "version": "1.0",
+     "valid_from": "2023-07-01",
+     "released": "2023-06-16"
+    },
+    {
+     "edition": "2023-24",
+     "version": "1.4",
+     "valid_from": "2023-07-01",
+     "released": "2024-01-25"
+    },
+    {
+     "edition": "2023-24",
+     "version": "3.0",
+     "valid_from": "2024-03-20",
+     "released": "2024-04-16"
+    },
+    {
+     "edition": "2024-25",
+     "version": "1.0",
+     "valid_from": "2024-07-01",
+     "released": "2024-06-28"
+    },
+    {
+     "edition": "2024-25",
+     "version": "3.0",
+     "valid_from": "2025-03-20",
+     "released": "2025-04-15"
+    },
+    {
+     "edition": "2025-26",
+     "version": "2.0",
+     "valid_from": "2025-09-20",
+     "released": "2025-10-14"
+    },
+    {
+     "edition": "2025-26",
+     "version": "3.0",
+     "valid_from": "2026-03-20",
+     "released": "2026-05-19"
+    },
+    {
+     "edition": "2026-27",
+     "version": "1.0",
+     "valid_from": "2026-07-01",
+     "released": "2026-07-30"
+    }
+   ],
+   "steps": [
+    {
+     "from": [
+      "2021-22",
+      "1.0"
+     ],
+     "to": [
+      "2021-22",
+      "2.0"
+     ],
+     "valid_from": "2021-09-20",
+     "released": "2021-10-14",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2021-22",
+      "2.0"
+     ],
+     "to": [
+      "2021-22",
+      "3.0"
+     ],
+     "valid_from": "2022-03-20",
+     "released": "2022-03-30",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2021-22",
+      "3.0"
+     ],
+     "to": [
+      "2022-23",
+      "1.0"
+     ],
+     "valid_from": "2022-07-01",
+     "released": "2022-06-30",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2022-23",
+      "1.0"
+     ],
+     "to": [
+      "2022-23",
+      "1.1"
+     ],
+     "valid_from": "2023-03-20",
+     "released": "2023-03-05",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2022-23",
+      "1.1"
+     ],
+     "to": [
+      "2023-24",
+      "1.0"
+     ],
+     "valid_from": "2023-07-01",
+     "released": "2023-06-16",
+     "new": {
+      "cells": 968,
+      "changed": 899,
+      "sa4s": 88,
+      "max_abs": 0.66
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 22,
+      "sa4s": 2,
+      "max_abs": 0.17
+     }
+    },
+    {
+     "from": [
+      "2023-24",
+      "1.0"
+     ],
+     "to": [
+      "2023-24",
+      "1.4"
+     ],
+     "valid_from": "2023-07-01",
+     "released": "2024-01-25",
+     "new": {
+      "cells": 968,
+      "changed": 254,
+      "sa4s": 76,
+      "max_abs": 0.03
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2023-24",
+      "1.4"
+     ],
+     "to": [
+      "2023-24",
+      "3.0"
+     ],
+     "valid_from": "2024-03-20",
+     "released": "2024-04-16",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2023-24",
+      "3.0"
+     ],
+     "to": [
+      "2024-25",
+      "1.0"
+     ],
+     "valid_from": "2024-07-01",
+     "released": "2024-06-28",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2024-25",
+      "1.0"
+     ],
+     "to": [
+      "2024-25",
+      "3.0"
+     ],
+     "valid_from": "2025-03-20",
+     "released": "2025-04-15",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2024-25",
+      "3.0"
+     ],
+     "to": [
+      "2025-26",
+      "2.0"
+     ],
+     "valid_from": "2025-09-20",
+     "released": "2025-10-14",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2025-26",
+      "2.0"
+     ],
+     "to": [
+      "2025-26",
+      "3.0"
+     ],
+     "valid_from": "2026-03-20",
+     "released": "2026-05-19",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    },
+    {
+     "from": [
+      "2025-26",
+      "3.0"
+     ],
+     "to": [
+      "2026-27",
+      "1.0"
+     ],
+     "valid_from": "2026-07-01",
+     "released": "2026-07-30",
+     "new": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     },
+     "existing": {
+      "cells": 968,
+      "changed": 0,
+      "sa4s": 0,
+      "max_abs": 0.0
+     }
+    }
+   ],
+   "last_combined": [
+    "2022-23",
+    "1.1"
+   ],
+   "current": [
+    "2026-27",
+    "1.0"
+   ],
+   "new_build_changes": [
+    [
+     "2023-24",
+     "1.0"
+    ],
+    [
+     "2023-24",
+     "1.4"
+    ]
+   ],
+   "reset": [
+    {
+     "building_type": "House, 2 residents",
+     "rose": 23,
+     "fell": 62,
+     "median": -0.03,
+     "spearman": 0.8401,
+     "up_most": [
+      [
+       "sa4:QLD - Queensland - Outback",
+       0.37
+      ],
+      [
+       "sa4:WA - Western Australia - Outback (North)",
+       0.31
+      ],
+      [
+       "sa4:NT - Northern Territory - Outback",
+       0.3
+      ]
+     ],
+     "down_most": [
+      [
+       "sa4:VIC - Melbourne - South East",
+       -0.12
+      ],
+      [
+       "sa4:VIC - Shepparton",
+       -0.11
+      ],
+      [
+       "sa4:VIC - Ballarat",
+       -0.11
+      ]
+     ]
+    },
+    {
+     "building_type": "Villa/Duplex/Townhouse, 1 resident",
+     "rose": 22,
+     "fell": 59,
+     "median": -0.025,
+     "spearman": 0.8064,
+     "up_most": [
+      [
+       "sa4:QLD - Queensland - Outback",
+       0.38
+      ],
+      [
+       "sa4:WA - Western Australia - Outback (North)",
+       0.3
+      ],
+      [
+       "sa4:WA - Western Australia - Outback (South)",
+       0.27
+      ]
+     ],
+     "down_most": [
+      [
+       "sa4:NSW - Sydney - City and Inner South",
+       -0.15
+      ],
+      [
+       "sa4:VIC - Melbourne - South East",
+       -0.1
+      ],
+      [
+       "sa4:VIC - Shepparton",
+       -0.09
+      ]
+     ]
+    },
+    {
+     "building_type": "Apartment, 2 bedrooms, 1 resident",
+     "rose": 39,
+     "fell": 40,
+     "median": 0.0,
+     "spearman": 0.7229,
+     "up_most": [
+      [
+       "sa4:QLD - Queensland - Outback",
+       0.55
+      ],
+      [
+       "sa4:WA - Western Australia - Outback (North)",
+       0.45
+      ],
+      [
+       "sa4:NT - Northern Territory - Outback",
+       0.44
+      ]
+     ],
+     "down_most": [
+      [
+       "sa4:NSW - Sydney - Inner West",
+       -0.11
+      ],
+      [
+       "sa4:VIC - Shepparton",
+       -0.08
+      ],
+      [
+       "sa4:VIC - Melbourne - South East",
+       -0.08
+      ]
+     ]
+    },
+    {
+     "building_type": "House, 3 residents",
+     "rose": 23,
+     "fell": 59,
+     "median": -0.04,
+     "spearman": 0.8462,
+     "up_most": [
+      [
+       "sa4:QLD - Queensland - Outback",
+       0.41
+      ],
+      [
+       "sa4:WA - Western Australia - Outback (North)",
+       0.35
+      ],
+      [
+       "sa4:NT - Northern Territory - Outback",
+       0.31
+      ]
+     ],
+     "down_most": [
+      [
+       "sa4:NSW - Sydney - City and Inner South",
+       -0.23
+      ],
+      [
+       "sa4:VIC - Melbourne - South East",
+       -0.11
+      ],
+      [
+       "sa4:NSW - Sydney - North Sydney and Hornsby",
+       -0.1
+      ]
+     ]
+    }
+   ]
+  },
   "by_type": [
    {
     "stock": "New build",

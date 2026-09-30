@@ -18,7 +18,7 @@ private.
 | `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
 | `panel/` | Built by `scripts/extract_panel.py` (SA4) and `scripts/extract_panel_sa3.py` (SA3, placed by `asgs_2021_sa2.csv`) from every workbook in `supplements/` | June 2023 – June 2026 |
-| `pricing/` | NDIA Pricing Arrangements for SDA 2026-27 (v1.0) and Pricing Schedule for SDA 2026-27, and the location factors and base amounts `scripts/extract_pricing.py` extracts from them | effective 1 July 2026 |
+| `pricing/` | NDIA Pricing Arrangements for SDA, every version 2021-22 v1.0 to 2026-27 v1.0, the 2026-27 Pricing Schedule, and the location factors and base amounts `scripts/extract_pricing.py` extracts from them | 1 July 2021 – 2026-27 |
 | `abs/` | Reduced ABS files: building approvals by SA2, 2021 Census medians by SA3 and SA2, SA3 adjacency. Rebuilt from the git-ignored `raw/` (see `raw/MANIFEST.md`) | see below |
 
 ## Both CSVs are reduced before committing
@@ -173,9 +173,9 @@ publications. Both are Word files, read with `zipfile` and `xml.etree`.
 
 | File | Source |
 | --- | --- |
-| `Pricing-Arrangements-for-SDA-2026_27-v1_0.docx` | NDIS Pricing Arrangements for Specialist Disability Accommodation 2026-27, version 1.0, effective 1 July 2026 (ndis.gov.au) |
+| `*.docx` (14) | NDIS Pricing Arrangements for Specialist Disability Accommodation, every version from 2021-22 v1.0 to 2026-27 v1.0, under the NDIA's own filenames (ndis.gov.au; fetched by browser, since ndis.gov.au refuses scripted requests). `DOCUMENTS` in the extractor lists each with its version. |
 | `ndis-pricing-schedule-for-sda-2026-27.docx` | NDIS Pricing Schedule for SDA 2026-27 (ndis.gov.au) |
-| `location_factors.csv` | edition, version, effective date, SA4, stock type (New build / Existing / Legacy), building type, factor as published |
+| `location_factors.csv` | edition, version, valid-from and release dates (read from each title page), SA4, stock type (All / New build / Existing / Legacy), building type, factor to two decimals |
 | `base_amounts.csv` | edition, stock type, building type, design category, breakout room, sprinklers, OOA, GST treatment, annual base amount per participant |
 
 `python3 scripts/extract_pricing.py` rebuilds both CSVs. The Arrangements are
@@ -187,9 +187,26 @@ The existing-and-legacy factor table names two SA4s by their pre-2016 names,
 unmatched name fails the build. Building types are named as Supplement P's
 Table P.11 names them, so the two join on the label.
 
-Only the 2026-27 edition is here. Earlier editions (2021-22 to 2025-26) could
-not be fetched from ndis.gov.au by script; each can be added as a Word copy
-and a line in `EDITIONS`.
+Before 1 July 2023 one factor table served every stock type (stock type
+`All`); from then new builds, whenever first enrolled, have their own table
+and existing and legacy stock keep the other. Four things are corrected
+explicitly, and anything else unmatched fails the build:
+
+- `SA4_RENAMES`: the retired names above, and "Hunter Valley excluding
+  Newcastle" (2021-22, 2022-23).
+- `SA4_SPLITS`: 2021-22 and 2022-23 still publish one factor for
+  `WA - Western Australia - Outback`, the pre-2016 SA4 since split into
+  Outback (North) and (South); it applies to both.
+- `LABEL_FIXES`: in 2023-24 v3.0's new-build table the words "Hunter Valley
+  exc Newcastle" slipped from their row into the Murray row; the figures stayed
+  put, and each row equals v1.4's.
+- Some existing-stock tables drop trailing zeros (`0.9`, `1`); factors are
+  written to two decimals.
+
+Two copies of 2023-24 v1.0 were published; they differ only in page numbers,
+and the extractor checks that their tables agree. The file published as
+"v1.3 (1)" is version 1.4 by its title page. Base amounts are extracted for
+2026-27 only: earlier editions lay the base-price tables out differently.
 
 ## `abs/`
 

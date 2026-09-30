@@ -1,4 +1,4 @@
-edition,version,effective_from,stock_type,building_type,design_category,breakout_room,fire_sprinklers,ooa,gst,amount
+edition,version,valid_from,stock_type,building_type,design_category,breakout_room,fire_sprinklers,ooa,gst,amount
 2026-27,1.0,2026-07-01,New build (post-2023),"Apartment, 1 bedroom, 1 resident",Improved Liveability,No,No,No,"Not paid, or paid and credits claimed",81414
 2026-27,1.0,2026-07-01,New build (post-2023),"Apartment, 1 bedroom, 1 resident",Improved Liveability,No,No,No,"Paid, credits not claimed",87469
 2026-27,1.0,2026-07-01,New build (post-2023),"Apartment, 1 bedroom, 1 resident",Improved Liveability,No,No,Yes,"Not paid, or paid and credits claimed",94983

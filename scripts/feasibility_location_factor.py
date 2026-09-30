@@ -95,6 +95,63 @@ def change(panel, geo, category, measure, a=START, b=END):
 # 1. Pricing
 # --------------------------------------------------------------------------
 
+def versions(d):
+    """How the factors changed from each published version to the next.
+
+    Before 2023-24 one table ('All') served every stock type; from 1 July 2023
+    new builds have their own table and existing stock keeps the other. So the
+    factor a new build faced is 'All' before and 'New build' after, and an
+    existing dwelling's is 'All' before and 'Existing' after.
+    """
+    by = {}
+    for r in d["factors"]:
+        key = (r["edition"], r["version"])
+        v = by.setdefault(key, {"valid_from": r["valid_from"], "released": r["released"], "f": {}})
+        v["f"][(r["stock_type"], r["sa4"], r["building_type"])] = float(r["factor"])
+    order = sorted(by, key=lambda k: (by[k]["valid_from"], by[k]["released"]))
+
+    def facing(f, stock):
+        own = "New build" if stock == "new" else "Existing"
+        return {(s, t): v for (st, s, t), v in f.items()
+                if st in (own, "All") and t != "Legacy"}
+    steps = []
+    for a, b in zip(order, order[1:]):
+        row = {"from": list(a), "to": list(b), "valid_from": by[b]["valid_from"],
+               "released": by[b]["released"]}
+        for stock in ("new", "existing"):
+            x, y = facing(by[a]["f"], stock), facing(by[b]["f"], stock)
+            diffs = {k: y[k] - x[k] for k in x}
+            moved = {k: v for k, v in diffs.items() if abs(v) > 0.001}
+            row[stock] = {"cells": len(diffs), "changed": len(moved),
+                          "sa4s": len({k[0] for k in moved}),
+                          "max_abs": max((abs(v) for v in diffs.values()), default=0.0)}
+        steps.append(row)
+    # The July 2023 re-set, for the main types: last combined table against the
+    # first new-build table still in force.
+    last_all = max((k for k in order if any(s == "All" for s, _, _ in by[k]["f"])),
+                   key=lambda k: by[k]["valid_from"])
+    changes = [st for st in steps if st["new"]["changed"]]
+    current = order[-1]
+    reset = []
+    for t in ("House, 2 residents", "Villa/Duplex/Townhouse, 1 resident",
+              "Apartment, 2 bedrooms, 1 resident", "House, 3 residents"):
+        old = {s: v for (st, s, tt), v in by[last_all]["f"].items() if st == "All" and tt == t}
+        new = {s: v for (st, s, tt), v in by[current]["f"].items() if st == "New build" and tt == t}
+        diff = {s: new[s] - old[s] for s in old}
+        top = sorted(diff, key=lambda s: -diff[s])
+        reset.append({"building_type": t, "rose": sum(v > 0.005 for v in diff.values()),
+                      "fell": sum(v < -0.005 for v in diff.values()),
+                      "median": statistics.median(diff.values()),
+                      "spearman": spearman([old[s] for s in sorted(old)], [new[s] for s in sorted(old)]),
+                      "up_most": [(s, diff[s]) for s in top[:3]],
+                      "down_most": [(s, diff[s]) for s in top[-3:][::-1]]})
+    return {"versions": [{"edition": k[0], "version": k[1], "valid_from": by[k]["valid_from"],
+                          "released": by[k]["released"]} for k in order],
+            "steps": steps, "last_combined": list(last_all), "current": list(current),
+            "new_build_changes": [[st["to"][0], st["to"][1]] for st in changes],
+            "reset": reset}
+
+
 def pricing(d):
     editions = sorted({r["edition"] for r in d["factors"]})
     latest = editions[-1]
@@ -164,7 +221,8 @@ def pricing(d):
                 "median_factor": statistics.median(fv.values()),
                 "per_0_05_factor": round(base * residents * 0.05),
             })
-    return {"editions": editions, "latest": latest, "by_type": by_type, "within_sa4": within,
+    return {"editions": editions, "latest": latest, "history": versions(d),
+            "by_type": by_type, "within_sa4": within,
             "new_vs_existing": new_vs_existing, "legacy_equals_group_home_5": legacy_equals,
             "sa4s": len(sa4s), "base_amounts": len(amt), "examples": examples}
 
@@ -535,11 +593,14 @@ def to_markdown(a):
     w("")
     w("## In brief")
     w("")
-    w(f"1. **Only one pricing edition is in hand ({pr['latest']}), and it is the wrong one for the "
-      f"test.** Building over {month(START)}–{month(END)} was committed under the factors of "
-      "about 2021-22 to 2025-26. ndis.gov.au could not be reached from here, so those editions "
-      "are still needed. Everything below that uses a factor uses the "
-      f"{pr['latest']} factors as a stand-in.")
+    hi = pr["history"]
+    ch = hi["new_build_changes"]
+    w(f"1. **The factors were re-set once in the window that matters.** Of the "
+      f"{len(hi['versions'])} versions from {hi['versions'][0]['edition']} to "
+      f"{hi['versions'][-1]['edition']}, new-build factors changed in {len(ch)}: "
+      + " and ".join(f"{e} v{v}" for e, v in ch)
+      + ". Until 30 June 2023 one table served all stock; from 1 July 2023 new builds have their "
+      f"own, unchanged since. The {pr['latest']} factors used below are the ones in force since then.")
     w(f"2. **The factors vary a lot, and by building type.** Across the {pr['sa4s']} SA4s the "
       f"new-build factor for {ws['house_type']} runs "
       f"{f2(next(r for r in pr['by_type'] if r['stock'] == 'New build' and r['building_type'] == ws['house_type'])['min'])}"
@@ -649,13 +710,34 @@ def to_markdown(a):
     w("")
     w("### Changes between editions")
     w("")
-    w(f"**Not yet possible.** Only the {pr['latest']} edition is in hand. It says it implements the "
-      "2022-23 SDA Pricing Review, so the factors may have been re-set this year, and the factors "
-      f"that could have steered building committed before {month(END)} are those of about 2021-22 "
-      "to 2025-26. ndis.gov.au answers automated requests with a Cloudflare browser challenge, and "
-      "the Internet Archive is blocked by this environment's egress policy, so none could be "
-      "fetched. `extract_pricing.py` is built to take them: add each edition's Word copy to "
-      "`data/pricing/` and a line to `EDITIONS`.")
+    w(f"`data/pricing/` holds every version from {hi['versions'][0]['edition']} v"
+      f"{hi['versions'][0]['version']} to {hi['versions'][-1]['edition']} v"
+      f"{hi['versions'][-1]['version']} ({len(hi['versions'])} in all). Before 2023-24 one "
+      "table served every stock type; since 1 July 2023 the new-build table applies to every new "
+      "build, whenever first enrolled, and existing and legacy stock keep the other. Each version "
+      "against the one before, for the factor a new build and an existing dwelling faced:")
+    w("")
+    w("| From | To | Valid from | Released | New-build cells changed | SA4s | Largest change | Existing cells changed | SA4s | Largest change |")
+    w("| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |")
+    for st in hi["steps"]:
+        nb_, ex_ = st["new"], st["existing"]
+        w(f"| {st['from'][0]} v{st['from'][1]} | {st['to'][0]} v{st['to'][1]} | {st['valid_from']} | "
+          f"{st['released']} | {nb_['changed']} of {nb_['cells']} | {nb_['sa4s']} | {nb_['max_abs']:.2f} | "
+          f"{ex_['changed']} of {ex_['cells']} | {ex_['sa4s']} | {ex_['max_abs']:.2f} |")
+    w("")
+    w(f"**The July 2023 re-set.** New-build factors in {hi['current'][0]} v{hi['current'][1]} against "
+      f"the last combined table ({hi['last_combined'][0]} v{hi['last_combined'][1]}):")
+    w("")
+    w("| Building type | SA4s rising | SA4s falling | Median change | Rank correlation old–new | Rose most | Fell most |")
+    w("| --- | --- | --- | --- | --- | --- | --- |")
+    for r in hi["reset"]:
+        w(f"| {r['building_type']} | {r['rose']} | {r['fell']} | {r['median']:+.2f} | "
+          f"{f2(r['spearman'])} | " + ", ".join(f"{nm(s_)} ({v:+.2f})" for s_, v in r["up_most"])
+          + " | " + ", ".join(f"{nm(s_)} ({v:+.2f})" for s_, v in r["down_most"]) + " |")
+    w("")
+    w("So the factors that could have steered the building enrolled over the window are two sets: "
+      "the combined table for sites committed before mid-2023, and the new-build table after. The "
+      "border test uses each, and the change between them.")
     w("")
 
     # ---- 2. Approvals
@@ -811,11 +893,9 @@ def to_markdown(a):
       "for the cost coefficient only.** Their mutual collinearity makes their own coefficients "
       "unstable, but relative cost is well identified. HPS and Robust separately; Robust will be "
       "thin (see the counts above).")
-    w("3. **Border test: worth running, but only once the past editions are in.** The pair count is "
-      "large, but pairs overlap heavily, so the effective sample is nearer the "
-      f"{bd['sa4_pairs']} SA4 borders, and it must be run on the factors in force when building was "
-      f"committed. With the {pr['latest']} factors alone it would test the wrong prices. Cluster by "
-      "SA4 pair and control for the cost gap.")
+    w("3. **Border test: run it on both factor sets, and on the change between them.** The pair "
+      "count is large, but pairs overlap heavily, so the effective sample is nearer the "
+      f"{bd['sa4_pairs']} SA4 borders. Cluster by SA4 pair and control for the cost gap.")
     w(f"4. **Legacy placebo: run it, but expect little from it.** Legacy stock is only "
       f"{n0(oc['legacy_total'])} dwellings, in {oc['legacy_sa3s']} SA3s, at {month(END)}. It is a "
       "level, not a flow: its SA4 share is set against relative cost exactly as new build's is. "
@@ -824,10 +904,6 @@ def to_markdown(a):
       "with the caveat that its *enrolment*, unlike its construction, can respond to price.")
     w("5. **Dose-response: run the cost-spread half; the factor-versus-cheapest-SA3 half needs a "
       "cost level comparable across SA4s, which a 2021 median mortgage only approximates.**")
-    w("")
-    w("**Still needed from you:** the SDA Pricing Arrangements (or Price Guides) for 2021-22, "
-      "2022-23, 2023-24, 2024-25 and 2025-26, as Word or Excel; they could not be fetched "
-      "from here (see `raw/MANIFEST.md`).")
     return "\n".join(L) + "\n"
 
 

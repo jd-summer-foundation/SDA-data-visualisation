@@ -12,8 +12,9 @@ Tests (numbered as in the brief):
      SA4, so nothing between SA4s can leak in.
   2. Share regression with SA4 fixed effects, clustered by SA4, and a
      within-SA4 multinomial (Poisson with SA4 effects) version.
-  3. Border test: held until the pricing editions in force 2021-22 to 2025-26
-     are in hand; the 2026-27 factors are the wrong prices for it.
+  3. Border test: adjacent SA3s either side of an SA4 border, on the factors in
+     force when building was committed (the combined table to June 2023, the
+     new-build table after), and before-and-after the July 2023 re-set.
   4. Placebos: legacy and existing stock, which predate NDIS pricing.
   5. Dose-response: is the lean stronger where cost spreads wider within the SA4?
 Plus robustness: without Victoria, without the largest SA4s, rent for
@@ -61,6 +62,14 @@ OUTCOMES = [("new_build", "New build (all categories)"),
             ("hps", "High Physical Support (enrolled)"),
             ("robust", "Robust (enrolled)")]
 NEED_FOR = {"new_build": "eligible_not_using", "hps": "need_hps", "robust": "need_robust"}
+MIN_BORDER_KM = 0.5
+# The border test's factor sets. Until 30 June 2023 one table served all stock;
+# from 1 July 2023 new builds have their own (revised in v1.4, unchanged since).
+FACTOR_SETS = [("combined", "Combined table, to June 2023", ("2022-23", "1.1"), "All"),
+               ("new_build", "New-build table, from July 2023", ("2026-27", "1.0"), "New build")]
+# SDA windows for the before/after comparison, with approvals lagged as above.
+MIDPOINT = "2024-06-30"
+GAP_SIGN_TEST = 0.05
 
 
 # --------------------------------------------------------------------------
@@ -357,6 +366,137 @@ def dose_response(frame, groups, outcome, cost, lag=LAG_PRIMARY, comparator="app
 
 
 # --------------------------------------------------------------------------
+# 3. Across SA4 borders
+# --------------------------------------------------------------------------
+
+def cluster_flip_p(x, y, clusters, rng, controls=None):
+    """Permutation p for the slope on x, flipping x's sign by cluster.
+
+    With controls, x and y are first residualised on them (Frisch-Waugh), so
+    the flips leave the controls' part alone. No intercept: every pair is
+    oriented arbitrarily, and flipping a pair flips both sides of the model.
+    """
+    if controls:
+        def resid(v):
+            b, _ = ols([[c] for c in controls], v, clusters)
+            return [vi - b[0] * ci for vi, ci in zip(v, controls)]
+        x, y = resid(x), resid(y)
+    sxx = sum(v * v for v in x)
+    obs = sum(a * b for a, b in zip(x, y)) / sxx
+    groups = defaultdict(list)
+    for i, c in enumerate(clusters):
+        groups[c].append(i)
+    idx = list(groups.values())
+    hits = 0
+    for _ in range(PERMUTATIONS):
+        num = 0.0
+        for members in idx:
+            sign = 1 if rng.random() < 0.5 else -1
+            num += sign * sum(x[i] * y[i] for i in members)
+        if abs(num / sxx) >= abs(obs) - 1e-12:
+            hits += 1
+    return (1 + hits) / (1 + PERMUTATIONS)
+
+
+def border_test(d, frame, rng):
+    appr, quarters, _, _, _ = approvals(d)
+    code_of = {g: r["sa3_code"] for g, r in d["sa3"].items()}
+    idx = {q: i for i, q in enumerate(quarters)}
+
+    def approvals_for(g, first_sda_q, last_sda_q):
+        lo, hi = idx[first_sda_q] - LAG_PRIMARY, idx[last_sda_q] - LAG_PRIMARY
+        return sum(appr[code_of[g]].get(q, 0.0) for q in quarters[lo:hi + 1])
+
+    sda_q = [q for q in quarters if START < q <= END]
+    windows = {"full": (START, END, sda_q[0], sda_q[-1]),
+               "early": (START, MIDPOINT, sda_q[0], MIDPOINT),
+               "late": (MIDPOINT, END, quarters[idx[MIDPOINT] + 1], END)}
+    sda, apv = {}, {}
+    for w, (a, b, q0, q1) in windows.items():
+        for g in frame:
+            sda[(w, g)] = max(change(d["panel"], g, "Total", "dwellings_new_build", a, b), 0.0)
+            apv[(w, g)] = approvals_for(g, q0, q1)
+    sets = {}
+    for key, _, version, stock in FACTOR_SETS:
+        f = defaultdict(dict)
+        for r in d["factors"]:
+            if (r["edition"], r["version"]) == version and r["stock_type"] == stock:
+                f[r["sa4"]][r["building_type"]] = float(r["factor"])
+        if len(f) != 88:
+            raise ValueError(f"factor set {key}: {len(f)} SA4s")
+        sets[key] = f
+    # Building-type weights: new-build growth over the window in the pair's two SA4s.
+    growth = defaultdict(lambda: defaultdict(float))
+    for r in d["types"]:
+        sign = 1 if r["as_at"] == END else -1 if r["as_at"] == START else 0
+        if sign and r["dwellings"] != "" and r["building_type"] in sets["new_build"][r["sa4"]]:
+            growth[r["sa4"]][r["building_type"]] += sign * float(r["dwellings"])
+    national = defaultdict(float)
+    for g4 in growth.values():
+        for t, v in g4.items():
+            national[t] += v
+
+    def mix_factor(f, sa4, weights):
+        tot = sum(weights.values())
+        return sum(f[sa4][t] * w for t, w in weights.items()) / tot
+
+    pairs = []
+    for p in d["adjacency"]:
+        if p["cross_sa4"] != "yes" or float(p["shared_km"]) < MIN_BORDER_KM:
+            continue
+        a, b = p["sa3_a"], p["sa3_b"]
+        if frame[a]["mortgage"] is None or frame[b]["mortgage"] is None:
+            continue
+        s4a, s4b = p["sa4_a"], p["sa4_b"]
+        w = {t: max(growth[s4a][t] + growth[s4b][t], 0.0) for t in national}
+        if sum(w.values()) <= 0:
+            w = {t: max(v, 0.0) for t, v in national.items()}
+        rec = {"a": a, "b": b, "cluster": tuple(sorted((s4a, s4b))),
+               "dcost": math.log(frame[a]["mortgage"] / frame[b]["mortgage"]),
+               "gap": {k: math.log(mix_factor(f, s4a, w) / mix_factor(f, s4b, w))
+                       for k, f in sets.items()}}
+        for win in windows:
+            ts, ta = sda[(win, a)] + sda[(win, b)], apv[(win, a)] + apv[(win, b)]
+            rec[win] = (sda[(win, a)] / ts - apv[(win, a)] / ta) if ts > 0 and ta > 0 else None
+        pairs.append(rec)
+
+    def cross_section(key, win):
+        use = [r for r in pairs if r[win] is not None]
+        x = [[r["gap"][key], r["dcost"]] for r in use]
+        y = [100 * r[win] for r in use]
+        cl = [r["cluster"] for r in use]
+        beta, cov = ols(x, y, cl)
+        p = cluster_flip_p([r["gap"][key] for r in use], y, cl, rng,
+                           controls=[r["dcost"] for r in use])
+        # The transparent version: does the higher-factor side get more SDA per approval?
+        wide = [r for r in use if abs(r["gap"][key]) >= math.log(1 + GAP_SIGN_TEST)]
+        agree = sum((r["gap"][key] > 0) == (r[win] > 0) for r in wide if r[win] != 0)
+        decided = sum(1 for r in wide if r[win] != 0)
+        return {"pairs": len(use), "clusters": len(set(cl)),
+                "factor": {"b": beta[0], "se": cov[0][0] ** 0.5}, "cost": {"b": beta[1], "se": cov[1][1] ** 0.5},
+                "p_flip": p, "wide_pairs": len(wide), "decided": decided, "higher_side_more": agree}
+
+    cross = {f"{key}:{win}": cross_section(key, win)
+             for key, _, _, _ in FACTOR_SETS for win in ("full", "early", "late")}
+    # Difference in differences: the change in a pair's SDA gap against the
+    # change in its factor gap. Land either side is held fixed.
+    use = [r for r in pairs if r["early"] is not None and r["late"] is not None]
+    dx = [r["gap"]["new_build"] - r["gap"]["combined"] for r in use]
+    dy = [100 * (r["late"] - r["early"]) for r in use]
+    cl = [r["cluster"] for r in use]
+    beta, cov = ols([[v] for v in dx], dy, cl)
+    moved = [abs(v) for v in dx]
+    did = {"pairs": len(use), "clusters": len(set(cl)), "b": beta[0], "se": cov[0][0] ** 0.5,
+           "p_flip": cluster_flip_p(dx, dy, cl, rng),
+           "gap_change_median": statistics.median(moved), "gap_change_max": max(moved),
+           "gap_change_ge_0_05": sum(v >= math.log(1.05) for v in moved)}
+    corr = spearman([r["gap"]["combined"] for r in pairs], [r["gap"]["new_build"] for r in pairs])
+    return {"pairs": len(pairs), "clusters": len({r["cluster"] for r in pairs}),
+            "cross": cross, "did": did, "gap_correlation": corr,
+            "windows": {k: [v[0], v[1]] for k, v in windows.items()}}
+
+
+# --------------------------------------------------------------------------
 # Running everything
 # --------------------------------------------------------------------------
 
@@ -440,6 +580,7 @@ def analyse(d):
             shares(fr, gs, "new_build"), shares(fr, gs, "persons"))],
     }, rng)}
     results["placebo"] = placebo
+    results["border"] = border_test(d, frame, rng)
     results["totals"] = {o: sum(frame[g][o] for g in frame) for o, _ in OUTCOMES}
     results["vic_share"] = {o: sum(frame[g][o] for g in frame if frame[g]["state"] == "VIC")
                             / results["totals"][o] for o, _ in OUTCOMES}
@@ -549,11 +690,41 @@ def verdict(a):
                   "have sat on cheaper land within SA4s. "
                   if same else "Pre-NDIS stock does not share the lean. ")
                + f"Legacy stock ({lg['sa4s']} SA4s, {f2(lg['mean'])}) is too thin to say anything.")
+    Bf = a["border"]["cross"]
+    bsig = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] > 0]
+    bneg = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] < 0]
+    did = a["border"]["did"]
+    dsig = did["p_flip"] < 0.05
+    Bf = a["border"]["cross"]
+    bsig = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] > 0]
+    bneg = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] < 0]
+    did = a["border"]["did"]
+    dsig = did["p_flip"] < 0.05
     dz = P["new_build"]["dose"]["interaction"]
     out.append(f"5. **No dose-response.** If margin drove the lean, it would steepen where cost "
                f"spreads wider within the SA4. The interaction is {est(dz)} per SD of spread, "
                f"{'the wrong sign and ' if dz['b'] > 0 else ''}"
                f"{'within' if not significant(dz) else 'beyond'} two standard errors of zero.")
+    if bsig and not bneg:
+        head = "The border test finds building following the higher factor."
+    elif bneg and not bsig:
+        head = "Across borders, SDA leans to the *lower*-factor side, not the higher."
+    elif bsig and bneg:
+        head = "The border test is mixed."
+    else:
+        head = "The border test finds no sign that building follows the factor."
+    out.append(f"6. **{head}** Across {Bf['combined:full']['pairs']} SA4-border pairs, with the cost "
+               "gap controlled, the factor-gap coefficient over the whole window is "
+               f"{est(Bf['combined:full']['factor'])} (p {pval(Bf['combined:full']['p_flip'])}) with the "
+               f"pre-2023 factors and {est(Bf['new_build:full']['factor'])} "
+               f"(p {pval(Bf['new_build:full']['p_flip'])}) with the post-2023 ones; "
+               f"{len(bsig)} of {len(Bf)} factor-by-window combinations are positive at p < 0.05 and "
+               f"{len(bneg)} negative. The before-and-after comparison, which holds land fixed, gives "
+               f"{est(did)} (p {pval(did['p_flip'])})."
+               + (" A higher factor usually marks dearer land, and the only cost control is a 2021 "
+                  "median mortgage, so a negative coefficient most likely means the factor gap is "
+                  "picking up land cost the control misses: more evidence that SDA goes where land is "
+                  "cheap, not that it chases the factor." if bneg else ""))
     out.append("")
     out.append("**In sum:** \"New SDA leans toward cheap SA3s within SA4s more than general "
                "building does\" is "
@@ -563,8 +734,13 @@ def verdict(a):
                + ("leans the same way, and there is no dose-response, so the lean cannot be "
                   "attributed to the location factor's margin. " if same else
                   "does not, which is consistent with the incentive. ")
-               + "\"Providers respond to the location factor\" is not tested and needs the border "
-               "test on the factors in force at the time.")
+               + ("\"Providers respond to the location factor\" is not supported by the border "
+                  "test either: where a border separates two prices, building does not follow the "
+                  "higher one" + (", and with the post-2023 factors it leans to the lower." if bneg
+                                  else ".")
+                  if not bsig and not (dsig and did["b"] > 0) else
+                  "The border test gives some support to \"providers respond to the location "
+                  "factor\"; see Section 3 for how far."))
     return out
 
 
@@ -630,9 +806,12 @@ def to_markdown(a):
       f"{f2(nbp['mean'])} (p = {pval(nbp['p'])}); existing stock, which predates NDIS pricing, "
       f"{f2(ex['mean'])} (p = {pval(ex['p'])}); legacy stock {f2(lg['mean'])} "
       f"(p = {pval(lg['p'])}, only {lg['sa4s']} SA4s).")
-    w("- **Not tested: whether providers respond to the factor itself.** That needs the border "
-      "test, which needs the factors in force in 2021-22 to 2025-26. Nothing here can say "
-      "providers chase the factor, only whether SDA sits on cheaper land than other building.")
+    Bf = a["border"]["cross"]
+    bc, bn, bd_ = Bf["combined:full"], Bf["new_build:full"], a["border"]["did"]
+    w(f"- **Across SA4 borders** ({bc['pairs']} pairs), the factor gap on the SDA-per-approval gap: "
+      f"{est(bc['factor'])} per log point with the pre-2023 factors (p = {pval(bc['p_flip'])}), "
+      f"{est(bn['factor'])} with the post-2023 ones (p = {pval(bn['p_flip'])}); before and after "
+      f"the July 2023 re-set, {est(bd_)} (p = {pval(bd_['p_flip'])}).")
     w("")
 
     w("## What the evidence supports")
@@ -706,14 +885,45 @@ def to_markdown(a):
     w("")
 
     # ---- Test 3
+    B = a["border"]
     w("## 3. Across SA4 borders")
     w("")
-    w("**Not run.** It asks whether more SDA per approval is built on the higher-factor side of an "
-      "SA4 border, which isolates the factor from land cost only if the factors are those in force "
-      "when building was committed, about 2021-22 to 2025-26. Only the 2026-27 edition is in hand, "
-      "and it implements the 2022-23 SDA Pricing Review, so it may differ. The pair list with "
-      "factors on each side is ready (`location_factor_pairs.csv`); the test runs once the past "
-      "editions are added to `data/pricing/`.")
+    w(f"Adjacent SA3s either side of an SA4 border ({B['pairs']} pairs sharing at least "
+      f"{MIN_BORDER_KM} km of border, with cost data, across {B['clusters']} SA4 borders). For each "
+      "pair: the side's share of the pair's new SDA minus its share of the pair's approvals "
+      "(percentage points), against the log gap in the location factor and the log gap in median "
+      "mortgage. The factor is each SA4's factors weighted by a building-type mix common to both "
+      "sides (the two SA4s' new-build growth), so the gap is price, not mix. Standard errors are "
+      "clustered by SA4 border; the permutation flips the factor gap's sign border by border, "
+      "after partialling out the cost gap. The pre-2023 factors applied to all stock; since 1 July "
+      "2023 new builds have their own. Sites committed before mid-2023 faced the first set.")
+    w("")
+    wl = {"full": f"{month(B['windows']['full'][0])}–{month(B['windows']['full'][1])}",
+          "early": f"{month(B['windows']['early'][0])}–{month(B['windows']['early'][1])}",
+          "late": f"{month(B['windows']['late'][0])}–{month(B['windows']['late'][1])}"}
+    w(f"| Factors | New SDA over | Pairs | Factor gap (per log point) | Permutation p | Cost gap | Pairs with a factor gap ≥ {GAP_SIGN_TEST:.0%}: higher side builds more per approval |")
+    w("| --- | --- | --- | --- | --- | --- | --- |")
+    for key, label, _, _ in FACTOR_SETS:
+        for win in ("full", "early", "late"):
+            c = B["cross"][f"{key}:{win}"]
+            w(f"| {label} | {wl[win]} | {c['pairs']} | {est(c['factor'])} | {pval(c['p_flip'])} | "
+              f"{est(c['cost'])} | {c['higher_side_more']} of {c['decided']} |")
+    w("")
+    dd = B["did"]
+    w(f"**Before and after the re-set.** The two sets of factor gaps are related (rank correlation "
+      f"{f2(B['gap_correlation'])} across pairs) but not the same: across the {dd['pairs']} pairs "
+      f"with new SDA in both windows, the July 2023 re-set moved the factor gap by a median "
+      f"{dd['gap_change_median']:.3f} log points (at most {dd['gap_change_max']:.2f}; "
+      f"{dd['gap_change_ge_0_05']} pairs by 5% or more). The change in a pair's SDA gap from "
+      f"{wl['early']} to {wl['late']} on the change in its factor gap: {est(dd)} "
+      f"(permutation p {pval(dd['p_flip'])}, {dd['clusters']} SA4 borders). Land either side is "
+      "held fixed in this comparison.")
+    w("")
+    w("**What it can support.** Whether, where an SA4 border separates two prices, building "
+      "follows the price rather than the land. **What it cannot.** A two-year development lag "
+      f"means much of what was enrolled over {wl['late']} was committed before the July 2023 "
+      "factors were known, so the after window is only partly after. Pairs overlap (an SA3 sits in "
+      "several), which the clustering allows for only in part.")
     w("")
 
     # ---- Test 4
@@ -819,9 +1029,11 @@ def to_markdown(a):
       "other building, not why any provider chose any site.")
     w("- **The outcome is a net change in published totals.** HPS and Robust enrolled dwellings "
       "include existing dwellings newly enrolled, and SA3 has no building-type split.")
-    w("- **No claim about the factor itself.** A lean toward cheap SA3s is consistent with the "
-      "location-factor incentive but also with any reason to build on cheap land. "
-      "\"Providers respond to the location factor\" needs the border test.")
+    w("- **The factor and land cost move together.** A higher factor usually marks dearer land, "
+      "so across a border the factor gap is not independent of land cost, and the only cost "
+      "control is the 2021 Census median. The before-and-after comparison avoids this but has "
+      "only two years of after, much of it committed before the new factors were known; it is "
+      "worth re-running as quarters are added.")
     return "\n".join(L) + "\n"
 
 
