@@ -1,0 +1,896 @@
+{
+ "pricing": {
+  "editions": [
+   "2026-27"
+  ],
+  "latest": "2026-27",
+  "by_type": [
+   {
+    "stock": "New build",
+    "building_type": "Apartment, 1 bedroom, 1 resident",
+    "sa4s": 88,
+    "distinct": 31,
+    "singletons": 15,
+    "modal_value": 0.98,
+    "modal_sa4s": 12,
+    "median_sa4s_per_value": 2,
+    "min": 0.96,
+    "median": 1.03,
+    "max": 1.85,
+    "below_1": 22,
+    "above_1": 58
+   },
+   {
+    "stock": "New build",
+    "building_type": "Apartment, 2 bedrooms, 1 resident",
+    "sa4s": 88,
+    "distinct": 30,
+    "singletons": 13,
+    "modal_value": 0.97,
+    "modal_sa4s": 12,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.96,
+    "median": 1.03,
+    "max": 1.84,
+    "below_1": 24,
+    "above_1": 58
+   },
+   {
+    "stock": "New build",
+    "building_type": "Apartment, 2 bedrooms, 2 residents",
+    "sa4s": 88,
+    "distinct": 34,
+    "singletons": 16,
+    "modal_value": 0.97,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.95,
+    "median": 1.04,
+    "max": 1.98,
+    "below_1": 24,
+    "above_1": 60
+   },
+   {
+    "stock": "New build",
+    "building_type": "Apartment, 3 bedrooms, 2 residents",
+    "sa4s": 88,
+    "distinct": 30,
+    "singletons": 10,
+    "modal_value": 0.97,
+    "modal_sa4s": 8,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.95,
+    "median": 1.03,
+    "max": 1.87,
+    "below_1": 25,
+    "above_1": 58
+   },
+   {
+    "stock": "New build",
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "sa4s": 88,
+    "distinct": 33,
+    "singletons": 11,
+    "modal_value": 0.93,
+    "modal_sa4s": 6,
+    "median_sa4s_per_value": 2,
+    "min": 0.88,
+    "median": 0.99,
+    "max": 1.61,
+    "below_1": 45,
+    "above_1": 38
+   },
+   {
+    "stock": "New build",
+    "building_type": "Villa/Duplex/Townhouse, 2 residents",
+    "sa4s": 88,
+    "distinct": 38,
+    "singletons": 18,
+    "modal_value": 1.0,
+    "modal_sa4s": 8,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.86,
+    "median": 0.98,
+    "max": 1.72,
+    "below_1": 46,
+    "above_1": 34
+   },
+   {
+    "stock": "New build",
+    "building_type": "Villa/Duplex/Townhouse, 3 residents",
+    "sa4s": 88,
+    "distinct": 42,
+    "singletons": 23,
+    "modal_value": 0.85,
+    "modal_sa4s": 7,
+    "median_sa4s_per_value": 1.0,
+    "min": 0.83,
+    "median": 0.975,
+    "max": 1.88,
+    "below_1": 49,
+    "above_1": 32
+   },
+   {
+    "stock": "New build",
+    "building_type": "House, 2 residents",
+    "sa4s": 88,
+    "distinct": 35,
+    "singletons": 10,
+    "modal_value": 0.84,
+    "modal_sa4s": 7,
+    "median_sa4s_per_value": 2,
+    "min": 0.83,
+    "median": 0.965,
+    "max": 1.92,
+    "below_1": 54,
+    "above_1": 30
+   },
+   {
+    "stock": "New build",
+    "building_type": "House, 3 residents",
+    "sa4s": 88,
+    "distinct": 41,
+    "singletons": 21,
+    "modal_value": 0.84,
+    "modal_sa4s": 7,
+    "median_sa4s_per_value": 1,
+    "min": 0.83,
+    "median": 0.97,
+    "max": 1.92,
+    "below_1": 51,
+    "above_1": 32
+   },
+   {
+    "stock": "New build",
+    "building_type": "Group home, 4 residents",
+    "sa4s": 88,
+    "distinct": 41,
+    "singletons": 20,
+    "modal_value": 0.84,
+    "modal_sa4s": 6,
+    "median_sa4s_per_value": 2,
+    "min": 0.82,
+    "median": 0.97,
+    "max": 1.97,
+    "below_1": 51,
+    "above_1": 32
+   },
+   {
+    "stock": "New build",
+    "building_type": "Group home, 5 residents",
+    "sa4s": 88,
+    "distinct": 42,
+    "singletons": 19,
+    "modal_value": 1.0,
+    "modal_sa4s": 6,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.81,
+    "median": 0.97,
+    "max": 1.99,
+    "below_1": 49,
+    "above_1": 33
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Apartment, 1 bedroom, 1 resident",
+    "sa4s": 88,
+    "distinct": 22,
+    "singletons": 6,
+    "modal_value": 1.07,
+    "modal_sa4s": 11,
+    "median_sa4s_per_value": 3.0,
+    "min": 0.95,
+    "median": 1.04,
+    "max": 1.39,
+    "below_1": 17,
+    "above_1": 65
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Apartment, 2 bedrooms, 1 resident",
+    "sa4s": 88,
+    "distinct": 25,
+    "singletons": 10,
+    "modal_value": 1.08,
+    "modal_sa4s": 13,
+    "median_sa4s_per_value": 3,
+    "min": 0.95,
+    "median": 1.04,
+    "max": 1.4,
+    "below_1": 18,
+    "above_1": 66
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Apartment, 2 bedrooms, 2 residents",
+    "sa4s": 88,
+    "distinct": 25,
+    "singletons": 10,
+    "modal_value": 1.08,
+    "modal_sa4s": 13,
+    "median_sa4s_per_value": 3,
+    "min": 0.95,
+    "median": 1.04,
+    "max": 1.4,
+    "below_1": 18,
+    "above_1": 66
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Apartment, 3 bedrooms, 2 residents",
+    "sa4s": 88,
+    "distinct": 27,
+    "singletons": 9,
+    "modal_value": 1.09,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 2,
+    "min": 0.94,
+    "median": 1.05,
+    "max": 1.47,
+    "below_1": 19,
+    "above_1": 66
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "sa4s": 88,
+    "distinct": 28,
+    "singletons": 10,
+    "modal_value": 0.94,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.91,
+    "median": 1.01,
+    "max": 1.76,
+    "below_1": 37,
+    "above_1": 49
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Villa/Duplex/Townhouse, 2 residents",
+    "sa4s": 88,
+    "distinct": 33,
+    "singletons": 12,
+    "modal_value": 0.94,
+    "modal_sa4s": 7,
+    "median_sa4s_per_value": 2,
+    "min": 0.86,
+    "median": 0.97,
+    "max": 2.25,
+    "below_1": 50,
+    "above_1": 34
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Villa/Duplex/Townhouse, 3 residents",
+    "sa4s": 88,
+    "distinct": 37,
+    "singletons": 23,
+    "modal_value": 0.99,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 1,
+    "min": 0.84,
+    "median": 0.96,
+    "max": 2.53,
+    "below_1": 56,
+    "above_1": 32
+   },
+   {
+    "stock": "Existing",
+    "building_type": "House, 2 residents",
+    "sa4s": 88,
+    "distinct": 30,
+    "singletons": 14,
+    "modal_value": 0.93,
+    "modal_sa4s": 8,
+    "median_sa4s_per_value": 2.0,
+    "min": 0.9,
+    "median": 0.98,
+    "max": 1.93,
+    "below_1": 47,
+    "above_1": 35
+   },
+   {
+    "stock": "Existing",
+    "building_type": "House, 3 residents",
+    "sa4s": 88,
+    "distinct": 31,
+    "singletons": 10,
+    "modal_value": 0.94,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 3,
+    "min": 0.87,
+    "median": 0.98,
+    "max": 2.15,
+    "below_1": 50,
+    "above_1": 35
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Group home, 4 residents",
+    "sa4s": 88,
+    "distinct": 35,
+    "singletons": 17,
+    "modal_value": 0.93,
+    "modal_sa4s": 7,
+    "median_sa4s_per_value": 2,
+    "min": 0.86,
+    "median": 0.97,
+    "max": 2.31,
+    "below_1": 50,
+    "above_1": 34
+   },
+   {
+    "stock": "Existing",
+    "building_type": "Group home, 5 residents",
+    "sa4s": 88,
+    "distinct": 36,
+    "singletons": 20,
+    "modal_value": 0.99,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 1.0,
+    "min": 0.83,
+    "median": 0.96,
+    "max": 2.53,
+    "below_1": 56,
+    "above_1": 32
+   },
+   {
+    "stock": "Legacy",
+    "building_type": "Legacy",
+    "sa4s": 88,
+    "distinct": 36,
+    "singletons": 20,
+    "modal_value": 0.99,
+    "modal_sa4s": 10,
+    "median_sa4s_per_value": 1.0,
+    "min": 0.83,
+    "median": 0.96,
+    "max": 2.53,
+    "below_1": 56,
+    "above_1": 32
+   }
+  ],
+  "within_sa4": {
+   "median_range": 0.15,
+   "max_range": 0.9,
+   "identical_across_types": 1,
+   "range_at_least_0_10": 66,
+   "widest": [
+    {
+     "sa4": "sa4:NSW - Sydney - City and Inner South",
+     "range": 0.9,
+     "apartment": 1.12,
+     "house": 1.92
+    },
+    {
+     "sa4": "sa4:NSW - Sydney - Eastern Suburbs",
+     "range": 0.87,
+     "apartment": 1.12,
+     "house": 1.9
+    },
+    {
+     "sa4": "sa4:NT - Northern Territory - Outback",
+     "range": 0.49,
+     "apartment": 1.84,
+     "house": 1.49
+    },
+    {
+     "sa4": "sa4:NSW - Sydney - Inner West",
+     "range": 0.45,
+     "apartment": 1.06,
+     "house": 1.46
+    },
+    {
+     "sa4": "sa4:QLD - Queensland - Outback",
+     "range": 0.42,
+     "apartment": 1.65,
+     "house": 1.34
+    }
+   ],
+   "apartment_vs_house_spearman": 0.5871,
+   "house_below_apartment": 67,
+   "house_above_apartment": 16,
+   "apartment_type": "Apartment, 2 bedrooms, 1 resident",
+   "house_type": "House, 2 residents"
+  },
+  "new_vs_existing": [
+   {
+    "building_type": "Apartment, 1 bedroom, 1 resident",
+    "same": 8,
+    "median_diff": 0.0
+   },
+   {
+    "building_type": "Apartment, 2 bedrooms, 1 resident",
+    "same": 9,
+    "median_diff": 0.0
+   },
+   {
+    "building_type": "Apartment, 2 bedrooms, 2 residents",
+    "same": 10,
+    "median_diff": 0.0
+   },
+   {
+    "building_type": "Apartment, 3 bedrooms, 2 residents",
+    "same": 8,
+    "median_diff": 0.0
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "same": 7,
+    "median_diff": 0.025
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 2 residents",
+    "same": 3,
+    "median_diff": 0.015
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 3 residents",
+    "same": 3,
+    "median_diff": 0.02
+   },
+   {
+    "building_type": "House, 2 residents",
+    "same": 3,
+    "median_diff": 0.03
+   },
+   {
+    "building_type": "House, 3 residents",
+    "same": 5,
+    "median_diff": 0.04
+   },
+   {
+    "building_type": "Group home, 4 residents",
+    "same": 5,
+    "median_diff": 0.03
+   },
+   {
+    "building_type": "Group home, 5 residents",
+    "same": 6,
+    "median_diff": 0.03
+   }
+  ],
+  "legacy_equals_group_home_5": 88,
+  "sa4s": 88,
+  "base_amounts": 858,
+  "examples": [
+   {
+    "category": "High Physical Support",
+    "building_type": "House, 2 residents",
+    "base_per_participant": 81767,
+    "residents": 2,
+    "dwelling_base": 163534,
+    "min_factor": 0.83,
+    "max_factor": 1.92,
+    "median_factor": 0.965,
+    "per_0_05_factor": 8177
+   },
+   {
+    "category": "High Physical Support",
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "base_per_participant": 69208,
+    "residents": 1,
+    "dwelling_base": 69208,
+    "min_factor": 0.88,
+    "max_factor": 1.61,
+    "median_factor": 0.99,
+    "per_0_05_factor": 3460
+   },
+   {
+    "category": "Robust",
+    "building_type": "House, 2 residents",
+    "base_per_participant": 77083,
+    "residents": 2,
+    "dwelling_base": 154166,
+    "min_factor": 0.83,
+    "max_factor": 1.92,
+    "median_factor": 0.965,
+    "per_0_05_factor": 7708
+   },
+   {
+    "category": "Robust",
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "base_per_participant": 62992,
+    "residents": 1,
+    "dwelling_base": 62992,
+    "min_factor": 0.88,
+    "max_factor": 1.61,
+    "median_factor": 0.99,
+    "per_0_05_factor": 3150
+   }
+  ]
+ },
+ "approvals": {
+  "first": "2021-09-30",
+  "last": "2026-06-30",
+  "quarters": 20,
+  "checks": 360,
+  "lagged": [
+   "2022-09-30",
+   "2025-06-30"
+  ],
+  "same": [
+   "2023-09-30",
+   "2026-06-30"
+  ],
+  "national_lagged": 522603.0,
+  "national_same": 552077.0,
+  "sa3_lagged": 522601.0,
+  "outside_panel_lagged": 2.0,
+  "sa3_zero_lagged": 2
+ },
+ "cost": {
+  "sa3s": 336,
+  "mortgage": {
+   "sa3s": 335,
+   "sd_total": 0.2653,
+   "sd_within": 0.098,
+   "share_within": 0.1365,
+   "median_range": 0.2227,
+   "p90_range": 0.3675,
+   "max_range": 0.5143,
+   "median_sd": 0.0874,
+   "widest": [
+    {
+     "sa4": "sa4:NSW - Far West and Orana",
+     "range": 0.5143
+    },
+    {
+     "sa4": "sa4:QLD - Queensland - Outback",
+     "range": 0.511
+    },
+    {
+     "sa4": "sa4:NT - Northern Territory - Outback",
+     "range": 0.5044
+    }
+   ]
+  },
+  "rent": {
+   "sa3s": 335,
+   "sd_total": 0.3,
+   "sd_within": 0.1153,
+   "share_within": 0.1476,
+   "median_range": 0.2044,
+   "p90_range": 0.4418,
+   "max_range": 1.2528,
+   "median_sd": 0.0847,
+   "widest": [
+    {
+     "sa4": "sa4:NT - Northern Territory - Outback",
+     "range": 1.2528
+    },
+    {
+     "sa4": "sa4:QLD - Mackay - Isaac - Whitsunday",
+     "range": 0.5596
+    },
+    {
+     "sa4": "sa4:ACT - Australian Capital Territory",
+     "range": 0.5447
+    }
+   ]
+  },
+  "mortgage_rent_spearman": 0.7483,
+  "median_mortgage": 1800.0,
+  "median_rent": 355.5
+ },
+ "outcome": {
+  "new_build_total": 6511.0,
+  "hps_total": 4509.0,
+  "robust_total": 1172.0,
+  "negative": 3,
+  "zero": 65,
+  "positive": 268,
+  "missing_cost": [
+   "sa3:NSW - Blue Mountains - South"
+  ],
+  "legacy_total": 151.0,
+  "legacy_sa3s": 86,
+  "existing_total": 3670.0,
+  "existing_sa3s": 243,
+  "missing_cost_persons": 8.0
+ },
+ "qualifying": [
+  {
+   "threshold": 5,
+   "sa4s": 79,
+   "sa4s_two_building": 75,
+   "sa3s": 313,
+   "share_of_new_build": 0.9653
+  },
+  {
+   "threshold": 10,
+   "sa4s": 74,
+   "sa4s_two_building": 72,
+   "sa3s": 295,
+   "share_of_new_build": 0.9595
+  },
+  {
+   "threshold": 25,
+   "sa4s": 61,
+   "sa4s_two_building": 60,
+   "sa3s": 252,
+   "share_of_new_build": 0.9277
+  },
+  {
+   "threshold": 50,
+   "sa4s": 41,
+   "sa4s_two_building": 41,
+   "sa3s": 178,
+   "share_of_new_build": 0.8209
+  }
+ ],
+ "collinearity": {
+  "sa3s": 333,
+  "sa4s": 86,
+  "spearman": {
+   "approvals_share": {
+    "cost": 0.1671,
+    "approvals_share": 1.0,
+    "new_sda_share": 0.6548,
+    "eligible_share": 0.6687,
+    "need_share": 0.6861,
+    "population_share": 0.8244,
+    "area_share": 0.2021,
+    "approvals_per_1000": 0.4129
+   },
+   "new_sda_share": {
+    "cost": 0.009,
+    "approvals_share": 0.6548,
+    "new_sda_share": 1.0,
+    "eligible_share": 0.6478,
+    "need_share": 0.6722,
+    "population_share": 0.6325,
+    "area_share": 0.056,
+    "approvals_per_1000": 0.2416
+   },
+   "eligible_share": {
+    "cost": 0.0225,
+    "approvals_share": 0.6687,
+    "new_sda_share": 0.6478,
+    "eligible_share": 1.0,
+    "need_share": 0.9173,
+    "population_share": 0.8415,
+    "area_share": 0.0895,
+    "approvals_per_1000": 0.015
+   },
+   "need_share": {
+    "cost": 0.0338,
+    "approvals_share": 0.6861,
+    "new_sda_share": 0.6722,
+    "eligible_share": 0.9173,
+    "need_share": 1.0,
+    "population_share": 0.8383,
+    "area_share": 0.0596,
+    "approvals_per_1000": 0.05
+   },
+   "population_share": {
+    "cost": 0.0901,
+    "approvals_share": 0.8244,
+    "new_sda_share": 0.6325,
+    "eligible_share": 0.8415,
+    "need_share": 0.8383,
+    "population_share": 1.0,
+    "area_share": 0.2364,
+    "approvals_per_1000": 0.0205
+   },
+   "area_share": {
+    "cost": -0.2951,
+    "approvals_share": 0.2021,
+    "new_sda_share": 0.056,
+    "eligible_share": 0.0895,
+    "need_share": 0.0596,
+    "population_share": 0.2364,
+    "area_share": 1.0,
+    "approvals_per_1000": -0.0441
+   },
+   "approvals_per_1000": {
+    "cost": 0.1082,
+    "approvals_share": 0.4129,
+    "new_sda_share": 0.2416,
+    "eligible_share": 0.015,
+    "need_share": 0.05,
+    "population_share": 0.0205,
+    "area_share": -0.0441,
+    "approvals_per_1000": 1.0
+   }
+  },
+  "r2_cost_on_controls": 0.1802,
+  "residual_sd": 0.089,
+  "cost_sd": 0.0983
+ },
+ "types": {
+  "ranked": [
+   {
+    "building_type": "House, 2 residents",
+    "dwellings": 2423.0,
+    "share": 0.3673
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 1 resident",
+    "dwellings": 1363.0,
+    "share": 0.2066
+   },
+   {
+    "building_type": "House, 3 residents",
+    "dwellings": 1038.0,
+    "share": 0.1574
+   },
+   {
+    "building_type": "Apartment, 2 bedrooms, 1 resident",
+    "dwellings": 877.0,
+    "share": 0.133
+   },
+   {
+    "building_type": "Apartment, 1 bedroom, 1 resident",
+    "dwellings": 519.0,
+    "share": 0.0787
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 2 residents",
+    "dwellings": 169.0,
+    "share": 0.0256
+   },
+   {
+    "building_type": "Apartment, 2 bedrooms, 2 residents",
+    "dwellings": 107.0,
+    "share": 0.0162
+   },
+   {
+    "building_type": "Villa/Duplex/Townhouse, 3 residents",
+    "dwellings": 44.0,
+    "share": 0.0067
+   },
+   {
+    "building_type": "Group home, 4 residents",
+    "dwellings": 37.0,
+    "share": 0.0056
+   },
+   {
+    "building_type": "Group home, 5 residents",
+    "dwellings": 13.0,
+    "share": 0.002
+   },
+   {
+    "building_type": "Apartment, 3 bedrooms, 2 residents",
+    "dwellings": 6.0,
+    "share": 0.0009
+   }
+  ],
+  "total": 6596.0,
+  "by_category": {
+   "High Physical Support": {
+    "total": 4532.0,
+    "top": [
+     {
+      "building_type": "House, 2 residents",
+      "dwellings": 1456.0,
+      "share": 0.3213
+     },
+     {
+      "building_type": "House, 3 residents",
+      "dwellings": 850.0,
+      "share": 0.1876
+     },
+     {
+      "building_type": "Apartment, 2 bedrooms, 1 resident",
+      "dwellings": 781.0,
+      "share": 0.1723
+     }
+    ]
+   },
+   "Robust": {
+    "total": 1181.0,
+    "top": [
+     {
+      "building_type": "House, 2 residents",
+      "dwellings": 693.0,
+      "share": 0.5868
+     },
+     {
+      "building_type": "Villa/Duplex/Townhouse, 1 resident",
+      "dwellings": 439.0,
+      "share": 0.3717
+     },
+     {
+      "building_type": "House, 3 residents",
+      "dwellings": 27.0,
+      "share": 0.0229
+     }
+    ]
+   }
+  },
+  "main": {
+   "Apartment": "Apartment, 2 bedrooms, 1 resident",
+   "Villa": "Villa/Duplex/Townhouse, 1 resident",
+   "House": "House, 2 residents"
+  }
+ },
+ "borders": {
+  "edition": "2026-27",
+  "pairs_all": 811,
+  "pairs_within": 372,
+  "pairs_cross": 439,
+  "pairs_used": 435,
+  "sa4_pairs": 189,
+  "sa3s_in_pairs": 287,
+  "max_pairs_per_sa3": 11,
+  "short_dropped": 4,
+  "gaps": [
+   {
+    "type": "Apartment, 2 bedrooms, 1 resident",
+    "key": "Apartment",
+    "median": 0.03,
+    "max": 0.62,
+    "ge_0.01": 391,
+    "ge_0.01_both_sda": 256,
+    "ge_0.03": 240,
+    "ge_0.03_both_sda": 154,
+    "ge_0.05": 172,
+    "ge_0.05_both_sda": 99,
+    "ge_0.10": 99,
+    "ge_0.10_both_sda": 52
+   },
+   {
+    "type": "Villa/Duplex/Townhouse, 1 resident",
+    "key": "Villa",
+    "median": 0.05,
+    "max": 0.52,
+    "ge_0.01": 409,
+    "ge_0.01_both_sda": 276,
+    "ge_0.03": 312,
+    "ge_0.03_both_sda": 195,
+    "ge_0.05": 238,
+    "ge_0.05_both_sda": 142,
+    "ge_0.10": 109,
+    "ge_0.10_both_sda": 63
+   },
+   {
+    "type": "House, 2 residents",
+    "key": "House",
+    "median": 0.06,
+    "max": 0.79,
+    "ge_0.01": 415,
+    "ge_0.01_both_sda": 277,
+    "ge_0.03": 327,
+    "ge_0.03_both_sda": 199,
+    "ge_0.05": 268,
+    "ge_0.05_both_sda": 171,
+    "ge_0.10": 147,
+    "ge_0.10_both_sda": 85
+   },
+   {
+    "type": "National new-build mix",
+    "key": "mix",
+    "median": 0.0546,
+    "max": 0.5709,
+    "ge_0.01": 387,
+    "ge_0.01_both_sda": 256,
+    "ge_0.03": 296,
+    "ge_0.03_both_sda": 187,
+    "ge_0.05": 237,
+    "ge_0.05_both_sda": 142,
+    "ge_0.10": 116,
+    "ge_0.10_both_sda": 65
+   }
+  ],
+  "sda_either": 412,
+  "sda_both": 292,
+  "gap_vs_cost_spearman": 0.181,
+  "median_abs_cost_gap": 0.1348,
+  "pairs_with_cost": 431,
+  "mix_weights": {
+   "House, 2 residents": 0.3673,
+   "Villa/Duplex/Townhouse, 1 resident": 0.2066,
+   "House, 3 residents": 0.1574,
+   "Apartment, 2 bedrooms, 1 resident": 0.133,
+   "Apartment, 1 bedroom, 1 resident": 0.0787,
+   "Villa/Duplex/Townhouse, 2 residents": 0.0256,
+   "Apartment, 2 bedrooms, 2 residents": 0.0162,
+   "Villa/Duplex/Townhouse, 3 residents": 0.0067,
+   "Group home, 4 residents": 0.0056,
+   "Group home, 5 residents": 0.002,
+   "Apartment, 3 bedrooms, 2 residents": 0.0009
+  }
+ }
+}

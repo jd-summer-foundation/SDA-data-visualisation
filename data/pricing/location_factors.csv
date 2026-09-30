@@ -1,0 +1,2025 @@
+edition,version,effective_from,sa4,stock_type,building_type,factor
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Apartment, 1 bedroom, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,New build,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"House, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,New build,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Apartment, 1 bedroom, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Apartment, 2 bedrooms, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Apartment, 2 bedrooms, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Apartment, 3 bedrooms, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,New build,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Apartment, 2 bedrooms, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Apartment, 2 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"House, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,New build,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Apartment, 1 bedroom, 1 resident",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Apartment, 2 bedrooms, 1 resident",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Apartment, 2 bedrooms, 2 residents",1.25
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Apartment, 3 bedrooms, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Group home, 4 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,New build,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"House, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,New build,"Group home, 5 residents",0.88
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Villa/Duplex/Townhouse, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Villa/Duplex/Townhouse, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Group home, 4 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,New build,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,New build,"Group home, 5 residents",0.90
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Villa/Duplex/Townhouse, 1 resident",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"House, 2 residents",0.85
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"House, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,New build,"Group home, 5 residents",0.84
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Villa/Duplex/Townhouse, 1 resident",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Villa/Duplex/Townhouse, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Villa/Duplex/Townhouse, 3 residents",0.87
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"House, 2 residents",0.86
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"House, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Group home, 4 residents",0.86
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,New build,"Group home, 5 residents",0.86
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,New build,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Apartment, 3 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Villa/Duplex/Townhouse, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Villa/Duplex/Townhouse, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"House, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,New build,"Group home, 5 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"House, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"House, 3 residents",0.88
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Group home, 4 residents",0.87
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,New build,"Group home, 5 residents",0.87
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"House, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,New build,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Villa/Duplex/Townhouse, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Villa/Duplex/Townhouse, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Group home, 4 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,New build,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Villa/Duplex/Townhouse, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"House, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"House, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Group home, 4 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,New build,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Apartment, 1 bedroom, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Apartment, 2 bedrooms, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Apartment, 2 bedrooms, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Apartment, 3 bedrooms, 2 residents",1.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Villa/Duplex/Townhouse, 1 resident",1.61
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Villa/Duplex/Townhouse, 2 residents",1.72
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Villa/Duplex/Townhouse, 3 residents",1.88
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"House, 2 residents",1.92
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"House, 3 residents",1.92
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Group home, 4 residents",1.97
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,New build,"Group home, 5 residents",1.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Apartment, 1 bedroom, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Apartment, 2 bedrooms, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Apartment, 2 bedrooms, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Apartment, 3 bedrooms, 2 residents",1.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Villa/Duplex/Townhouse, 1 resident",1.60
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Villa/Duplex/Townhouse, 2 residents",1.70
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Villa/Duplex/Townhouse, 3 residents",1.86
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"House, 2 residents",1.90
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"House, 3 residents",1.90
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Group home, 4 residents",1.95
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,New build,"Group home, 5 residents",1.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Villa/Duplex/Townhouse, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Villa/Duplex/Townhouse, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Villa/Duplex/Townhouse, 3 residents",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"House, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"House, 3 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Group home, 4 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,New build,"Group home, 5 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Apartment, 2 bedrooms, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Apartment, 2 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Apartment, 3 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Villa/Duplex/Townhouse, 1 resident",1.31
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Villa/Duplex/Townhouse, 2 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Villa/Duplex/Townhouse, 3 residents",1.44
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"House, 2 residents",1.46
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"House, 3 residents",1.46
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Group home, 4 residents",1.49
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,New build,"Group home, 5 residents",1.50
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Villa/Duplex/Townhouse, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Villa/Duplex/Townhouse, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Villa/Duplex/Townhouse, 3 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"House, 2 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"House, 3 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Group home, 4 residents",1.27
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,New build,"Group home, 5 residents",1.28
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Villa/Duplex/Townhouse, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Villa/Duplex/Townhouse, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Villa/Duplex/Townhouse, 3 residents",1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"House, 2 residents",1.31
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"House, 3 residents",1.31
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Group home, 4 residents",1.33
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,New build,"Group home, 5 residents",1.33
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,New build,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,New build,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Villa/Duplex/Townhouse, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Villa/Duplex/Townhouse, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Villa/Duplex/Townhouse, 3 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"House, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"House, 3 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Group home, 4 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,New build,"Group home, 5 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Villa/Duplex/Townhouse, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Villa/Duplex/Townhouse, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Villa/Duplex/Townhouse, 3 residents",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"House, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"House, 3 residents",1.19
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Group home, 4 residents",1.20
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,New build,"Group home, 5 residents",1.20
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Villa/Duplex/Townhouse, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Villa/Duplex/Townhouse, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Villa/Duplex/Townhouse, 3 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"House, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"House, 3 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Group home, 4 residents",1.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,New build,"Group home, 5 residents",1.15
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Apartment, 1 bedroom, 1 resident",1.35
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Apartment, 2 bedrooms, 1 resident",1.35
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Apartment, 2 bedrooms, 2 residents",1.41
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Apartment, 3 bedrooms, 2 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Villa/Duplex/Townhouse, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Villa/Duplex/Townhouse, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Villa/Duplex/Townhouse, 3 residents",1.21
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"House, 2 residents",1.18
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"House, 3 residents",1.20
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Group home, 4 residents",1.21
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,New build,"Group home, 5 residents",1.23
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Apartment, 1 bedroom, 1 resident",1.85
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Apartment, 2 bedrooms, 1 resident",1.84
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Apartment, 2 bedrooms, 2 residents",1.98
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Apartment, 3 bedrooms, 2 residents",1.87
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Villa/Duplex/Townhouse, 1 resident",1.54
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Villa/Duplex/Townhouse, 2 residents",1.54
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Villa/Duplex/Townhouse, 3 residents",1.55
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"House, 2 residents",1.49
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"House, 3 residents",1.53
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Group home, 4 residents",1.57
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,New build,"Group home, 5 residents",1.61
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,New build,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Villa/Duplex/Townhouse, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Group home, 4 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,New build,"Group home, 5 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Group home, 4 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,New build,"Group home, 5 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Villa/Duplex/Townhouse, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Group home, 4 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,New build,"Group home, 5 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Villa/Duplex/Townhouse, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Villa/Duplex/Townhouse, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Villa/Duplex/Townhouse, 3 residents",1.17
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"House, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"House, 3 residents",1.18
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Group home, 4 residents",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,New build,"Group home, 5 residents",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Apartment, 1 bedroom, 1 resident",1.14
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Apartment, 2 bedrooms, 1 resident",1.14
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Apartment, 3 bedrooms, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Villa/Duplex/Townhouse, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,New build,"Group home, 5 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Apartment, 1 bedroom, 1 resident",1.23
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Apartment, 2 bedrooms, 1 resident",1.22
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Apartment, 2 bedrooms, 2 residents",1.26
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Apartment, 3 bedrooms, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Villa/Duplex/Townhouse, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Villa/Duplex/Townhouse, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Villa/Duplex/Townhouse, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"House, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,New build,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Villa/Duplex/Townhouse, 1 resident",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"House, 2 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"House, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,New build,"Group home, 5 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,New build,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Apartment, 1 bedroom, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Apartment, 2 bedrooms, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Apartment, 2 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Apartment, 3 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Villa/Duplex/Townhouse, 1 resident",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Villa/Duplex/Townhouse, 2 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Group home, 4 residents",0.83
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,New build,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Apartment, 2 bedrooms, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Apartment, 3 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,New build,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Apartment, 1 bedroom, 1 resident",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Apartment, 2 bedrooms, 1 resident",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Apartment, 2 bedrooms, 2 residents",1.23
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Apartment, 3 bedrooms, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Villa/Duplex/Townhouse, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Villa/Duplex/Townhouse, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"House, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,New build,"Group home, 5 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"House, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,New build,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Villa/Duplex/Townhouse, 1 resident",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"House, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,New build,"Group home, 5 residents",0.88
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Apartment, 1 bedroom, 1 resident",1.66
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Apartment, 2 bedrooms, 1 resident",1.65
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Apartment, 2 bedrooms, 2 residents",1.76
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Apartment, 3 bedrooms, 2 residents",1.67
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Villa/Duplex/Townhouse, 1 resident",1.40
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Villa/Duplex/Townhouse, 2 residents",1.39
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Villa/Duplex/Townhouse, 3 residents",1.39
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"House, 2 residents",1.34
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"House, 3 residents",1.37
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Group home, 4 residents",1.40
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,New build,"Group home, 5 residents",1.43
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Villa/Duplex/Townhouse, 1 resident",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Villa/Duplex/Townhouse, 3 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"House, 2 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"House, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Group home, 4 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,New build,"Group home, 5 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Villa/Duplex/Townhouse, 1 resident",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Villa/Duplex/Townhouse, 2 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Villa/Duplex/Townhouse, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Group home, 4 residents",0.83
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,New build,"Group home, 5 residents",0.82
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Apartment, 1 bedroom, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Apartment, 2 bedrooms, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Apartment, 2 bedrooms, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Apartment, 3 bedrooms, 2 residents",1.17
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Villa/Duplex/Townhouse, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Villa/Duplex/Townhouse, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,New build,"Group home, 5 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Villa/Duplex/Townhouse, 1 resident",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,New build,"Group home, 5 residents",0.84
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Apartment, 1 bedroom, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Apartment, 2 bedrooms, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Apartment, 2 bedrooms, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Apartment, 3 bedrooms, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Villa/Duplex/Townhouse, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Apartment, 1 bedroom, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Apartment, 2 bedrooms, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Apartment, 2 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Villa/Duplex/Townhouse, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Villa/Duplex/Townhouse, 3 residents",1.07
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"House, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"House, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Group home, 4 residents",1.07
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,New build,"Group home, 5 residents",1.07
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Apartment, 1 bedroom, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Apartment, 2 bedrooms, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Apartment, 2 bedrooms, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Apartment, 3 bedrooms, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Group home, 4 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,New build,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Apartment, 1 bedroom, 1 resident",1.39
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Apartment, 2 bedrooms, 1 resident",1.38
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Apartment, 2 bedrooms, 2 residents",1.45
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Apartment, 3 bedrooms, 2 residents",1.39
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Villa/Duplex/Townhouse, 1 resident",1.19
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Villa/Duplex/Townhouse, 2 residents",1.18
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Villa/Duplex/Townhouse, 3 residents",1.16
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"House, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"House, 3 residents",1.15
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Group home, 4 residents",1.16
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,New build,"Group home, 5 residents",1.18
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Apartment, 1 bedroom, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Apartment, 2 bedrooms, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Apartment, 2 bedrooms, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,New build,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,New build,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Apartment, 1 bedroom, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"House, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,New build,"Group home, 5 residents",0.88
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Apartment, 1 bedroom, 1 resident",1.13
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Apartment, 2 bedrooms, 1 resident",1.13
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Apartment, 2 bedrooms, 2 residents",1.15
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Apartment, 3 bedrooms, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - South East,New build,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Apartment, 1 bedroom, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Apartment, 2 bedrooms, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Apartment, 2 bedrooms, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Apartment, 3 bedrooms, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Villa/Duplex/Townhouse, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"House, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,New build,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Villa/Duplex/Townhouse, 1 resident",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Group home, 4 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,New build,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Villa/Duplex/Townhouse, 1 resident",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"House, 2 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"House, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,New build,"Group home, 5 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Villa/Duplex/Townhouse, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,New build,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Villa/Duplex/Townhouse, 1 resident",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Group home, 4 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,New build,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Villa/Duplex/Townhouse, 1 resident",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Villa/Duplex/Townhouse, 2 residents",0.87
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Villa/Duplex/Townhouse, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"House, 2 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"House, 3 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Group home, 4 residents",0.82
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,New build,"Group home, 5 residents",0.82
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Villa/Duplex/Townhouse, 1 resident",1.25
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Villa/Duplex/Townhouse, 2 residents",1.29
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Villa/Duplex/Townhouse, 3 residents",1.36
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"House, 2 residents",1.37
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"House, 3 residents",1.37
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Group home, 4 residents",1.39
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,New build,"Group home, 5 residents",1.39
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Villa/Duplex/Townhouse, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Villa/Duplex/Townhouse, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Villa/Duplex/Townhouse, 3 residents",1.15
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"House, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"House, 3 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Group home, 4 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,New build,"Group home, 5 residents",1.17
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Villa/Duplex/Townhouse, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Villa/Duplex/Townhouse, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Villa/Duplex/Townhouse, 3 residents",1.13
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"House, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"House, 3 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Group home, 4 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,New build,"Group home, 5 residents",1.15
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,New build,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Villa/Duplex/Townhouse, 1 resident",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,New build,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Villa/Duplex/Townhouse, 1 resident",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"House, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"House, 3 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,New build,"Group home, 5 residents",0.87
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Villa/Duplex/Townhouse, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,New build,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Villa/Duplex/Townhouse, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,New build,"Group home, 5 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,New build,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Villa/Duplex/Townhouse, 1 resident",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"House, 2 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"House, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Group home, 4 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - North West,New build,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Villa/Duplex/Townhouse, 1 resident",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Villa/Duplex/Townhouse, 2 residents",0.86
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Villa/Duplex/Townhouse, 3 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"House, 2 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"House, 3 residents",0.83
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Group home, 4 residents",0.82
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,New build,"Group home, 5 residents",0.81
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Apartment, 1 bedroom, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Villa/Duplex/Townhouse, 1 resident",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"House, 2 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"House, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Group home, 4 residents",0.84
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,New build,"Group home, 5 residents",0.84
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Apartment, 1 bedroom, 1 resident",1.23
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Apartment, 2 bedrooms, 1 resident",1.23
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Apartment, 2 bedrooms, 2 residents",1.27
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Apartment, 3 bedrooms, 2 residents",1.23
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Villa/Duplex/Townhouse, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Villa/Duplex/Townhouse, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Villa/Duplex/Townhouse, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"House, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Group home, 4 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,New build,"Group home, 5 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,New build,"Group home, 5 residents",0.90
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Villa/Duplex/Townhouse, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Villa/Duplex/Townhouse, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Villa/Duplex/Townhouse, 3 residents",1.24
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"House, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"House, 3 residents",1.25
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Group home, 4 residents",1.26
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,New build,"Group home, 5 residents",1.27
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,New build,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Villa/Duplex/Townhouse, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,New build,"Group home, 5 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Apartment, 1 bedroom, 1 resident",1.19
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Apartment, 2 bedrooms, 1 resident",1.19
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Apartment, 2 bedrooms, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Apartment, 3 bedrooms, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Villa/Duplex/Townhouse, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Villa/Duplex/Townhouse, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Villa/Duplex/Townhouse, 3 residents",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"House, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"House, 3 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Group home, 4 residents",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,New build,"Group home, 5 residents",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Apartment, 1 bedroom, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Apartment, 2 bedrooms, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Apartment, 2 bedrooms, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"House, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Group home, 4 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,New build,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Apartment, 1 bedroom, 1 resident",1.66
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Apartment, 2 bedrooms, 1 resident",1.66
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Apartment, 2 bedrooms, 2 residents",1.77
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Apartment, 3 bedrooms, 2 residents",1.68
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Villa/Duplex/Townhouse, 1 resident",1.42
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Villa/Duplex/Townhouse, 2 residents",1.42
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Villa/Duplex/Townhouse, 3 residents",1.42
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"House, 2 residents",1.37
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"House, 3 residents",1.41
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Group home, 4 residents",1.43
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),New build,"Group home, 5 residents",1.47
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Apartment, 1 bedroom, 1 resident",1.65
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Apartment, 2 bedrooms, 1 resident",1.65
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Apartment, 2 bedrooms, 2 residents",1.76
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Apartment, 3 bedrooms, 2 residents",1.67
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Villa/Duplex/Townhouse, 1 resident",1.39
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Villa/Duplex/Townhouse, 2 residents",1.39
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Villa/Duplex/Townhouse, 3 residents",1.38
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"House, 2 residents",1.34
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"House, 3 residents",1.37
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Group home, 4 residents",1.39
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),New build,"Group home, 5 residents",1.43
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Apartment, 1 bedroom, 1 resident",1.18
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Apartment, 2 bedrooms, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Apartment, 2 bedrooms, 2 residents",1.20
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Apartment, 3 bedrooms, 2 residents",1.17
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Villa/Duplex/Townhouse, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Group home, 4 residents",0.98
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,New build,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Existing,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Existing,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Villa/Duplex/Townhouse, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Existing,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Existing,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Apartment, 1 bedroom, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Apartment, 3 bedrooms, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Villa/Duplex/Townhouse, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Villa/Duplex/Townhouse, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Group home, 4 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Existing,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Apartment, 2 bedrooms, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Villa/Duplex/Townhouse, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Group home, 4 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Existing,"Group home, 5 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Villa/Duplex/Townhouse, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Existing,"Group home, 5 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Apartment, 2 bedrooms, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Villa/Duplex/Townhouse, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Villa/Duplex/Townhouse, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Group home, 4 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Existing,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Existing,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Villa/Duplex/Townhouse, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Existing,"Group home, 5 residents",0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Villa/Duplex/Townhouse, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Villa/Duplex/Townhouse, 3 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"House, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"House, 3 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Group home, 4 residents",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Existing,"Group home, 5 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Villa/Duplex/Townhouse, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"House, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Existing,"Group home, 5 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Apartment, 1 bedroom, 1 resident",1.20
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Apartment, 2 bedrooms, 1 resident",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Apartment, 2 bedrooms, 2 residents",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Apartment, 3 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Villa/Duplex/Townhouse, 1 resident",1.76
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Villa/Duplex/Townhouse, 2 residents",2.25
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Villa/Duplex/Townhouse, 3 residents",2.53
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"House, 2 residents",1.93
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"House, 3 residents",2.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Group home, 4 residents",2.31
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Existing,"Group home, 5 residents",2.53
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Apartment, 1 bedroom, 1 resident",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Apartment, 3 bedrooms, 2 residents",1.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Villa/Duplex/Townhouse, 1 resident",1.63
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Villa/Duplex/Townhouse, 2 residents",2.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Villa/Duplex/Townhouse, 3 residents",2.27
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"House, 2 residents",1.78
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"House, 3 residents",1.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Group home, 4 residents",2.09
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Existing,"Group home, 5 residents",2.27
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Villa/Duplex/Townhouse, 3 residents",1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"House, 2 residents",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"House, 3 residents",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Group home, 4 residents",1.25
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Existing,"Group home, 5 residents",1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Apartment, 1 bedroom, 1 resident",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Apartment, 2 bedrooms, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Apartment, 2 bedrooms, 2 residents",1.17
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Apartment, 3 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.59
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Villa/Duplex/Townhouse, 3 residents",1.71
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"House, 2 residents",1.44
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"House, 3 residents",1.54
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Group home, 4 residents",1.61
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Existing,"Group home, 5 residents",1.72
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Apartment, 3 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Villa/Duplex/Townhouse, 1 resident",1.25
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Villa/Duplex/Townhouse, 2 residents",1.39
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Villa/Duplex/Townhouse, 3 residents",1.47
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"House, 2 residents",1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"House, 3 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Group home, 4 residents",1.41
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Existing,"Group home, 5 residents",1.47
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Villa/Duplex/Townhouse, 1 resident",1.18
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Villa/Duplex/Townhouse, 2 residents",1.30
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Villa/Duplex/Townhouse, 3 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"House, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"House, 3 residents",1.27
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Group home, 4 residents",1.31
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Existing,"Group home, 5 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Apartment, 3 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Villa/Duplex/Townhouse, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Villa/Duplex/Townhouse, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Villa/Duplex/Townhouse, 3 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"House, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"House, 3 residents",1.12
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Group home, 4 residents",1.14
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Existing,"Group home, 5 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Villa/Duplex/Townhouse, 1 resident",1.17
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Villa/Duplex/Townhouse, 2 residents",1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Villa/Duplex/Townhouse, 3 residents",1.35
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"House, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"House, 3 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Group home, 4 residents",1.30
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Existing,"Group home, 5 residents",1.35
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Villa/Duplex/Townhouse, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Group home, 4 residents",1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Existing,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Villa/Duplex/Townhouse, 1 resident",1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Villa/Duplex/Townhouse, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Villa/Duplex/Townhouse, 3 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"House, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"House, 3 residents",1.20
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Group home, 4 residents",1.23
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Existing,"Group home, 5 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Apartment, 1 bedroom, 1 resident",1.35
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Apartment, 2 bedrooms, 1 resident",1.36
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Apartment, 2 bedrooms, 2 residents",1.36
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Apartment, 3 bedrooms, 2 residents",1.41
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Villa/Duplex/Townhouse, 1 resident",1.29
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Villa/Duplex/Townhouse, 2 residents",1.26
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Villa/Duplex/Townhouse, 3 residents",1.28
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"House, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"House, 3 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Group home, 4 residents",1.27
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Existing,"Group home, 5 residents",1.28
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Apartment, 1 bedroom, 1 resident",1.39
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Apartment, 2 bedrooms, 1 resident",1.40
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Apartment, 2 bedrooms, 2 residents",1.40
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Apartment, 3 bedrooms, 2 residents",1.47
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Villa/Duplex/Townhouse, 1 resident",1.29
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Villa/Duplex/Townhouse, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Villa/Duplex/Townhouse, 3 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"House, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"House, 3 residents",1.22
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Group home, 4 residents",1.24
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Existing,"Group home, 5 residents",1.24
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Apartment, 1 bedroom, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Apartment, 2 bedrooms, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Apartment, 2 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Apartment, 3 bedrooms, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Apartment, 1 bedroom, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Apartment, 2 bedrooms, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Apartment, 2 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Apartment, 3 bedrooms, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"House, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Group home, 4 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Existing,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Apartment, 1 bedroom, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Apartment, 2 bedrooms, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Apartment, 2 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Apartment, 3 bedrooms, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Villa/Duplex/Townhouse, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Villa/Duplex/Townhouse, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Group home, 4 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Existing,"Group home, 5 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Apartment, 1 bedroom, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Apartment, 2 bedrooms, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Apartment, 2 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Apartment, 3 bedrooms, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"House, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Apartment, 1 bedroom, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Apartment, 2 bedrooms, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Apartment, 2 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Apartment, 3 bedrooms, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Villa/Duplex/Townhouse, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Villa/Duplex/Townhouse, 3 residents",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"House, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Group home, 4 residents",1.07
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Existing,"Group home, 5 residents",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Apartment, 1 bedroom, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Apartment, 3 bedrooms, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Existing,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Villa/Duplex/Townhouse, 2 residents",0.88
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Villa/Duplex/Townhouse, 3 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"House, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Group home, 4 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Existing,"Group home, 5 residents",0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Apartment, 1 bedroom, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Apartment, 3 bedrooms, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Villa/Duplex/Townhouse, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Existing,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"House, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Existing,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Villa/Duplex/Townhouse, 1 resident",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Villa/Duplex/Townhouse, 2 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Villa/Duplex/Townhouse, 3 residents",0.84
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"House, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"House, 3 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Group home, 4 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Existing,"Group home, 5 residents",0.83
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Villa/Duplex/Townhouse, 3 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Group home, 4 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Existing,"Group home, 5 residents",0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Apartment, 1 bedroom, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Apartment, 3 bedrooms, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Group home, 4 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Existing,"Group home, 5 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Apartment, 1 bedroom, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Apartment, 2 bedrooms, 1 resident",1.10
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Apartment, 2 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Apartment, 3 bedrooms, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Villa/Duplex/Townhouse, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"House, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Existing,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Apartment, 1 bedroom, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Apartment, 2 bedrooms, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Apartment, 2 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Apartment, 1 bedroom, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Apartment, 2 bedrooms, 1 resident",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Apartment, 2 bedrooms, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Apartment, 3 bedrooms, 2 residents",1.19
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Villa/Duplex/Townhouse, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Group home, 4 residents",1.04
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Existing,"Group home, 5 residents",1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Existing,"Group home, 5 residents",0.86
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Villa/Duplex/Townhouse, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Villa/Duplex/Townhouse, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"House, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"House, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Existing,"Group home, 5 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Villa/Duplex/Townhouse, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"House, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Group home, 4 residents",0.96
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Existing,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Apartment, 1 bedroom, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Villa/Duplex/Townhouse, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"House, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Existing,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Apartment, 1 bedroom, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"House, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Group home, 4 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Existing,"Group home, 5 residents",0.86
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Apartment, 1 bedroom, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Apartment, 2 bedrooms, 1 resident",1.15
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Apartment, 2 bedrooms, 2 residents",1.15
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Apartment, 3 bedrooms, 2 residents",1.18
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Villa/Duplex/Townhouse, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Group home, 4 residents",1.01
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Apartment, 3 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"House, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Existing,"Group home, 5 residents",0.86
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Apartment, 3 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Villa/Duplex/Townhouse, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Villa/Duplex/Townhouse, 3 residents",0.88
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Existing,"Group home, 5 residents",0.88
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Apartment, 2 bedrooms, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"House, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"House, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Group home, 4 residents",0.95
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Existing,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Existing,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Apartment, 2 bedrooms, 1 resident",1.09
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Apartment, 2 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Apartment, 3 bedrooms, 2 residents",1.10
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"House, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Existing,"Group home, 5 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"House, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Apartment, 1 bedroom, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Villa/Duplex/Townhouse, 1 resident",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"House, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Villa/Duplex/Townhouse, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"House, 2 residents",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"House, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Group home, 4 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Existing,"Group home, 5 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Villa/Duplex/Townhouse, 2 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Villa/Duplex/Townhouse, 3 residents",0.86
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"House, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"House, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Group home, 4 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Existing,"Group home, 5 residents",0.86
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Apartment, 1 bedroom, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Apartment, 2 bedrooms, 1 resident",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Apartment, 2 bedrooms, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Apartment, 3 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Villa/Duplex/Townhouse, 1 resident",1.13
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Villa/Duplex/Townhouse, 2 residents",1.22
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Villa/Duplex/Townhouse, 3 residents",1.27
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"House, 2 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"House, 3 residents",1.20
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Group home, 4 residents",1.23
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Existing,"Group home, 5 residents",1.27
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Apartment, 3 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Villa/Duplex/Townhouse, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Villa/Duplex/Townhouse, 3 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"House, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"House, 3 residents",1.10
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Group home, 4 residents",1.12
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Existing,"Group home, 5 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Apartment, 1 bedroom, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Apartment, 2 bedrooms, 1 resident",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Apartment, 2 bedrooms, 2 residents",0.99
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Apartment, 3 bedrooms, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Villa/Duplex/Townhouse, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Villa/Duplex/Townhouse, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Villa/Duplex/Townhouse, 3 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"House, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"House, 3 residents",1.12
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Group home, 4 residents",1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Existing,"Group home, 5 residents",1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"House, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"House, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Group home, 4 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Existing,"Group home, 5 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Apartment, 1 bedroom, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Apartment, 2 bedrooms, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Apartment, 2 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Apartment, 1 bedroom, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Apartment, 2 bedrooms, 1 resident",1.02
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Apartment, 2 bedrooms, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Apartment, 3 bedrooms, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Villa/Duplex/Townhouse, 1 resident",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Existing,"Group home, 5 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Apartment, 1 bedroom, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Apartment, 2 bedrooms, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Apartment, 3 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Villa/Duplex/Townhouse, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Villa/Duplex/Townhouse, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"House, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"House, 3 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Group home, 4 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Existing,"Group home, 5 residents",1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Apartment, 3 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.95
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Existing,"Group home, 5 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Apartment, 1 bedroom, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Apartment, 2 bedrooms, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Apartment, 2 bedrooms, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Apartment, 3 bedrooms, 2 residents",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Villa/Duplex/Townhouse, 1 resident",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Villa/Duplex/Townhouse, 2 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.96
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"House, 2 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"House, 3 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Group home, 4 residents",0.90
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Existing,"Group home, 5 residents",0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"House, 3 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Group home, 4 residents",0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Existing,"Group home, 5 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Apartment, 2 bedrooms, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Apartment, 2 bedrooms, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Apartment, 3 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Villa/Duplex/Townhouse, 1 resident",0.97
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Villa/Duplex/Townhouse, 2 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Villa/Duplex/Townhouse, 3 residents",0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"House, 2 residents",0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"House, 3 residents",0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Group home, 4 residents",0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Existing,"Group home, 5 residents",0.90
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Apartment, 1 bedroom, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Apartment, 2 bedrooms, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Apartment, 2 bedrooms, 2 residents",1.12
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Apartment, 3 bedrooms, 2 residents",1.14
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Villa/Duplex/Townhouse, 1 resident",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"House, 2 residents",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"House, 3 residents",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Apartment, 2 bedrooms, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Apartment, 2 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Apartment, 3 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Villa/Duplex/Townhouse, 3 residents",0.96
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"House, 3 residents",0.98
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Existing,"Group home, 5 residents",0.96
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Apartment, 1 bedroom, 1 resident",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Apartment, 2 bedrooms, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Apartment, 2 bedrooms, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Apartment, 3 bedrooms, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Villa/Duplex/Townhouse, 1 resident",1.22
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Villa/Duplex/Townhouse, 2 residents",1.34
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Villa/Duplex/Townhouse, 3 residents",1.42
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"House, 2 residents",1.26
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"House, 3 residents",1.32
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Group home, 4 residents",1.36
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Existing,"Group home, 5 residents",1.42
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.01
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Villa/Duplex/Townhouse, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Villa/Duplex/Townhouse, 3 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"House, 2 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"House, 3 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Group home, 4 residents",1.00
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Existing,"Group home, 5 residents",0.99
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Apartment, 1 bedroom, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Apartment, 2 bedrooms, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Apartment, 2 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Villa/Duplex/Townhouse, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"House, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"House, 3 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Group home, 4 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Existing,"Group home, 5 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Apartment, 1 bedroom, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Apartment, 2 bedrooms, 1 resident",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Apartment, 2 bedrooms, 2 residents",1.08
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Apartment, 3 bedrooms, 2 residents",1.09
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Villa/Duplex/Townhouse, 1 resident",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Villa/Duplex/Townhouse, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Villa/Duplex/Townhouse, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"House, 2 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"House, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Group home, 4 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Existing,"Group home, 5 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Apartment, 1 bedroom, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Apartment, 2 bedrooms, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Apartment, 2 bedrooms, 2 residents",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Apartment, 3 bedrooms, 2 residents",1.04
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Villa/Duplex/Townhouse, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Villa/Duplex/Townhouse, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"House, 2 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"House, 3 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Group home, 4 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Existing,"Group home, 5 residents",1.02
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Apartment, 1 bedroom, 1 resident",1.20
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Apartment, 2 bedrooms, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Apartment, 2 bedrooms, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Apartment, 3 bedrooms, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Villa/Duplex/Townhouse, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Villa/Duplex/Townhouse, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Villa/Duplex/Townhouse, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"House, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"House, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Group home, 4 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Existing,"Group home, 5 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Apartment, 1 bedroom, 1 resident",1.20
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Apartment, 2 bedrooms, 1 resident",1.21
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Apartment, 2 bedrooms, 2 residents",1.21
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Apartment, 3 bedrooms, 2 residents",1.24
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Villa/Duplex/Townhouse, 1 resident",1.12
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Villa/Duplex/Townhouse, 2 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Villa/Duplex/Townhouse, 3 residents",1.05
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"House, 2 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"House, 3 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Group home, 4 residents",1.07
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Existing,"Group home, 5 residents",1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Apartment, 1 bedroom, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Apartment, 2 bedrooms, 1 resident",1.11
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Apartment, 2 bedrooms, 2 residents",1.11
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Apartment, 3 bedrooms, 2 residents",1.13
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Villa/Duplex/Townhouse, 1 resident",1.03
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Villa/Duplex/Townhouse, 2 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Villa/Duplex/Townhouse, 3 residents",0.95
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"House, 2 residents",0.98
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"House, 3 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Group home, 4 residents",0.97
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Existing,"Group home, 5 residents",0.95
+2026-27,1.0,2026-07-01,sa4:ACT - Australian Capital Territory,Legacy,Legacy,0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Capital Region,Legacy,Legacy,0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Central Coast,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Central West,Legacy,Legacy,0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Coffs Harbour - Grafton,Legacy,Legacy,0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Far West and Orana,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Hunter Valley exc Newcastle,Legacy,Legacy,0.95
+2026-27,1.0,2026-07-01,sa4:NSW - Illawarra,Legacy,Legacy,1.04
+2026-27,1.0,2026-07-01,sa4:NSW - Mid North Coast,Legacy,Legacy,0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Murray,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:NSW - New England and North West,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:NSW - Newcastle and Lake Macquarie,Legacy,Legacy,1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Richmond - Tweed,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Riverina,Legacy,Legacy,0.92
+2026-27,1.0,2026-07-01,sa4:NSW - Southern Highlands and Shoalhaven,Legacy,Legacy,0.96
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,Legacy,Legacy,1.13
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Blacktown,Legacy,Legacy,1.03
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - City and Inner South,Legacy,Legacy,2.53
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Eastern Suburbs,Legacy,Legacy,2.27
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner South West,Legacy,Legacy,1.29
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Inner West,Legacy,Legacy,1.72
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - North Sydney and Hornsby,Legacy,Legacy,1.47
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Northern Beaches,Legacy,Legacy,1.36
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer South West,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Outer West and Blue Mountains,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Parramatta,Legacy,Legacy,1.16
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Ryde,Legacy,Legacy,1.35
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - South West,Legacy,Legacy,1.05
+2026-27,1.0,2026-07-01,sa4:NSW - Sydney - Sutherland,Legacy,Legacy,1.26
+2026-27,1.0,2026-07-01,sa4:NT - Darwin,Legacy,Legacy,1.28
+2026-27,1.0,2026-07-01,sa4:NT - Northern Territory - Outback,Legacy,Legacy,1.24
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - East,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - North,Legacy,Legacy,0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - South,Legacy,Legacy,0.98
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane - West,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:QLD - Brisbane Inner City,Legacy,Legacy,1.08
+2026-27,1.0,2026-07-01,sa4:QLD - Cairns,Legacy,Legacy,1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Central Queensland,Legacy,Legacy,0.85
+2026-27,1.0,2026-07-01,sa4:QLD - Darling Downs - Maranoa,Legacy,Legacy,1.02
+2026-27,1.0,2026-07-01,sa4:QLD - Gold Coast,Legacy,Legacy,0.92
+2026-27,1.0,2026-07-01,sa4:QLD - Ipswich,Legacy,Legacy,0.83
+2026-27,1.0,2026-07-01,sa4:QLD - Logan - Beaudesert,Legacy,Legacy,0.87
+2026-27,1.0,2026-07-01,sa4:QLD - Mackay - Isaac - Whitsunday,Legacy,Legacy,1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - North,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Moreton Bay - South,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Queensland - Outback,Legacy,Legacy,0.94
+2026-27,1.0,2026-07-01,sa4:QLD - Sunshine Coast,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Toowoomba,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:QLD - Townsville,Legacy,Legacy,1.03
+2026-27,1.0,2026-07-01,sa4:QLD - Wide Bay,Legacy,Legacy,0.86
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - Central and Hills,Legacy,Legacy,1.03
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - North,Legacy,Legacy,0.94
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - South,Legacy,Legacy,0.93
+2026-27,1.0,2026-07-01,sa4:SA - Adelaide - West,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:SA - Barossa - Yorke - Mid North,Legacy,Legacy,0.86
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - Outback,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:SA - South Australia - South East,Legacy,Legacy,0.86
+2026-27,1.0,2026-07-01,sa4:TAS - Hobart,Legacy,Legacy,0.88
+2026-27,1.0,2026-07-01,sa4:TAS - Launceston and North East,Legacy,Legacy,0.93
+2026-27,1.0,2026-07-01,sa4:TAS - South East,Legacy,Legacy,0.92
+2026-27,1.0,2026-07-01,sa4:TAS - West and North West,Legacy,Legacy,0.93
+2026-27,1.0,2026-07-01,sa4:VIC - Ballarat,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Bendigo,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Geelong,Legacy,Legacy,0.92
+2026-27,1.0,2026-07-01,sa4:VIC - Hume,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Latrobe - Gippsland,Legacy,Legacy,0.86
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner,Legacy,Legacy,1.27
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner East,Legacy,Legacy,1.14
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Inner South,Legacy,Legacy,1.16
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North East,Legacy,Legacy,0.94
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - North West,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - Outer East,Legacy,Legacy,0.90
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - South East,Legacy,Legacy,1.03
+2026-27,1.0,2026-07-01,sa4:VIC - Melbourne - West,Legacy,Legacy,0.91
+2026-27,1.0,2026-07-01,sa4:VIC - Mornington Peninsula,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:VIC - North West,Legacy,Legacy,0.88
+2026-27,1.0,2026-07-01,sa4:VIC - Shepparton,Legacy,Legacy,0.89
+2026-27,1.0,2026-07-01,sa4:VIC - Warrnambool and South West,Legacy,Legacy,0.90
+2026-27,1.0,2026-07-01,sa4:WA - Bunbury,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:WA - Mandurah,Legacy,Legacy,0.96
+2026-27,1.0,2026-07-01,sa4:WA - Perth - Inner,Legacy,Legacy,1.42
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North East,Legacy,Legacy,0.99
+2026-27,1.0,2026-07-01,sa4:WA - Perth - North West,Legacy,Legacy,1.05
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South East,Legacy,Legacy,1.06
+2026-27,1.0,2026-07-01,sa4:WA - Perth - South West,Legacy,Legacy,1.02
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (North),Legacy,Legacy,1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Outback (South),Legacy,Legacy,1.06
+2026-27,1.0,2026-07-01,sa4:WA - Western Australia - Wheat Belt,Legacy,Legacy,0.95

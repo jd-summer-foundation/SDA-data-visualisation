@@ -1,0 +1,440 @@
+sa3_a,sa4_a,sa3_b,sa4_b,shared_km,edition,apartment_factor_a,apartment_factor_b,villa_factor_a,villa_factor_b,house_factor_a,house_factor_b,mix_factor_a,mix_factor_b,differs
+sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,sa3:NSW - Shoalhaven,sa4:NSW - Southern Highlands and Shoalhaven,96.57,2026-27,1.05,1.04,0.96,0.96,0.91,0.91,0.953,0.954,yes
+sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,sa3:ACT - Canberra East,sa4:ACT - Australian Capital Territory,67.21,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,sa3:ACT - Gungahlin,sa4:ACT - Australian Capital Territory,0.02,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,sa3:ACT - Tuggeranong,sa4:ACT - Australian Capital Territory,28.66,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Queanbeyan,sa4:NSW - Capital Region,sa3:ACT - Urriarra - Namadgi,sa4:ACT - Australian Capital Territory,28.34,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Snowy Mountains,sa4:NSW - Capital Region,sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,225.64,2026-27,1.05,1.04,0.96,0.93,0.91,0.88,0.953,0.929,yes
+sa3:NSW - Snowy Mountains,sa4:NSW - Capital Region,sa3:VIC - Gippsland - East,sa4:VIC - Latrobe - Gippsland,114.83,2026-27,1.05,0.97,0.96,0.88,0.91,0.83,0.953,0.874,yes
+sa3:NSW - Snowy Mountains,sa4:NSW - Capital Region,sa3:ACT - Urriarra - Namadgi,sa4:ACT - Australian Capital Territory,71.47,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - South Coast,sa4:NSW - Capital Region,sa3:NSW - Shoalhaven,sa4:NSW - Southern Highlands and Shoalhaven,71.53,2026-27,1.05,1.04,0.96,0.96,0.91,0.91,0.953,0.954,yes
+sa3:NSW - South Coast,sa4:NSW - Capital Region,sa3:VIC - Gippsland - East,sa4:VIC - Latrobe - Gippsland,61.04,2026-27,1.05,0.97,0.96,0.88,0.91,0.83,0.953,0.874,yes
+sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,sa3:NSW - Bathurst,sa4:NSW - Central West,186.15,2026-27,1.05,1.11,0.96,0.99,0.91,0.94,0.953,0.991,yes
+sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,sa3:NSW - Lachlan Valley,sa4:NSW - Central West,18.35,2026-27,1.05,1.11,0.96,0.99,0.91,0.94,0.953,0.991,yes
+sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,sa3:NSW - Shoalhaven,sa4:NSW - Southern Highlands and Shoalhaven,74.24,2026-27,1.05,1.04,0.96,0.96,0.91,0.91,0.953,0.954,yes
+sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,112.71,2026-27,1.05,1.04,0.96,0.96,0.91,0.91,0.953,0.954,yes
+sa3:NSW - Goulburn - Mulwaree,sa4:NSW - Capital Region,sa3:NSW - Blue Mountains - South,sa4:NSW - Sydney - Outer West and Blue Mountains,36.21,2026-27,1.05,1.03,0.96,0.97,0.91,0.94,0.953,0.968,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:NSW - Lachlan Valley,sa4:NSW - Central West,219.07,2026-27,1.05,1.11,0.96,0.99,0.91,0.94,0.953,0.991,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,66.82,2026-27,1.05,1.04,0.96,0.93,0.91,0.88,0.953,0.929,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:NSW - Wagga Wagga,sa4:NSW - Riverina,242.69,2026-27,1.05,1.04,0.96,0.93,0.91,0.88,0.953,0.929,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:ACT - Belconnen,sa4:ACT - Australian Capital Territory,9.45,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:ACT - Gungahlin,sa4:ACT - Australian Capital Territory,27.23,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Young - Yass,sa4:NSW - Capital Region,sa3:ACT - Urriarra - Namadgi,sa4:ACT - Australian Capital Territory,23.67,2026-27,1.05,0.99,0.96,0.96,0.91,0.94,0.953,0.956,yes
+sa3:NSW - Gosford,sa4:NSW - Central Coast,sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,8.32,2026-27,1.05,1.02,1.01,0.93,0.99,0.89,1.010,0.929,yes
+sa3:NSW - Gosford,sa4:NSW - Central Coast,sa3:NSW - Dural - Wisemans Ferry,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,16.68,2026-27,1.05,1.04,1.01,1.04,0.99,1.04,1.010,1.040,yes
+sa3:NSW - Gosford,sa4:NSW - Central Coast,sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,46.03,2026-27,1.05,1.04,1.01,1.04,0.99,1.04,1.010,1.040,yes
+sa3:NSW - Wyong,sa4:NSW - Central Coast,sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,21.40,2026-27,1.05,1.02,1.01,0.93,0.99,0.89,1.010,0.929,yes
+sa3:NSW - Wyong,sa4:NSW - Central Coast,sa3:NSW - Lake Macquarie - East,sa4:NSW - Newcastle and Lake Macquarie,4.56,2026-27,1.05,1.03,1.01,1.00,0.99,0.99,1.010,1.001,yes
+sa3:NSW - Wyong,sa4:NSW - Central Coast,sa3:NSW - Lake Macquarie - West,sa4:NSW - Newcastle and Lake Macquarie,40.18,2026-27,1.05,1.03,1.01,1.00,0.99,0.99,1.010,1.001,yes
+sa3:NSW - Bathurst,sa4:NSW - Central West,sa3:NSW - Blue Mountains,sa4:NSW - Sydney - Outer West and Blue Mountains,7.74,2026-27,1.11,1.03,0.99,0.97,0.94,0.94,0.991,0.968,yes
+sa3:NSW - Bathurst,sa4:NSW - Central West,sa3:NSW - Blue Mountains - South,sa4:NSW - Sydney - Outer West and Blue Mountains,66.58,2026-27,1.11,1.03,0.99,0.97,0.94,0.94,0.991,0.968,yes
+sa3:NSW - Lachlan Valley,sa4:NSW - Central West,sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,416.62,2026-27,1.11,1.22,0.99,1.06,0.94,1.00,0.991,1.066,yes
+sa3:NSW - Lachlan Valley,sa4:NSW - Central West,sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,162.09,2026-27,1.11,1.22,0.99,1.06,0.94,1.00,0.991,1.066,yes
+sa3:NSW - Lachlan Valley,sa4:NSW - Central West,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,200.87,2026-27,1.11,1.04,0.99,0.93,0.94,0.88,0.991,0.929,yes
+sa3:NSW - Lachlan Valley,sa4:NSW - Central West,sa3:NSW - Wagga Wagga,sa4:NSW - Riverina,133.14,2026-27,1.11,1.04,0.99,0.93,0.94,0.88,0.991,0.929,yes
+sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,454.17,2026-27,1.11,1.22,0.99,1.06,0.94,1.00,0.991,1.066,yes
+sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,50.29,2026-27,1.11,1.02,0.99,0.93,0.94,0.89,0.991,0.929,yes
+sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,277.61,2026-27,1.11,1.02,0.99,0.93,0.94,0.89,0.991,0.929,yes
+sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,109.10,2026-27,1.11,1.04,0.99,1.04,0.94,1.04,0.991,1.040,yes
+sa3:NSW - Lithgow - Mudgee,sa4:NSW - Central West,sa3:NSW - Blue Mountains,sa4:NSW - Sydney - Outer West and Blue Mountains,77.88,2026-27,1.11,1.03,0.99,0.97,0.94,0.94,0.991,0.968,yes
+sa3:NSW - Orange,sa4:NSW - Central West,sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,185.77,2026-27,1.11,1.22,0.99,1.06,0.94,1.00,0.991,1.066,yes
+sa3:NSW - Clarence Valley,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Armidale,sa4:NSW - New England and North West,50.74,2026-27,1.06,1.03,0.96,0.92,0.91,0.86,0.957,0.912,yes
+sa3:NSW - Clarence Valley,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,218.75,2026-27,1.06,1.03,0.96,0.92,0.91,0.86,0.957,0.912,yes
+sa3:NSW - Clarence Valley,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Richmond Valley - Coastal,sa4:NSW - Richmond - Tweed,20.51,2026-27,1.06,1.08,0.96,1.00,0.91,0.96,0.957,0.997,yes
+sa3:NSW - Clarence Valley,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,122.24,2026-27,1.06,1.08,0.96,1.00,0.91,0.96,0.957,0.997,yes
+sa3:NSW - Coffs Harbour,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Kempsey - Nambucca,sa4:NSW - Mid North Coast,77.88,2026-27,1.06,1.04,0.96,0.95,0.91,0.90,0.957,0.943,yes
+sa3:NSW - Coffs Harbour,sa4:NSW - Coffs Harbour - Grafton,sa3:NSW - Armidale,sa4:NSW - New England and North West,54.64,2026-27,1.06,1.03,0.96,0.92,0.91,0.86,0.957,0.912,yes
+sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,sa3:NSW - Moree - Narrabri,sa4:NSW - New England and North West,357.41,2026-27,1.22,1.03,1.06,0.92,1.00,0.86,1.066,0.912,yes
+sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,189.99,2026-27,1.22,1.04,1.06,0.93,1.00,0.88,1.066,0.929,yes
+sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,195.78,2026-27,1.22,1.03,1.06,0.91,1.00,0.85,1.066,0.905,yes
+sa3:NSW - Bourke - Cobar - Coonamble,sa4:NSW - Far West and Orana,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,248.20,2026-27,1.22,1.65,1.06,1.40,1.00,1.34,1.066,1.433,yes
+sa3:NSW - Broken Hill and Far West,sa4:NSW - Far West and Orana,sa3:NSW - Lower Murray,sa4:NSW - Murray,625.16,2026-27,1.22,1.01,1.06,0.91,1.00,0.85,1.066,0.900,yes
+sa3:NSW - Broken Hill and Far West,sa4:NSW - Far West and Orana,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,63.13,2026-27,1.22,1.04,1.06,0.93,1.00,0.88,1.066,0.929,yes
+sa3:NSW - Broken Hill and Far West,sa4:NSW - Far West and Orana,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,330.05,2026-27,1.22,1.65,1.06,1.40,1.00,1.34,1.066,1.433,yes
+sa3:NSW - Broken Hill and Far West,sa4:NSW - Far West and Orana,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,481.47,2026-27,1.22,1.38,1.06,1.19,1.00,1.13,1.066,1.206,yes
+sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,45.89,2026-27,1.22,1.02,1.06,0.93,1.00,0.89,1.066,0.929,yes
+sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,sa3:NSW - Moree - Narrabri,sa4:NSW - New England and North West,137.86,2026-27,1.22,1.03,1.06,0.92,1.00,0.86,1.066,0.912,yes
+sa3:NSW - Dubbo,sa4:NSW - Far West and Orana,sa3:NSW - Tamworth - Gunnedah,sa4:NSW - New England and North West,200.57,2026-27,1.22,1.03,1.06,0.92,1.00,0.86,1.066,0.912,yes
+sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Great Lakes,sa4:NSW - Mid North Coast,86.26,2026-27,1.02,1.04,0.93,0.95,0.89,0.90,0.929,0.943,yes
+sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Taree - Gloucester,sa4:NSW - Mid North Coast,27.77,2026-27,1.02,1.04,0.93,0.95,0.89,0.90,0.929,0.943,yes
+sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Lake Macquarie - West,sa4:NSW - Newcastle and Lake Macquarie,47.93,2026-27,1.02,1.03,0.93,1.00,0.89,0.99,0.929,1.001,yes
+sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Newcastle,sa4:NSW - Newcastle and Lake Macquarie,7.97,2026-27,1.02,1.03,0.93,1.00,0.89,0.99,0.929,1.001,yes
+sa3:NSW - Lower Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,102.15,2026-27,1.02,1.04,0.93,1.04,0.89,1.04,0.929,1.040,yes
+sa3:NSW - Maitland,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Newcastle,sa4:NSW - Newcastle and Lake Macquarie,11.16,2026-27,1.02,1.03,0.93,1.00,0.89,0.99,0.929,1.001,yes
+sa3:NSW - Port Stephens,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Great Lakes,sa4:NSW - Mid North Coast,57.92,2026-27,1.02,1.04,0.93,0.95,0.89,0.90,0.929,0.943,yes
+sa3:NSW - Port Stephens,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Newcastle,sa4:NSW - Newcastle and Lake Macquarie,13.09,2026-27,1.02,1.03,0.93,1.00,0.89,0.99,0.929,1.001,yes
+sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Taree - Gloucester,sa4:NSW - Mid North Coast,81.09,2026-27,1.02,1.04,0.93,0.95,0.89,0.90,0.929,0.943,yes
+sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Armidale,sa4:NSW - New England and North West,41.52,2026-27,1.02,1.03,0.93,0.92,0.89,0.86,0.929,0.912,yes
+sa3:NSW - Upper Hunter,sa4:NSW - Hunter Valley exc Newcastle,sa3:NSW - Tamworth - Gunnedah,sa4:NSW - New England and North West,186.24,2026-27,1.02,1.03,0.93,0.92,0.89,0.86,0.929,0.912,yes
+sa3:NSW - Illawarra Catchment Reserve,sa4:NSW - Illawarra,sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,57.92,2026-27,1.04,1.04,1.04,0.96,1.04,0.91,1.040,0.954,yes
+sa3:NSW - Illawarra Catchment Reserve,sa4:NSW - Illawarra,sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,52.97,2026-27,1.04,1.00,1.04,0.96,1.04,0.93,1.040,0.955,yes
+sa3:NSW - Kiama - Shellharbour,sa4:NSW - Illawarra,sa3:NSW - Shoalhaven,sa4:NSW - Southern Highlands and Shoalhaven,49.47,2026-27,1.04,1.04,1.04,0.96,1.04,0.91,1.040,0.954,yes
+sa3:NSW - Kiama - Shellharbour,sa4:NSW - Illawarra,sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,33.74,2026-27,1.04,1.04,1.04,0.96,1.04,0.91,1.040,0.954,yes
+sa3:NSW - Wollongong,sa4:NSW - Illawarra,sa3:NSW - Campbelltown (NSW),sa4:NSW - Sydney - Outer South West,21.05,2026-27,1.04,1.00,1.04,0.96,1.04,0.93,1.040,0.955,yes
+sa3:NSW - Wollongong,sa4:NSW - Illawarra,sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,8.81,2026-27,1.04,1.00,1.04,0.96,1.04,0.93,1.040,0.955,yes
+sa3:NSW - Wollongong,sa4:NSW - Illawarra,sa3:NSW - Sutherland - Menai - Heathcote,sa4:NSW - Sydney - Sutherland,18.00,2026-27,1.04,1.02,1.04,1.09,1.04,1.14,1.040,1.101,yes
+sa3:NSW - Kempsey - Nambucca,sa4:NSW - Mid North Coast,sa3:NSW - Armidale,sa4:NSW - New England and North West,127.70,2026-27,1.04,1.03,0.95,0.92,0.90,0.86,0.943,0.912,yes
+sa3:NSW - Port Macquarie,sa4:NSW - Mid North Coast,sa3:NSW - Armidale,sa4:NSW - New England and North West,82.38,2026-27,1.04,1.03,0.95,0.92,0.90,0.86,0.943,0.912,yes
+sa3:NSW - Taree - Gloucester,sa4:NSW - Mid North Coast,sa3:NSW - Armidale,sa4:NSW - New England and North West,95.14,2026-27,1.04,1.03,0.95,0.92,0.90,0.86,0.943,0.912,yes
+sa3:NSW - Albury,sa4:NSW - Murray,sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,85.79,2026-27,1.01,1.04,0.91,0.93,0.85,0.88,0.900,0.929,yes
+sa3:NSW - Albury,sa4:NSW - Murray,sa3:NSW - Wagga Wagga,sa4:NSW - Riverina,152.80,2026-27,1.01,1.04,0.91,0.93,0.85,0.88,0.900,0.929,yes
+sa3:NSW - Albury,sa4:NSW - Murray,sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,203.30,2026-27,1.01,0.99,0.91,0.89,0.85,0.84,0.900,0.886,yes
+sa3:NSW - Lower Murray,sa4:NSW - Murray,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,281.29,2026-27,1.01,1.04,0.91,0.93,0.85,0.88,0.900,0.929,yes
+sa3:NSW - Lower Murray,sa4:NSW - Murray,sa3:VIC - Mildura,sa4:VIC - North West,407.27,2026-27,1.01,1.01,0.91,0.90,0.85,0.84,0.900,0.892,yes
+sa3:NSW - Lower Murray,sa4:NSW - Murray,sa3:VIC - Murray River - Swan Hill,sa4:VIC - North West,287.83,2026-27,1.01,1.01,0.91,0.90,0.85,0.84,0.900,0.892,yes
+sa3:NSW - Lower Murray,sa4:NSW - Murray,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,77.04,2026-27,1.01,1.38,0.91,1.19,0.85,1.13,0.900,1.206,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:NSW - Griffith - Murrumbidgee (West),sa4:NSW - Riverina,191.47,2026-27,1.01,1.04,0.91,0.93,0.85,0.88,0.900,0.929,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:NSW - Wagga Wagga,sa4:NSW - Riverina,66.25,2026-27,1.01,1.04,0.91,0.93,0.85,0.88,0.900,0.929,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:VIC - Wangaratta - Benalla,sa4:VIC - Hume,113.37,2026-27,1.01,0.99,0.91,0.89,0.85,0.84,0.900,0.886,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,23.81,2026-27,1.01,0.99,0.91,0.89,0.85,0.84,0.900,0.886,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:VIC - Murray River - Swan Hill,sa4:VIC - North West,275.02,2026-27,1.01,1.01,0.91,0.90,0.85,0.84,0.900,0.892,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:VIC - Campaspe,sa4:VIC - Shepparton,116.82,2026-27,1.01,0.97,0.91,0.88,0.85,0.83,0.900,0.874,yes
+sa3:NSW - Upper Murray exc. Albury,sa4:NSW - Murray,sa3:VIC - Moira,sa4:VIC - Shepparton,296.61,2026-27,1.01,0.97,0.91,0.88,0.85,0.83,0.900,0.874,yes
+sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,165.69,2026-27,1.03,1.08,0.92,1.00,0.86,0.96,0.912,0.997,yes
+sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,193.30,2026-27,1.03,1.03,0.92,0.91,0.86,0.85,0.912,0.905,yes
+sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,sa3:QLD - Granite Belt,sa4:QLD - Darling Downs - Maranoa,228.65,2026-27,1.03,1.03,0.92,0.91,0.86,0.85,0.912,0.905,yes
+sa3:NSW - Inverell - Tenterfield,sa4:NSW - New England and North West,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,22.56,2026-27,1.03,0.96,0.92,0.89,0.86,0.84,0.912,0.878,yes
+sa3:NSW - Moree - Narrabri,sa4:NSW - New England and North West,sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,354.43,2026-27,1.03,1.03,0.92,0.91,0.86,0.85,0.912,0.905,yes
+sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,sa3:QLD - Gold Coast Hinterland,sa4:QLD - Gold Coast,11.76,2026-27,1.08,0.97,1.00,0.93,0.96,0.90,0.997,0.923,yes
+sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,14.95,2026-27,1.08,0.96,1.00,0.89,0.96,0.84,0.997,0.878,yes
+sa3:NSW - Richmond Valley - Hinterland,sa4:NSW - Richmond - Tweed,sa3:QLD - Beaudesert,sa4:QLD - Logan - Beaudesert,45.60,2026-27,1.08,1.07,1.00,0.98,0.96,0.93,0.997,0.974,yes
+sa3:NSW - Tweed Valley,sa4:NSW - Richmond - Tweed,sa3:QLD - Coolangatta,sa4:QLD - Gold Coast,12.08,2026-27,1.08,0.97,1.00,0.93,0.96,0.90,0.997,0.923,yes
+sa3:NSW - Tweed Valley,sa4:NSW - Richmond - Tweed,sa3:QLD - Gold Coast Hinterland,sa4:QLD - Gold Coast,34.33,2026-27,1.08,0.97,1.00,0.93,0.96,0.90,0.997,0.923,yes
+sa3:NSW - Tweed Valley,sa4:NSW - Richmond - Tweed,sa3:QLD - Mudgeeraba - Tallebudgera,sa4:QLD - Gold Coast,21.11,2026-27,1.08,0.97,1.00,0.93,0.96,0.90,0.997,0.923,yes
+sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,217.89,2026-27,1.04,0.99,0.93,0.89,0.88,0.84,0.929,0.886,yes
+sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,sa3:VIC - Gippsland - East,sa4:VIC - Latrobe - Gippsland,25.43,2026-27,1.04,0.97,0.93,0.88,0.88,0.83,0.929,0.874,yes
+sa3:NSW - Tumut - Tumbarumba,sa4:NSW - Riverina,sa3:ACT - Urriarra - Namadgi,sa4:ACT - Australian Capital Territory,50.10,2026-27,1.04,0.99,0.93,0.96,0.88,0.94,0.929,0.956,yes
+sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,16.52,2026-27,1.04,1.00,0.96,0.96,0.91,0.93,0.954,0.955,yes
+sa3:NSW - Southern Highlands,sa4:NSW - Southern Highlands and Shoalhaven,sa3:NSW - Blue Mountains - South,sa4:NSW - Sydney - Outer West and Blue Mountains,55.63,2026-27,1.04,1.03,0.96,0.97,0.91,0.94,0.954,0.968,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Blacktown,sa4:NSW - Sydney - Blacktown,1.69,2026-27,1.04,1.00,1.04,1.01,1.04,1.02,1.040,1.013,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Blacktown - North,sa4:NSW - Sydney - Blacktown,6.01,2026-27,1.04,1.00,1.04,1.01,1.04,1.02,1.040,1.013,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Hornsby,sa4:NSW - Sydney - North Sydney and Hornsby,2.30,2026-27,1.04,1.04,1.04,1.17,1.04,1.26,1.040,1.189,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Carlingford,sa4:NSW - Sydney - Parramatta,2.09,2026-27,1.04,1.01,1.04,1.07,1.04,1.11,1.040,1.078,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Parramatta,sa4:NSW - Sydney - Parramatta,7.62,2026-27,1.04,1.01,1.04,1.07,1.04,1.11,1.040,1.078,yes
+sa3:NSW - Baulkham Hills,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Pennant Hills - Epping,sa4:NSW - Sydney - Ryde,7.38,2026-27,1.04,1.02,1.04,1.12,1.04,1.19,1.040,1.136,yes
+sa3:NSW - Dural - Wisemans Ferry,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Hornsby,sa4:NSW - Sydney - North Sydney and Hornsby,18.18,2026-27,1.04,1.04,1.04,1.17,1.04,1.26,1.040,1.189,yes
+sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Blue Mountains,sa4:NSW - Sydney - Outer West and Blue Mountains,86.14,2026-27,1.04,1.03,1.04,0.97,1.04,0.94,1.040,0.968,yes
+sa3:NSW - Hawkesbury,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Richmond - Windsor,sa4:NSW - Sydney - Outer West and Blue Mountains,41.01,2026-27,1.04,1.03,1.04,0.97,1.04,0.94,1.040,0.968,yes
+sa3:NSW - Rouse Hill - McGraths Hill,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Blacktown - North,sa4:NSW - Sydney - Blacktown,14.98,2026-27,1.04,1.00,1.04,1.01,1.04,1.02,1.040,1.013,yes
+sa3:NSW - Rouse Hill - McGraths Hill,sa4:NSW - Sydney - Baulkham Hills and Hawkesbury,sa3:NSW - Richmond - Windsor,sa4:NSW - Sydney - Outer West and Blue Mountains,7.81,2026-27,1.04,1.03,1.04,0.97,1.04,0.94,1.040,0.968,yes
+sa3:NSW - Blacktown,sa4:NSW - Sydney - Blacktown,sa3:NSW - Merrylands - Guildford,sa4:NSW - Sydney - Parramatta,1.90,2026-27,1.00,1.01,1.01,1.07,1.02,1.11,1.013,1.078,yes
+sa3:NSW - Blacktown,sa4:NSW - Sydney - Blacktown,sa3:NSW - Parramatta,sa4:NSW - Sydney - Parramatta,9.93,2026-27,1.00,1.01,1.01,1.07,1.02,1.11,1.013,1.078,yes
+sa3:NSW - Blacktown - North,sa4:NSW - Sydney - Blacktown,sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,4.09,2026-27,1.00,1.03,1.01,0.97,1.02,0.94,1.013,0.968,yes
+sa3:NSW - Blacktown - North,sa4:NSW - Sydney - Blacktown,sa3:NSW - Richmond - Windsor,sa4:NSW - Sydney - Outer West and Blue Mountains,10.59,2026-27,1.00,1.03,1.01,0.97,1.02,0.94,1.013,0.968,yes
+sa3:NSW - Mount Druitt,sa4:NSW - Sydney - Blacktown,sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,3.03,2026-27,1.00,1.03,1.01,0.97,1.02,0.94,1.013,0.968,yes
+sa3:NSW - Mount Druitt,sa4:NSW - Sydney - Blacktown,sa3:NSW - St Marys,sa4:NSW - Sydney - Outer West and Blue Mountains,15.66,2026-27,1.00,1.03,1.01,0.97,1.02,0.94,1.013,0.968,yes
+sa3:NSW - Mount Druitt,sa4:NSW - Sydney - Blacktown,sa3:NSW - Merrylands - Guildford,sa4:NSW - Sydney - Parramatta,1.90,2026-27,1.00,1.01,1.01,1.07,1.02,1.11,1.013,1.078,yes
+sa3:NSW - Mount Druitt,sa4:NSW - Sydney - Blacktown,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,11.33,2026-27,1.00,1.00,1.01,1.00,1.02,1.00,1.013,1.000,yes
+sa3:NSW - Botany,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Eastern Suburbs - South,sa4:NSW - Sydney - Eastern Suburbs,10.04,2026-27,1.12,1.12,1.61,1.60,1.92,1.90,1.666,1.653,yes
+sa3:NSW - Botany,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Kogarah - Rockdale,sa4:NSW - Sydney - Inner South West,2.21,2026-27,1.12,1.02,1.61,1.09,1.92,1.13,1.666,1.095,yes
+sa3:NSW - Marrickville - Sydenham - Petersham,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Canterbury,sa4:NSW - Sydney - Inner South West,3.22,2026-27,1.12,1.02,1.61,1.09,1.92,1.13,1.666,1.095,yes
+sa3:NSW - Marrickville - Sydenham - Petersham,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Kogarah - Rockdale,sa4:NSW - Sydney - Inner South West,1.21,2026-27,1.12,1.02,1.61,1.09,1.92,1.13,1.666,1.095,yes
+sa3:NSW - Marrickville - Sydenham - Petersham,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Leichhardt,sa4:NSW - Sydney - Inner West,2.31,2026-27,1.12,1.06,1.61,1.31,1.92,1.46,1.666,1.334,yes
+sa3:NSW - Marrickville - Sydenham - Petersham,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Strathfield - Burwood - Ashfield,sa4:NSW - Sydney - Inner West,4.11,2026-27,1.12,1.06,1.61,1.31,1.92,1.46,1.666,1.334,yes
+sa3:NSW - Sydney Inner City,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Eastern Suburbs - North,sa4:NSW - Sydney - Eastern Suburbs,4.12,2026-27,1.12,1.12,1.61,1.60,1.92,1.90,1.666,1.653,yes
+sa3:NSW - Sydney Inner City,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Eastern Suburbs - South,sa4:NSW - Sydney - Eastern Suburbs,2.41,2026-27,1.12,1.12,1.61,1.60,1.92,1.90,1.666,1.653,yes
+sa3:NSW - Sydney Inner City,sa4:NSW - Sydney - City and Inner South,sa3:NSW - Leichhardt,sa4:NSW - Sydney - Inner West,1.95,2026-27,1.12,1.06,1.61,1.31,1.92,1.46,1.666,1.334,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Strathfield - Burwood - Ashfield,sa4:NSW - Sydney - Inner West,3.75,2026-27,1.02,1.06,1.09,1.31,1.13,1.46,1.095,1.334,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Auburn,sa4:NSW - Sydney - Parramatta,4.65,2026-27,1.02,1.01,1.09,1.07,1.13,1.11,1.095,1.078,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Merrylands - Guildford,sa4:NSW - Sydney - Parramatta,8.18,2026-27,1.02,1.01,1.09,1.07,1.13,1.11,1.095,1.078,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,3.53,2026-27,1.02,1.00,1.09,1.00,1.13,1.00,1.095,1.000,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Liverpool,sa4:NSW - Sydney - South West,10.94,2026-27,1.02,1.00,1.09,1.00,1.13,1.00,1.095,1.000,yes
+sa3:NSW - Bankstown,sa4:NSW - Sydney - Inner South West,sa3:NSW - Sutherland - Menai - Heathcote,sa4:NSW - Sydney - Sutherland,2.60,2026-27,1.02,1.02,1.09,1.09,1.13,1.14,1.095,1.101,yes
+sa3:NSW - Canterbury,sa4:NSW - Sydney - Inner South West,sa3:NSW - Strathfield - Burwood - Ashfield,sa4:NSW - Sydney - Inner West,8.25,2026-27,1.02,1.06,1.09,1.31,1.13,1.46,1.095,1.334,yes
+sa3:NSW - Canada Bay,sa4:NSW - Sydney - Inner West,sa3:NSW - Auburn,sa4:NSW - Sydney - Parramatta,1.55,2026-27,1.06,1.01,1.31,1.07,1.46,1.11,1.334,1.078,yes
+sa3:NSW - Strathfield - Burwood - Ashfield,sa4:NSW - Sydney - Inner West,sa3:NSW - Auburn,sa4:NSW - Sydney - Parramatta,6.58,2026-27,1.06,1.01,1.31,1.07,1.46,1.11,1.334,1.078,yes
+sa3:NSW - Chatswood - Lane Cove,sa4:NSW - Sydney - North Sydney and Hornsby,sa3:NSW - Ryde - Hunters Hill,sa4:NSW - Sydney - Ryde,2.84,2026-27,1.04,1.02,1.17,1.12,1.26,1.19,1.189,1.136,yes
+sa3:NSW - Hornsby,sa4:NSW - Sydney - North Sydney and Hornsby,sa3:NSW - Pennant Hills - Epping,sa4:NSW - Sydney - Ryde,4.92,2026-27,1.04,1.02,1.17,1.12,1.26,1.19,1.189,1.136,yes
+sa3:NSW - Ku-ring-gai,sa4:NSW - Sydney - North Sydney and Hornsby,sa3:NSW - Warringah,sa4:NSW - Sydney - Northern Beaches,18.51,2026-27,1.04,1.05,1.17,1.21,1.26,1.31,1.189,1.227,yes
+sa3:NSW - Ku-ring-gai,sa4:NSW - Sydney - North Sydney and Hornsby,sa3:NSW - Pennant Hills - Epping,sa4:NSW - Sydney - Ryde,3.53,2026-27,1.04,1.02,1.17,1.12,1.26,1.19,1.189,1.136,yes
+sa3:NSW - Ku-ring-gai,sa4:NSW - Sydney - North Sydney and Hornsby,sa3:NSW - Ryde - Hunters Hill,sa4:NSW - Sydney - Ryde,9.25,2026-27,1.04,1.02,1.17,1.12,1.26,1.19,1.189,1.136,yes
+sa3:NSW - Camden,sa4:NSW - Sydney - Outer South West,sa3:NSW - Bringelly - Green Valley,sa4:NSW - Sydney - South West,20.34,2026-27,1.00,1.00,0.96,1.00,0.93,1.00,0.955,1.000,yes
+sa3:NSW - Campbelltown (NSW),sa4:NSW - Sydney - Outer South West,sa3:NSW - Bringelly - Green Valley,sa4:NSW - Sydney - South West,16.02,2026-27,1.00,1.00,0.96,1.00,0.93,1.00,0.955,1.000,yes
+sa3:NSW - Campbelltown (NSW),sa4:NSW - Sydney - Outer South West,sa3:NSW - Liverpool,sa4:NSW - Sydney - South West,32.77,2026-27,1.00,1.00,0.96,1.00,0.93,1.00,0.955,1.000,yes
+sa3:NSW - Campbelltown (NSW),sa4:NSW - Sydney - Outer South West,sa3:NSW - Sutherland - Menai - Heathcote,sa4:NSW - Sydney - Sutherland,17.98,2026-27,1.00,1.02,0.96,1.09,0.93,1.14,0.955,1.101,yes
+sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,sa3:NSW - Blue Mountains - South,sa4:NSW - Sydney - Outer West and Blue Mountains,73.39,2026-27,1.00,1.03,0.96,0.97,0.93,0.94,0.955,0.968,yes
+sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,9.32,2026-27,1.00,1.03,0.96,0.97,0.93,0.94,0.955,0.968,yes
+sa3:NSW - Wollondilly,sa4:NSW - Sydney - Outer South West,sa3:NSW - Bringelly - Green Valley,sa4:NSW - Sydney - South West,16.12,2026-27,1.00,1.00,0.96,1.00,0.93,1.00,0.955,1.000,yes
+sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,sa3:NSW - Bringelly - Green Valley,sa4:NSW - Sydney - South West,26.67,2026-27,1.03,1.00,0.97,1.00,0.94,1.00,0.968,1.000,yes
+sa3:NSW - Penrith,sa4:NSW - Sydney - Outer West and Blue Mountains,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,9.17,2026-27,1.03,1.00,0.97,1.00,0.94,1.00,0.968,1.000,yes
+sa3:NSW - St Marys,sa4:NSW - Sydney - Outer West and Blue Mountains,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,3.18,2026-27,1.03,1.00,0.97,1.00,0.94,1.00,0.968,1.000,yes
+sa3:NSW - Carlingford,sa4:NSW - Sydney - Parramatta,sa3:NSW - Pennant Hills - Epping,sa4:NSW - Sydney - Ryde,6.10,2026-27,1.01,1.02,1.07,1.12,1.11,1.19,1.078,1.136,yes
+sa3:NSW - Carlingford,sa4:NSW - Sydney - Parramatta,sa3:NSW - Ryde - Hunters Hill,sa4:NSW - Sydney - Ryde,4.55,2026-27,1.01,1.02,1.07,1.12,1.11,1.19,1.078,1.136,yes
+sa3:NSW - Merrylands - Guildford,sa4:NSW - Sydney - Parramatta,sa3:NSW - Fairfield,sa4:NSW - Sydney - South West,16.25,2026-27,1.01,1.00,1.07,1.00,1.11,1.00,1.078,1.000,yes
+sa3:NSW - Liverpool,sa4:NSW - Sydney - South West,sa3:NSW - Sutherland - Menai - Heathcote,sa4:NSW - Sydney - Sutherland,6.65,2026-27,1.00,1.02,1.00,1.09,1.00,1.14,1.000,1.101,yes
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,139.49,2026-27,0.97,0.97,0.89,0.90,0.84,0.85,0.881,0.888,yes
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Barwon - West,sa4:VIC - Geelong,40.32,2026-27,0.97,0.98,0.89,0.95,0.84,0.93,0.881,0.944,yes
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Geelong,sa4:VIC - Geelong,39.12,2026-27,0.97,0.98,0.89,0.95,0.84,0.93,0.881,0.944,yes
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,14.89,2026-27,0.97,0.97,0.89,0.89,0.84,0.84,0.881,0.881,no
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Melton - Bacchus Marsh,sa4:VIC - Melbourne - West,74.32,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Creswick - Daylesford - Ballan,sa4:VIC - Ballarat,sa3:VIC - Wyndham,sa4:VIC - Melbourne - West,11.14,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,69.29,2026-27,0.97,0.97,0.89,0.90,0.84,0.85,0.881,0.888,yes
+sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,sa3:VIC - Loddon - Elmore,sa4:VIC - Bendigo,62.90,2026-27,0.97,0.97,0.89,0.90,0.84,0.85,0.881,0.888,yes
+sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,sa3:VIC - Barwon - West,sa4:VIC - Geelong,64.43,2026-27,0.97,0.98,0.89,0.95,0.84,0.93,0.881,0.944,yes
+sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,sa3:VIC - Grampians,sa4:VIC - North West,236.43,2026-27,0.97,1.01,0.89,0.90,0.84,0.84,0.881,0.892,yes
+sa3:VIC - Maryborough - Pyrenees,sa4:VIC - Ballarat,sa3:VIC - Colac - Corangamite,sa4:VIC - Warrnambool and South West,109.68,2026-27,0.97,0.99,0.89,0.90,0.84,0.85,0.881,0.893,yes
+sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,112.26,2026-27,0.97,0.99,0.90,0.89,0.85,0.84,0.888,0.886,yes
+sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,67.06,2026-27,0.97,0.97,0.90,0.89,0.85,0.84,0.888,0.881,yes
+sa3:VIC - Heathcote - Castlemaine - Kyneton,sa4:VIC - Bendigo,sa3:VIC - Campaspe,sa4:VIC - Shepparton,30.23,2026-27,0.97,0.97,0.90,0.88,0.85,0.83,0.888,0.874,yes
+sa3:VIC - Loddon - Elmore,sa4:VIC - Bendigo,sa3:VIC - Grampians,sa4:VIC - North West,45.97,2026-27,0.97,1.01,0.90,0.90,0.85,0.84,0.888,0.892,yes
+sa3:VIC - Loddon - Elmore,sa4:VIC - Bendigo,sa3:VIC - Murray River - Swan Hill,sa4:VIC - North West,187.24,2026-27,0.97,1.01,0.90,0.90,0.85,0.84,0.888,0.892,yes
+sa3:VIC - Loddon - Elmore,sa4:VIC - Bendigo,sa3:VIC - Campaspe,sa4:VIC - Shepparton,169.24,2026-27,0.97,0.97,0.90,0.88,0.85,0.83,0.888,0.874,yes
+sa3:VIC - Barwon - West,sa4:VIC - Geelong,sa3:VIC - Colac - Corangamite,sa4:VIC - Warrnambool and South West,101.26,2026-27,0.98,0.99,0.95,0.90,0.93,0.85,0.944,0.893,yes
+sa3:VIC - Geelong,sa4:VIC - Geelong,sa3:VIC - Wyndham,sa4:VIC - Melbourne - West,33.61,2026-27,0.98,0.98,0.95,0.98,0.93,0.97,0.944,0.975,yes
+sa3:VIC - Surf Coast - Bellarine Peninsula,sa4:VIC - Geelong,sa3:VIC - Colac - Corangamite,sa4:VIC - Warrnambool and South West,25.68,2026-27,0.98,0.99,0.95,0.90,0.93,0.85,0.944,0.893,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Baw Baw,sa4:VIC - Latrobe - Gippsland,104.55,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Wellington,sa4:VIC - Latrobe - Gippsland,53.92,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Nillumbik - Kinglake,sa4:VIC - Melbourne - North East,61.12,2026-27,0.99,0.97,0.89,0.93,0.84,0.90,0.886,0.923,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Whittlesea - Wallan,sa4:VIC - Melbourne - North East,57.56,2026-27,0.99,0.97,0.89,0.93,0.84,0.90,0.886,0.923,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,43.10,2026-27,0.99,0.97,0.89,0.89,0.84,0.84,0.886,0.881,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,65.74,2026-27,0.99,0.97,0.89,0.92,0.84,0.88,0.886,0.910,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Campaspe,sa4:VIC - Shepparton,43.13,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Upper Goulburn Valley,sa4:VIC - Hume,sa3:VIC - Shepparton,sa4:VIC - Shepparton,98.51,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Wangaratta - Benalla,sa4:VIC - Hume,sa3:VIC - Wellington,sa4:VIC - Latrobe - Gippsland,5.83,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Wangaratta - Benalla,sa4:VIC - Hume,sa3:VIC - Moira,sa4:VIC - Shepparton,97.04,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Wangaratta - Benalla,sa4:VIC - Hume,sa3:VIC - Shepparton,sa4:VIC - Shepparton,23.26,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,sa3:VIC - Gippsland - East,sa4:VIC - Latrobe - Gippsland,207.47,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Wodonga - Alpine,sa4:VIC - Hume,sa3:VIC - Wellington,sa4:VIC - Latrobe - Gippsland,58.87,2026-27,0.99,0.97,0.89,0.88,0.84,0.83,0.886,0.874,yes
+sa3:VIC - Baw Baw,sa4:VIC - Latrobe - Gippsland,sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,25.97,2026-27,0.97,0.97,0.88,0.92,0.83,0.88,0.874,0.910,yes
+sa3:VIC - Baw Baw,sa4:VIC - Latrobe - Gippsland,sa3:VIC - Cardinia,sa4:VIC - Melbourne - South East,53.58,2026-27,0.97,0.98,0.88,0.95,0.83,0.92,0.874,0.940,yes
+sa3:VIC - Gippsland - South West,sa4:VIC - Latrobe - Gippsland,sa3:VIC - Cardinia,sa4:VIC - Melbourne - South East,34.51,2026-27,0.97,0.98,0.88,0.95,0.83,0.92,0.874,0.940,yes
+sa3:VIC - Brunswick - Coburg,sa4:VIC - Melbourne - Inner,sa3:VIC - Darebin - North,sa4:VIC - Melbourne - North East,2.03,2026-27,1.03,0.97,1.25,0.93,1.37,0.90,1.265,0.923,yes
+sa3:VIC - Brunswick - Coburg,sa4:VIC - Melbourne - Inner,sa3:VIC - Keilor,sa4:VIC - Melbourne - North West,1.36,2026-27,1.03,0.97,1.25,0.89,1.37,0.84,1.265,0.881,yes
+sa3:VIC - Brunswick - Coburg,sa4:VIC - Melbourne - Inner,sa3:VIC - Moreland - North,sa4:VIC - Melbourne - North West,5.42,2026-27,1.03,0.97,1.25,0.89,1.37,0.84,1.265,0.881,yes
+sa3:VIC - Darebin - South,sa4:VIC - Melbourne - Inner,sa3:VIC - Banyule,sa4:VIC - Melbourne - North East,4.06,2026-27,1.03,0.97,1.25,0.93,1.37,0.90,1.265,0.923,yes
+sa3:VIC - Darebin - South,sa4:VIC - Melbourne - Inner,sa3:VIC - Darebin - North,sa4:VIC - Melbourne - North East,4.51,2026-27,1.03,0.97,1.25,0.93,1.37,0.90,1.265,0.923,yes
+sa3:VIC - Essendon,sa4:VIC - Melbourne - Inner,sa3:VIC - Keilor,sa4:VIC - Melbourne - North West,7.22,2026-27,1.03,0.97,1.25,0.89,1.37,0.84,1.265,0.881,yes
+sa3:VIC - Essendon,sa4:VIC - Melbourne - Inner,sa3:VIC - Maribyrnong,sa4:VIC - Melbourne - West,4.67,2026-27,1.03,0.98,1.25,0.98,1.37,0.97,1.265,0.975,yes
+sa3:VIC - Melbourne City,sa4:VIC - Melbourne - Inner,sa3:VIC - Maribyrnong,sa4:VIC - Melbourne - West,4.95,2026-27,1.03,0.98,1.25,0.98,1.37,0.97,1.265,0.975,yes
+sa3:VIC - Port Phillip,sa4:VIC - Melbourne - Inner,sa3:VIC - Bayside,sa4:VIC - Melbourne - Inner South,1.88,2026-27,1.03,1.00,1.25,1.09,1.37,1.14,1.265,1.097,yes
+sa3:VIC - Port Phillip,sa4:VIC - Melbourne - Inner,sa3:VIC - Glen Eira,sa4:VIC - Melbourne - Inner South,3.60,2026-27,1.03,1.00,1.25,1.09,1.37,1.14,1.265,1.097,yes
+sa3:VIC - Port Phillip,sa4:VIC - Melbourne - Inner,sa3:VIC - Hobsons Bay,sa4:VIC - Melbourne - West,2.31,2026-27,1.03,0.98,1.25,0.98,1.37,0.97,1.265,0.975,yes
+sa3:VIC - Stonnington - West,sa4:VIC - Melbourne - Inner,sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,0.89,2026-27,1.03,1.01,1.25,1.10,1.37,1.16,1.265,1.111,yes
+sa3:VIC - Stonnington - West,sa4:VIC - Melbourne - Inner,sa3:VIC - Glen Eira,sa4:VIC - Melbourne - Inner South,1.67,2026-27,1.03,1.00,1.25,1.09,1.37,1.14,1.265,1.097,yes
+sa3:VIC - Stonnington - West,sa4:VIC - Melbourne - Inner,sa3:VIC - Stonnington - East,sa4:VIC - Melbourne - Inner South,3.33,2026-27,1.03,1.00,1.25,1.09,1.37,1.14,1.265,1.097,yes
+sa3:VIC - Yarra,sa4:VIC - Melbourne - Inner,sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,18.60,2026-27,1.03,1.01,1.25,1.10,1.37,1.16,1.265,1.111,yes
+sa3:VIC - Yarra,sa4:VIC - Melbourne - Inner,sa3:VIC - Banyule,sa4:VIC - Melbourne - North East,1.16,2026-27,1.03,0.97,1.25,0.93,1.37,0.90,1.265,0.923,yes
+sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,sa3:VIC - Stonnington - East,sa4:VIC - Melbourne - Inner South,8.55,2026-27,1.01,1.00,1.10,1.09,1.16,1.14,1.111,1.097,yes
+sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,sa3:VIC - Banyule,sa4:VIC - Melbourne - North East,4.89,2026-27,1.01,0.97,1.10,0.93,1.16,0.90,1.111,0.923,yes
+sa3:VIC - Boroondara,sa4:VIC - Melbourne - Inner East,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,2.08,2026-27,1.01,0.98,1.10,0.95,1.16,0.92,1.111,0.940,yes
+sa3:VIC - Manningham - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Banyule,sa4:VIC - Melbourne - North East,15.72,2026-27,1.01,0.97,1.10,0.93,1.16,0.90,1.111,0.923,yes
+sa3:VIC - Manningham - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Nillumbik - Kinglake,sa4:VIC - Melbourne - North East,5.03,2026-27,1.01,0.97,1.10,0.93,1.16,0.90,1.111,0.923,yes
+sa3:VIC - Manningham - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Manningham - East,sa4:VIC - Melbourne - Outer East,10.80,2026-27,1.01,0.97,1.10,0.92,1.16,0.88,1.111,0.910,yes
+sa3:VIC - Whitehorse - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Manningham - East,sa4:VIC - Melbourne - Outer East,0.20,2026-27,1.01,0.97,1.10,0.92,1.16,0.88,1.111,0.910,yes
+sa3:VIC - Whitehorse - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Whitehorse - East,sa4:VIC - Melbourne - Outer East,9.64,2026-27,1.01,0.97,1.10,0.92,1.16,0.88,1.111,0.910,yes
+sa3:VIC - Whitehorse - West,sa4:VIC - Melbourne - Inner East,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,6.58,2026-27,1.01,0.98,1.10,0.95,1.16,0.92,1.111,0.940,yes
+sa3:VIC - Glen Eira,sa4:VIC - Melbourne - Inner South,sa3:VIC - Dandenong,sa4:VIC - Melbourne - South East,1.67,2026-27,1.00,0.98,1.09,0.95,1.14,0.92,1.097,0.940,yes
+sa3:VIC - Glen Eira,sa4:VIC - Melbourne - Inner South,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,3.49,2026-27,1.00,0.98,1.09,0.95,1.14,0.92,1.097,0.940,yes
+sa3:VIC - Kingston,sa4:VIC - Melbourne - Inner South,sa3:VIC - Dandenong,sa4:VIC - Melbourne - South East,19.63,2026-27,1.00,0.98,1.09,0.95,1.14,0.92,1.097,0.940,yes
+sa3:VIC - Kingston,sa4:VIC - Melbourne - Inner South,sa3:VIC - Frankston,sa4:VIC - Mornington Peninsula,5.05,2026-27,1.00,0.97,1.09,0.93,1.14,0.90,1.097,0.923,yes
+sa3:VIC - Stonnington - East,sa4:VIC - Melbourne - Inner South,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,2.37,2026-27,1.00,0.98,1.09,0.95,1.14,0.92,1.097,0.940,yes
+sa3:VIC - Darebin - North,sa4:VIC - Melbourne - North East,sa3:VIC - Moreland - North,sa4:VIC - Melbourne - North West,8.17,2026-27,0.97,0.97,0.93,0.89,0.90,0.84,0.923,0.881,yes
+sa3:VIC - Nillumbik - Kinglake,sa4:VIC - Melbourne - North East,sa3:VIC - Manningham - East,sa4:VIC - Melbourne - Outer East,30.57,2026-27,0.97,0.97,0.93,0.92,0.90,0.88,0.923,0.910,yes
+sa3:VIC - Nillumbik - Kinglake,sa4:VIC - Melbourne - North East,sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,59.46,2026-27,0.97,0.97,0.93,0.92,0.90,0.88,0.923,0.910,yes
+sa3:VIC - Whittlesea - Wallan,sa4:VIC - Melbourne - North East,sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,29.27,2026-27,0.97,0.97,0.93,0.89,0.90,0.84,0.923,0.881,yes
+sa3:VIC - Whittlesea - Wallan,sa4:VIC - Melbourne - North East,sa3:VIC - Tullamarine - Broadmeadows,sa4:VIC - Melbourne - North West,38.62,2026-27,0.97,0.97,0.93,0.89,0.90,0.84,0.923,0.881,yes
+sa3:VIC - Keilor,sa4:VIC - Melbourne - North West,sa3:VIC - Brimbank,sa4:VIC - Melbourne - West,13.89,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Keilor,sa4:VIC - Melbourne - North West,sa3:VIC - Maribyrnong,sa4:VIC - Melbourne - West,6.30,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Macedon Ranges,sa4:VIC - Melbourne - North West,sa3:VIC - Melton - Bacchus Marsh,sa4:VIC - Melbourne - West,15.99,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Sunbury,sa4:VIC - Melbourne - North West,sa3:VIC - Brimbank,sa4:VIC - Melbourne - West,1.95,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Sunbury,sa4:VIC - Melbourne - North West,sa3:VIC - Melton - Bacchus Marsh,sa4:VIC - Melbourne - West,21.05,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Tullamarine - Broadmeadows,sa4:VIC - Melbourne - North West,sa3:VIC - Brimbank,sa4:VIC - Melbourne - West,12.37,2026-27,0.97,0.98,0.89,0.98,0.84,0.97,0.881,0.975,yes
+sa3:VIC - Knox,sa4:VIC - Melbourne - Outer East,sa3:VIC - Casey - North,sa4:VIC - Melbourne - South East,8.09,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Knox,sa4:VIC - Melbourne - Outer East,sa3:VIC - Dandenong,sa4:VIC - Melbourne - South East,2.08,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Knox,sa4:VIC - Melbourne - Outer East,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,17.20,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Whitehorse - East,sa4:VIC - Melbourne - Outer East,sa3:VIC - Monash,sa4:VIC - Melbourne - South East,2.35,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,sa3:VIC - Cardinia,sa4:VIC - Melbourne - South East,69.55,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Yarra Ranges,sa4:VIC - Melbourne - Outer East,sa3:VIC - Casey - North,sa4:VIC - Melbourne - South East,7.75,2026-27,0.97,0.98,0.92,0.95,0.88,0.92,0.910,0.940,yes
+sa3:VIC - Casey - South,sa4:VIC - Melbourne - South East,sa3:VIC - Frankston,sa4:VIC - Mornington Peninsula,13.83,2026-27,0.98,0.97,0.95,0.93,0.92,0.90,0.940,0.923,yes
+sa3:VIC - Casey - South,sa4:VIC - Melbourne - South East,sa3:VIC - Mornington Peninsula,sa4:VIC - Mornington Peninsula,4.91,2026-27,0.98,0.97,0.95,0.93,0.92,0.90,0.940,0.923,yes
+sa3:VIC - Dandenong,sa4:VIC - Melbourne - South East,sa3:VIC - Frankston,sa4:VIC - Mornington Peninsula,7.38,2026-27,0.98,0.97,0.95,0.93,0.92,0.90,0.940,0.923,yes
+sa3:VIC - Grampians,sa4:VIC - North West,sa3:VIC - Glenelg - Southern Grampians,sa4:VIC - Warrnambool and South West,355.11,2026-27,1.01,0.99,0.90,0.90,0.84,0.85,0.892,0.893,yes
+sa3:VIC - Grampians,sa4:VIC - North West,sa3:VIC - Colac - Corangamite,sa4:VIC - Warrnambool and South West,21.50,2026-27,1.01,0.99,0.90,0.90,0.84,0.85,0.892,0.893,yes
+sa3:VIC - Grampians,sa4:VIC - North West,sa3:VIC - Warrnambool,sa4:VIC - Warrnambool and South West,62.94,2026-27,1.01,0.99,0.90,0.90,0.84,0.85,0.892,0.893,yes
+sa3:VIC - Grampians,sa4:VIC - North West,sa3:SA - Limestone Coast,sa4:SA - South Australia - South East,179.13,2026-27,1.01,1.10,0.90,0.98,0.84,0.92,0.892,0.977,yes
+sa3:VIC - Mildura,sa4:VIC - North West,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,11.34,2026-27,1.01,1.38,0.90,1.19,0.84,1.13,0.892,1.206,yes
+sa3:VIC - Mildura,sa4:VIC - North West,sa3:SA - Limestone Coast,sa4:SA - South Australia - South East,0.70,2026-27,1.01,1.10,0.90,0.98,0.84,0.92,0.892,0.977,yes
+sa3:VIC - Mildura,sa4:VIC - North West,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,195.98,2026-27,1.01,1.10,0.90,0.98,0.84,0.92,0.892,0.977,yes
+sa3:VIC - Murray River - Swan Hill,sa4:VIC - North West,sa3:VIC - Campaspe,sa4:VIC - Shepparton,22.46,2026-27,1.01,0.97,0.90,0.88,0.84,0.83,0.892,0.874,yes
+sa3:VIC - Glenelg - Southern Grampians,sa4:VIC - Warrnambool and South West,sa3:SA - Limestone Coast,sa4:SA - South Australia - South East,77.73,2026-27,0.99,1.10,0.90,0.98,0.85,0.92,0.893,0.977,yes
+sa3:QLD - Capalaba,sa4:QLD - Brisbane - East,sa3:QLD - Carindale,sa4:QLD - Brisbane - South,5.23,2026-27,0.97,0.98,0.94,1.00,0.92,1.01,0.936,1.001,yes
+sa3:QLD - Capalaba,sa4:QLD - Brisbane - East,sa3:QLD - Mt Gravatt,sa4:QLD - Brisbane - South,11.22,2026-27,0.97,0.98,0.94,1.00,0.92,1.01,0.936,1.001,yes
+sa3:QLD - Cleveland - Stradbroke,sa4:QLD - Brisbane - East,sa3:QLD - Mt Gravatt,sa4:QLD - Brisbane - South,8.00,2026-27,0.97,0.98,0.94,1.00,0.92,1.01,0.936,1.001,yes
+sa3:QLD - Cleveland - Stradbroke,sa4:QLD - Brisbane - East,sa3:QLD - Ormeau - Oxenford,sa4:QLD - Gold Coast,0.66,2026-27,0.97,0.97,0.94,0.93,0.92,0.90,0.936,0.923,yes
+sa3:QLD - Cleveland - Stradbroke,sa4:QLD - Brisbane - East,sa3:QLD - Loganlea - Carbrook,sa4:QLD - Logan - Beaudesert,18.94,2026-27,0.97,1.07,0.94,0.98,0.92,0.93,0.936,0.974,yes
+sa3:QLD - Cleveland - Stradbroke,sa4:QLD - Brisbane - East,sa3:QLD - Springwood - Kingston,sa4:QLD - Logan - Beaudesert,4.15,2026-27,0.97,1.07,0.94,0.98,0.92,0.93,0.936,0.974,yes
+sa3:QLD - Wynnum - Manly,sa4:QLD - Brisbane - East,sa3:QLD - Carindale,sa4:QLD - Brisbane - South,7.77,2026-27,0.97,0.98,0.94,1.00,0.92,1.01,0.936,1.001,yes
+sa3:QLD - Wynnum - Manly,sa4:QLD - Brisbane - East,sa3:QLD - Brisbane Inner - East,sa4:QLD - Brisbane Inner City,0.89,2026-27,0.97,1.00,0.94,1.12,0.92,1.19,0.936,1.129,yes
+sa3:QLD - Bald Hills - Everton Park,sa4:QLD - Brisbane - North,sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,3.50,2026-27,0.98,0.98,0.98,0.98,0.98,0.98,0.980,0.980,no
+sa3:QLD - Bald Hills - Everton Park,sa4:QLD - Brisbane - North,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,10.78,2026-27,0.98,0.98,0.98,0.92,0.98,0.89,0.980,0.917,yes
+sa3:QLD - Bald Hills - Everton Park,sa4:QLD - Brisbane - North,sa3:QLD - North Lakes,sa4:QLD - Moreton Bay - South,5.56,2026-27,0.98,0.98,0.98,0.92,0.98,0.89,0.980,0.917,yes
+sa3:QLD - Bald Hills - Everton Park,sa4:QLD - Brisbane - North,sa3:QLD - Strathpine,sa4:QLD - Moreton Bay - South,11.82,2026-27,0.98,0.98,0.98,0.92,0.98,0.89,0.980,0.917,yes
+sa3:QLD - Chermside,sa4:QLD - Brisbane - North,sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,0.62,2026-27,0.98,0.98,0.98,0.98,0.98,0.98,0.980,0.980,no
+sa3:QLD - Chermside,sa4:QLD - Brisbane - North,sa3:QLD - Brisbane Inner - North,sa4:QLD - Brisbane Inner City,7.20,2026-27,0.98,1.00,0.98,1.12,0.98,1.19,0.980,1.129,yes
+sa3:QLD - Nundah,sa4:QLD - Brisbane - North,sa3:QLD - Brisbane Inner - North,sa4:QLD - Brisbane Inner City,8.16,2026-27,0.98,1.00,0.98,1.12,0.98,1.19,0.980,1.129,yes
+sa3:QLD - Sandgate,sa4:QLD - Brisbane - North,sa3:QLD - North Lakes,sa4:QLD - Moreton Bay - South,1.68,2026-27,0.98,0.98,0.98,0.92,0.98,0.89,0.980,0.917,yes
+sa3:QLD - Carindale,sa4:QLD - Brisbane - South,sa3:QLD - Brisbane Inner - East,sa4:QLD - Brisbane Inner City,7.52,2026-27,0.98,1.00,1.00,1.12,1.01,1.19,1.001,1.129,yes
+sa3:QLD - Holland Park - Yeronga,sa4:QLD - Brisbane - South,sa3:QLD - Sherwood - Indooroopilly,sa4:QLD - Brisbane - West,1.67,2026-27,0.98,0.98,1.00,0.98,1.01,0.98,1.001,0.980,yes
+sa3:QLD - Holland Park - Yeronga,sa4:QLD - Brisbane - South,sa3:QLD - Brisbane Inner,sa4:QLD - Brisbane Inner City,3.51,2026-27,0.98,1.00,1.00,1.12,1.01,1.19,1.001,1.129,yes
+sa3:QLD - Holland Park - Yeronga,sa4:QLD - Brisbane - South,sa3:QLD - Brisbane Inner - East,sa4:QLD - Brisbane Inner City,4.73,2026-27,0.98,1.00,1.00,1.12,1.01,1.19,1.001,1.129,yes
+sa3:QLD - Mt Gravatt,sa4:QLD - Brisbane - South,sa3:QLD - Springwood - Kingston,sa4:QLD - Logan - Beaudesert,8.54,2026-27,0.98,1.07,1.00,0.98,1.01,0.93,1.001,0.974,yes
+sa3:QLD - Rocklea - Acacia Ridge,sa4:QLD - Brisbane - South,sa3:QLD - Sherwood - Indooroopilly,sa4:QLD - Brisbane - West,5.15,2026-27,0.98,0.98,1.00,0.98,1.01,0.98,1.001,0.980,yes
+sa3:QLD - Rocklea - Acacia Ridge,sa4:QLD - Brisbane - South,sa3:QLD - Forest Lake - Oxley,sa4:QLD - Ipswich,18.96,2026-27,0.98,0.96,1.00,0.89,1.01,0.84,1.001,0.878,yes
+sa3:QLD - Rocklea - Acacia Ridge,sa4:QLD - Brisbane - South,sa3:QLD - Browns Plains,sa4:QLD - Logan - Beaudesert,11.19,2026-27,0.98,1.07,1.00,0.98,1.01,0.93,1.001,0.974,yes
+sa3:QLD - Rocklea - Acacia Ridge,sa4:QLD - Brisbane - South,sa3:QLD - Springwood - Kingston,sa4:QLD - Logan - Beaudesert,8.06,2026-27,0.98,1.07,1.00,0.98,1.01,0.93,1.001,0.974,yes
+sa3:QLD - Sunnybank,sa4:QLD - Brisbane - South,sa3:QLD - Springwood - Kingston,sa4:QLD - Logan - Beaudesert,3.44,2026-27,0.98,1.07,1.00,0.98,1.01,0.93,1.001,0.974,yes
+sa3:QLD - Centenary,sa4:QLD - Brisbane - West,sa3:QLD - Forest Lake - Oxley,sa4:QLD - Ipswich,9.01,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - Kenmore - Brookfield - Moggill,sa4:QLD - Brisbane - West,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,5.15,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - Kenmore - Brookfield - Moggill,sa4:QLD - Brisbane - West,sa3:QLD - Ipswich Inner,sa4:QLD - Ipswich,17.00,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - Kenmore - Brookfield - Moggill,sa4:QLD - Brisbane - West,sa3:QLD - Springfield - Redbank,sa4:QLD - Ipswich,4.55,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - Sherwood - Indooroopilly,sa4:QLD - Brisbane - West,sa3:QLD - Brisbane Inner - West,sa4:QLD - Brisbane Inner City,3.06,2026-27,0.98,1.00,0.98,1.12,0.98,1.19,0.980,1.129,yes
+sa3:QLD - Sherwood - Indooroopilly,sa4:QLD - Brisbane - West,sa3:QLD - Forest Lake - Oxley,sa4:QLD - Ipswich,2.64,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,sa3:QLD - Brisbane Inner - North,sa4:QLD - Brisbane Inner City,2.69,2026-27,0.98,1.00,0.98,1.12,0.98,1.19,0.980,1.129,yes
+sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,sa3:QLD - Brisbane Inner - West,sa4:QLD - Brisbane Inner City,12.84,2026-27,0.98,1.00,0.98,1.12,0.98,1.19,0.980,1.129,yes
+sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,6.73,2026-27,0.98,0.96,0.98,0.89,0.98,0.84,0.980,0.878,yes
+sa3:QLD - The Gap - Enoggera,sa4:QLD - Brisbane - West,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,25.36,2026-27,0.98,0.98,0.98,0.92,0.98,0.89,0.980,0.917,yes
+sa3:QLD - Innisfail - Cassowary Coast,sa4:QLD - Cairns,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,82.50,2026-27,1.14,1.17,1.01,1.04,0.96,0.99,1.015,1.045,yes
+sa3:QLD - Port Douglas - Daintree,sa4:QLD - Cairns,sa3:QLD - Far North,sa4:QLD - Queensland - Outback,234.03,2026-27,1.14,1.65,1.01,1.40,0.96,1.34,1.015,1.433,yes
+sa3:QLD - Tablelands (East) - Kuranda,sa4:QLD - Cairns,sa3:QLD - Far North,sa4:QLD - Queensland - Outback,297.44,2026-27,1.14,1.65,1.01,1.40,0.96,1.34,1.015,1.433,yes
+sa3:QLD - Tablelands (East) - Kuranda,sa4:QLD - Cairns,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,233.18,2026-27,1.14,1.17,1.01,1.04,0.96,0.99,1.015,1.045,yes
+sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Central Highlands (Qld),sa4:QLD - Central Queensland,160.62,2026-27,1.03,1.22,0.91,1.07,0.85,1.02,0.905,1.080,yes
+sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Biloela,sa4:QLD - Central Queensland,331.06,2026-27,1.03,1.22,0.91,1.07,0.85,1.02,0.905,1.080,yes
+sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,667.52,2026-27,1.03,1.65,0.91,1.40,0.85,1.34,0.905,1.433,yes
+sa3:QLD - Darling Downs (West) - Maranoa,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Burnett,sa4:QLD - Wide Bay,223.21,2026-27,1.03,1.00,0.91,0.90,0.85,0.84,0.905,0.890,yes
+sa3:QLD - Darling Downs - East,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,81.90,2026-27,1.03,0.96,0.91,0.89,0.85,0.84,0.905,0.878,yes
+sa3:QLD - Darling Downs - East,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,43.94,2026-27,1.03,0.99,0.91,0.93,0.85,0.89,0.905,0.923,yes
+sa3:QLD - Darling Downs - East,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Toowoomba,sa4:QLD - Toowoomba,158.64,2026-27,1.03,0.97,0.91,0.89,0.85,0.84,0.905,0.882,yes
+sa3:QLD - Darling Downs - East,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Burnett,sa4:QLD - Wide Bay,179.01,2026-27,1.03,1.00,0.91,0.90,0.85,0.84,0.905,0.890,yes
+sa3:QLD - Granite Belt,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,45.48,2026-27,1.03,0.96,0.91,0.89,0.85,0.84,0.905,0.878,yes
+sa3:QLD - Granite Belt,sa4:QLD - Darling Downs - Maranoa,sa3:QLD - Toowoomba,sa4:QLD - Toowoomba,119.25,2026-27,1.03,0.97,0.91,0.89,0.85,0.84,0.905,0.882,yes
+sa3:QLD - Central Highlands (Qld),sa4:QLD - Central Queensland,sa3:QLD - Bowen Basin - North,sa4:QLD - Mackay - Isaac - Whitsunday,543.65,2026-27,1.22,1.20,1.07,1.06,1.02,1.01,1.080,1.067,yes
+sa3:QLD - Central Highlands (Qld),sa4:QLD - Central Queensland,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,449.40,2026-27,1.22,1.65,1.07,1.40,1.02,1.34,1.080,1.433,yes
+sa3:QLD - Rockhampton,sa4:QLD - Central Queensland,sa3:QLD - Bowen Basin - North,sa4:QLD - Mackay - Isaac - Whitsunday,101.84,2026-27,1.22,1.20,1.07,1.06,1.02,1.01,1.080,1.067,yes
+sa3:QLD - Biloela,sa4:QLD - Central Queensland,sa3:QLD - Burnett,sa4:QLD - Wide Bay,225.33,2026-27,1.22,1.00,1.07,0.90,1.02,0.84,1.080,0.890,yes
+sa3:QLD - Gladstone,sa4:QLD - Central Queensland,sa3:QLD - Bundaberg,sa4:QLD - Wide Bay,48.03,2026-27,1.22,1.00,1.07,0.90,1.02,0.84,1.080,0.890,yes
+sa3:QLD - Gladstone,sa4:QLD - Central Queensland,sa3:QLD - Burnett,sa4:QLD - Wide Bay,218.26,2026-27,1.22,1.00,1.07,0.90,1.02,0.84,1.080,0.890,yes
+sa3:QLD - Gold Coast Hinterland,sa4:QLD - Gold Coast,sa3:QLD - Beaudesert,sa4:QLD - Logan - Beaudesert,98.06,2026-27,0.97,1.07,0.93,0.98,0.90,0.93,0.923,0.974,yes
+sa3:QLD - Gold Coast Hinterland,sa4:QLD - Gold Coast,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,25.28,2026-27,0.97,1.07,0.93,0.98,0.90,0.93,0.923,0.974,yes
+sa3:QLD - Ormeau - Oxenford,sa4:QLD - Gold Coast,sa3:QLD - Beenleigh,sa4:QLD - Logan - Beaudesert,22.58,2026-27,0.97,1.07,0.93,0.98,0.90,0.93,0.923,0.974,yes
+sa3:QLD - Ormeau - Oxenford,sa4:QLD - Gold Coast,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,4.53,2026-27,0.97,1.07,0.93,0.98,0.90,0.93,0.923,0.974,yes
+sa3:QLD - Ormeau - Oxenford,sa4:QLD - Gold Coast,sa3:QLD - Loganlea - Carbrook,sa4:QLD - Logan - Beaudesert,5.47,2026-27,0.97,1.07,0.93,0.98,0.90,0.93,0.923,0.974,yes
+sa3:QLD - Forest Lake - Oxley,sa4:QLD - Ipswich,sa3:QLD - Browns Plains,sa4:QLD - Logan - Beaudesert,3.31,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,sa3:QLD - Beaudesert,sa4:QLD - Logan - Beaudesert,95.42,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,45.43,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,99.04,2026-27,0.96,0.99,0.89,0.93,0.84,0.89,0.878,0.923,yes
+sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,52.08,2026-27,0.96,0.98,0.89,0.92,0.84,0.89,0.878,0.917,yes
+sa3:QLD - Ipswich Hinterland,sa4:QLD - Ipswich,sa3:QLD - Toowoomba,sa4:QLD - Toowoomba,110.82,2026-27,0.96,0.97,0.89,0.89,0.84,0.84,0.878,0.882,yes
+sa3:QLD - Ipswich Inner,sa4:QLD - Ipswich,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,16.52,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Springfield - Redbank,sa4:QLD - Ipswich,sa3:QLD - Browns Plains,sa4:QLD - Logan - Beaudesert,5.14,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Springfield - Redbank,sa4:QLD - Ipswich,sa3:QLD - Jimboomba,sa4:QLD - Logan - Beaudesert,7.64,2026-27,0.96,1.07,0.89,0.98,0.84,0.93,0.878,0.974,yes
+sa3:QLD - Bowen Basin - North,sa4:QLD - Mackay - Isaac - Whitsunday,sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,279.61,2026-27,1.20,1.65,1.06,1.40,1.01,1.34,1.067,1.433,yes
+sa3:QLD - Bowen Basin - North,sa4:QLD - Mackay - Isaac - Whitsunday,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,541.68,2026-27,1.20,1.17,1.06,1.04,1.01,0.99,1.067,1.045,yes
+sa3:QLD - Caboolture,sa4:QLD - Moreton Bay - North,sa3:QLD - Sunshine Coast Hinterland,sa4:QLD - Sunshine Coast,22.59,2026-27,0.99,0.97,0.93,0.90,0.89,0.86,0.923,0.894,yes
+sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,13.06,2026-27,0.99,0.98,0.93,0.92,0.89,0.89,0.923,0.917,yes
+sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,sa3:QLD - Sunshine Coast Hinterland,sa4:QLD - Sunshine Coast,89.90,2026-27,0.99,0.97,0.93,0.90,0.89,0.86,0.923,0.894,yes
+sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,sa3:QLD - Burnett,sa4:QLD - Wide Bay,82.38,2026-27,0.99,1.00,0.93,0.90,0.89,0.84,0.923,0.890,yes
+sa3:QLD - Caboolture Hinterland,sa4:QLD - Moreton Bay - North,sa3:QLD - Gympie - Cooloola,sa4:QLD - Wide Bay,78.68,2026-27,0.99,1.00,0.93,0.90,0.89,0.84,0.923,0.890,yes
+sa3:QLD - Narangba - Burpengary,sa4:QLD - Moreton Bay - North,sa3:QLD - The Hills District,sa4:QLD - Moreton Bay - South,35.91,2026-27,0.99,0.98,0.93,0.92,0.89,0.89,0.923,0.917,yes
+sa3:QLD - Narangba - Burpengary,sa4:QLD - Moreton Bay - North,sa3:QLD - North Lakes,sa4:QLD - Moreton Bay - South,8.55,2026-27,0.99,0.98,0.93,0.92,0.89,0.89,0.923,0.917,yes
+sa3:QLD - Redcliffe,sa4:QLD - Moreton Bay - North,sa3:QLD - North Lakes,sa4:QLD - Moreton Bay - South,9.56,2026-27,0.99,0.98,0.93,0.92,0.89,0.89,0.923,0.917,yes
+sa3:QLD - Far North,sa4:QLD - Queensland - Outback,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,234.04,2026-27,1.65,1.17,1.40,1.04,1.34,0.99,1.433,1.045,yes
+sa3:QLD - Outback - North,sa4:QLD - Queensland - Outback,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,371.10,2026-27,1.65,1.17,1.40,1.04,1.34,0.99,1.433,1.045,yes
+sa3:QLD - Outback - North,sa4:QLD - Queensland - Outback,sa3:NT - Barkly,sa4:NT - Northern Territory - Outback,398.40,2026-27,1.65,1.84,1.40,1.54,1.34,1.49,1.433,1.592,yes
+sa3:QLD - Outback - North,sa4:QLD - Queensland - Outback,sa3:NT - Katherine,sa4:NT - Northern Territory - Outback,119.32,2026-27,1.65,1.84,1.40,1.54,1.34,1.49,1.433,1.592,yes
+sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,sa3:QLD - Charters Towers - Ayr - Ingham,sa4:QLD - Townsville,105.15,2026-27,1.65,1.17,1.40,1.04,1.34,0.99,1.433,1.045,yes
+sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,633.75,2026-27,1.65,1.38,1.40,1.19,1.34,1.13,1.433,1.206,yes
+sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,452.30,2026-27,1.65,1.84,1.40,1.54,1.34,1.49,1.433,1.592,yes
+sa3:QLD - Outback - South,sa4:QLD - Queensland - Outback,sa3:NT - Barkly,sa4:NT - Northern Territory - Outback,81.72,2026-27,1.65,1.84,1.40,1.54,1.34,1.49,1.433,1.592,yes
+sa3:QLD - Sunshine Coast Hinterland,sa4:QLD - Sunshine Coast,sa3:QLD - Gympie - Cooloola,sa4:QLD - Wide Bay,47.76,2026-27,0.97,1.00,0.90,0.90,0.86,0.84,0.894,0.890,yes
+sa3:QLD - Noosa Hinterland,sa4:QLD - Sunshine Coast,sa3:QLD - Gympie - Cooloola,sa4:QLD - Wide Bay,77.22,2026-27,0.97,1.00,0.90,0.90,0.86,0.84,0.894,0.890,yes
+sa3:SA - Adelaide City,sa4:SA - Adelaide - Central and Hills,sa3:SA - Charles Sturt,sa4:SA - Adelaide - West,1.54,2026-27,1.01,1.09,1.00,1.06,1.00,1.06,1.002,1.067,yes
+sa3:SA - Adelaide City,sa4:SA - Adelaide - Central and Hills,sa3:SA - West Torrens,sa4:SA - Adelaide - West,3.78,2026-27,1.01,1.09,1.00,1.06,1.00,1.06,1.002,1.067,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Playford,sa4:SA - Adelaide - North,15.93,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Tea Tree Gully,sa4:SA - Adelaide - North,21.07,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Mitcham,sa4:SA - Adelaide - South,8.95,2026-27,1.01,1.05,1.00,1.01,1.00,0.99,1.002,1.008,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Onkaparinga,sa4:SA - Adelaide - South,24.65,2026-27,1.01,1.05,1.00,1.01,1.00,0.99,1.002,1.008,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Barossa,sa4:SA - Barossa - Yorke - Mid North,34.43,2026-27,1.01,1.21,1.00,1.06,1.00,1.00,1.002,1.064,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Fleurieu - Kangaroo Island,sa4:SA - South Australia - South East,53.94,2026-27,1.01,1.10,1.00,0.98,1.00,0.92,1.002,0.977,yes
+sa3:SA - Adelaide Hills,sa4:SA - Adelaide - Central and Hills,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,54.17,2026-27,1.01,1.10,1.00,0.98,1.00,0.92,1.002,0.977,yes
+sa3:SA - Burnside,sa4:SA - Adelaide - Central and Hills,sa3:SA - Mitcham,sa4:SA - Adelaide - South,4.52,2026-27,1.01,1.05,1.00,1.01,1.00,0.99,1.002,1.008,yes
+sa3:SA - Campbelltown (SA),sa4:SA - Adelaide - Central and Hills,sa3:SA - Port Adelaide - East,sa4:SA - Adelaide - North,3.60,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Campbelltown (SA),sa4:SA - Adelaide - Central and Hills,sa3:SA - Tea Tree Gully,sa4:SA - Adelaide - North,7.81,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Norwood - Payneham - St Peters,sa4:SA - Adelaide - Central and Hills,sa3:SA - Port Adelaide - East,sa4:SA - Adelaide - North,1.52,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Prospect - Walkerville,sa4:SA - Adelaide - Central and Hills,sa3:SA - Port Adelaide - East,sa4:SA - Adelaide - North,7.25,2026-27,1.01,1.11,1.00,1.02,1.00,0.98,1.002,1.021,yes
+sa3:SA - Prospect - Walkerville,sa4:SA - Adelaide - Central and Hills,sa3:SA - Charles Sturt,sa4:SA - Adelaide - West,1.19,2026-27,1.01,1.09,1.00,1.06,1.00,1.06,1.002,1.067,yes
+sa3:SA - Prospect - Walkerville,sa4:SA - Adelaide - Central and Hills,sa3:SA - Port Adelaide - West,sa4:SA - Adelaide - West,2.15,2026-27,1.01,1.09,1.00,1.06,1.00,1.06,1.002,1.067,yes
+sa3:SA - Unley,sa4:SA - Adelaide - Central and Hills,sa3:SA - Marion,sa4:SA - Adelaide - South,0.98,2026-27,1.01,1.05,1.00,1.01,1.00,0.99,1.002,1.008,yes
+sa3:SA - Unley,sa4:SA - Adelaide - Central and Hills,sa3:SA - Mitcham,sa4:SA - Adelaide - South,6.51,2026-27,1.01,1.05,1.00,1.01,1.00,0.99,1.002,1.008,yes
+sa3:SA - Unley,sa4:SA - Adelaide - Central and Hills,sa3:SA - West Torrens,sa4:SA - Adelaide - West,2.17,2026-27,1.01,1.09,1.00,1.06,1.00,1.06,1.002,1.067,yes
+sa3:SA - Gawler - Two Wells,sa4:SA - Adelaide - North,sa3:SA - Barossa,sa4:SA - Barossa - Yorke - Mid North,76.28,2026-27,1.11,1.21,1.02,1.06,0.98,1.00,1.021,1.064,yes
+sa3:SA - Playford,sa4:SA - Adelaide - North,sa3:SA - Barossa,sa4:SA - Barossa - Yorke - Mid North,20.38,2026-27,1.11,1.21,1.02,1.06,0.98,1.00,1.021,1.064,yes
+sa3:SA - Port Adelaide - East,sa4:SA - Adelaide - North,sa3:SA - Port Adelaide - West,sa4:SA - Adelaide - West,4.41,2026-27,1.11,1.09,1.02,1.06,0.98,1.06,1.021,1.067,yes
+sa3:SA - Salisbury,sa4:SA - Adelaide - North,sa3:SA - Port Adelaide - West,sa4:SA - Adelaide - West,2.52,2026-27,1.11,1.09,1.02,1.06,0.98,1.06,1.021,1.067,yes
+sa3:SA - Holdfast Bay,sa4:SA - Adelaide - South,sa3:SA - West Torrens,sa4:SA - Adelaide - West,4.32,2026-27,1.05,1.09,1.01,1.06,0.99,1.06,1.008,1.067,yes
+sa3:SA - Marion,sa4:SA - Adelaide - South,sa3:SA - West Torrens,sa4:SA - Adelaide - West,3.70,2026-27,1.05,1.09,1.01,1.06,0.99,1.06,1.008,1.067,yes
+sa3:SA - Onkaparinga,sa4:SA - Adelaide - South,sa3:SA - Fleurieu - Kangaroo Island,sa4:SA - South Australia - South East,33.44,2026-27,1.05,1.10,1.01,0.98,0.99,0.92,1.008,0.977,yes
+sa3:SA - Barossa,sa4:SA - Barossa - Yorke - Mid North,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,86.36,2026-27,1.21,1.10,1.06,0.98,1.00,0.92,1.064,0.977,yes
+sa3:SA - Lower North,sa4:SA - Barossa - Yorke - Mid North,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,78.44,2026-27,1.21,1.38,1.06,1.19,1.00,1.13,1.064,1.206,yes
+sa3:SA - Lower North,sa4:SA - Barossa - Yorke - Mid North,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,84.52,2026-27,1.21,1.10,1.06,0.98,1.00,0.92,1.064,0.977,yes
+sa3:SA - Mid North,sa4:SA - Barossa - Yorke - Mid North,sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,332.79,2026-27,1.21,1.38,1.06,1.19,1.00,1.13,1.064,1.206,yes
+sa3:SA - Eyre Peninsula and South West,sa4:SA - South Australia - Outback,sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),397.09,2026-27,1.38,1.65,1.19,1.39,1.13,1.34,1.206,1.430,yes
+sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,sa3:SA - Murray and Mallee,sa4:SA - South Australia - South East,277.15,2026-27,1.38,1.10,1.19,0.98,1.13,0.92,1.206,0.977,yes
+sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),235.43,2026-27,1.38,1.65,1.19,1.39,1.13,1.34,1.206,1.430,yes
+sa3:SA - Outback - North and East,sa4:SA - South Australia - Outback,sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,899.21,2026-27,1.38,1.84,1.19,1.54,1.13,1.49,1.206,1.592,yes
+sa3:WA - Bunbury,sa4:WA - Bunbury,sa3:WA - Mandurah,sa4:WA - Mandurah,50.93,2026-27,1.23,1.03,1.09,0.95,1.04,0.90,1.097,0.942,yes
+sa3:WA - Bunbury,sa4:WA - Bunbury,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,152.77,2026-27,1.23,1.17,1.09,1.03,1.04,0.97,1.097,1.032,yes
+sa3:WA - Manjimup,sa4:WA - Bunbury,sa3:WA - Albany,sa4:WA - Western Australia - Wheat Belt,267.91,2026-27,1.23,1.17,1.09,1.03,1.04,0.97,1.097,1.032,yes
+sa3:WA - Manjimup,sa4:WA - Bunbury,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,67.53,2026-27,1.23,1.17,1.09,1.03,1.04,0.97,1.097,1.032,yes
+sa3:WA - Mandurah,sa4:WA - Mandurah,sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,21.56,2026-27,1.03,1.19,0.95,1.09,0.90,1.06,0.942,1.099,yes
+sa3:WA - Mandurah,sa4:WA - Mandurah,sa3:WA - Rockingham,sa4:WA - Perth - South West,11.91,2026-27,1.03,1.10,0.95,1.03,0.90,1.01,0.942,1.037,yes
+sa3:WA - Mandurah,sa4:WA - Mandurah,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,62.94,2026-27,1.03,1.17,0.95,1.03,0.90,0.97,0.942,1.032,yes
+sa3:WA - Cottesloe - Claremont,sa4:WA - Perth - Inner,sa3:WA - Stirling,sa4:WA - Perth - North West,7.92,2026-27,1.08,1.05,1.17,1.01,1.24,0.99,1.189,1.010,yes
+sa3:WA - Cottesloe - Claremont,sa4:WA - Perth - Inner,sa3:WA - Fremantle,sa4:WA - Perth - South West,1.06,2026-27,1.08,1.10,1.17,1.03,1.24,1.01,1.189,1.037,yes
+sa3:WA - Perth City,sa4:WA - Perth - Inner,sa3:WA - Bayswater - Bassendean,sa4:WA - Perth - North East,4.97,2026-27,1.08,1.04,1.17,0.97,1.24,0.93,1.189,0.964,yes
+sa3:WA - Perth City,sa4:WA - Perth - Inner,sa3:WA - Stirling,sa4:WA - Perth - North West,12.48,2026-27,1.08,1.05,1.17,1.01,1.24,0.99,1.189,1.010,yes
+sa3:WA - Bayswater - Bassendean,sa4:WA - Perth - North East,sa3:WA - Stirling,sa4:WA - Perth - North West,5.93,2026-27,1.04,1.05,0.97,1.01,0.93,0.99,0.964,1.010,yes
+sa3:WA - Mundaring,sa4:WA - Perth - North East,sa3:WA - Kalamunda,sa4:WA - Perth - South East,47.67,2026-27,1.04,1.19,0.97,1.09,0.93,1.06,0.964,1.099,yes
+sa3:WA - Mundaring,sa4:WA - Perth - North East,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,75.89,2026-27,1.04,1.17,0.97,1.03,0.93,0.97,0.964,1.032,yes
+sa3:WA - Swan,sa4:WA - Perth - North East,sa3:WA - Stirling,sa4:WA - Perth - North West,1.92,2026-27,1.04,1.05,0.97,1.01,0.93,0.99,0.964,1.010,yes
+sa3:WA - Swan,sa4:WA - Perth - North East,sa3:WA - Wanneroo,sa4:WA - Perth - North West,29.16,2026-27,1.04,1.05,0.97,1.01,0.93,0.99,0.964,1.010,yes
+sa3:WA - Swan,sa4:WA - Perth - North East,sa3:WA - Belmont - Victoria Park,sa4:WA - Perth - South East,5.54,2026-27,1.04,1.19,0.97,1.09,0.93,1.06,0.964,1.099,yes
+sa3:WA - Swan,sa4:WA - Perth - North East,sa3:WA - Kalamunda,sa4:WA - Perth - South East,6.46,2026-27,1.04,1.19,0.97,1.09,0.93,1.06,0.964,1.099,yes
+sa3:WA - Swan,sa4:WA - Perth - North East,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,57.18,2026-27,1.04,1.17,0.97,1.03,0.93,0.97,0.964,1.032,yes
+sa3:WA - Wanneroo,sa4:WA - Perth - North West,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,49.58,2026-27,1.05,1.17,1.01,1.03,0.99,0.97,1.010,1.032,yes
+sa3:WA - Armadale,sa4:WA - Perth - South East,sa3:WA - Cockburn,sa4:WA - Perth - South West,7.93,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Armadale,sa4:WA - Perth - South East,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,23.61,2026-27,1.19,1.17,1.09,1.03,1.06,0.97,1.099,1.032,yes
+sa3:WA - Armadale,sa4:WA - Perth - South East,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,19.16,2026-27,1.19,1.17,1.09,1.03,1.06,0.97,1.099,1.032,yes
+sa3:WA - Canning,sa4:WA - Perth - South East,sa3:WA - Cockburn,sa4:WA - Perth - South West,5.77,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Canning,sa4:WA - Perth - South East,sa3:WA - Melville,sa4:WA - Perth - South West,6.56,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Gosnells,sa4:WA - Perth - South East,sa3:WA - Cockburn,sa4:WA - Perth - South West,0.10,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Kalamunda,sa4:WA - Perth - South East,sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,2.68,2026-27,1.19,1.17,1.09,1.03,1.06,0.97,1.099,1.032,yes
+sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,sa3:WA - Cockburn,sa4:WA - Perth - South West,0.01,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,sa3:WA - Kwinana,sa4:WA - Perth - South West,13.93,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,sa3:WA - Rockingham,sa4:WA - Perth - South West,24.22,2026-27,1.19,1.10,1.09,1.03,1.06,1.01,1.099,1.037,yes
+sa3:WA - Serpentine - Jarrahdale,sa4:WA - Perth - South East,sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,46.09,2026-27,1.19,1.17,1.09,1.03,1.06,0.97,1.099,1.032,yes
+sa3:WA - Albany,sa4:WA - Western Australia - Wheat Belt,sa3:WA - Esperance,sa4:WA - Western Australia - Outback (South),148.14,2026-27,1.17,1.65,1.03,1.39,0.97,1.34,1.032,1.430,yes
+sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),385.05,2026-27,1.17,1.65,1.03,1.39,0.97,1.34,1.032,1.430,yes
+sa3:WA - Wheat Belt - North,sa4:WA - Western Australia - Wheat Belt,sa3:WA - Mid West,sa4:WA - Western Australia - Outback (South),512.78,2026-27,1.17,1.65,1.03,1.39,0.97,1.34,1.032,1.430,yes
+sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,sa3:WA - Esperance,sa4:WA - Western Australia - Outback (South),167.63,2026-27,1.17,1.65,1.03,1.39,0.97,1.34,1.032,1.430,yes
+sa3:WA - Wheat Belt - South,sa4:WA - Western Australia - Wheat Belt,sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),113.34,2026-27,1.17,1.65,1.03,1.39,0.97,1.34,1.032,1.430,yes
+sa3:WA - Kimberley,sa4:WA - Western Australia - Outback (North),sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,283.48,2026-27,1.66,1.84,1.42,1.54,1.37,1.49,1.457,1.592,yes
+sa3:WA - Kimberley,sa4:WA - Western Australia - Outback (North),sa3:NT - Katherine,sa4:NT - Northern Territory - Outback,422.87,2026-27,1.66,1.84,1.42,1.54,1.37,1.49,1.457,1.592,yes
+sa3:WA - East Pilbara,sa4:WA - Western Australia - Outback (North),sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),441.99,2026-27,1.66,1.65,1.42,1.39,1.37,1.34,1.457,1.430,yes
+sa3:WA - East Pilbara,sa4:WA - Western Australia - Outback (North),sa3:WA - Mid West,sa4:WA - Western Australia - Outback (South),721.01,2026-27,1.66,1.65,1.42,1.39,1.37,1.34,1.457,1.430,yes
+sa3:WA - East Pilbara,sa4:WA - Western Australia - Outback (North),sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,245.55,2026-27,1.66,1.84,1.42,1.54,1.37,1.49,1.457,1.592,yes
+sa3:WA - West Pilbara,sa4:WA - Western Australia - Outback (North),sa3:WA - Gascoyne,sa4:WA - Western Australia - Outback (South),677.56,2026-27,1.66,1.65,1.42,1.39,1.37,1.34,1.457,1.430,yes
+sa3:WA - West Pilbara,sa4:WA - Western Australia - Outback (North),sa3:WA - Mid West,sa4:WA - Western Australia - Outback (South),176.39,2026-27,1.66,1.65,1.42,1.39,1.37,1.34,1.457,1.430,yes
+sa3:WA - Goldfields,sa4:WA - Western Australia - Outback (South),sa3:NT - Alice Springs,sa4:NT - Northern Territory - Outback,284.60,2026-27,1.65,1.84,1.39,1.54,1.34,1.49,1.430,1.592,yes
+sa3:TAS - Brighton,sa4:TAS - Hobart,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,34.02,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Hobart - North West,sa4:TAS - Hobart,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,37.15,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Hobart - South and West,sa4:TAS - Hobart,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,6.10,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Hobart - South and West,sa4:TAS - Hobart,sa3:TAS - Huon - Bruny Island,sa4:TAS - South East,48.21,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Sorell - Dodges Ferry,sa4:TAS - Hobart,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,29.98,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Sorell - Dodges Ferry,sa4:TAS - Hobart,sa3:TAS - South East Coast,sa4:TAS - South East,42.69,2026-27,1.01,1.13,0.94,0.99,0.90,0.93,0.935,0.990,yes
+sa3:TAS - Meander Valley - West Tamar,sa4:TAS - Launceston and North East,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,122.73,2026-27,1.05,1.13,0.94,0.99,0.88,0.93,0.935,0.990,yes
+sa3:TAS - Meander Valley - West Tamar,sa4:TAS - Launceston and North East,sa3:TAS - Devonport,sa4:TAS - West and North West,161.18,2026-27,1.05,1.11,0.94,0.99,0.88,0.94,0.935,0.993,yes
+sa3:TAS - Meander Valley - West Tamar,sa4:TAS - Launceston and North East,sa3:TAS - West Coast,sa4:TAS - West and North West,33.27,2026-27,1.05,1.11,0.94,0.99,0.88,0.94,0.935,0.993,yes
+sa3:TAS - North East,sa4:TAS - Launceston and North East,sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,163.75,2026-27,1.05,1.13,0.94,0.99,0.88,0.93,0.935,0.990,yes
+sa3:TAS - North East,sa4:TAS - Launceston and North East,sa3:TAS - South East Coast,sa4:TAS - South East,98.53,2026-27,1.05,1.13,0.94,0.99,0.88,0.93,0.935,0.990,yes
+sa3:TAS - Central Highlands (Tas.),sa4:TAS - South East,sa3:TAS - West Coast,sa4:TAS - West and North West,191.32,2026-27,1.13,1.11,0.99,0.99,0.93,0.94,0.990,0.993,yes
+sa3:NT - Litchfield,sa4:NT - Darwin,sa3:NT - Daly - Tiwi - West Arnhem,sa4:NT - Northern Territory - Outback,197.14,2026-27,1.35,1.84,1.21,1.54,1.18,1.49,1.230,1.592,yes

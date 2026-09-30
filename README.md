@@ -631,6 +631,29 @@ directional claim in it is computed, and `analysis.json` holds the numbers
 behind it. The regressions are solved directly in the standard library, with
 standard errors clustered by region.
 
+### The location-factor experiment
+
+A test, in phases, of whether SDA providers build on the cheapest land within
+each SA4, since the NDIA's location factor is set per SA4 and building type
+while land cost varies within it. Phase 1 (ingest and feasibility) is done;
+nothing here changes the site.
+
+```sh
+python3 scripts/extract_pricing.py            # data/pricing/*.docx -> location_factors.csv, base_amounts.csv
+python3 scripts/extract_newbuild_types.py     # data/supplements -> data/panel/newbuild_types_sa4.csv
+python3 scripts/reduce_abs.py                 # raw/abs -> data/abs (approvals, Census)
+python3 scripts/build_sa3_adjacency.py        # raw/abs/asgs SA3 shapefile -> data/abs/sa3_adjacency.csv
+python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_FACTOR_FEASIBILITY.md
+```
+
+The ABS downloads are large and live in the git-ignored `raw/`;
+`raw/MANIFEST.md` records every one (URL, release, edition, licence, checksum)
+and `data/README.md` says how each reduced file is rebuilt. Only the last two
+steps need `raw/`. `data/panel/LOCATION_FACTOR_FEASIBILITY.md` reports how the
+factors vary, how far cost varies within SA4s, how many SA4 borders separate
+different factors, and how collinear cost is with approvals and need; like the
+other reports it is generated, and the tests rebuild it byte for byte.
+
 ### The time-based interface (`time/`)
 
 A second, simpler site built around time sits in `time/`, beside the explorer,
@@ -726,8 +749,10 @@ node tests/smoke.js                      # every view in Chromium, desktop and p
 ```
 
 The first rebuilds `vacancies.json`, re-derives `sda.json` and rebuilds the
-quarterly panel (SA4 and SA3) from all thirteen workbooks (about a minute), and fails if any
-differs byte for byte from what is committed; it then checks that every quarter
+quarterly panel (SA4 and SA3) and the P.11 building-type detail from all thirteen
+workbooks (about two minutes), the pricing extracts and the location-factor
+report, and fails if any differs byte for byte from what is committed (the ABS
+reductions are rebuilt too when `raw/` is present); it then checks that every quarter
 reconciles and that the panel's June 2026 quarter equals `sda.json`. The second needs Playwright (`npm install --no-save
 playwright axe-core && npx playwright install chromium`; with a global install, prefix
 `NODE_PATH="$(npm root -g)"`). It fails on any page error, on horizontal

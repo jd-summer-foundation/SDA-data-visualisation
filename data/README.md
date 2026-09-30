@@ -18,6 +18,8 @@ private.
 | `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
 | `panel/` | Built by `scripts/extract_panel.py` (SA4) and `scripts/extract_panel_sa3.py` (SA3, placed by `asgs_2021_sa2.csv`) from every workbook in `supplements/` | June 2023 – June 2026 |
+| `pricing/` | NDIA Pricing Arrangements for SDA 2026-27 (v1.0) and Pricing Schedule for SDA 2026-27, and the location factors and base amounts `scripts/extract_pricing.py` extracts from them | effective 1 July 2026 |
+| `abs/` | Reduced ABS files: building approvals by SA2, 2021 Census medians by SA3 and SA2, SA3 adjacency. Rebuilt from the git-ignored `raw/` (see `raw/MANIFEST.md`) | see below |
 
 ## Both CSVs are reduced before committing
 
@@ -163,3 +165,65 @@ Three further quirks, all handled in `build_concordance`:
   alone — unique in Supplement P except for the `Other` bucket, which no listing
   reaches — and each listing's state is taken from its matched SA4 rather than
   its address.
+
+## `pricing/`
+
+The NDIA's SDA pricing documents, committed whole: they are public NDIA
+publications. Both are Word files, read with `zipfile` and `xml.etree`.
+
+| File | Source |
+| --- | --- |
+| `Pricing-Arrangements-for-SDA-2026_27-v1_0.docx` | NDIS Pricing Arrangements for Specialist Disability Accommodation 2026-27, version 1.0, effective 1 July 2026 (ndis.gov.au) |
+| `ndis-pricing-schedule-for-sda-2026-27.docx` | NDIS Pricing Schedule for SDA 2026-27 (ndis.gov.au) |
+| `location_factors.csv` | edition, version, effective date, SA4, stock type (New build / Existing / Legacy), building type, factor as published |
+| `base_amounts.csv` | edition, stock type, building type, design category, breakout room, sprinklers, OOA, GST treatment, annual base amount per participant |
+
+`python3 scripts/extract_pricing.py` rebuilds both CSVs. The Arrangements are
+the source; the Schedule is read the same way and must agree on every factor
+and amount. Tables are found by caption, since the two number them differently
+(location factors: Tables 23–24 in the Arrangements, 35–36 in the Schedule).
+The existing-and-legacy factor table names two SA4s by their pre-2016 names,
+`QLD - Fitzroy` and `QLD - Mackay`; `SA4_RENAMES` maps them, and any other
+unmatched name fails the build. Building types are named as Supplement P's
+Table P.11 names them, so the two join on the label.
+
+Only the 2026-27 edition is here. Earlier editions (2021-22 to 2025-26) could
+not be fetched from ndis.gov.au by script; each can be added as a Word copy
+and a line in `EDITIONS`.
+
+## `abs/`
+
+Small files reduced from ABS downloads kept in the git-ignored `raw/`.
+`raw/MANIFEST.md` records the URL, release, geography edition, licence and
+checksum of each download. All ABS data is CC BY 4.0.
+
+| File | From | Rebuilt by |
+| --- | --- | --- |
+| `building_approvals_sa2.csv` | Building Approvals, Australia: small-area CSVs by SA2, ASGS 2021, FY 2021-22 to 2026-27 FYTD (July releases 2022–2026) | `scripts/reduce_abs.py` |
+| `census_2021_sa3.csv`, `census_2021_sa2.csv` | 2021 Census GCP DataPacks (SA3 and SA2, all of Australia), tables G02 and G01 | `scripts/reduce_abs.py` |
+| `sa3_adjacency.csv` | ASGS Edition 3 SA3 boundaries, `SA3_2021_AUST_SHP_GDA2020.zip` | `scripts/build_sa3_adjacency.py` |
+
+`building_approvals_sa2.csv` keeps dwelling units approved in **new**
+residential buildings, all sectors (`type_work` 1, `own_sector` 9), as houses
+(`type_bld` 110) and other residential (150), summed to quarters; the partial
+latest quarter is dropped. SA2s with nothing approved in a quarter are omitted,
+so absence means zero. The ABS's own state (`1`–`8`) and national (`0`) rows
+are kept beside the SA2s, and both the reducer (monthly) and the tests
+(quarterly) check that SA2s sum to their state and states to the nation.
+
+The Census files keep `Median_mortgage_repay_monthly`, `Median_rent_weekly`,
+`Median_tot_hhd_inc_weekly` (G02) and `Tot_P_P` (G01), by ASGS 2021 code. A
+median of 0 means not published (NSW - Blue Mountains - South, 8 residents).
+
+`sa3_adjacency.csv` lists every pair of the 336 Supplement P SA3s that share
+at least one boundary edge (a corner alone does not count), each side's SA4,
+whether the pair crosses an SA4 boundary, and the shared border length in km.
+
+## `panel/newbuild_types_sa4.csv` and the location-factor report
+
+`scripts/extract_newbuild_types.py` writes Table P.11's new-build dwellings by
+building type, design category and SA4, every quarter, which `panel.csv` sums
+over building types. Zero cells are omitted. `scripts/feasibility_location_factor.py`
+writes `LOCATION_FACTOR_FEASIBILITY.md`, `location_factor_feasibility.json` and
+`location_factor_pairs.csv` (each cross-SA4 adjacent pair with the factor on
+each side) from committed files alone.
