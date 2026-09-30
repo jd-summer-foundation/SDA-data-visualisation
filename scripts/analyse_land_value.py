@@ -9,6 +9,10 @@ This carries them to SA3 and re-runs the within-SA4 tests for Victoria with
 each cost measure on exactly the same SA3s, so any difference comes from the
 measure, not the sample.
 
+Medians VGV marks '*' were carried forward from a year with no sales, so they
+are never used; '^' (fewer than 10 sales that year) is used in the primary run
+and dropped in a sensitivity check.
+
 SA3 land price: each locality's mean log median over LAND_YEARS, averaged over
 the localities in the SA3 weighted by their 2021 dwellings in it
 (data/abs/sal_sa3_dwellings.csv). An SA3 is used when localities with a median
@@ -40,18 +44,24 @@ from analyse_panel import spearman  # noqa: E402
 from feasibility_location_factor import DATA, END, START, load  # noqa: E402
 
 SEED = 20260930
-LAND_YEARS = (2021, 2023)   # when the SDA enrolled Jun 2023 - Jun 2026 was being committed
+LAND_YEARS = (2021, 2023)   # calendar years; when the SDA enrolled Jun 2023 - Jun 2026 was committed
 MIN_COVERAGE = 0.25
 MIN_SA4S_MODEL = 8          # fewer SA4s than this cannot carry a five-covariate model
 COVERAGE_CHECK = 0.5
 
 
 def land_prices(unflagged=False):
-    """SAL code -> mean log median vacant-land price over LAND_YEARS."""
+    """SAL code -> mean log median vacant-land price over LAND_YEARS.
+
+    '*' medians repeat an earlier year's and are always dropped; with
+    `unflagged`, '^' medians (fewer than 10 sales) are dropped too.
+    """
     logs = defaultdict(list)
     with open(DATA / "vgv" / "vacant_land_by_locality.csv", newline="") as fh:
         for r in csv.DictReader(fh):
-            if LAND_YEARS[0] <= int(r["year"]) <= LAND_YEARS[1] and not (unflagged and r["flag"]):
+            if r["flag"] == "*" or (unflagged and r["flag"]):
+                continue
+            if LAND_YEARS[0] <= int(r["year"]) <= LAND_YEARS[1]:
                 logs[r["sal_code_2021"]].append(math.log(float(r["median_price"])))
     return {k: statistics.fmean(v) for k, v in logs.items()}
 
@@ -190,9 +200,14 @@ def to_markdown(a):
     w("Phase 2 measured cost by the 2021 Census median mortgage repayment. That is high where "
       "housing is new, because recent buyers carry larger loans, so growth areas read as dear. "
       "Valuer-General Victoria publishes the median sale price of vacant residential land by "
-      "locality, which is land cost itself (per lot, not per square metre).")
+      "locality, which is land cost itself: the median sale of a vacant residential home site "
+      "or surveyed lot under 4,000 m², by calendar year.")
     w("")
     w("## The land measure")
+    w("")
+    w("Medians VGV marks `*` repeat the previous year's for want of any sales and are not used; "
+      "`^` marks a year with fewer than 10 sales and is used here, then dropped under Sensitivity "
+      "(definitions from VGV's *A Guide to Property Values 2025*, p. 10).")
     w("")
     w(f"Each locality's mean log median, {y0}–{y1} (VGV's 2015–2025 time series), carried to SA3 by "
       "the locality's 2021 dwellings in each SA3 (ABS Mesh Blocks). An SA3 is used when localities "
@@ -241,8 +256,8 @@ def to_markdown(a):
     w("")
     w("| Specification | SA3s | New build: SDA share | New build: approvals share | New build: SDA minus approvals | Regression |")
     w("| --- | --- | --- | --- | --- | --- |")
-    for name, lab in (("primary", f"Primary (coverage ≥ {a['min_coverage']:.0%}, all medians)"),
-                      ("unflagged", "Only medians VGV does not mark ^ or *"),
+    for name, lab in (("primary", f"Primary (coverage ≥ {a['min_coverage']:.0%}, without * medians)"),
+                      ("unflagged", "Also without ^ (fewer than 10 sales)"),
                       ("coverage_half", "Coverage ≥ 50%")):
         s = a["specs"][name]
         t = s["tests"]["land"]["new_build"]
@@ -283,8 +298,11 @@ def to_markdown(a):
     w(f"- **Small sample.** {nbL['rank']['difference']['sa4s']} Victorian SA4s qualify; inner "
       "Melbourne is missing because it sells no vacant land, so these are comparisons among "
       "fringe, middle-ring and regional SA3s only.")
-    w("- **Per lot, not per square metre.** Regional and peri-urban localities sell larger lots, so "
-      "their medians overstate land cost per square metre relative to fringe estates.")
+    w("- **Per lot, not per square metre.** VGV's vacant-land class is home sites under 4,000 m², "
+      "which excludes lifestyle and acreage blocks, but lots within it still vary (a 2,000–3,999 m² "
+      "regional site against a 400 m² estate lot), so a median lot price is not a price per "
+      "square metre. VGV does not state the workbook's class in words; its quarterly report titles "
+      "the same table \"median vacant residential land prices\".")
     w("- **Victoria only.** NSW bulk land values are available only on request; Queensland, South "
       "Australia and Western Australia publish no comparable free series.")
     return "\n".join(L) + "\n"

@@ -251,8 +251,13 @@ browser, kept in `raw/vgv/`). Rebuilt by `scripts/reduce_vgv.py`. Localities
 are joined to SAL 2021 by name within Victoria; five VGV names that are not ABS
 localities (estates such as Sanctuary Lakes) are left out by name, and any
 other unmatched name fails the build. Only the latest vintage is read, because
-VGV revises earlier years between releases. VGV marks some medians `^` or `*`
-without defining either in the workbook; the marker is kept in `flag`.
+VGV revises earlier years between releases. VGV marks some medians `^` or `*`,
+kept in `flag`. The workbooks do not define them; *A Guide to Property Values
+2025* (explanatory notes, printed p. 10) does: "^ Fewer than 10 sales in that
+year. * Value was carried forward from the previous year due to zero sales in
+the represented year." The analysis never uses `*` medians. Years are calendar
+years, and vacant land is VGV's Vacant Residential Land: home sites or surveyed
+lots under 4,000 m² (Guide, pp. 3, 11–12).
 `scripts/analyse_land_value.py` uses it in `panel/LAND_VALUE_VIC.md`.
 
 ## `panel/newbuild_types_sa4.csv` and the location-factor report

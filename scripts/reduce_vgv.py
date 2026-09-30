@@ -12,10 +12,14 @@ build unless it is listed in NOT_LOCALITIES with the reason.
 
 Only the latest vintage is read: VGV revises earlier years between releases
 (Aintree 2021 is $390,000 in the 2013-2023 file and $430,000 in this one).
-VGV marks some medians with '^' or '*'. The workbooks do not define either
-(both are probably small-sample warnings), so the marker is kept in the
-`flag` column for the analysis to include or exclude; the preliminary
-current-year column is not read.
+VGV marks some medians with '^' or '*', which the workbooks do not define.
+A Guide to Property Values 2025 (explanatory notes, printed p. 10) does, for
+annual figures: "^ Fewer than 10 sales in that year. * Value was carried
+forward from the previous year due to zero sales in the represented year."
+The marker is kept in the `flag` column; the preliminary current-year column
+is not read. Years are calendar years (Guide, p. 3). "Vacant land" is VGV's
+Vacant Residential Land: home sites or surveyed lots under 4,000 m2 (Vac Res
+A and B; Guide, pp. 11-12).
 
 Usage:  python3 scripts/reduce_vgv.py [raw/vgv] [-o data/vgv]
 """
