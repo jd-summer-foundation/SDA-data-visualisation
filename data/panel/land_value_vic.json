@@ -1,0 +1,1342 @@
+{
+ "land_years": [
+  2021,
+  2023
+ ],
+ "min_coverage": 0.25,
+ "specs": {
+  "primary": {
+   "sa3s": 41,
+   "excluded": [
+    "sa3:VIC - Banyule",
+    "sa3:VIC - Bayside",
+    "sa3:VIC - Boroondara",
+    "sa3:VIC - Brunswick - Coburg",
+    "sa3:VIC - Darebin - North",
+    "sa3:VIC - Darebin - South",
+    "sa3:VIC - Essendon",
+    "sa3:VIC - Glen Eira",
+    "sa3:VIC - Hobsons Bay",
+    "sa3:VIC - Keilor",
+    "sa3:VIC - Kingston",
+    "sa3:VIC - Knox",
+    "sa3:VIC - Loddon - Elmore",
+    "sa3:VIC - Manningham - East",
+    "sa3:VIC - Maribyrnong",
+    "sa3:VIC - Melbourne City",
+    "sa3:VIC - Monash",
+    "sa3:VIC - Moreland - North",
+    "sa3:VIC - Nillumbik - Kinglake",
+    "sa3:VIC - Port Phillip",
+    "sa3:VIC - Stonnington - East",
+    "sa3:VIC - Stonnington - West",
+    "sa3:VIC - Whitehorse - East",
+    "sa3:VIC - Whitehorse - West",
+    "sa3:VIC - Yarra"
+   ],
+   "sa4s_two": 13,
+   "land_vs_mortgage": 0.657251,
+   "sd_land": 0.189162,
+   "sd_mortgage": 0.076279,
+   "tests": {
+    "land": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.308333,
+        "sa4s": 12,
+        "se": 0.163048,
+        "negative": 6,
+        "positive": 3,
+        "p": 0.155769
+       },
+       "approvals": {
+        "mean": 0.016667,
+        "sa4s": 12,
+        "se": 0.23252,
+        "negative": 6,
+        "positive": 6,
+        "p": 0.952809
+       },
+       "difference": {
+        "mean": -0.183333,
+        "sa4s": 12,
+        "se": 0.165983,
+        "negative": 7,
+        "positive": 4,
+        "p": 0.425315
+       }
+      },
+      "rank_houses": {
+       "mean": 0.008333,
+       "sa4s": 12,
+       "se": 0.229445,
+       "negative": 6,
+       "positive": 6,
+       "p": 0.983803
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 37,
+       "coef": {
+        "relative_log_cost": {
+         "b": -19.126833,
+         "se": 8.077102
+        },
+        "approvals_share": {
+         "b": 0.671198,
+         "se": 0.2596
+        },
+        "need_share": {
+         "b": 0.991702,
+         "se": 0.240188
+        },
+        "population_share": {
+         "b": -0.78512,
+         "se": 0.523248
+        },
+        "area_share": {
+         "b": -0.470098,
+         "se": 0.137942
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.280335,
+         "se": 0.497364
+        },
+        "log_approvals": {
+         "b": 0.738336,
+         "se": 0.244621
+        },
+        "log_need": {
+         "b": 0.29046,
+         "se": 0.31213
+        },
+        "log_population": {
+         "b": 0.025393,
+         "se": 0.692827
+        },
+        "log_area": {
+         "b": -0.573252,
+         "se": 0.195514
+        }
+       }
+      }
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": -0.280502,
+        "sa4s": 12,
+        "se": 0.179136,
+        "negative": 8,
+        "positive": 4,
+        "p": 0.192362
+       },
+       "approvals": {
+        "mean": 0.016667,
+        "sa4s": 12,
+        "se": 0.23252,
+        "negative": 6,
+        "positive": 6,
+        "p": 0.956409
+       },
+       "difference": {
+        "mean": -0.216667,
+        "sa4s": 12,
+        "se": 0.197267,
+        "negative": 8,
+        "positive": 4,
+        "p": 0.329334
+       }
+      },
+      "rank_houses": {
+       "mean": 0.008333,
+       "sa4s": 12,
+       "se": 0.229445,
+       "negative": 6,
+       "positive": 6,
+       "p": 0.986603
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 37,
+       "coef": {
+        "relative_log_cost": {
+         "b": -31.503126,
+         "se": 11.97834
+        },
+        "approvals_share": {
+         "b": 0.509414,
+         "se": 0.254169
+        },
+        "need_share": {
+         "b": 0.471096,
+         "se": 0.287372
+        },
+        "population_share": {
+         "b": -0.032427,
+         "se": 0.233463
+        },
+        "area_share": {
+         "b": -0.574195,
+         "se": 0.183214
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.650185,
+         "se": 0.551954
+        },
+        "log_approvals": {
+         "b": 0.421356,
+         "se": 0.231306
+        },
+        "log_need": {
+         "b": 0.077954,
+         "se": 0.290374
+        },
+        "log_population": {
+         "b": 0.752107,
+         "se": 0.497227
+        },
+        "log_area": {
+         "b": -0.63062,
+         "se": 0.267393
+        }
+       }
+      }
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.557143,
+        "sa4s": 7,
+        "se": 0.203373,
+        "negative": 6,
+        "positive": 1,
+        "p": 0.063587
+       },
+       "approvals": {
+        "mean": -0.185714,
+        "sa4s": 7,
+        "se": 0.314286,
+        "negative": 4,
+        "positive": 3,
+        "p": 0.567087
+       },
+       "difference": {
+        "mean": -0.214286,
+        "sa4s": 7,
+        "se": 0.324719,
+        "negative": 5,
+        "positive": 2,
+        "p": 0.488302
+       }
+      },
+      "rank_houses": {
+       "mean": -0.185714,
+       "sa4s": 7,
+       "se": 0.314286,
+       "negative": 4,
+       "positive": 3,
+       "p": 0.568286
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.092308,
+      "sa4s": 13,
+      "se": 0.226869,
+      "negative": 8,
+      "positive": 5,
+      "p": 0.673465
+     },
+     "new_vs_population": {
+      "mean": -0.475,
+      "sa4s": 12,
+      "se": 0.186322,
+      "negative": 9,
+      "positive": 3,
+      "p": 0.022795
+     }
+    },
+    "mortgage": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.103561,
+        "sa4s": 11,
+        "se": 0.183752,
+        "negative": 5,
+        "positive": 4,
+        "p": 0.640672
+       },
+       "approvals": {
+        "mean": 0.351299,
+        "sa4s": 11,
+        "se": 0.209998,
+        "negative": 3,
+        "positive": 8,
+        "p": 0.115377
+       },
+       "difference": {
+        "mean": -0.505372,
+        "sa4s": 11,
+        "se": 0.174761,
+        "negative": 10,
+        "positive": 1,
+        "p": 0.021396
+       }
+      },
+      "rank_houses": {
+       "mean": 0.36529,
+       "sa4s": 11,
+       "se": 0.211875,
+       "negative": 3,
+       "positive": 8,
+       "p": 0.09878
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 37,
+       "coef": {
+        "relative_log_cost": {
+         "b": -13.365225,
+         "se": 38.31657
+        },
+        "approvals_share": {
+         "b": 0.700839,
+         "se": 0.21037
+        },
+        "need_share": {
+         "b": 1.188736,
+         "se": 0.249082
+        },
+        "population_share": {
+         "b": -1.0483,
+         "se": 0.510716
+        },
+        "area_share": {
+         "b": -0.412059,
+         "se": 0.135775
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.788066,
+         "se": 1.762796
+        },
+        "log_approvals": {
+         "b": 0.891068,
+         "se": 0.20179
+        },
+        "log_need": {
+         "b": 0.604161,
+         "se": 0.301732
+        },
+        "log_population": {
+         "b": -0.449003,
+         "se": 0.579275
+        },
+        "log_area": {
+         "b": -0.46554,
+         "se": 0.24404
+        }
+       }
+      }
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": -0.093193,
+        "sa4s": 11,
+        "se": 0.230087,
+        "negative": 6,
+        "positive": 5,
+        "p": 0.687263
+       },
+       "approvals": {
+        "mean": 0.351299,
+        "sa4s": 11,
+        "se": 0.209998,
+        "negative": 3,
+        "positive": 8,
+        "p": 0.119776
+       },
+       "difference": {
+        "mean": -0.478099,
+        "sa4s": 11,
+        "se": 0.202812,
+        "negative": 9,
+        "positive": 2,
+        "p": 0.029994
+       }
+      },
+      "rank_houses": {
+       "mean": 0.36529,
+       "sa4s": 11,
+       "se": 0.211875,
+       "negative": 3,
+       "positive": 8,
+       "p": 0.104579
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 37,
+       "coef": {
+        "relative_log_cost": {
+         "b": -7.796189,
+         "se": 46.668422
+        },
+        "approvals_share": {
+         "b": 0.50809,
+         "se": 0.174738
+        },
+        "need_share": {
+         "b": 0.619983,
+         "se": 0.216422
+        },
+        "population_share": {
+         "b": -0.23106,
+         "se": 0.269374
+        },
+        "area_share": {
+         "b": -0.483946,
+         "se": 0.173362
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -0.970815,
+         "se": 1.902379
+        },
+        "log_approvals": {
+         "b": 0.58677,
+         "se": 0.18295
+        },
+        "log_need": {
+         "b": 0.351545,
+         "se": 0.233441
+        },
+        "log_population": {
+         "b": 0.219035,
+         "se": 0.37327
+        },
+        "log_area": {
+         "b": -0.506041,
+         "se": 0.318618
+        }
+       }
+      }
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.285714,
+        "sa4s": 7,
+        "se": 0.285714,
+        "negative": 5,
+        "positive": 2,
+        "p": 0.356129
+       },
+       "approvals": {
+        "mean": 0.114286,
+        "sa4s": 7,
+        "se": 0.290671,
+        "negative": 3,
+        "positive": 4,
+        "p": 0.731854
+       },
+       "difference": {
+        "mean": -0.485714,
+        "sa4s": 7,
+        "se": 0.189521,
+        "negative": 6,
+        "positive": 1,
+        "p": 0.109378
+       }
+      },
+      "rank_houses": {
+       "mean": 0.114286,
+       "sa4s": 7,
+       "se": 0.290671,
+       "negative": 3,
+       "positive": 4,
+       "p": 0.734053
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.492966,
+      "sa4s": 12,
+      "se": 0.181592,
+      "negative": 10,
+      "positive": 2,
+      "p": 0.024595
+     },
+     "new_vs_population": {
+      "mean": -0.314463,
+      "sa4s": 11,
+      "se": 0.20116,
+      "negative": 8,
+      "positive": 3,
+      "p": 0.171966
+     }
+    }
+   },
+   "corridor": {
+    "sa3s": 5,
+    "mean_rel_land": -0.037293,
+    "mean_rel_mortgage": 0.021086
+   },
+   "new_sda_covered": 0.796367,
+   "new_sda_vic": 2092.0,
+   "vic_sa3s": 66
+  },
+  "unflagged": {
+   "sa3s": 39,
+   "excluded": [
+    "sa3:VIC - Banyule",
+    "sa3:VIC - Bayside",
+    "sa3:VIC - Boroondara",
+    "sa3:VIC - Brimbank",
+    "sa3:VIC - Brunswick - Coburg",
+    "sa3:VIC - Dandenong",
+    "sa3:VIC - Darebin - North",
+    "sa3:VIC - Darebin - South",
+    "sa3:VIC - Essendon",
+    "sa3:VIC - Glen Eira",
+    "sa3:VIC - Hobsons Bay",
+    "sa3:VIC - Keilor",
+    "sa3:VIC - Kingston",
+    "sa3:VIC - Knox",
+    "sa3:VIC - Loddon - Elmore",
+    "sa3:VIC - Manningham - East",
+    "sa3:VIC - Maribyrnong",
+    "sa3:VIC - Melbourne City",
+    "sa3:VIC - Monash",
+    "sa3:VIC - Moreland - North",
+    "sa3:VIC - Nillumbik - Kinglake",
+    "sa3:VIC - Port Phillip",
+    "sa3:VIC - Stonnington - East",
+    "sa3:VIC - Stonnington - West",
+    "sa3:VIC - Whitehorse - East",
+    "sa3:VIC - Whitehorse - West",
+    "sa3:VIC - Yarra"
+   ],
+   "sa4s_two": 13,
+   "land_vs_mortgage": 0.700421,
+   "sd_land": 0.193384,
+   "sd_mortgage": 0.076943,
+   "tests": {
+    "land": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.366667,
+        "sa4s": 12,
+        "se": 0.17724,
+        "negative": 6,
+        "positive": 3,
+        "p": 0.104179
+       },
+       "approvals": {
+        "mean": -0.041667,
+        "sa4s": 12,
+        "se": 0.249684,
+        "negative": 6,
+        "positive": 6,
+        "p": 0.866627
+       },
+       "difference": {
+        "mean": -0.433333,
+        "sa4s": 12,
+        "se": 0.145297,
+        "negative": 10,
+        "positive": 2,
+        "p": 0.054389
+       }
+      },
+      "rank_houses": {
+       "mean": -0.05,
+       "sa4s": 12,
+       "se": 0.246644,
+       "negative": 6,
+       "positive": 6,
+       "p": 0.844431
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 35,
+       "coef": {
+        "relative_log_cost": {
+         "b": -18.957203,
+         "se": 10.315488
+        },
+        "approvals_share": {
+         "b": 0.577169,
+         "se": 0.313293
+        },
+        "need_share": {
+         "b": 0.96638,
+         "se": 0.241916
+        },
+        "population_share": {
+         "b": -0.684775,
+         "se": 0.500819
+        },
+        "area_share": {
+         "b": -0.480212,
+         "se": 0.141274
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.387156,
+         "se": 0.397097
+        },
+        "log_approvals": {
+         "b": 0.975452,
+         "se": 0.189877
+        },
+        "log_need": {
+         "b": 0.201133,
+         "se": 0.36091
+        },
+        "log_population": {
+         "b": -0.107086,
+         "se": 0.542992
+        },
+        "log_area": {
+         "b": -0.605031,
+         "se": 0.193321
+        }
+       }
+      }
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": -0.255502,
+        "sa4s": 12,
+        "se": 0.204247,
+        "negative": 8,
+        "positive": 4,
+        "p": 0.255149
+       },
+       "approvals": {
+        "mean": -0.041667,
+        "sa4s": 12,
+        "se": 0.249684,
+        "negative": 6,
+        "positive": 6,
+        "p": 0.864427
+       },
+       "difference": {
+        "mean": -0.35,
+        "sa4s": 12,
+        "se": 0.195982,
+        "negative": 9,
+        "positive": 3,
+        "p": 0.120176
+       }
+      },
+      "rank_houses": {
+       "mean": -0.05,
+       "sa4s": 12,
+       "se": 0.246644,
+       "negative": 6,
+       "positive": 6,
+       "p": 0.846431
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 35,
+       "coef": {
+        "relative_log_cost": {
+         "b": -36.310079,
+         "se": 14.333996
+        },
+        "approvals_share": {
+         "b": 0.59844,
+         "se": 0.377669
+        },
+        "need_share": {
+         "b": 0.476236,
+         "se": 0.281275
+        },
+        "population_share": {
+         "b": -0.088117,
+         "se": 0.225278
+        },
+        "area_share": {
+         "b": -0.53557,
+         "se": 0.182897
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.770988,
+         "se": 0.499141
+        },
+        "log_approvals": {
+         "b": 0.89508,
+         "se": 0.214967
+        },
+        "log_need": {
+         "b": 0.012887,
+         "se": 0.25155
+        },
+        "log_population": {
+         "b": 0.405231,
+         "se": 0.344577
+        },
+        "log_area": {
+         "b": -0.620466,
+         "se": 0.265485
+        }
+       }
+      }
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.571429,
+        "sa4s": 7,
+        "se": 0.202031,
+        "negative": 6,
+        "positive": 1,
+        "p": 0.091382
+       },
+       "approvals": {
+        "mean": -0.214286,
+        "sa4s": 7,
+        "se": 0.324719,
+        "negative": 4,
+        "positive": 3,
+        "p": 0.574885
+       },
+       "difference": {
+        "mean": -0.285714,
+        "sa4s": 7,
+        "se": 0.342559,
+        "negative": 5,
+        "positive": 2,
+        "p": 0.442911
+       }
+      },
+      "rank_houses": {
+       "mean": -0.214286,
+       "sa4s": 7,
+       "se": 0.324719,
+       "negative": 4,
+       "positive": 3,
+       "p": 0.593281
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.192308,
+      "sa4s": 13,
+      "se": 0.215865,
+      "negative": 9,
+      "positive": 4,
+      "p": 0.410118
+     },
+     "new_vs_population": {
+      "mean": -0.558333,
+      "sa4s": 12,
+      "se": 0.163974,
+      "negative": 10,
+      "positive": 2,
+      "p": 0.012398
+     }
+    },
+    "mortgage": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.212652,
+        "sa4s": 11,
+        "se": 0.197592,
+        "negative": 6,
+        "positive": 3,
+        "p": 0.373725
+       },
+       "approvals": {
+        "mean": 0.187663,
+        "sa4s": 11,
+        "se": 0.237047,
+        "negative": 4,
+        "positive": 7,
+        "p": 0.442711
+       },
+       "difference": {
+        "mean": -0.396281,
+        "sa4s": 11,
+        "se": 0.221596,
+        "negative": 9,
+        "positive": 2,
+        "p": 0.097381
+       }
+      },
+      "rank_houses": {
+       "mean": 0.201653,
+       "sa4s": 11,
+       "se": 0.239668,
+       "negative": 4,
+       "positive": 7,
+       "p": 0.402519
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 35,
+       "coef": {
+        "relative_log_cost": {
+         "b": -12.416589,
+         "se": 38.131517
+        },
+        "approvals_share": {
+         "b": 0.551624,
+         "se": 0.220311
+        },
+        "need_share": {
+         "b": 1.160085,
+         "se": 0.215925
+        },
+        "population_share": {
+         "b": -0.906541,
+         "se": 0.471208
+        },
+        "area_share": {
+         "b": -0.442294,
+         "se": 0.148305
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.759422,
+         "se": 1.741297
+        },
+        "log_approvals": {
+         "b": 1.13833,
+         "se": 0.124938
+        },
+        "log_need": {
+         "b": 0.612532,
+         "se": 0.371348
+        },
+        "log_population": {
+         "b": -0.72799,
+         "se": 0.49729
+        },
+        "log_area": {
+         "b": -0.497902,
+         "se": 0.246816
+        }
+       }
+      }
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": -0.06592,
+        "sa4s": 11,
+        "se": 0.235124,
+        "negative": 6,
+        "positive": 5,
+        "p": 0.781444
+       },
+       "approvals": {
+        "mean": 0.187663,
+        "sa4s": 11,
+        "se": 0.237047,
+        "negative": 4,
+        "positive": 7,
+        "p": 0.442312
+       },
+       "difference": {
+        "mean": -0.259917,
+        "sa4s": 11,
+        "se": 0.254698,
+        "negative": 7,
+        "positive": 4,
+        "p": 0.280144
+       }
+      },
+      "rank_houses": {
+       "mean": 0.201653,
+       "sa4s": 11,
+       "se": 0.239668,
+       "negative": 4,
+       "positive": 7,
+       "p": 0.403919
+      },
+      "regression": {
+       "sa4s": 12,
+       "sa3s": 35,
+       "coef": {
+        "relative_log_cost": {
+         "b": -8.905451,
+         "se": 44.77189
+        },
+        "approvals_share": {
+         "b": 0.493398,
+         "se": 0.348995
+        },
+        "need_share": {
+         "b": 0.624482,
+         "se": 0.208918
+        },
+        "population_share": {
+         "b": -0.216636,
+         "se": 0.326902
+        },
+        "area_share": {
+         "b": -0.475526,
+         "se": 0.205004
+        }
+       }
+      },
+      "multinomial": {
+       "sa4s": 12,
+       "coef": {
+        "relative_log_cost": {
+         "b": -1.383424,
+         "se": 1.991258
+        },
+        "log_approvals": {
+         "b": 1.101168,
+         "se": 0.217136
+        },
+        "log_need": {
+         "b": 0.305943,
+         "se": 0.195807
+        },
+        "log_population": {
+         "b": -0.198741,
+         "se": 0.257835
+        },
+        "log_area": {
+         "b": -0.51242,
+         "se": 0.329258
+        }
+       }
+      }
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.5,
+        "sa4s": 7,
+        "se": 0.267261,
+        "negative": 6,
+        "positive": 1,
+        "p": 0.143971
+       },
+       "approvals": {
+        "mean": -0.142857,
+        "sa4s": 7,
+        "se": 0.303046,
+        "negative": 4,
+        "positive": 3,
+        "p": 0.756449
+       },
+       "difference": {
+        "mean": -0.571429,
+        "sa4s": 7,
+        "se": 0.202031,
+        "negative": 6,
+        "positive": 1,
+        "p": 0.094581
+       }
+      },
+      "rank_houses": {
+       "mean": -0.142857,
+       "sa4s": 7,
+       "se": 0.303046,
+       "negative": 4,
+       "positive": 3,
+       "p": 0.762048
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.384632,
+      "sa4s": 12,
+      "se": 0.196632,
+      "negative": 9,
+      "positive": 3,
+      "p": 0.10018
+     },
+     "new_vs_population": {
+      "mean": -0.441736,
+      "sa4s": 11,
+      "se": 0.196157,
+      "negative": 9,
+      "positive": 2,
+      "p": 0.058388
+     }
+    }
+   },
+   "corridor": {
+    "sa3s": 5,
+    "mean_rel_land": -0.010009,
+    "mean_rel_mortgage": 0.006188
+   }
+  },
+  "coverage_half": {
+   "sa3s": 20,
+   "excluded": [
+    "sa3:VIC - Ballarat",
+    "sa3:VIC - Banyule",
+    "sa3:VIC - Barwon - West",
+    "sa3:VIC - Bayside",
+    "sa3:VIC - Boroondara",
+    "sa3:VIC - Brimbank",
+    "sa3:VIC - Brunswick - Coburg",
+    "sa3:VIC - Casey - North",
+    "sa3:VIC - Colac - Corangamite",
+    "sa3:VIC - Creswick - Daylesford - Ballan",
+    "sa3:VIC - Dandenong",
+    "sa3:VIC - Darebin - North",
+    "sa3:VIC - Darebin - South",
+    "sa3:VIC - Essendon",
+    "sa3:VIC - Frankston",
+    "sa3:VIC - Geelong",
+    "sa3:VIC - Gippsland - East",
+    "sa3:VIC - Gippsland - South West",
+    "sa3:VIC - Glen Eira",
+    "sa3:VIC - Glenelg - Southern Grampians",
+    "sa3:VIC - Grampians",
+    "sa3:VIC - Heathcote - Castlemaine - Kyneton",
+    "sa3:VIC - Hobsons Bay",
+    "sa3:VIC - Keilor",
+    "sa3:VIC - Kingston",
+    "sa3:VIC - Knox",
+    "sa3:VIC - Loddon - Elmore",
+    "sa3:VIC - Manningham - East",
+    "sa3:VIC - Manningham - West",
+    "sa3:VIC - Maribyrnong",
+    "sa3:VIC - Maroondah",
+    "sa3:VIC - Maryborough - Pyrenees",
+    "sa3:VIC - Melbourne City",
+    "sa3:VIC - Monash",
+    "sa3:VIC - Moreland - North",
+    "sa3:VIC - Mornington Peninsula",
+    "sa3:VIC - Murray River - Swan Hill",
+    "sa3:VIC - Nillumbik - Kinglake",
+    "sa3:VIC - Port Phillip",
+    "sa3:VIC - Stonnington - East",
+    "sa3:VIC - Stonnington - West",
+    "sa3:VIC - Upper Goulburn Valley",
+    "sa3:VIC - Whitehorse - East",
+    "sa3:VIC - Whitehorse - West",
+    "sa3:VIC - Yarra",
+    "sa3:VIC - Yarra Ranges"
+   ],
+   "sa4s_two": 6,
+   "land_vs_mortgage": 0.795704,
+   "sd_land": 0.120543,
+   "sd_mortgage": 0.064683,
+   "tests": {
+    "land": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.416667,
+        "sa4s": 6,
+        "se": 0.300463,
+        "negative": 4,
+        "positive": 2,
+        "p": 0.302539
+       },
+       "approvals": {
+        "mean": -0.166667,
+        "sa4s": 6,
+        "se": 0.380058,
+        "negative": 4,
+        "positive": 2,
+        "p": 0.725855
+       },
+       "difference": {
+        "mean": -0.583333,
+        "sa4s": 6,
+        "se": 0.23863,
+        "negative": 5,
+        "positive": 1,
+        "p": 0.146171
+       }
+      },
+      "rank_houses": {
+       "mean": -0.166667,
+       "sa4s": 6,
+       "se": 0.380058,
+       "negative": 4,
+       "positive": 2,
+       "p": 0.716657
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": 0.1,
+        "sa4s": 5,
+        "se": 0.367423,
+        "negative": 2,
+        "positive": 3,
+        "p": 0.913217
+       },
+       "approvals": {
+        "mean": -0.4,
+        "sa4s": 5,
+        "se": 0.367423,
+        "negative": 4,
+        "positive": 1,
+        "p": 0.365327
+       },
+       "difference": {
+        "mean": -0.1,
+        "sa4s": 5,
+        "se": 0.367423,
+        "negative": 3,
+        "positive": 2,
+        "p": 0.913217
+       }
+      },
+      "rank_houses": {
+       "mean": -0.4,
+       "sa4s": 5,
+       "se": 0.367423,
+       "negative": 4,
+       "positive": 1,
+       "p": 0.365327
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.833333,
+        "sa4s": 3,
+        "se": 0.166667,
+        "negative": 3,
+        "positive": 0,
+        "p": 0.24955
+       },
+       "approvals": {
+        "mean": -0.833333,
+        "sa4s": 3,
+        "se": 0.166667,
+        "negative": 3,
+        "positive": 0,
+        "p": 0.24955
+       },
+       "difference": {
+        "mean": -0.833333,
+        "sa4s": 3,
+        "se": 0.166667,
+        "negative": 3,
+        "positive": 0,
+        "p": 0.24955
+       }
+      },
+      "rank_houses": {
+       "mean": -0.833333,
+       "sa4s": 3,
+       "se": 0.166667,
+       "negative": 3,
+       "positive": 0,
+       "p": 0.245951
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.583333,
+      "sa4s": 6,
+      "se": 0.327024,
+      "negative": 5,
+      "positive": 1,
+      "p": 0.139972
+     },
+     "new_vs_population": {
+      "mean": -0.5,
+      "sa4s": 6,
+      "se": 0.316228,
+      "negative": 4,
+      "positive": 2,
+      "p": 0.202559
+     }
+    },
+    "mortgage": {
+     "new_build": {
+      "rank": {
+       "sda": {
+        "mean": -0.4,
+        "sa4s": 5,
+        "se": 0.367423,
+        "negative": 4,
+        "positive": 1,
+        "p": 0.39972
+       },
+       "approvals": {
+        "mean": 0.2,
+        "sa4s": 5,
+        "se": 0.406202,
+        "negative": 2,
+        "positive": 3,
+        "p": 0.745851
+       },
+       "difference": {
+        "mean": -0.5,
+        "sa4s": 5,
+        "se": 0.387298,
+        "negative": 4,
+        "positive": 1,
+        "p": 0.287542
+       }
+      },
+      "rank_houses": {
+       "mean": 0.2,
+       "sa4s": 5,
+       "se": 0.406202,
+       "negative": 2,
+       "positive": 3,
+       "p": 0.746451
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "hps": {
+      "rank": {
+       "sda": {
+        "mean": 0.25,
+        "sa4s": 4,
+        "se": 0.433013,
+        "negative": 2,
+        "positive": 2,
+        "p": 0.673665
+       },
+       "approvals": {
+        "mean": 0.0,
+        "sa4s": 4,
+        "se": 0.456435,
+        "negative": 2,
+        "positive": 2,
+        "p": 1.0
+       },
+       "difference": {
+        "mean": 0.125,
+        "sa4s": 4,
+        "se": 0.515388,
+        "negative": 2,
+        "positive": 2,
+        "p": 0.847031
+       }
+      },
+      "rank_houses": {
+       "mean": 0.0,
+       "sa4s": 4,
+       "se": 0.456435,
+       "negative": 2,
+       "positive": 2,
+       "p": 1.0
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "robust": {
+      "rank": {
+       "sda": {
+        "mean": -0.166667,
+        "sa4s": 3,
+        "se": 0.600925,
+        "negative": 2,
+        "positive": 1,
+        "p": 1.0
+       },
+       "approvals": {
+        "mean": -0.166667,
+        "sa4s": 3,
+        "se": 0.600925,
+        "negative": 2,
+        "positive": 1,
+        "p": 1.0
+       },
+       "difference": {
+        "mean": -0.166667,
+        "sa4s": 3,
+        "se": 0.600925,
+        "negative": 2,
+        "positive": 1,
+        "p": 1.0
+       }
+      },
+      "rank_houses": {
+       "mean": -0.166667,
+       "sa4s": 3,
+       "se": 0.600925,
+       "negative": 2,
+       "positive": 1,
+       "p": 1.0
+      },
+      "regression": null,
+      "multinomial": null
+     },
+     "existing": {
+      "mean": -0.4,
+      "sa4s": 5,
+      "se": 0.367423,
+      "negative": 4,
+      "positive": 1,
+      "p": 0.39912
+     },
+     "new_vs_population": {
+      "mean": -0.5,
+      "sa4s": 5,
+      "se": 0.387298,
+      "negative": 4,
+      "positive": 1,
+      "p": 0.284943
+     }
+    }
+   },
+   "corridor": {
+    "sa3s": 4,
+    "mean_rel_land": -0.029721,
+    "mean_rel_mortgage": -0.010112
+   }
+  }
+ }
+}

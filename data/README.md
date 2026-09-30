@@ -18,6 +18,8 @@ private.
 | `sda.json` | Built by `scripts/extract_sda.py` from `supplements/Supplement_P_SDA_2025-26_Q4.xlsx` | 30 June 2026 |
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
 | `panel/` | Built by `scripts/extract_panel.py` (SA4) and `scripts/extract_panel_sa3.py` (SA3, placed by `asgs_2021_sa2.csv`) from every workbook in `supplements/` | June 2023 – June 2026 |
+| `pricing/` | NDIA Pricing Arrangements for SDA, every version 2021-22 v1.0 to 2026-27 v1.0, the 2026-27 Pricing Schedule, and the location factors and base amounts `scripts/extract_pricing.py` extracts from them | 1 July 2021 – 2026-27 |
+| `abs/` | Reduced ABS files: building approvals by SA2, 2021 Census medians by SA3 and SA2, SA3 adjacency. Rebuilt from the git-ignored `raw/` (see `raw/MANIFEST.md`) | see below |
 
 ## Both CSVs are reduced before committing
 
@@ -163,3 +165,106 @@ Three further quirks, all handled in `build_concordance`:
   alone — unique in Supplement P except for the `Other` bucket, which no listing
   reaches — and each listing's state is taken from its matched SA4 rather than
   its address.
+
+## `pricing/`
+
+The NDIA's SDA pricing documents, committed whole: they are public NDIA
+publications. Both are Word files, read with `zipfile` and `xml.etree`.
+
+| File | Source |
+| --- | --- |
+| `*.docx` (14) | NDIS Pricing Arrangements for Specialist Disability Accommodation, every version from 2021-22 v1.0 to 2026-27 v1.0, under the NDIA's own filenames (ndis.gov.au; fetched by browser, since ndis.gov.au refuses scripted requests). `DOCUMENTS` in the extractor lists each with its version. |
+| `ndis-pricing-schedule-for-sda-2026-27.docx` | NDIS Pricing Schedule for SDA 2026-27 (ndis.gov.au) |
+| `location_factors.csv` | edition, version, valid-from and release dates (read from each title page), SA4, stock type (All / New build / Existing / Legacy), building type, factor to two decimals |
+| `base_amounts.csv` | edition, stock type, building type, design category, breakout room, sprinklers, OOA, GST treatment, annual base amount per participant |
+
+`python3 scripts/extract_pricing.py` rebuilds both CSVs. The Arrangements are
+the source; the Schedule is read the same way and must agree on every factor
+and amount. Tables are found by caption, since the two number them differently
+(location factors: Tables 23–24 in the Arrangements, 35–36 in the Schedule).
+The existing-and-legacy factor table names two SA4s by their pre-2016 names,
+`QLD - Fitzroy` and `QLD - Mackay`; `SA4_RENAMES` maps them, and any other
+unmatched name fails the build. Building types are named as Supplement P's
+Table P.11 names them, so the two join on the label.
+
+Before 1 July 2023 one factor table served every stock type (stock type
+`All`); from then new builds, whenever first enrolled, have their own table
+and existing and legacy stock keep the other. Four things are corrected
+explicitly, and anything else unmatched fails the build:
+
+- `SA4_RENAMES`: the retired names above, and "Hunter Valley excluding
+  Newcastle" (2021-22, 2022-23).
+- `SA4_SPLITS`: 2021-22 and 2022-23 still publish one factor for
+  `WA - Western Australia - Outback`, the pre-2016 SA4 since split into
+  Outback (North) and (South); it applies to both.
+- `LABEL_FIXES`: in 2023-24 v3.0's new-build table the words "Hunter Valley
+  exc Newcastle" slipped from their row into the Murray row; the figures stayed
+  put, and each row equals v1.4's.
+- Some existing-stock tables drop trailing zeros (`0.9`, `1`); factors are
+  written to two decimals.
+
+Two copies of 2023-24 v1.0 were published; they differ only in page numbers,
+and the extractor checks that their tables agree. The file published as
+"v1.3 (1)" is version 1.4 by its title page. Base amounts are extracted for
+2026-27 only: earlier editions lay the base-price tables out differently.
+
+## `abs/`
+
+Small files reduced from ABS downloads kept in the git-ignored `raw/`.
+`raw/MANIFEST.md` records the URL, release, geography edition, licence and
+checksum of each download. All ABS data is CC BY 4.0.
+
+| File | From | Rebuilt by |
+| --- | --- | --- |
+| `building_approvals_sa2.csv` | Building Approvals, Australia: small-area CSVs by SA2, ASGS 2021, FY 2021-22 to 2026-27 FYTD (July releases 2022–2026) | `scripts/reduce_abs.py` |
+| `census_2021_sa3.csv`, `census_2021_sa2.csv` | 2021 Census GCP DataPacks (SA3 and SA2, all of Australia), tables G02 and G01 | `scripts/reduce_abs.py` |
+| `sa3_adjacency.csv` | ASGS Edition 3 SA3 boundaries, `SA3_2021_AUST_SHP_GDA2020.zip` | `scripts/build_sa3_adjacency.py` |
+| `sal_sa3_dwellings.csv` | ASGS 2021 allocation files `MB_2021_AUST.xlsx` and `SAL_2021_AUST.xlsx`, and 2021 Census Mesh Block Counts | `scripts/reduce_abs.py` |
+
+`building_approvals_sa2.csv` keeps dwelling units approved in **new**
+residential buildings, all sectors (`type_work` 1, `own_sector` 9), as houses
+(`type_bld` 110) and other residential (150), summed to quarters; the partial
+latest quarter is dropped. SA2s with nothing approved in a quarter are omitted,
+so absence means zero. The ABS's own state (`1`–`8`) and national (`0`) rows
+are kept beside the SA2s, and both the reducer (monthly) and the tests
+(quarterly) check that SA2s sum to their state and states to the nation.
+
+The Census files keep `Median_mortgage_repay_monthly`, `Median_rent_weekly`,
+`Median_tot_hhd_inc_weekly` (G02) and `Tot_P_P` (G01), by ASGS 2021 code. A
+median of 0 means not published (NSW - Blue Mountains - South, 8 residents).
+
+`sa3_adjacency.csv` lists every pair of the 336 Supplement P SA3s that share
+at least one boundary edge (a corner alone does not count), each side's SA4,
+whether the pair crosses an SA4 boundary, and the shared border length in km.
+
+`sal_sa3_dwellings.csv` has one row per Suburb and Locality (SAL 2021) × SA3
+intersection, with its 2021 Census dwellings and persons summed from Mesh
+Blocks. It is the weighting for carrying locality data to SA3.
+
+## `vgv/`
+
+`vacant_land_by_locality.csv`: Valuer-General Victoria's annual median sale
+price of vacant residential land, by locality, 2015–2025, from the Victorian
+Property Sales Report time series `land-by-suburb-2015-2025.xlsx`
+(land.vic.gov.au; listed on data.vic.gov.au under CC BY 4.0; fetched by
+browser, kept in `raw/vgv/`). Rebuilt by `scripts/reduce_vgv.py`. Localities
+are joined to SAL 2021 by name within Victoria; five VGV names that are not ABS
+localities (estates such as Sanctuary Lakes) are left out by name, and any
+other unmatched name fails the build. Only the latest vintage is read, because
+VGV revises earlier years between releases. VGV marks some medians `^` or `*`,
+kept in `flag`. The workbooks do not define them; *A Guide to Property Values
+2025* (explanatory notes, printed p. 10) does: "^ Fewer than 10 sales in that
+year. * Value was carried forward from the previous year due to zero sales in
+the represented year." The analysis never uses `*` medians. Years are calendar
+years, and vacant land is VGV's Vacant Residential Land: home sites or surveyed
+lots under 4,000 m² (Guide, pp. 3, 11–12).
+`scripts/analyse_land_value.py` uses it in `panel/LAND_VALUE_VIC.md`.
+
+## `panel/newbuild_types_sa4.csv` and the location-factor report
+
+`scripts/extract_newbuild_types.py` writes Table P.11's new-build dwellings by
+building type, design category and SA4, every quarter, which `panel.csv` sums
+over building types. Zero cells are omitted. `scripts/feasibility_location_factor.py`
+writes `LOCATION_FACTOR_FEASIBILITY.md`, `location_factor_feasibility.json` and
+`location_factor_pairs.csv` (each cross-SA4 adjacent pair with the factor on
+each side) from committed files alone.

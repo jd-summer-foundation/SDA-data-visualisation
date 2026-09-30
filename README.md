@@ -631,6 +631,49 @@ directional claim in it is computed, and `analysis.json` holds the numbers
 behind it. The regressions are solved directly in the standard library, with
 standard errors clustered by region.
 
+### The location-factor experiment
+
+**Start with `data/panel/LOCATION_FACTOR_SUMMARY.md`**, the executive summary.
+
+A test, in phases, of whether SDA providers build on the cheapest land within
+each SA4, since the NDIA's location factor is set per SA4 and building type
+while land cost varies within it. Phase 1 (ingest and feasibility) and Phase 2
+(the tests, including the border test on every pricing version since 2021-22)
+are done; nothing here changes the site.
+
+```sh
+python3 scripts/extract_pricing.py            # data/pricing/*.docx -> location_factors.csv, base_amounts.csv
+python3 scripts/extract_newbuild_types.py     # data/supplements -> data/panel/newbuild_types_sa4.csv
+python3 scripts/reduce_abs.py                 # raw/abs -> data/abs (approvals, Census)
+python3 scripts/build_sa3_adjacency.py        # raw/abs/asgs SA3 shapefile -> data/abs/sa3_adjacency.csv
+python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_FACTOR_FEASIBILITY.md
+python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
+python3 scripts/reduce_vgv.py                 # raw/vgv -> data/vgv (Victorian vacant-land medians)
+python3 scripts/analyse_land_value.py         # Victoria, land price as cost -> LAND_VALUE_VIC.md
+python3 scripts/summarise_location_factor.py  # the three reports' JSON -> LOCATION_FACTOR_SUMMARY.md
+```
+
+Run `analyse_land_value.py` before `analyse_location_factor.py`: the headline of
+`LOCATION_FACTOR.md` quotes the Victorian results from `land_value_vic.json`.
+The summary script refuses to write if a finding its prose states no longer
+holds, so new data forces a rewrite rather than contradictory text.
+
+`LOCATION_FACTOR.md` runs the within-SA4 rank test (permutations within SA4),
+the SA4 fixed-effects share regression and a within-SA4 multinomial (Poisson
+with SA4 effects), the border test (on the factors in force before and after
+the July 2023 re-set, and the change between them), the legacy and
+existing-stock placebos, the cost-spread dose-response and the robustness
+variants, all clustered or permuted by SA4 and
+seeded so the output rebuilds byte for byte.
+
+The ABS downloads are large and live in the git-ignored `raw/`;
+`raw/MANIFEST.md` records every one (URL, release, edition, licence, checksum)
+and `data/README.md` says how each reduced file is rebuilt. Only the last two
+steps need `raw/`. `data/panel/LOCATION_FACTOR_FEASIBILITY.md` reports how the
+factors vary, how far cost varies within SA4s, how many SA4 borders separate
+different factors, and how collinear cost is with approvals and need; like the
+other reports it is generated, and the tests rebuild it byte for byte.
+
 ### The time-based interface (`time/`)
 
 A second, simpler site built around time sits in `time/`, beside the explorer,
@@ -726,8 +769,10 @@ node tests/smoke.js                      # every view in Chromium, desktop and p
 ```
 
 The first rebuilds `vacancies.json`, re-derives `sda.json` and rebuilds the
-quarterly panel (SA4 and SA3) from all thirteen workbooks (about a minute), and fails if any
-differs byte for byte from what is committed; it then checks that every quarter
+quarterly panel (SA4 and SA3) and the P.11 building-type detail from all thirteen
+workbooks (about two minutes), the pricing extracts and the location-factor
+report, and fails if any differs byte for byte from what is committed (the ABS
+reductions are rebuilt too when `raw/` is present); it then checks that every quarter
 reconciles and that the panel's June 2026 quarter equals `sda.json`. The second needs Playwright (`npm install --no-save
 playwright axe-core && npx playwright install chromium`; with a global install, prefix
 `NODE_PATH="$(npm root -g)"`). It fails on any page error, on horizontal
