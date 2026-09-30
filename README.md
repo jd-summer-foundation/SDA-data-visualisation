@@ -635,8 +635,9 @@ standard errors clustered by region.
 
 A test, in phases, of whether SDA providers build on the cheapest land within
 each SA4, since the NDIA's location factor is set per SA4 and building type
-while land cost varies within it. Phase 1 (ingest and feasibility) is done;
-nothing here changes the site.
+while land cost varies within it. Phase 1 (ingest and feasibility) and Phase 2
+(the tests, except the border test, which waits on past pricing editions) are
+done; nothing here changes the site.
 
 ```sh
 python3 scripts/extract_pricing.py            # data/pricing/*.docx -> location_factors.csv, base_amounts.csv
@@ -644,7 +645,14 @@ python3 scripts/extract_newbuild_types.py     # data/supplements -> data/panel/n
 python3 scripts/reduce_abs.py                 # raw/abs -> data/abs (approvals, Census)
 python3 scripts/build_sa3_adjacency.py        # raw/abs/asgs SA3 shapefile -> data/abs/sa3_adjacency.csv
 python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_FACTOR_FEASIBILITY.md
+python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
 ```
+
+`LOCATION_FACTOR.md` runs the within-SA4 rank test (permutations within SA4),
+the SA4 fixed-effects share regression and a within-SA4 multinomial (Poisson
+with SA4 effects), the legacy and existing-stock placebos, the cost-spread
+dose-response and the robustness variants, all clustered or permuted by SA4 and
+seeded so the output rebuilds byte for byte.
 
 The ABS downloads are large and live in the git-ignored `raw/`;
 `raw/MANIFEST.md` records every one (URL, release, edition, licence, checksum)

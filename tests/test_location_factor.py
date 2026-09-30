@@ -1,8 +1,9 @@
-"""Checks on the location-factor experiment's inputs and Phase 1 report.
+"""Checks on the location-factor experiment's inputs, Phase 1 report and Phase 2 analysis.
 
 Run from the repository root:  python3 -m unittest discover tests
 
-Pricing, the P.11 building-type detail and the feasibility report rebuild
+Pricing, the P.11 building-type detail, the feasibility report and the
+Phase 2 analysis rebuild
 from committed files and are compared byte for byte (the P.11 rebuild needs
 openpyxl). The ABS reductions rebuild from raw/, which is not committed, so
 those rebuilds are skipped unless raw/ is present; the committed reduced files
@@ -60,6 +61,12 @@ class Rebuilds(unittest.TestCase):
                                             "LOCATION_FACTOR_FEASIBILITY.md",
                                             "location_factor_pairs.csv"],
                       "feasibility_location_factor.py")
+
+    def test_analysis(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/analyse_location_factor.py", "-o", tmp)
+            self.same(tmp, DATA / "panel", ["location_factor.json", "LOCATION_FACTOR.md"],
+                      "analyse_location_factor.py")
 
     @unittest.skipUnless(HAVE_OPENPYXL, "openpyxl not installed")
     def test_newbuild_types(self):
