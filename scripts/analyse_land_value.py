@@ -315,7 +315,9 @@ def main(argv=None):
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     a = analyse(load())
-    (out / "land_value_vic.json").write_text(json.dumps(rounded(a), indent=1) + "\n")
+    # Six decimals: LOCATION_FACTOR.md quotes these figures from the JSON, and at
+    # four a value on a rounding boundary could print differently from here.
+    (out / "land_value_vic.json").write_text(json.dumps(rounded(a, 6), indent=1) + "\n")
     (out / "LAND_VALUE_VIC.md").write_text(to_markdown(a))
     print(f"wrote {out}/land_value_vic.json and LAND_VALUE_VIC.md", file=sys.stderr)
 

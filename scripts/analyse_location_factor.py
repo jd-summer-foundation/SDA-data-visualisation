@@ -584,7 +584,56 @@ def analyse(d):
     results["totals"] = {o: sum(frame[g][o] for g in frame) for o, _ in OUTCOMES}
     results["vic_share"] = {o: sum(frame[g][o] for g in frame if frame[g]["state"] == "VIC")
                             / results["totals"][o] for o, _ in OUTCOMES}
+    # Where new SDA goes: the growth corridors' share of each total.
+    results["corridor_shares"] = {
+        "sa3s": len(corridor),
+        "shares": {k: sum(max(frame[g][k], 0.0) for g in corridor)
+                   / sum(max(r[k], 0.0) for r in frame.values()) for k, _ in corridor_rows()}}
+    results["victoria"] = victoria_summary()
+    groups = groups_of(frame, sorted(frame), "new_build")
+    xs, ys = [], []
+    for gs in groups.values():
+        xs += shares(frame, gs, "new_build")
+        ys += shares(frame, gs, f"approvals_lag{LAG_PRIMARY}")
+    results["collinearity_new_sda_approvals"] = spearman(xs, ys)
     return results
+
+
+def corridor_rows():
+    """Rows of the growth-corridor table: (frame key, label)."""
+    return [
+    ("persons", "Population (2021 Census)"),
+    ("eligible_not_using", f"Participants eligible, not using SDA ({month(NEED_EARLIEST)})"),
+    ("existing", f"Existing SDA stock, pre-NDIS ({month(START)})"),
+    (f"approvals_lag{LAG_PRIMARY}", "All dwelling approvals (comparison window)"),
+    (f"houses_lag{LAG_PRIMARY}", "House approvals (comparison window)"),
+    ("new_build", f"**New SDA dwellings ({month(START)}–{month(END)})**"),
+    ("hps", "New High Physical Support (enrolled)"),
+    ("robust", "New Robust (enrolled)"),
+    ]
+
+
+def victoria_summary():
+    """The Victorian land-price results, from analyse_land_value.py's committed output.
+
+    That script imports this one's tests and runs them on Victorian SA3s with
+    vacant-land prices; reading its JSON here (rather than calling it) keeps
+    the two free of a circular import. Its own test rebuilds it byte for byte.
+    """
+    v = json.loads((DATA / "panel" / "land_value_vic.json").read_text())
+    P, U = v["specs"]["primary"], v["specs"]["unflagged"]
+
+    def pick(spec, cost):
+        t = spec["tests"][cost]
+        nb = t["new_build"]
+        return {"sda": nb["rank"]["sda"], "approvals": nb["rank"]["approvals"],
+                "difference": nb["rank"]["difference"],
+                "regression": nb["regression"]["coef"]["relative_log_cost"] if nb["regression"] else None,
+                "multinomial": nb["multinomial"]["coef"]["relative_log_cost"] if nb["multinomial"] else None,
+                "new_vs_population": t["new_vs_population"], "existing": t["existing"]}
+    return {"sa3s": P["sa3s"], "vic_sa3s": P["vic_sa3s"], "new_sda_covered": P["new_sda_covered"],
+            "land_years": v["land_years"], "land": pick(P, "land"), "mortgage": pick(P, "mortgage"),
+            "land_without_thin": pick(U, "land")}
 
 
 # --------------------------------------------------------------------------
@@ -592,7 +641,9 @@ def analyse(d):
 # --------------------------------------------------------------------------
 
 def f2(v):
-    return f"{v:+.2f}"
+    # Exact halves (a mean of ranks is often one) round away from zero, so a
+    # figure prints the same whether it comes from memory or from JSON.
+    return f"{v + math.copysign(1e-9, v):+.2f}"
 
 
 def pval(p):
@@ -633,6 +684,8 @@ def verdict(a):
     T = a["tests"]
     P, H = T["primary"]["outcomes"], T["houses"]["outcomes"]
     out = []
+    V = a["victoria"]
+    VL = V["land"]
     nb = P["new_build"]["rank"]["difference"]
     hps = P["hps"]["rank"]["difference"]
     rob = P["robust"]["rank"]["difference"]
@@ -681,7 +734,11 @@ def verdict(a):
     nbp = a["placebo"]["new_build"]["rank"]["beyond_population"]
     lg = a["placebo"]["legacy"]["rank"]["beyond_population"]
     same = abs(ex["mean"] - nbp["mean"]) < 0.05 and ex["mean"] < 0
-    out.append(f"4. **{'The placebo does not clear it.' if same else 'The placebo points the other way.'}** "
+    vic_sep = VL["new_vs_population"]["p"] < 0.05 <= VL["existing"]["p"]
+    head4 = ("Nationally the placebo does not clear it; in Victoria, on land prices, it does."
+             if same and vic_sep else
+             "The placebo does not clear it." if same else "The placebo points the other way.")
+    out.append(f"4. **{head4}** "
                f"Measured against population, new build leans to cheap SA3s by {f2(nbp['mean'])} "
                f"(p = {pval(nbp['p'])}); existing stock, built before NDIS pricing, by "
                f"{f2(ex['mean'])} (p = {pval(ex['p'])}). "
@@ -689,7 +746,10 @@ def verdict(a):
                   "sign that the new-build lean is new. Accessible housing for this cohort may always "
                   "have sat on cheaper land within SA4s. "
                   if same else "Pre-NDIS stock does not share the lean. ")
-               + f"Legacy stock ({lg['sa4s']} SA4s, {f2(lg['mean'])}) is too thin to say anything.")
+               + f"Legacy stock ({lg['sa4s']} SA4s, {f2(lg['mean'])}) is too thin to say anything."
+               + f" In Victoria, on vacant-land prices, the placebo separates: new SDA "
+               f"{f2(VL['new_vs_population']['mean'])} (p {pval(VL['new_vs_population']['p'])}), "
+               f"pre-NDIS stock {f2(VL['existing']['mean'])} (p {pval(VL['existing']['p'])}).")
     Bf = a["border"]["cross"]
     bsig = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] > 0]
     bneg = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] < 0]
@@ -726,21 +786,31 @@ def verdict(a):
                   "picking up land cost the control misses: more evidence that SDA goes where land is "
                   "cheap, not that it chases the factor." if bneg else ""))
     out.append("")
-    out.append("**In sum:** \"New SDA leans toward cheap SA3s within SA4s more than general "
-               "building does\" is "
-               + ("supported by the rank test and the regressions, " if lean else "not supported, ")
-               + f"but {'mostly' if part < 0.5 else 'partly'} because general building leans toward SA3s the Census measure reads as "
-               "dear, the pre-NDIS placebo "
-               + ("leans the same way, and there is no dose-response, so the lean cannot be "
-                  "attributed to the location factor's margin. " if same else
-                  "does not, which is consistent with the incentive. ")
-               + ("\"Providers respond to the location factor\" is not supported by the border "
-                  "test either: where a border separates two prices, building does not follow the "
-                  "higher one" + (", and with the post-2023 factors it leans to the lower." if bneg
-                                  else ".")
+    C = a["corridor_shares"]["shares"]
+    vreg = VL["regression"]
+    vic_yes = (vreg is not None and vreg["b"] < 0 and significant(vreg)
+               and abs(VL["approvals"]["mean"]) < 0.1
+               and VL["new_vs_population"]["p"] < 0.05 <= VL["existing"]["p"])
+    out.append(f"**In sum:** new SDA is built where new housing is built, concentrated in the growth "
+               f"corridors ({C['new_build']:.0%} of it, against {C[f'approvals_lag{LAG_PRIMARY}']:.0%} of "
+               f"approvals and {C['persons']:.0%} of population). Within SA4s the national Census "
+               "measure cannot settle whether it also seeks cheaper land, because it reads new housing "
+               "as dear. "
+               + (f"In Victoria, with vacant-land prices, it does: net of approvals, need, population "
+                  f"and area, new SDA leans toward cheaper land ({est(vreg)}), general building is "
+                  f"neutral ({f2(VL['approvals']['mean'])}), and pre-NDIS stock does not lean "
+                  f"({f2(VL['existing']['mean'])}) where new SDA does "
+                  f"({f2(VL['new_vs_population']['mean'])}). That is what a payment fixed across the "
+                  "SA4 predicts, on "
+                  f"{VL['difference']['sa4s']} Victorian SA4s. "
+                  if vic_yes else
+                  "Victorian vacant-land prices do not settle it either (see `LAND_VALUE_VIC.md`). ")
+               + ("What is not found is any pull from the factor's level: across SA4 borders building "
+                  "does not follow the higher factor"
+                  + (", and with the post-2023 factors it leans to the lower" if bneg else "")
+                  + ", and the lean does not steepen where cost spreads wider."
                   if not bsig and not (dsig and did["b"] > 0) else
-                  "The border test gives some support to \"providers respond to the location "
-                  "factor\"; see Section 3 for how far."))
+                  "The border test gives some support to a pull from the factor's level; see Section 3."))
     return out
 
 
@@ -784,34 +854,90 @@ def to_markdown(a):
     w("")
 
     # ---- In brief
+    V, C = a["victoria"], a["corridor_shares"]
+    VL, VM = V["land"], V["mortgage"]
     w("## In brief")
+    w("")
+    w("### 1. Where new SDA is built: where new housing is built")
+    w("")
+    w(f"The {C['sa3s']} growth-corridor SA3s (the top {CORRIDOR_SHARE:.0%} by house approvals per "
+      "resident) hold:")
+    w("")
+    w("| | Share in growth-corridor SA3s |")
+    w("| --- | --- |")
+    for k, label in corridor_rows():
+        v = C["shares"][k]
+        w(f"| {label} | {'**' + format(v, '.0%') + '**' if label.startswith('**') else format(v, '.0%')} |")
+    w("")
+    sh = C["shares"]
+    w(f"New SDA is concentrated in the fringe about as much as all new housing "
+      f"({sh['new_build']:.0%} against {sh[f'approvals_lag{LAG_PRIMARY}']:.0%}), well beyond those "
+      f"areas' share of population ({sh['persons']:.0%}) or of people waiting for SDA "
+      f"({sh['eligible_not_using']:.0%}), and far beyond older SDA stock ({sh['existing']:.0%}). Within "
+      f"SA4s, approvals are the strongest predictor of where SDA is built (rank correlation "
+      f"{f2(a['collinearity_new_sda_approvals'])}).")
+    w("")
+    w("### 2. Within each SA4, does SDA seek the cheaper land?")
+    w("")
+    w(f"**In Victoria, measured by vacant-land prices: yes.** Valuer-General Victoria's median "
+      f"vacant-land prices ({V['land_years'][0]}–{V['land_years'][1]}), carried to {V['sa3s']} of "
+      f"{V['vic_sa3s']} Victorian SA3s (holding {V['new_sda_covered']:.0%} of Victoria's new SDA; inner "
+      "Melbourne sells no vacant land and is missing), set against the Census mortgage measure on "
+      "the same SA3s (`LAND_VALUE_VIC.md`):")
+    w("")
+
+    def vr(r):
+        return f"{f2(r['mean'])} (p {pval(r['p'])})"
+
+    def vc(c):
+        return "—" if c is None else est(c)
+    w("| Within-SA4 lean toward cost (negative = cheaper) | Census mortgage | Vacant-land price |")
+    w("| --- | --- | --- |")
+    w(f"| All approvals share | {vr(VM['approvals'])} | {vr(VL['approvals'])} |")
+    w(f"| New SDA share | {vr(VM['sda'])} | {vr(VL['sda'])} |")
+    w(f"| Regression: new SDA share, net of approvals, need, population, area | {vc(VM['regression'])} | {vc(VL['regression'])} |")
+    w(f"| Multinomial (Poisson with SA4 effects) | {vc(VM['multinomial'])} | {vc(VL['multinomial'])} |")
+    w(f"| Placebo: new SDA share minus population share | {vr(VM['new_vs_population'])} | {vr(VL['new_vs_population'])} |")
+    w(f"| Placebo: pre-NDIS existing stock minus population share | {vr(VM['existing'])} | {vr(VL['existing'])} |")
+    w("")
+    w(f"On land prices general building is neutral within SA4s, new SDA leans toward cheaper land "
+      "net of approvals, need, population and area, and pre-NDIS SDA stock does not lean. That is "
+      "what the incentive predicts: SDA's payment does not rise with land value within an SA4, a "
+      f"market developer's sale price does. It rests on {VL['difference']['sa4s']} Victorian SA4s, so "
+      "the rank tests are imprecise; the regressions carry it.")
+    w("")
+    w("**Nationally, with the 2021 Census median mortgage as cost:** SDA sits in cheaper SA3s than "
+      "general building, but that measure reads new housing as dear, so it is unreliable here "
+      "(the details, section by section, follow):")
     w("")
     for o, lab in OUTCOMES:
         r = P[o]["rank"]
         reg = P[o]["regression"]["coef"]["relative_log_cost"]
-        w(f"- **{lab}.** Within SA4s, the SDA-minus-approvals share has a mean rank correlation "
-          f"with relative cost of {f2(r['difference']['mean'])} (permutation p = "
-          f"{pval(r['difference']['p'])}, {r['difference']['sa4s']} SA4s): "
-          f"{verdict_rank(r)}. SDA alone {f2(r['sda']['mean'])}, approvals alone "
-          f"{f2(r['approvals']['mean'])}. The fixed-effects regression puts the cost "
-          f"coefficient at {est(reg)} share points per log point, net of approvals and need.")
+        w(f"- **{lab}.** SDA-minus-approvals share against relative cost: "
+          f"{f2(r['difference']['mean'])} (permutation p = {pval(r['difference']['p'])}, "
+          f"{r['difference']['sa4s']} SA4s). SDA alone {f2(r['sda']['mean'])}, approvals alone "
+          f"{f2(r['approvals']['mean'])}. Regression {est(reg)}.")
     H = a["tests"]["houses"]["outcomes"]
     hd = H["new_build"]["rank"]["difference"]
-    w(f"- **Against house approvals only**, the fairer comparator for SDA's houses and villas, the "
-      f"new-build lean is {f2(hd['mean'])} (p = {pval(hd['p'])}).")
+    w(f"- **Against house approvals only**, the new-build lean is {f2(hd['mean'])} (p = {pval(hd['p'])}).")
     lg = a["placebo"]["legacy"]["rank"]["beyond_population"]
     ex = a["placebo"]["existing"]["rank"]["beyond_population"]
     nbp = a["placebo"]["new_build"]["rank"]["beyond_population"]
-    w(f"- **Placebos** (share minus population share, against relative cost). New build "
-      f"{f2(nbp['mean'])} (p = {pval(nbp['p'])}); existing stock, which predates NDIS pricing, "
-      f"{f2(ex['mean'])} (p = {pval(ex['p'])}); legacy stock {f2(lg['mean'])} "
-      f"(p = {pval(lg['p'])}, only {lg['sa4s']} SA4s).")
+    w(f"- **Placebos** (share minus population share). New build {f2(nbp['mean'])} "
+      f"(p = {pval(nbp['p'])}); existing stock {f2(ex['mean'])} (p = {pval(ex['p'])}); legacy stock "
+      f"{f2(lg['mean'])} (p = {pval(lg['p'])}, only {lg['sa4s']} SA4s).")
+    w("")
+    w("### 3. Does the factor's level draw building? No sign of it")
+    w("")
     Bf = a["border"]["cross"]
     bc, bn, bd_ = Bf["combined:full"], Bf["new_build:full"], a["border"]["did"]
-    w(f"- **Across SA4 borders** ({bc['pairs']} pairs), the factor gap on the SDA-per-approval gap: "
-      f"{est(bc['factor'])} per log point with the pre-2023 factors (p = {pval(bc['p_flip'])}), "
-      f"{est(bn['factor'])} with the post-2023 ones (p = {pval(bn['p_flip'])}); before and after "
-      f"the July 2023 re-set, {est(bd_)} (p = {pval(bd_['p_flip'])}).")
+    w(f"Across SA4 borders ({bc['pairs']} pairs of adjacent SA3s), the factor gap on the "
+      f"SDA-per-approval gap is {est(bc['factor'])} per log point with the pre-2023 factors "
+      f"(p = {pval(bc['p_flip'])}) and {est(bn['factor'])} with the post-2023 ones "
+      f"(p = {pval(bn['p_flip'])}); before and after the July 2023 re-set, {est(bd_)} "
+      f"(p = {pval(bd_['p_flip'])}). This asks something different from section 2: not whether SDA "
+      "seeks cheap land inside an SA4, but whether a higher factor pulls building across a border. "
+      "Factors largely track costs, so across a border the extra payment mostly buys dearer land.")
     w("")
 
     w("## What the evidence supports")
@@ -1037,13 +1163,13 @@ def to_markdown(a):
     return "\n".join(L) + "\n"
 
 
-def rounded(o):
+def rounded(o, digits=4):
     if isinstance(o, float):
-        return round(o, 4)
+        return round(o, digits)
     if isinstance(o, dict):
-        return {k: rounded(v) for k, v in o.items()}
+        return {k: rounded(v, digits) for k, v in o.items()}
     if isinstance(o, (list, tuple)):
-        return [rounded(v) for v in o]
+        return [rounded(v, digits) for v in o]
     return o
 
 

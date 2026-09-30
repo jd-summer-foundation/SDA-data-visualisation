@@ -3008,5 +3008,178 @@
   "new_build": 0.3213,
   "hps": 0.2901,
   "robust": 0.506
- }
+ },
+ "corridor_shares": {
+  "sa3s": 34,
+  "shares": {
+   "persons": 0.1228,
+   "eligible_not_using": 0.1293,
+   "existing": 0.0706,
+   "approvals_lag4": 0.2782,
+   "houses_lag4": 0.3935,
+   "new_build": 0.293,
+   "hps": 0.2668,
+   "robust": 0.428
+  }
+ },
+ "victoria": {
+  "sa3s": 41,
+  "vic_sa3s": 66,
+  "new_sda_covered": 0.7964,
+  "land_years": [
+   2021,
+   2023
+  ],
+  "land": {
+   "sda": {
+    "mean": -0.3083,
+    "sa4s": 12,
+    "se": 0.163,
+    "negative": 6,
+    "positive": 3,
+    "p": 0.1558
+   },
+   "approvals": {
+    "mean": 0.0167,
+    "sa4s": 12,
+    "se": 0.2325,
+    "negative": 6,
+    "positive": 6,
+    "p": 0.9528
+   },
+   "difference": {
+    "mean": -0.1833,
+    "sa4s": 12,
+    "se": 0.166,
+    "negative": 7,
+    "positive": 4,
+    "p": 0.4253
+   },
+   "regression": {
+    "b": -19.1268,
+    "se": 8.0771
+   },
+   "multinomial": {
+    "b": -1.2803,
+    "se": 0.4974
+   },
+   "new_vs_population": {
+    "mean": -0.475,
+    "sa4s": 12,
+    "se": 0.1863,
+    "negative": 9,
+    "positive": 3,
+    "p": 0.0228
+   },
+   "existing": {
+    "mean": -0.0923,
+    "sa4s": 13,
+    "se": 0.2269,
+    "negative": 8,
+    "positive": 5,
+    "p": 0.6735
+   }
+  },
+  "mortgage": {
+   "sda": {
+    "mean": -0.1036,
+    "sa4s": 11,
+    "se": 0.1838,
+    "negative": 5,
+    "positive": 4,
+    "p": 0.6407
+   },
+   "approvals": {
+    "mean": 0.3513,
+    "sa4s": 11,
+    "se": 0.21,
+    "negative": 3,
+    "positive": 8,
+    "p": 0.1154
+   },
+   "difference": {
+    "mean": -0.5054,
+    "sa4s": 11,
+    "se": 0.1748,
+    "negative": 10,
+    "positive": 1,
+    "p": 0.0214
+   },
+   "regression": {
+    "b": -13.3652,
+    "se": 38.3166
+   },
+   "multinomial": {
+    "b": -1.7881,
+    "se": 1.7628
+   },
+   "new_vs_population": {
+    "mean": -0.3145,
+    "sa4s": 11,
+    "se": 0.2012,
+    "negative": 8,
+    "positive": 3,
+    "p": 0.172
+   },
+   "existing": {
+    "mean": -0.493,
+    "sa4s": 12,
+    "se": 0.1816,
+    "negative": 10,
+    "positive": 2,
+    "p": 0.0246
+   }
+  },
+  "land_without_thin": {
+   "sda": {
+    "mean": -0.3667,
+    "sa4s": 12,
+    "se": 0.1772,
+    "negative": 6,
+    "positive": 3,
+    "p": 0.1042
+   },
+   "approvals": {
+    "mean": -0.0417,
+    "sa4s": 12,
+    "se": 0.2497,
+    "negative": 6,
+    "positive": 6,
+    "p": 0.8666
+   },
+   "difference": {
+    "mean": -0.4333,
+    "sa4s": 12,
+    "se": 0.1453,
+    "negative": 10,
+    "positive": 2,
+    "p": 0.0544
+   },
+   "regression": {
+    "b": -18.9572,
+    "se": 10.3155
+   },
+   "multinomial": {
+    "b": -1.3872,
+    "se": 0.3971
+   },
+   "new_vs_population": {
+    "mean": -0.5583,
+    "sa4s": 12,
+    "se": 0.164,
+    "negative": 10,
+    "positive": 2,
+    "p": 0.0124
+   },
+   "existing": {
+    "mean": -0.1923,
+    "sa4s": 13,
+    "se": 0.2159,
+    "negative": 9,
+    "positive": 4,
+    "p": 0.4101
+   }
+  }
+ },
+ "collinearity_new_sda_approvals": 0.7162
 }

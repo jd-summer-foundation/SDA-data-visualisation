@@ -14,23 +14,60 @@ The SDA amount is a base amount times a location factor set per SA4 and building
 
 ## In brief
 
-- **New build (all categories).** Within SA4s, the SDA-minus-approvals share has a mean rank correlation with relative cost of -0.18 (permutation p = 0.015, 72 SA4s): toward cheap SA3s. SDA alone -0.10, approvals alone +0.13. The fixed-effects regression puts the cost coefficient at -25.59 (± 12.30) share points per log point, net of approvals and need.
-- **High Physical Support (enrolled).** Within SA4s, the SDA-minus-approvals share has a mean rank correlation with relative cost of -0.18 (permutation p = 0.029, 65 SA4s): toward cheap SA3s. SDA alone -0.09, approvals alone +0.10. The fixed-effects regression puts the cost coefficient at -28.84 (± 13.61) share points per log point, net of approvals and need.
-- **Robust (enrolled).** Within SA4s, the SDA-minus-approvals share has a mean rank correlation with relative cost of -0.15 (permutation p = 0.202, 30 SA4s): no detectable lean. SDA alone -0.17, approvals alone +0.06. The fixed-effects regression puts the cost coefficient at -59.36 (± 17.51) share points per log point, net of approvals and need.
-- **Against house approvals only**, the fairer comparator for SDA's houses and villas, the new-build lean is -0.16 (p = 0.041).
-- **Placebos** (share minus population share, against relative cost). New build -0.13 (p = 0.096); existing stock, which predates NDIS pricing, -0.13 (p = 0.116); legacy stock +0.00 (p = 0.980, only 13 SA4s).
-- **Across SA4 borders** (409 pairs), the factor gap on the SDA-per-approval gap: +36.35 (± 31.73) per log point with the pre-2023 factors (p = 0.267), -42.30 (± 18.23) with the post-2023 ones (p = 0.036); before and after the July 2023 re-set, -38.30 (± 28.05) (p = 0.193).
+### 1. Where new SDA is built: where new housing is built
+
+The 34 growth-corridor SA3s (the top 10% by house approvals per resident) hold:
+
+| | Share in growth-corridor SA3s |
+| --- | --- |
+| Population (2021 Census) | 12% |
+| Participants eligible, not using SDA (Dec 2023) | 13% |
+| Existing SDA stock, pre-NDIS (Jun 2023) | 7% |
+| All dwelling approvals (comparison window) | 28% |
+| House approvals (comparison window) | 39% |
+| **New SDA dwellings (Jun 2023–Jun 2026)** | **29%** |
+| New High Physical Support (enrolled) | 27% |
+| New Robust (enrolled) | 43% |
+
+New SDA is concentrated in the fringe about as much as all new housing (29% against 28%), well beyond those areas' share of population (12%) or of people waiting for SDA (13%), and far beyond older SDA stock (7%). Within SA4s, approvals are the strongest predictor of where SDA is built (rank correlation +0.72).
+
+### 2. Within each SA4, does SDA seek the cheaper land?
+
+**In Victoria, measured by vacant-land prices: yes.** Valuer-General Victoria's median vacant-land prices (2021–2023), carried to 41 of 66 Victorian SA3s (holding 80% of Victoria's new SDA; inner Melbourne sells no vacant land and is missing), set against the Census mortgage measure on the same SA3s (`LAND_VALUE_VIC.md`):
+
+| Within-SA4 lean toward cost (negative = cheaper) | Census mortgage | Vacant-land price |
+| --- | --- | --- |
+| All approvals share | +0.35 (p 0.115) | +0.02 (p 0.953) |
+| New SDA share | -0.10 (p 0.641) | -0.31 (p 0.156) |
+| Regression: new SDA share, net of approvals, need, population, area | -13.37 (± 38.32) | -19.13 (± 8.08) |
+| Multinomial (Poisson with SA4 effects) | -1.79 (± 1.76) | -1.28 (± 0.50) |
+| Placebo: new SDA share minus population share | -0.31 (p 0.172) | -0.48 (p 0.023) |
+| Placebo: pre-NDIS existing stock minus population share | -0.49 (p 0.025) | -0.09 (p 0.673) |
+
+On land prices general building is neutral within SA4s, new SDA leans toward cheaper land net of approvals, need, population and area, and pre-NDIS SDA stock does not lean. That is what the incentive predicts: SDA's payment does not rise with land value within an SA4, a market developer's sale price does. It rests on 12 Victorian SA4s, so the rank tests are imprecise; the regressions carry it.
+
+**Nationally, with the 2021 Census median mortgage as cost:** SDA sits in cheaper SA3s than general building, but that measure reads new housing as dear, so it is unreliable here (the details, section by section, follow):
+
+- **New build (all categories).** SDA-minus-approvals share against relative cost: -0.18 (permutation p = 0.015, 72 SA4s). SDA alone -0.10, approvals alone +0.13. Regression -25.59 (± 12.30).
+- **High Physical Support (enrolled).** SDA-minus-approvals share against relative cost: -0.18 (permutation p = 0.029, 65 SA4s). SDA alone -0.09, approvals alone +0.10. Regression -28.84 (± 13.61).
+- **Robust (enrolled).** SDA-minus-approvals share against relative cost: -0.15 (permutation p = 0.202, 30 SA4s). SDA alone -0.17, approvals alone +0.06. Regression -59.36 (± 17.51).
+- **Against house approvals only**, the new-build lean is -0.16 (p = 0.041).
+- **Placebos** (share minus population share). New build -0.13 (p = 0.096); existing stock -0.13 (p = 0.116); legacy stock +0.00 (p = 0.980, only 13 SA4s).
+
+### 3. Does the factor's level draw building? No sign of it
+
+Across SA4 borders (409 pairs of adjacent SA3s), the factor gap on the SDA-per-approval gap is +36.35 (± 31.73) per log point with the pre-2023 factors (p = 0.267) and -42.30 (± 18.23) with the post-2023 ones (p = 0.036); before and after the July 2023 re-set, -38.30 (± 28.05) (p = 0.193). This asks something different from section 2: not whether SDA seeks cheap land inside an SA4, but whether a higher factor pulls building across a border. Factors largely track costs, so across a border the extra payment mostly buys dearer land.
 
 ## What the evidence supports
 
 1. **Relative to general building, new SDA sits in cheaper SA3s within SA4s.** The rank test gives -0.18 for all new build (p = 0.015) and -0.18 for High Physical Support (p = 0.029); Robust, with 30 SA4s, is -0.15 (p = 0.202). The regression cost coefficient is negative for all three outcomes (-25.6 (± 12.3), -28.8 (± 13.6), -59.4 (± 17.5)), as is the multinomial (-2.22 (± 0.61), -2.38 (± 0.70), -4.20 (± 1.34)).
 2. **Much of that gap is general building leaning *dear*, not SDA leaning cheap.** New SDA's own correlation with relative cost is -0.10 (p = 0.170), 57% of the gap; approvals come in at +0.13 (p = 0.094), and house approvals alone at +0.17 (p = 0.027), so it is not apartments. The likeliest reason is the cost measure: a 2021 median mortgage (or rent) is high where housing is new, because recent buyers carry larger loans, so SA3s that were already building read as dear. That inflates the gap, and it means the Census measure tracks newness as well as land cost.
 3. **It is only moderately robust.** The rank result stays below p = 0.05 in 3 of 6 variants; it weakens in: Without Victoria (-0.12, p 0.153); Without the 5 SA4s building most (-0.15, p 0.061); Without growth corridors (-0.15, p 0.069). The regression coefficient is negative in 7 of 7 specifications and beyond two standard errors in 3; the multinomial's is negative in 7 and beyond two standard errors in 7 (it weights SA4s by how much they built). Every lag from 0 to 8 quarters gives the same sign.
-4. **The placebo does not clear it.** Measured against population, new build leans to cheap SA3s by -0.13 (p = 0.096); existing stock, built before NDIS pricing, by -0.13 (p = 0.116). Neither clears p = 0.05 on this measure, but they are the same size: there is no sign that the new-build lean is new. Accessible housing for this cohort may always have sat on cheaper land within SA4s. Legacy stock (13 SA4s, +0.00) is too thin to say anything.
+4. **Nationally the placebo does not clear it; in Victoria, on land prices, it does.** Measured against population, new build leans to cheap SA3s by -0.13 (p = 0.096); existing stock, built before NDIS pricing, by -0.13 (p = 0.116). Neither clears p = 0.05 on this measure, but they are the same size: there is no sign that the new-build lean is new. Accessible housing for this cohort may always have sat on cheaper land within SA4s. Legacy stock (13 SA4s, +0.00) is too thin to say anything. In Victoria, on vacant-land prices, the placebo separates: new SDA -0.48 (p 0.023), pre-NDIS stock -0.09 (p 0.673).
 5. **No dose-response.** If margin drove the lean, it would steepen where cost spreads wider within the SA4. The interaction is +11.14 (± 18.00) per SD of spread, the wrong sign and within two standard errors of zero.
 6. **Across borders, SDA leans to the *lower*-factor side, not the higher.** Across 409 SA4-border pairs, with the cost gap controlled, the factor-gap coefficient over the whole window is +36.35 (± 31.73) (p 0.267) with the pre-2023 factors and -42.30 (± 18.23) (p 0.036) with the post-2023 ones; 0 of 6 factor-by-window combinations are positive at p < 0.05 and 2 negative. The before-and-after comparison, which holds land fixed, gives -38.30 (± 28.05) (p 0.193). A higher factor usually marks dearer land, and the only cost control is a 2021 median mortgage, so a negative coefficient most likely means the factor gap is picking up land cost the control misses: more evidence that SDA goes where land is cheap, not that it chases the factor.
 
-**In sum:** "New SDA leans toward cheap SA3s within SA4s more than general building does" is supported by the rank test and the regressions, but partly because general building leans toward SA3s the Census measure reads as dear, the pre-NDIS placebo leans the same way, and there is no dose-response, so the lean cannot be attributed to the location factor's margin. "Providers respond to the location factor" is not supported by the border test either: where a border separates two prices, building does not follow the higher one, and with the post-2023 factors it leans to the lower.
+**In sum:** new SDA is built where new housing is built, concentrated in the growth corridors (29% of it, against 28% of approvals and 12% of population). Within SA4s the national Census measure cannot settle whether it also seeks cheaper land, because it reads new housing as dear. In Victoria, with vacant-land prices, it does: net of approvals, need, population and area, new SDA leans toward cheaper land (-19.13 (± 8.08)), general building is neutral (+0.02), and pre-NDIS stock does not lean (-0.09) where new SDA does (-0.48). That is what a payment fixed across the SA4 predicts, on 12 Victorian SA4s. What is not found is any pull from the factor's level: across SA4 borders building does not follow the higher factor, and with the post-2023 factors it leans to the lower, and the lean does not steepen where cost spreads wider.
 
 ## 1. Within-SA4 rank test
 
