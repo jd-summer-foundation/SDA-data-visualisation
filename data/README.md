@@ -219,6 +219,7 @@ checksum of each download. All ABS data is CC BY 4.0.
 | `building_approvals_sa2.csv` | Building Approvals, Australia: small-area CSVs by SA2, ASGS 2021, FY 2021-22 to 2026-27 FYTD (July releases 2022–2026) | `scripts/reduce_abs.py` |
 | `census_2021_sa3.csv`, `census_2021_sa2.csv` | 2021 Census GCP DataPacks (SA3 and SA2, all of Australia), tables G02 and G01 | `scripts/reduce_abs.py` |
 | `sa3_adjacency.csv` | ASGS Edition 3 SA3 boundaries, `SA3_2021_AUST_SHP_GDA2020.zip` | `scripts/build_sa3_adjacency.py` |
+| `sal_sa3_dwellings.csv` | ASGS 2021 allocation files `MB_2021_AUST.xlsx` and `SAL_2021_AUST.xlsx`, and 2021 Census Mesh Block Counts | `scripts/reduce_abs.py` |
 
 `building_approvals_sa2.csv` keeps dwelling units approved in **new**
 residential buildings, all sectors (`type_work` 1, `own_sector` 9), as houses
@@ -235,6 +236,24 @@ median of 0 means not published (NSW - Blue Mountains - South, 8 residents).
 `sa3_adjacency.csv` lists every pair of the 336 Supplement P SA3s that share
 at least one boundary edge (a corner alone does not count), each side's SA4,
 whether the pair crosses an SA4 boundary, and the shared border length in km.
+
+`sal_sa3_dwellings.csv` has one row per Suburb and Locality (SAL 2021) × SA3
+intersection, with its 2021 Census dwellings and persons summed from Mesh
+Blocks. It is the weighting for carrying locality data to SA3.
+
+## `vgv/`
+
+`vacant_land_by_locality.csv`: Valuer-General Victoria's annual median sale
+price of vacant residential land, by locality, 2015–2025, from the Victorian
+Property Sales Report time series `land-by-suburb-2015-2025.xlsx`
+(land.vic.gov.au; listed on data.vic.gov.au under CC BY 4.0; fetched by
+browser, kept in `raw/vgv/`). Rebuilt by `scripts/reduce_vgv.py`. Localities
+are joined to SAL 2021 by name within Victoria; five VGV names that are not ABS
+localities (estates such as Sanctuary Lakes) are left out by name, and any
+other unmatched name fails the build. Only the latest vintage is read, because
+VGV revises earlier years between releases. VGV marks some medians `^` or `*`
+without defining either in the workbook; the marker is kept in `flag`.
+`scripts/analyse_land_value.py` uses it in `panel/LAND_VALUE_VIC.md`.
 
 ## `panel/newbuild_types_sa4.csv` and the location-factor report
 

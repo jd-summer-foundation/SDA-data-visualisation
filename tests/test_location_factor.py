@@ -79,7 +79,20 @@ class Rebuilds(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             run("scripts/reduce_abs.py", str(RAW), "-o", tmp)
             self.same(tmp, DATA / "abs", ["building_approvals_sa2.csv", "census_2021_sa3.csv",
-                                          "census_2021_sa2.csv"], "reduce_abs.py")
+                                          "census_2021_sa2.csv", "sal_sa3_dwellings.csv"],
+                      "reduce_abs.py")
+
+    @unittest.skipUnless((ROOT / "raw" / "vgv").exists(), "raw/vgv not downloaded")
+    def test_vgv_reduction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/reduce_vgv.py", str(ROOT / "raw" / "vgv"), "-o", tmp)
+            self.same(tmp, DATA / "vgv", ["vacant_land_by_locality.csv"], "reduce_vgv.py")
+
+    def test_land_value_analysis(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/analyse_land_value.py", "-o", tmp)
+            self.same(tmp, DATA / "panel", ["land_value_vic.json", "LAND_VALUE_VIC.md"],
+                      "analyse_land_value.py")
 
     @unittest.skipUnless((RAW / "asgs").exists(), "raw/abs/asgs not downloaded")
     def test_adjacency(self):
@@ -158,6 +171,17 @@ class AbsReductions(unittest.TestCase):
         census = {r["sa3_code_2021"] for r in read(DATA / "abs" / "census_2021_sa3.csv")}
         panel = {r["sa3_code"] for r in read(DATA / "panel" / "sa3_sa4.csv")}
         self.assertEqual(panel - census, set())
+
+    def test_localities_join(self):
+        """Every VGV locality is a Victorian SAL, and every SAL x SA3 cell a known SA3."""
+        sal = read(DATA / "abs" / "sal_sa3_dwellings.csv")
+        vic = {r["sal_code"] for r in sal if r["state"] == "VIC"}
+        vgv = {r["sal_code_2021"] for r in read(DATA / "vgv" / "vacant_land_by_locality.csv")}
+        self.assertEqual(vgv - vic, set())
+        sa3 = {r["SA3_CODE_2021"] for r in read(DATA / "asgs_2021_sa2.csv")}
+        self.assertEqual({r["sa3_code"] for r in sal} - sa3, set())
+        panel = {r["sa3_code"] for r in read(DATA / "panel" / "sa3_sa4.csv")}
+        self.assertEqual(panel - {r["sa3_code"] for r in sal}, set())
 
     def test_adjacency_pairs(self):
         mapping = {r["sa3"]: r for r in read(DATA / "panel" / "sa3_sa4.csv")}

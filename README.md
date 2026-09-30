@@ -646,6 +646,8 @@ python3 scripts/reduce_abs.py                 # raw/abs -> data/abs (approvals, 
 python3 scripts/build_sa3_adjacency.py        # raw/abs/asgs SA3 shapefile -> data/abs/sa3_adjacency.csv
 python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_FACTOR_FEASIBILITY.md
 python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
+python3 scripts/reduce_vgv.py                 # raw/vgv -> data/vgv (Victorian vacant-land medians)
+python3 scripts/analyse_land_value.py         # Victoria, land price as cost -> LAND_VALUE_VIC.md
 ```
 
 `LOCATION_FACTOR.md` runs the within-SA4 rank test (permutations within SA4),

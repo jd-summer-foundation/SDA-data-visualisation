@@ -13,6 +13,11 @@ from. This keeps only what the location-factor analysis reads:
                               committed file.
   census_2021_sa3.csv         2021 Census G02 medians and G01 persons, by SA3.
   census_2021_sa2.csv         the same, by SA2.
+  sal_sa3_dwellings.csv       every ASGS 2021 Suburb and Locality (SAL) x SA3
+                              intersection, with its 2021 Census dwellings and
+                              persons, built from Mesh Blocks: the weights for
+                              carrying locality data (such as valuer-general
+                              medians) to SA3.
 
 Before writing, every month is checked: SA2s must sum to their state's
 published total, and states to the national total, for houses and for other
@@ -54,6 +59,8 @@ G02 = {"Median_mortgage_repay_monthly": "median_mortgage_monthly",
        "Median_rent_weekly": "median_rent_weekly",
        "Median_tot_hhd_inc_weekly": "median_household_income_weekly"}
 G01 = {"Tot_P_P": "persons"}
+STATES = {"1": "NSW", "2": "VIC", "3": "QLD", "4": "SA", "5": "WA", "6": "TAS", "7": "NT",
+          "8": "ACT", "9": "OT", "Z": "Z"}  # Z: the ABS's non-spatial codes (no usual address etc.)
 
 
 def quarter_of(month: str) -> str:
@@ -165,6 +172,51 @@ def reduce_census(raw: Path, level: str, out: Path):
     return len(g02)
 
 
+def reduce_sal(raw: Path, out: Path):
+    """SAL x SA3 dwellings and persons, from the Mesh Block allocation files."""
+    import openpyxl
+
+    def sheet_rows(path, header_first):
+        wb = openpyxl.load_workbook(path, read_only=True)
+        for ws in wb.worksheets:
+            header = None
+            for r in ws.iter_rows(values_only=True):
+                if header is None:
+                    if r and r[0] == header_first:
+                        header = list(r)
+                    continue
+                if not r or r[0] is None:
+                    continue
+                yield dict(zip(header, r))
+        wb.close()
+
+    sa3 = {r["MB_CODE_2021"]: r["SA3_CODE_2021"]
+           for r in sheet_rows(raw / "asgs" / "MB_2021_AUST.xlsx", "MB_CODE_2021")}
+    counts = {}
+    for r in sheet_rows(raw / "census" / "Mesh_Block_Counts_2021.xlsx", "MB_CODE_2021"):
+        code = str(r["MB_CODE_2021"]).strip()
+        if code.isdigit():
+            counts[code] = (int(r["Dwelling"] or 0), int(r["Person"] or 0))
+    cells = defaultdict(lambda: [0, 0])
+    names = {}
+    for r in sheet_rows(raw / "asgs" / "SAL_2021_AUST.xlsx", "MB_CODE_2021"):
+        mb = r["MB_CODE_2021"]
+        if mb not in sa3:
+            raise ValueError(f"mesh block {mb} has no SA3")
+        key = (r["SAL_CODE_2021"], sa3[mb])
+        names[r["SAL_CODE_2021"]] = (r["SAL_NAME_2021"], STATES[r["STATE_CODE_2021"]])
+        d, p = counts.get(mb, (0, 0))
+        cells[key][0] += d
+        cells[key][1] += p
+    missing = len(set(sa3) - set(counts))
+    with open(out / "sal_sa3_dwellings.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.writer(fh, lineterminator="\n")
+        w.writerow(["sal_code", "sal_name", "state", "sa3_code", "dwellings", "persons"])
+        for (sal, s3), (d, p) in sorted(cells.items()):
+            w.writerow([sal, names[sal][0], names[sal][1], s3, d, p])
+    return len(names), len(cells), missing
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("raw", nargs="?", default=str(ROOT / "raw" / "abs"))
@@ -182,6 +234,9 @@ def main(argv=None):
     for level in CENSUS:
         n = reduce_census(raw, level, out)
         print(f"census {level}: {n} regions", file=sys.stderr)
+    sals, cells, missing = reduce_sal(raw, out)
+    print(f"SAL x SA3: {sals} localities, {cells} intersections; "
+          f"{missing} mesh blocks without Census counts", file=sys.stderr)
 
 
 if __name__ == "__main__":
