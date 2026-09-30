@@ -1180,7 +1180,7 @@ def main(argv=None):
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     a = analyse(load())
-    (out / "location_factor.json").write_text(json.dumps(rounded(a), indent=1) + "\n")
+    (out / "location_factor.json").write_text(json.dumps(rounded(a, 6), indent=1) + "\n")
     (out / "LOCATION_FACTOR.md").write_text(to_markdown(a))
     print(f"wrote {out}/location_factor.json and LOCATION_FACTOR.md", file=sys.stderr)
 

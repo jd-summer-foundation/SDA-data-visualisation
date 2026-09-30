@@ -633,6 +633,8 @@ standard errors clustered by region.
 
 ### The location-factor experiment
 
+**Start with `data/panel/LOCATION_FACTOR_SUMMARY.md`**, the executive summary.
+
 A test, in phases, of whether SDA providers build on the cheapest land within
 each SA4, since the NDIA's location factor is set per SA4 and building type
 while land cost varies within it. Phase 1 (ingest and feasibility) and Phase 2
@@ -648,7 +650,13 @@ python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_F
 python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
 python3 scripts/reduce_vgv.py                 # raw/vgv -> data/vgv (Victorian vacant-land medians)
 python3 scripts/analyse_land_value.py         # Victoria, land price as cost -> LAND_VALUE_VIC.md
+python3 scripts/summarise_location_factor.py  # the three reports' JSON -> LOCATION_FACTOR_SUMMARY.md
 ```
+
+Run `analyse_land_value.py` before `analyse_location_factor.py`: the headline of
+`LOCATION_FACTOR.md` quotes the Victorian results from `land_value_vic.json`.
+The summary script refuses to write if a finding its prose states no longer
+holds, so new data forces a rewrite rather than contradictory text.
 
 `LOCATION_FACTOR.md` runs the within-SA4 rank test (permutations within SA4),
 the SA4 fixed-effects share regression and a within-SA4 multinomial (Poisson

@@ -88,6 +88,12 @@ class Rebuilds(unittest.TestCase):
             run("scripts/reduce_vgv.py", str(ROOT / "raw" / "vgv"), "-o", tmp)
             self.same(tmp, DATA / "vgv", ["vacant_land_by_locality.csv"], "reduce_vgv.py")
 
+    def test_summary(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/summarise_location_factor.py", "-o", tmp)
+            self.same(tmp, DATA / "panel", ["LOCATION_FACTOR_SUMMARY.md"],
+                      "summarise_location_factor.py")
+
     def test_land_value_analysis(self):
         with tempfile.TemporaryDirectory() as tmp:
             run("scripts/analyse_land_value.py", "-o", tmp)
