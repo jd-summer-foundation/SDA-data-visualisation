@@ -19,6 +19,7 @@ private.
 | `vacancies.json` | Built by `scripts/extract_vacancies.py` from the two CSVs | 24 August 2026 |
 | `panel/` | Built by `scripts/extract_panel.py` (SA4) and `scripts/extract_panel_sa3.py` (SA3, placed by `asgs_2021_sa2.csv`) from every workbook in `supplements/` | June 2023 – June 2026 |
 | `pricing/` | NDIA Pricing Arrangements for SDA, every version 2021-22 v1.0 to 2026-27 v1.0, the 2026-27 Pricing Schedule, and the location factors and base amounts `scripts/extract_pricing.py` extracts from them | 1 July 2021 – 2026-27 |
+| `nsw_vg/` | NSW Valuer General land values, reduced to locality medians by `scripts/reduce_nsw_vg.py` (property-level files stay in the git-ignored `raw/`) | 1 July 2021 – 2025 |
 | `abs/` | Reduced ABS files: building approvals by SA2, 2021 Census medians by SA3 and SA2, SA3 adjacency. Rebuilt from the git-ignored `raw/` (see `raw/MANIFEST.md`) | see below |
 
 ## Both CSVs are reduced before committing
@@ -259,6 +260,59 @@ the represented year." The analysis never uses `*` medians. Years are calendar
 years, and vacant land is VGV's Vacant Residential Land: home sites or surveyed
 lots under 4,000 m² (Guide, pp. 3, 11–12).
 `scripts/analyse_land_value.py` uses it in `panel/LAND_VALUE_VIC.md`.
+
+## `nsw_vg/`
+
+`land_value_by_locality.csv`: median NSW land values by ABS locality (SAL
+2021) and 1 July base date, 2021–2025, reduced by `scripts/reduce_nsw_vg.py`
+from the NSW Valuer General's bulk land values (snapshot `LV_20260901`,
+supplied on request; one CSV per council area, a record per property).
+© State of New South Wales through Valuer General NSW, licensed under
+[CC BY 3.0 AU](https://creativecommons.org/licenses/by/3.0/au/). **Changed from
+the original:** aggregated to locality medians.
+
+**The property-level files are never committed.** They carry addresses, and
+everything under `data/` is published. They stay in the git-ignored
+`raw/nsw_vg/`, recorded in `raw/MANIFEST.md` with their checksums, and only
+locality aggregates come out: a parcel count and a median for each of four
+measures, with the median left blank where fewer than 10 parcels carry it (a
+row with no median at all is not written).
+
+| Measure | Parcels | Value |
+| --- | --- | --- |
+| `urban` | zoned R1–R4, 100–3,999 m², strata schemes included | land value per m² |
+| `urban_plain` | the same, only values on basis 6A(1) (the ordinary land value) | land value per m² |
+| `urban_lot` | zoned R1–R4, 100–3,999 m², strata schemes left out | land value per parcel |
+| `wider` | zoned R1–R5 or RU5, 100 m² or more | land value per m² |
+
+The Valuer General values a strata scheme once, as one record (`UNDERSP`)
+with the whole site's area and value, so it counts as one parcel per m² but
+would overstate a per-parcel median. Areas in hectares are converted to m².
+Zones are those in force at the snapshot, not at each base date. Each value
+carries a *basis*, the section of the Valuation of Land Act 1916 it was made
+under; the documentation supplied does not explain bases other than 6A(1), so
+`urban_plain` is there to check they do not matter (almost all of Broken Hill
+is valued on another basis).
+
+Localities are joined to SAL 2021 by name within NSW. Where several NSW SALs
+share a name, the ABS adds the council area ("Dural (Hornsby - NSW)") and the
+Valuer General's council area picks one. Every other name is listed in the
+reducer with its reason, and any unlisted unmatched name fails the build:
+
+- `PLACED` (22): a locality spanning council areas, placed in the SAL whose
+  part shares its postcode (Dural in The Hills Shire goes to
+  "Dural (Hornsby - NSW)"); a rename (Balmoral Village is the SAL's
+  Balmoral, Wingecarribee); and Valuer General spellings of SAL names (Oaky
+  Park for Oakey Park, Mt Rivers for Mount Rivers, Currathool for Carrathool,
+  and others), each with the same postcode in the ABS postcode concordance.
+- `NOT_LOCALITIES` (80): names with no SAL 2021, left out rather than guessed.
+  Most are reserves, waterways, parishes and named places with no residential
+  zoning; a few have residential parcels, chiefly Stream Hill (Wollongong)
+  and Badagarang (Shoalhaven), localities named since SAL 2021 was drawn.
+  Together they are 2,728 of the snapshot's 2,736,701 records.
+
+`scripts/analyse_land_value.py` uses it in `panel/LAND_VALUE_NSW.md`. The
+reduction's test runs only where `raw/nsw_vg/` is present.
 
 ## `panel/newbuild_types_sa4.csv` and the location-factor report
 

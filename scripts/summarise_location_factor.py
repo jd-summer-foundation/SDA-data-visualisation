@@ -10,6 +10,8 @@ cannot drift from the reports it summarises; the tests rebuild it byte for byte.
   location_factor_feasibility.json  (feasibility_location_factor.py, Phase 1)
   location_factor.json              (analyse_location_factor.py, Phase 2)
   land_value_vic.json               (analyse_land_value.py, Victoria)
+  land_value_nsw.json               (analyse_land_value.py, NSW and both states; read
+                                     through location_factor.json's "nsw" block)
 
 Usage:  python3 scripts/summarise_location_factor.py [-o data/panel]
 """
@@ -22,7 +24,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from analyse_location_factor import LAG_PRIMARY, est, f2, pval  # noqa: E402
+from analyse_location_factor import (  # noqa: E402
+    LAG_PRIMARY, est, f2, nsw_confirms, pval, scaled, separates, significant)
 
 ROOT = Path(__file__).resolve().parent.parent
 PANEL = ROOT / "data" / "panel"
@@ -45,6 +48,8 @@ def check(lf):
     """
     C = lf["corridor_shares"]["shares"]
     VL = lf["victoria"]["land"]
+    N = lf["nsw"]
+    NL, NP = N["land"], N["pooled"]
     B = lf["border"]
     conds = {
         "1: SDA concentrated in corridors like approvals, beyond population":
@@ -55,6 +60,19 @@ def check(lf):
         "2: Victoria, general building neutral on land": abs(VL["approvals"]["mean"]) < 0.1,
         "2: Victoria, placebo separates":
             VL["new_vs_population"]["p"] < 0.05 <= VL["existing"]["p"],
+        "2: NSW does not confirm Victoria": not nsw_confirms(N),
+        "2: NSW, SDA no cheaper than approvals on land": NL["difference"]["p"] >= 0.05,
+        "2: NSW, placebo does not separate": not separates(NL),
+        "2: NSW regression same sign as Victoria's, within two SE":
+            NL["regression"]["b"] < 0 and not significant(NL["regression"]),
+        "2: NSW and Victorian regressions the same size per SD": (lambda n, v: abs(n["b"] - v["b"])
+            < 1.96 * (n["se"] ** 2 + v["se"] ** 2) ** 0.5)(scaled(NL["regression"], N["sd"]["NSW"]),
+                                                       scaled(VL["regression"], N["sd"]["VIC"])),
+        "2: pooled regression without rank or placebo support":
+            NP["difference"]["p"] >= 0.05 and not separates(NP),
+        "4: no dose-response on land": not significant(N["dose_pooled"]) or N["dose_pooled"]["b"] > 0,
+        "4: no border pull with land as the control":
+            not any(c["p_flip"] < 0.05 and c["factor"]["b"] > 0 for c in N["border_land"].values()),
         "4: no border pull toward the higher factor":
             not any(c["p_flip"] < 0.05 and c["factor"]["b"] > 0 for c in B["cross"].values())
             and not (B["did"]["p_flip"] < 0.05 and B["did"]["b"] > 0),
@@ -69,6 +87,8 @@ def to_markdown(feas, lf, vic):
     C = lf["corridor_shares"]["shares"]
     V = lf["victoria"]
     VL, VM = V["land"], V["mortgage"]
+    N = lf["nsw"]
+    NL, NP = N["land"], N["pooled"]
     P = lf["tests"]["primary"]["outcomes"]["new_build"]["rank"]
     reg = lf["tests"]["primary"]["outcomes"]["new_build"]["regression"]["coef"]["relative_log_cost"]
     B = lf["border"]
@@ -101,14 +121,23 @@ def to_markdown(feas, lf, vic):
       f"{pc(C['new_build'])} of new SDA (Jun 2023–Jun 2026) against {pc(C[appr])} of dwelling "
       f"approvals, {pc(C['persons'])} of population, {pc(C['eligible_not_using'])} of participants "
       f"waiting for SDA and {pc(C['existing'])} of older SDA stock. *Solid, national.*")
-    w(f"2. **Within an SA4, new SDA leans toward the cheaper land, as the hypothesis predicts.** In "
-      f"Victoria, with Valuer-General vacant-land prices ({V['land_years'][0]}–{V['land_years'][1]}): "
-      f"general building is neutral ({f2(VL['approvals']['mean'])}), new SDA leans cheaper net of "
-      f"approvals, need, population and area (regression {est(VL['regression'])}; multinomial "
-      f"{est(VL['multinomial'])}), and pre-NDIS SDA stock does not lean "
-      f"({f2(VL['existing']['mean'])}, p {pval(VL['existing']['p'])}; new SDA "
-      f"{f2(VL['new_vs_population']['mean'])}, p {pval(VL['new_vs_population']['p'])}). "
-      f"*Suggestive: Victoria only, {VL['difference']['sa4s']} SA4s, inner Melbourne missing.*")
+    w(f"2. **Within an SA4, new SDA leans toward the cheaper land in Victoria, but NSW does not "
+      f"confirm it.** In Victoria, with Valuer-General vacant-land prices "
+      f"({V['land_years'][0]}–{V['land_years'][1]}): general building is neutral "
+      f"({f2(VL['approvals']['mean'])}), new SDA leans cheaper net of approvals, need, population and "
+      f"area (regression {est(VL['regression'])}; multinomial {est(VL['multinomial'])}), and pre-NDIS "
+      f"SDA stock does not lean ({f2(VL['existing']['mean'])}, p {pval(VL['existing']['p'])}; new SDA "
+      f"{f2(VL['new_vs_population']['mean'])}, p {pval(VL['new_vs_population']['p'])}). In NSW, with "
+      f"the Valuer General's land values for {N['sa3s']} of {N['nsw_sa3s']} SA3s "
+      f"({NL['difference']['sa4s']} SA4s in the tests), that does not repeat: new SDA leans no more "
+      f"toward cheap land than general building does ({f2(NL['difference']['mean'])}, p "
+      f"{pval(NL['difference']['p'])}), and the placebo does not separate (new SDA "
+      f"{f2(NL['new_vs_population']['mean'])}, pre-NDIS stock {f2(NL['existing']['mean'])}). Only the "
+      f"regression keeps Victoria's sign and size, per within-state SD of land price (NSW "
+      f"{est(scaled(NL['regression'], N['sd']['NSW']))}, Victoria "
+      f"{est(scaled(VL['regression'], N['sd']['VIC']))}; both states pooled {est(NP['regression'])}), "
+      f"and in NSW it is within two standard errors of zero. *Suggestive in Victoria "
+      f"({VL['difference']['sa4s']} SA4s, inner Melbourne missing); not replicated in NSW.*")
     w(f"3. **Nationally the question cannot be settled with the Census cost measure.** SDA sits in "
       f"cheaper SA3s than approvals ({f2(P['difference']['mean'])}, p {pval(P['difference']['p'])}; "
       f"regression {est(reg)}), but the 2021 median mortgage reads new housing as dear, so general "
@@ -120,26 +149,40 @@ def to_markdown(feas, lf, vic):
       f"adjacent SA3s either side of an SA4 border, the higher-factor side gets no more SDA per "
       f"approval, and with the post-2023 factors less ({est(bc['factor'])} per log point with pre-2023 factors, p {pval(bc['p_flip'])}; "
       f"{est(bn['factor'])} with post-2023 factors, p {pval(bn['p_flip'])}), nor did the July 2023 "
-      f"re-set move building ({est(did)}, p {pval(did['p_flip'])}). The lean does not steepen where "
-      f"cost spreads wider ({est(dose)} per SD). This does not contradict point 2: factors largely "
+      f"re-set move building ({est(did)}, p {pval(did['p_flip'])}). With land prices as the cost "
+      f"control ({N['border_pairs']} pairs in NSW and Victoria) the higher-factor side still gets no "
+      f"more. The lean does not steepen where cost spreads wider ({est(dose)} per SD; with land prices "
+      f"in both states, {est(N['dose_pooled'])}). This does not contradict point 2: factors largely "
       "track costs, so across a border the extra payment mostly buys dearer land.")
     w("")
     w("**One-paragraph version:** New SDA is built where new housing is being built, concentrated "
       "in the growth corridors like other residential construction. In Victoria, where land prices "
       "can be measured directly, new SDA also leans toward the cheaper land within each region, "
       "beyond what general building, need or population explain, and older pre-NDIS stock does not "
-      "— consistent with providers using a payment that is fixed across the SA4. There is no "
-      "evidence that a higher factor, in itself, draws building across SA4 borders.")
+      "— consistent with providers using a payment that is fixed across the SA4. NSW, measured with "
+      "the Valuer General's land values, does not replicate that: there new SDA goes where general "
+      "building, need and population go, and only a regression estimate, too imprecise on its own, "
+      "points the Victorian way. So the lean toward cheap land is a Victorian finding, not yet a "
+      "general one. There is no evidence that a higher factor, in itself, draws building across SA4 "
+      "borders.")
     w("")
     w("## What the data cannot carry")
     w("")
-    w("- **Victoria only for land cost.** NSW bulk land values are available only on request "
-      "(requested; see *Open threads*). Queensland, South Australia and Western Australia publish no "
-      "comparable free series.")
+    w("- **Two states for land cost, measured differently.** Victoria's are median sale prices of "
+      "vacant lots; NSW's are the Valuer General's valuations of every residential parcel, per m². "
+      "The pooled tests divide each state's relative land price by its own spread, which makes the "
+      "two comparable in scale, not in kind. Queensland, South Australia and Western Australia "
+      "publish no comparable free series.")
+    w("- **Valuations, not sales (NSW).** A valuation is the Valuer General's estimate of unimproved "
+      "land value at 1 July, for rating and land tax, not a price anyone paid.")
     w("- **SA3 publishes no building-type or category split of new build**, and a rise in enrolled "
       "HPS or Robust dwellings can include existing dwellings newly enrolled.")
-    w("- **Lot prices, not prices per m².** VGV's vacant land is home sites under 4,000 m²; lots "
-      "within that still vary in size.")
+    pl = N["per_lot_difference"]
+    w(f"- **Per lot and per m² can disagree.** VGV's vacant land is home sites under 4,000 m², whose "
+      f"size still varies. NSW is measured per m², and per parcel instead the NSW rank test turns: "
+      f"new SDA leans toward *dearer* SA3s than approvals ({f2(pl['mean'])}, p {pval(pl['p'])}).")
+    w("- **2021 weights.** Locality prices reach SA3 through 2021 Census dwellings, before the SDA "
+      "in question was built.")
     w("- **Timing.** Building takes a year or more, so part of what was enrolled after the July 2023 "
       "factor re-set was committed before it.")
     w("- **Why, not just where.** Cheap land is also available land; providers also weigh "
@@ -160,24 +203,26 @@ def to_markdown(feas, lf, vic):
     w("| `data/panel/LOCATION_FACTOR_FEASIBILITY.md` | Phase 1: data ingested, factor variation and changes between editions, how much identifying variation there is |")
     w("| `data/panel/LOCATION_FACTOR.md` | Phase 2: within-SA4 rank test, SA4 fixed-effects and multinomial regressions, border test, placebos, dose-response, robustness |")
     w("| `data/panel/LAND_VALUE_VIC.md` | Victoria: the within-SA4 tests again with vacant-land prices |")
+    w("| `data/panel/LAND_VALUE_NSW.md` | NSW: the within-SA4 tests with Valuer General land values; both states pooled; dose-response and border tests with land prices |")
     w("| `data/pricing/` | the NDIA pricing documents, `location_factors.csv`, `base_amounts.csv` (`scripts/extract_pricing.py`) |")
     w("| `data/abs/` | building approvals by SA2, Census 2021 by SA3/SA2, SA3 adjacency, locality-to-SA3 dwellings (`scripts/reduce_abs.py`, `scripts/build_sa3_adjacency.py`) |")
     w("| `data/vgv/` | Victorian vacant-land medians by locality (`scripts/reduce_vgv.py`) |")
+    w("| `data/nsw_vg/` | NSW land-value medians by locality (`scripts/reduce_nsw_vg.py`; the property-level files stay in `raw/`) |")
     w("| `raw/MANIFEST.md` | every large download (git-ignored `raw/`): URL, release, licence, checksum |")
     w("| `data/README.md` | how each reduced file is built, and every name fix or exclusion |")
     w("")
     w("To rebuild the reports from committed files: `extract_pricing.py`, "
       "`feasibility_location_factor.py`, `analyse_land_value.py`, `analyse_location_factor.py`, "
-      "then this script (the order matters: `LOCATION_FACTOR.md` quotes the Victorian results). "
+      "then this script (the order matters: `LOCATION_FACTOR.md` quotes the Victorian and NSW "
+      "results). "
       "`python3 -m unittest discover tests` checks every output byte for byte.")
     w("")
     w("## Open threads")
     w("")
-    w("- **NSW land values.** Requested from the NSW Valuer General (bulk land values, all LGAs, "
-      "1 July 2021 and latest base dates). When they arrive: keep property-level files in `raw/` "
-      "(never `data/`, which is published), aggregate to SA3 by `data/abs/sal_sa3_dwellings.csv`, "
-      "and run the `analyse_land_value.py` tests for NSW. A second large state would add SA4s, which "
-      "the rank tests and the dose-response test on land prices both need.")
+    w("- **Why NSW differs from Victoria.** Three candidates, not yet separated: the measure "
+      "(valuations per m² against sale prices per lot), what general building does (in NSW it leans "
+      "toward dearer land, through townhouses and apartments; in Victoria it is neutral), and chance "
+      "in 12 Victorian SA4s. The same kind of land measure in both states would settle the first.")
     w("- **More quarters.** Re-run everything as Supplement P editions are added; the before-and-after "
       "border comparison in particular needs a longer post-2023 window.")
     w("- **Nothing here changes the site.** `index.html`, `app.js` and `time/` are untouched.")

@@ -97,8 +97,16 @@ class Rebuilds(unittest.TestCase):
     def test_land_value_analysis(self):
         with tempfile.TemporaryDirectory() as tmp:
             run("scripts/analyse_land_value.py", "-o", tmp)
-            self.same(tmp, DATA / "panel", ["land_value_vic.json", "LAND_VALUE_VIC.md"],
+            self.same(tmp, DATA / "panel", ["land_value_vic.json", "LAND_VALUE_VIC.md",
+                                            "land_value_nsw.json", "LAND_VALUE_NSW.md"],
                       "analyse_land_value.py")
+
+    @unittest.skipUnless((ROOT / "raw" / "nsw_vg" / "LV_20260901").exists(),
+                         "raw/nsw_vg not present (property-level; see raw/MANIFEST.md)")
+    def test_nsw_vg_reduction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            run("scripts/reduce_nsw_vg.py", str(ROOT / "raw" / "nsw_vg"), "-o", tmp)
+            self.same(tmp, DATA / "nsw_vg", ["land_value_by_locality.csv"], "reduce_nsw_vg.py")
 
     @unittest.skipUnless((RAW / "asgs").exists(), "raw/abs/asgs not downloaded")
     def test_adjacency(self):
@@ -184,6 +192,9 @@ class AbsReductions(unittest.TestCase):
         vic = {r["sal_code"] for r in sal if r["state"] == "VIC"}
         vgv = {r["sal_code_2021"] for r in read(DATA / "vgv" / "vacant_land_by_locality.csv")}
         self.assertEqual(vgv - vic, set())
+        nsw = {r["sal_code"] for r in sal if r["state"] == "NSW"}
+        vg = {r["sal_code_2021"] for r in read(DATA / "nsw_vg" / "land_value_by_locality.csv")}
+        self.assertEqual(vg - nsw, set())
         sa3 = {r["SA3_CODE_2021"] for r in read(DATA / "asgs_2021_sa2.csv")}
         self.assertEqual({r["sa3_code"] for r in sal} - sa3, set())
         panel = {r["sa3_code"] for r in read(DATA / "panel" / "sa3_sa4.csv")}
@@ -209,3 +220,37 @@ class AbsReductions(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class NswLandValues(unittest.TestCase):
+    """The committed NSW file holds locality aggregates only."""
+
+    def test_aggregates_only(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from reduce_nsw_vg import MEASURES, MIN_PARCELS
+        rows = read(DATA / "nsw_vg" / "land_value_by_locality.csv")
+        expected = ["sal_code_2021", "sal_name_2021", "base_date"]
+        for m in MEASURES:
+            expected += [f"{m}_parcels", f"{m}_median"]
+        self.assertEqual(list(rows[0]), expected, "unexpected columns: nothing property-level may be added")
+        seen = set()
+        for r in rows:
+            key = (r["sal_code_2021"], r["base_date"])
+            self.assertNotIn(key, seen)
+            seen.add(key)
+            self.assertIn(r["base_date"], {f"{y}-07-01" for y in range(2021, 2026)})
+            medians = 0
+            for m in MEASURES:
+                n = int(r[f"{m}_parcels"])
+                if r[f"{m}_median"]:
+                    self.assertGreaterEqual(n, MIN_PARCELS, f"{key} {m}: median from too few parcels")
+                    self.assertGreater(float(r[f"{m}_median"]), 0)
+                    medians += 1
+            self.assertGreater(medians, 0, key)
+
+    def test_readme_counts_match_reducer(self):
+        sys.path.insert(0, str(ROOT / "scripts"))
+        from reduce_nsw_vg import NOT_LOCALITIES, PLACED
+        text = (DATA / "README.md").read_text()
+        self.assertIn(f"`PLACED` ({len(PLACED)})", text)
+        self.assertIn(f"`NOT_LOCALITIES` ({len(NOT_LOCALITIES)})", text)

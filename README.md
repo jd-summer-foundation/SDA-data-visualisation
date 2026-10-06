@@ -647,14 +647,17 @@ python3 scripts/extract_newbuild_types.py     # data/supplements -> data/panel/n
 python3 scripts/reduce_abs.py                 # raw/abs -> data/abs (approvals, Census)
 python3 scripts/build_sa3_adjacency.py        # raw/abs/asgs SA3 shapefile -> data/abs/sa3_adjacency.csv
 python3 scripts/feasibility_location_factor.py  # all of the above -> LOCATION_FACTOR_FEASIBILITY.md
-python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
 python3 scripts/reduce_vgv.py                 # raw/vgv -> data/vgv (Victorian vacant-land medians)
-python3 scripts/analyse_land_value.py         # Victoria, land price as cost -> LAND_VALUE_VIC.md
-python3 scripts/summarise_location_factor.py  # the three reports' JSON -> LOCATION_FACTOR_SUMMARY.md
+python3 scripts/reduce_nsw_vg.py              # raw/nsw_vg -> data/nsw_vg (NSW land-value medians by locality)
+python3 scripts/analyse_land_value.py         # land price as cost -> LAND_VALUE_VIC.md, LAND_VALUE_NSW.md
+python3 scripts/analyse_location_factor.py    # the tests -> data/panel/LOCATION_FACTOR.md
+python3 scripts/summarise_location_factor.py  # the reports' JSON -> LOCATION_FACTOR_SUMMARY.md
 ```
 
 Run `analyse_land_value.py` before `analyse_location_factor.py`: the headline of
-`LOCATION_FACTOR.md` quotes the Victorian results from `land_value_vic.json`.
+`LOCATION_FACTOR.md` quotes the Victorian and NSW results from `land_value_vic.json`
+and `land_value_nsw.json`. The NSW Valuer General's files are property-level and
+never leave `raw/`; only locality medians are committed (`data/README.md`).
 The summary script refuses to write if a finding its prose states no longer
 holds, so new data forces a rewrite rather than contradictory text.
 
@@ -668,8 +671,8 @@ seeded so the output rebuilds byte for byte.
 
 The ABS downloads are large and live in the git-ignored `raw/`;
 `raw/MANIFEST.md` records every one (URL, release, edition, licence, checksum)
-and `data/README.md` says how each reduced file is rebuilt. Only the last two
-steps need `raw/`. `data/panel/LOCATION_FACTOR_FEASIBILITY.md` reports how the
+and `data/README.md` says how each reduced file is rebuilt. Only the
+`reduce_*` and `build_sa3_adjacency.py` steps need `raw/`. `data/panel/LOCATION_FACTOR_FEASIBILITY.md` reports how the
 factors vary, how far cost varies within SA4s, how many SA4 borders separate
 different factors, and how collinear cost is with approvals and need; like the
 other reports it is generated, and the tests rebuild it byte for byte.
