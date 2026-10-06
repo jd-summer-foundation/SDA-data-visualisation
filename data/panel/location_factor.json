@@ -3181,5 +3181,275 @@
    }
   }
  },
+ "nsw": {
+  "sa3s": 88,
+  "nsw_sa3s": 92,
+  "new_sda_covered": 0.998951,
+  "sa4s_two": 28,
+  "base_dates": [
+   2021,
+   2023
+  ],
+  "sd": {
+   "NSW": 0.384331,
+   "VIC": 0.189162
+  },
+  "land": {
+   "sda": {
+    "mean": 0.181789,
+    "sa4s": 23,
+    "se": 0.148776,
+    "negative": 7,
+    "positive": 14,
+    "p": 0.232553
+   },
+   "approvals": {
+    "mean": 0.36087,
+    "sa4s": 23,
+    "se": 0.147004,
+    "negative": 7,
+    "positive": 16,
+    "p": 0.018996
+   },
+   "houses": {
+    "mean": 0.095652,
+    "sa4s": 23,
+    "se": 0.177541,
+    "negative": 11,
+    "positive": 12,
+    "p": 0.546891
+   },
+   "difference": {
+    "mean": 0.130435,
+    "sa4s": 23,
+    "se": 0.146424,
+    "negative": 8,
+    "positive": 14,
+    "p": 0.402919
+   },
+   "regression": {
+    "b": -8.18714,
+    "se": 8.17265
+   },
+   "multinomial": {
+    "b": -1.218277,
+    "se": 0.7415
+   },
+   "new_vs_population": {
+    "mean": 0.086957,
+    "sa4s": 23,
+    "se": 0.153909,
+    "negative": 10,
+    "positive": 12,
+    "p": 0.588082
+   },
+   "existing": {
+    "mean": -0.035714,
+    "sa4s": 28,
+    "se": 0.146945,
+    "negative": 16,
+    "positive": 12,
+    "p": 0.815637
+   }
+  },
+  "mortgage": {
+   "sda": {
+    "mean": -0.042576,
+    "sa4s": 23,
+    "se": 0.170483,
+    "negative": 11,
+    "positive": 12,
+    "p": 0.790442
+   },
+   "approvals": {
+    "mean": 0.171388,
+    "sa4s": 23,
+    "se": 0.166963,
+    "negative": 9,
+    "positive": 14,
+    "p": 0.265547
+   },
+   "houses": {
+    "mean": 0.097232,
+    "sa4s": 23,
+    "se": 0.162958,
+    "negative": 9,
+    "positive": 13,
+    "p": 0.523095
+   },
+   "difference": {
+    "mean": -0.13333,
+    "sa4s": 23,
+    "se": 0.154752,
+    "negative": 13,
+    "positive": 10,
+    "p": 0.385723
+   },
+   "regression": {
+    "b": -42.387008,
+    "se": 42.581239
+   },
+   "multinomial": {
+    "b": -2.183047,
+    "se": 1.926394
+   },
+   "new_vs_population": {
+    "mean": -0.113352,
+    "sa4s": 23,
+    "se": 0.159083,
+    "negative": 11,
+    "positive": 12,
+    "p": 0.462507
+   },
+   "existing": {
+    "mean": -0.149,
+    "sa4s": 28,
+    "se": 0.144274,
+    "negative": 17,
+    "positive": 11,
+    "p": 0.295941
+   }
+  },
+  "per_lot_difference": {
+   "mean": 0.3,
+   "sa4s": 23,
+   "se": 0.134252,
+   "negative": 5,
+   "positive": 17,
+   "p": 0.046391
+  },
+  "pooled": {
+   "sda": {
+    "mean": 0.013747,
+    "sa4s": 35,
+    "se": 0.11812,
+    "negative": 13,
+    "positive": 17,
+    "p": 0.907219
+   },
+   "approvals": {
+    "mean": 0.242857,
+    "sa4s": 35,
+    "se": 0.126377,
+    "negative": 13,
+    "positive": 22,
+    "p": 0.046191
+   },
+   "houses": {
+    "mean": 0.065714,
+    "sa4s": 35,
+    "se": 0.1389,
+    "negative": 17,
+    "positive": 18,
+    "p": 0.60208
+   },
+   "difference": {
+    "mean": 0.022857,
+    "sa4s": 35,
+    "se": 0.113247,
+    "negative": 15,
+    "positive": 18,
+    "p": 0.859628
+   },
+   "regression": {
+    "b": -3.806517,
+    "se": 1.817407
+   },
+   "multinomial": {
+    "b": -0.221379,
+    "se": 0.088943
+   },
+   "new_vs_population": {
+    "mean": -0.105714,
+    "sa4s": 35,
+    "se": 0.126554,
+    "negative": 19,
+    "positive": 15,
+    "p": 0.404919
+   },
+   "existing": {
+    "mean": -0.053659,
+    "sa4s": 41,
+    "se": 0.12193,
+    "negative": 24,
+    "positive": 17,
+    "p": 0.658668
+   }
+  },
+  "pooled_sa3s": 129,
+  "dose_pooled": {
+   "b": 1.08546,
+   "se": 1.961573
+  },
+  "border_pairs": 165,
+  "border_land": {
+   "combined:full": {
+    "factor": {
+     "b": -19.327085,
+     "se": 38.457488
+    },
+    "p_flip": 0.660068,
+    "cost": {
+     "b": -2.913533,
+     "se": 1.666654
+    }
+   },
+   "combined:early": {
+    "factor": {
+     "b": -112.969248,
+     "se": 65.690117
+    },
+    "p_flip": 0.132174,
+    "cost": {
+     "b": -0.046571,
+     "se": 2.247756
+    }
+   },
+   "combined:late": {
+    "factor": {
+     "b": 8.867895,
+     "se": 44.592299
+    },
+    "p_flip": 0.841232,
+    "cost": {
+     "b": -4.607592,
+     "se": 2.070558
+    }
+   },
+   "new_build:full": {
+    "factor": {
+     "b": 0.701772,
+     "se": 45.398428
+    },
+    "p_flip": 0.985603,
+    "cost": {
+     "b": -3.030974,
+     "se": 1.649755
+    }
+   },
+   "new_build:early": {
+    "factor": {
+     "b": -21.445465,
+     "se": 76.648073
+    },
+    "p_flip": 0.792442,
+    "cost": {
+     "b": -0.118577,
+     "se": 2.259407
+    }
+   },
+   "new_build:late": {
+    "factor": {
+     "b": 29.992677,
+     "se": 50.508441
+    },
+    "p_flip": 0.557489,
+    "cost": {
+     "b": -4.947456,
+     "se": 2.102416
+    }
+   }
+  }
+ },
  "collinearity_new_sda_approvals": 0.716195
 }

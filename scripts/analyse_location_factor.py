@@ -398,7 +398,12 @@ def cluster_flip_p(x, y, clusters, rng, controls=None):
     return (1 + hits) / (1 + PERMUTATIONS)
 
 
-def border_test(d, frame, rng):
+def border_test(d, frame, rng, cost="mortgage", keep=None):
+    """Adjacent SA3 pairs across SA4 borders, with `cost` as the cost control.
+
+    `keep(a, b)` restricts the pairs (analyse_land_value.py uses it to keep
+    pairs with a land price on both sides, within one state).
+    """
     appr, quarters, _, _, _ = approvals(d)
     code_of = {g: r["sa3_code"] for g, r in d["sa3"].items()}
     idx = {q: i for i, q in enumerate(quarters)}
@@ -445,14 +450,16 @@ def border_test(d, frame, rng):
         if p["cross_sa4"] != "yes" or float(p["shared_km"]) < MIN_BORDER_KM:
             continue
         a, b = p["sa3_a"], p["sa3_b"]
-        if frame[a]["mortgage"] is None or frame[b]["mortgage"] is None:
+        if frame[a].get(cost) is None or frame[b].get(cost) is None:
+            continue
+        if keep is not None and not keep(a, b):
             continue
         s4a, s4b = p["sa4_a"], p["sa4_b"]
         w = {t: max(growth[s4a][t] + growth[s4b][t], 0.0) for t in national}
         if sum(w.values()) <= 0:
             w = {t: max(v, 0.0) for t, v in national.items()}
         rec = {"a": a, "b": b, "cluster": tuple(sorted((s4a, s4b))),
-               "dcost": math.log(frame[a]["mortgage"] / frame[b]["mortgage"]),
+               "dcost": math.log(frame[a][cost] / frame[b][cost]),
                "gap": {k: math.log(mix_factor(f, s4a, w) / mix_factor(f, s4b, w))
                        for k, f in sets.items()}}
         for win in windows:
@@ -590,6 +597,7 @@ def analyse(d):
         "shares": {k: sum(max(frame[g][k], 0.0) for g in corridor)
                    / sum(max(r[k], 0.0) for r in frame.values()) for k, _ in corridor_rows()}}
     results["victoria"] = victoria_summary()
+    results["nsw"] = nsw_summary()
     groups = groups_of(frame, sorted(frame), "new_build")
     xs, ys = [], []
     for gs in groups.values():
@@ -636,6 +644,29 @@ def victoria_summary():
             "land_without_thin": pick(U, "land")}
 
 
+def nsw_summary():
+    """The NSW and pooled land-price results, from analyse_land_value.py's committed output."""
+    v = json.loads((DATA / "panel" / "land_value_nsw.json").read_text())
+    P, Q = v["specs"]["primary"], v["pooled"]
+
+    def pick(t):
+        nb = t["new_build"]
+        return {"sda": nb["rank"]["sda"], "approvals": nb["rank"]["approvals"],
+                "houses": nb["rank_houses"], "difference": nb["rank"]["difference"],
+                "regression": nb["regression"]["coef"]["relative_log_cost"] if nb["regression"] else None,
+                "multinomial": nb["multinomial"]["coef"]["relative_log_cost"] if nb["multinomial"] else None,
+                "new_vs_population": t["new_vs_population"], "existing": t["existing"]}
+    lot = v["specs"]["per_lot"]["tests"]["land"]["new_build"]["rank"]["difference"]
+    return {"sa3s": P["sa3s"], "nsw_sa3s": P["state_sa3s"], "new_sda_covered": P["new_sda_covered"],
+            "sa4s_two": P["sa4s_two"], "base_dates": v["base_dates"], "sd": Q["sd"],
+            "land": pick(P["tests"]["land"]), "mortgage": pick(P["tests"]["mortgage"]),
+            "per_lot_difference": lot, "pooled": pick(Q["tests"]["land"]), "pooled_sa3s": Q["sa3s"],
+            "dose_pooled": v["dose"]["pooled"]["land"]["interaction"],
+            "border_pairs": v["border"]["land"]["pairs"],
+            "border_land": {k: {"factor": c["factor"], "p_flip": c["p_flip"], "cost": c["cost"]}
+                            for k, c in v["border"]["land"]["cross"].items()}}
+
+
 # --------------------------------------------------------------------------
 # Writing
 # --------------------------------------------------------------------------
@@ -672,6 +703,21 @@ def significant(c, z=1.96):
     return abs(c["b"]) > z * c["se"]
 
 
+def scaled(c, sd):
+    """A land coefficient per log point, restated per within-state SD of land price."""
+    return {"b": c["b"] * sd, "se": c["se"] * sd}
+
+
+def nsw_confirms(N):
+    """Does NSW, on its own, show new SDA leaning toward cheaper land?"""
+    d, reg = N["land"]["difference"], N["land"]["regression"]
+    return d["mean"] < 0 and d["p"] < 0.05 and reg is not None and reg["b"] < 0 and significant(reg)
+
+
+def separates(L):
+    return L["new_vs_population"]["p"] < 0.05 <= L["existing"]["p"]
+
+
 def verdict_rank(r):
     d = r["difference"]
     if d["p"] < 0.05:
@@ -686,6 +732,8 @@ def verdict(a):
     out = []
     V = a["victoria"]
     VL = V["land"]
+    N = a["nsw"]
+    NL = N["land"]
     nb = P["new_build"]["rank"]["difference"]
     hps = P["hps"]["rank"]["difference"]
     rob = P["robust"]["rank"]["difference"]
@@ -734,8 +782,12 @@ def verdict(a):
     nbp = a["placebo"]["new_build"]["rank"]["beyond_population"]
     lg = a["placebo"]["legacy"]["rank"]["beyond_population"]
     same = abs(ex["mean"] - nbp["mean"]) < 0.05 and ex["mean"] < 0
-    vic_sep = VL["new_vs_population"]["p"] < 0.05 <= VL["existing"]["p"]
-    head4 = ("Nationally the placebo does not clear it; in Victoria, on land prices, it does."
+    vic_sep, nsw_sep = separates(VL), separates(NL)
+    head4 = ("Nationally the placebo does not clear it; on land prices it does in Victoria but not "
+             "in NSW." if same and vic_sep and not nsw_sep else
+             "Nationally the placebo does not clear it; on land prices it does, in Victoria and NSW."
+             if same and vic_sep and nsw_sep else
+             "Nationally the placebo does not clear it; in Victoria, on land prices, it does."
              if same and vic_sep else
              "The placebo does not clear it." if same else "The placebo points the other way.")
     out.append(f"4. **{head4}** "
@@ -749,7 +801,10 @@ def verdict(a):
                + f"Legacy stock ({lg['sa4s']} SA4s, {f2(lg['mean'])}) is too thin to say anything."
                + f" In Victoria, on vacant-land prices, the placebo separates: new SDA "
                f"{f2(VL['new_vs_population']['mean'])} (p {pval(VL['new_vs_population']['p'])}), "
-               f"pre-NDIS stock {f2(VL['existing']['mean'])} (p {pval(VL['existing']['p'])}).")
+               f"pre-NDIS stock {f2(VL['existing']['mean'])} (p {pval(VL['existing']['p'])}). "
+               f"In NSW, on Valuer General land values, it {'does' if nsw_sep else 'does not'}: new SDA "
+               f"{f2(NL['new_vs_population']['mean'])} (p {pval(NL['new_vs_population']['p'])}), "
+               f"pre-NDIS stock {f2(NL['existing']['mean'])} (p {pval(NL['existing']['p'])}).")
     Bf = a["border"]["cross"]
     bsig = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] > 0]
     bneg = [k for k, c in Bf.items() if c["p_flip"] < 0.05 and c["factor"]["b"] < 0]
@@ -764,7 +819,10 @@ def verdict(a):
     out.append(f"5. **No dose-response.** If margin drove the lean, it would steepen where cost "
                f"spreads wider within the SA4. The interaction is {est(dz)} per SD of spread, "
                f"{'the wrong sign and ' if dz['b'] > 0 else ''}"
-               f"{'within' if not significant(dz) else 'beyond'} two standard errors of zero.")
+               f"{'within' if not significant(dz) else 'beyond'} two standard errors of zero. With "
+               f"land prices, NSW and Victoria together, it is {est(N['dose_pooled'])} per SD of "
+               f"spread, {'within' if not significant(N['dose_pooled']) else 'beyond'} two standard "
+               "errors.")
     if bsig and not bneg:
         head = "The border test finds building following the higher factor."
     elif bneg and not bsig:
@@ -784,7 +842,13 @@ def verdict(a):
                + (" A higher factor usually marks dearer land, and the only cost control is a 2021 "
                   "median mortgage, so a negative coefficient most likely means the factor gap is "
                   "picking up land cost the control misses: more evidence that SDA goes where land is "
-                  "cheap, not that it chases the factor." if bneg else ""))
+                  "cheap, not that it chases the factor." if bneg else "")
+               + f" With land prices as the control, on {N['border_pairs']} pairs in NSW and Victoria, "
+               + ("no factor-by-window combination shows building following the higher factor at "
+                  "p < 0.05." if not any(c["p_flip"] < 0.05 and c["factor"]["b"] > 0
+                                         for c in N["border_land"].values()) else
+                  "some factor-by-window combinations show building following the higher factor at "
+                  "p < 0.05."))
     out.append("")
     C = a["corridor_shares"]["shares"]
     vreg = VL["regression"]
@@ -805,6 +869,23 @@ def verdict(a):
                   f"{VL['difference']['sa4s']} Victorian SA4s. "
                   if vic_yes else
                   "Victorian vacant-land prices do not settle it either (see `LAND_VALUE_VIC.md`). ")
+               + (f"NSW, with the Valuer General's land values on {NL['difference']['sa4s']} SA4s, "
+                  + ("confirms it. " if nsw_confirms(N) else
+                     f"does not confirm it: new SDA leans no more toward cheap land than general "
+                     f"building does ({f2(NL['difference']['mean'])}, p {pval(NL['difference']['p'])}), "
+                     f"the placebo {'separates' if nsw_sep else 'does not separate'}, and the "
+                     f"regression ({est(scaled(NL['regression'], N['sd']['NSW']))} per within-state SD "
+                     f"of land price, against Victoria's {est(scaled(vreg, N['sd']['VIC']))}) has the "
+                     f"{'same' if NL['regression']['b'] < 0 else 'opposite'} sign and is "
+                     f"{'beyond' if significant(NL['regression']) else 'within'} two standard errors "
+                     f"of zero. Pooled, the regression is {est(N['pooled']['regression'])} per SD"
+                     + (f", with no rank or placebo test behind it (rank difference "
+                        f"{f2(N['pooled']['difference']['mean'])}, p "
+                        f"{pval(N['pooled']['difference']['p'])})"
+                        if N["pooled"]["difference"]["p"] >= 0.05 and not separates(N["pooled"]) else "")
+                     + ". The lean toward cheaper land remains a Victorian finding; NSW does not "
+                     "replicate it. ")
+                  if vic_yes else "")
                + ("What is not found is any pull from the factor's level: across SA4 borders building "
                   "does not follow the higher factor"
                   + (", and with the post-2023 factors it leans to the lower" if bneg else "")
@@ -879,11 +960,20 @@ def to_markdown(a):
     w("")
     w("### 2. Within each SA4, does SDA seek the cheaper land?")
     w("")
-    w(f"**In Victoria, measured by vacant-land prices: yes.** Valuer-General Victoria's median "
-      f"vacant-land prices ({V['land_years'][0]}–{V['land_years'][1]}), carried to {V['sa3s']} of "
+    N = a["nsw"]
+    NL, Q = N["land"], N["pooled"]
+    nsw_head = ("In NSW, measured by the Valuer General's land values: yes as well."
+                if nsw_confirms(N) else
+                "In NSW, measured by the Valuer General's land values: not confirmed.")
+    w(f"**In Victoria, measured by vacant-land prices: yes. {nsw_head}** Valuer-General Victoria's "
+      f"median vacant-land prices ({V['land_years'][0]}–{V['land_years'][1]}), carried to {V['sa3s']} of "
       f"{V['vic_sa3s']} Victorian SA3s (holding {V['new_sda_covered']:.0%} of Victoria's new SDA; inner "
-      "Melbourne sells no vacant land and is missing), set against the Census mortgage measure on "
-      "the same SA3s (`LAND_VALUE_VIC.md`):")
+      "Melbourne sells no vacant land and is missing; `LAND_VALUE_VIC.md`), and the NSW Valuer "
+      f"General's land values per m² of residential land (1 July {N['base_dates'][0]}–"
+      f"{N['base_dates'][1]}), carried to {N['sa3s']} of {N['nsw_sa3s']} NSW SA3s (holding "
+      f"{N['new_sda_covered']:.1%} of NSW's new SDA; `LAND_VALUE_NSW.md`). The Census mortgage column "
+      "is Victoria's, on the same SA3s as its land prices. Regressions are per log point of relative "
+      "cost, except the pooled column, which is per within-state standard deviation of land price.")
     w("")
 
     def vr(r):
@@ -891,21 +981,41 @@ def to_markdown(a):
 
     def vc(c):
         return "—" if c is None else est(c)
-    w("| Within-SA4 lean toward cost (negative = cheaper) | Census mortgage | Vacant-land price |")
-    w("| --- | --- | --- |")
-    w(f"| All approvals share | {vr(VM['approvals'])} | {vr(VL['approvals'])} |")
-    w(f"| New SDA share | {vr(VM['sda'])} | {vr(VL['sda'])} |")
-    w(f"| Regression: new SDA share, net of approvals, need, population, area | {vc(VM['regression'])} | {vc(VL['regression'])} |")
-    w(f"| Multinomial (Poisson with SA4 effects) | {vc(VM['multinomial'])} | {vc(VL['multinomial'])} |")
-    w(f"| Placebo: new SDA share minus population share | {vr(VM['new_vs_population'])} | {vr(VL['new_vs_population'])} |")
-    w(f"| Placebo: pre-NDIS existing stock minus population share | {vr(VM['existing'])} | {vr(VL['existing'])} |")
+    w("| Within-SA4 lean toward cost (negative = cheaper) | Victoria: Census mortgage | Victoria: vacant-land price | NSW: land value | Both states: land |")
+    w("| --- | --- | --- | --- | --- |")
+    for key, lab in (("approvals", "All approvals share"), ("sda", "New SDA share"),
+                     ("new_vs_population", "Placebo: new SDA share minus population share"),
+                     ("existing", "Placebo: pre-NDIS existing stock minus population share")):
+        if key == "new_vs_population":
+            w(f"| Regression: new SDA share, net of approvals, need, population, area | "
+              f"{vc(VM['regression'])} | {vc(VL['regression'])} | {vc(NL['regression'])} | "
+              f"{vc(Q['regression'])} |")
+            w(f"| Multinomial (Poisson with SA4 effects) | {vc(VM['multinomial'])} | "
+              f"{vc(VL['multinomial'])} | {vc(NL['multinomial'])} | {vc(Q['multinomial'])} |")
+        w(f"| {lab} | {vr(VM[key])} | {vr(VL[key])} | {vr(NL[key])} | {vr(Q[key])} |")
     w("")
-    w(f"On land prices general building is neutral within SA4s, new SDA leans toward cheaper land "
-      "net of approvals, need, population and area, and pre-NDIS SDA stock does not lean. That is "
-      "what the incentive predicts: SDA's payment does not rise with land value within an SA4, a "
-      f"market developer's sale price does. It rests on {VL['difference']['sa4s']} Victorian SA4s, so "
-      "the rank tests are imprecise; the regressions carry it.")
+    w(f"On land prices in Victoria general building is neutral within SA4s, new SDA leans toward "
+      "cheaper land net of approvals, need, population and area, and pre-NDIS SDA stock does not "
+      "lean. That is what the incentive predicts: SDA's payment does not rise with land value within "
+      f"an SA4, a market developer's sale price does. It rests on {VL['difference']['sa4s']} "
+      "Victorian SA4s.")
     w("")
+    if not nsw_confirms(N):
+        nreg = scaled(NL["regression"], N["sd"]["NSW"])
+        vreg_sd = scaled(VL["regression"], N["sd"]["VIC"])
+        w(f"NSW, on {NL['difference']['sa4s']} SA4s, does not replicate it. General building there "
+          f"leans {'dear' if NL['approvals']['mean'] > 0 else 'cheap'} on land "
+          f"({vr(NL['approvals'])}; house approvals alone {vr(NL['houses'])}), new SDA leans no more "
+          f"toward cheap land than general building does ({vr(NL['difference'])}), and the placebo "
+          f"{'separates' if separates(NL) else 'does not separate'}. "
+          + ("Only the regressions point the Victorian way" if NL["regression"]["b"] < 0 and
+             NL["multinomial"]["b"] < 0 else "The regressions do not point the Victorian way")
+          + f": per within-state SD of land price, {est(nreg)} in NSW against {est(vreg_sd)} in "
+          f"Victoria, "
+          + ("about the same size" if abs(nreg["b"] - vreg_sd["b"]) < 1.96 * (nreg["se"] ** 2 + vreg_sd["se"] ** 2) ** 0.5
+             else "a different size")
+          + f", but in NSW {'beyond' if significant(nreg) else 'within'} two standard errors of zero.")
+        w("")
     w("**Nationally, with the 2021 Census median mortgage as cost:** SDA sits in cheaper SA3s than "
       "general building, but that measure reads new housing as dear, so it is unreliable here "
       "(the details, section by section, follow):")
@@ -1144,8 +1254,9 @@ def to_markdown(a):
       "it, and relative prices within an SA4 may have moved since.")
     w("- **The cost measure also tracks newness.** Median mortgage and rent are higher where "
       "dwellings are newer, so SA3s already building before 2021 read as dear. General approvals "
-      "lean that way, which widens the SDA-minus-approvals gap. A land-value measure (for example "
-      "state valuer-general site values by SA3) would separate land cost from newness.")
+      "lean that way, which widens the SDA-minus-approvals gap. Valuer-general land prices "
+      "separate land cost from newness for Victoria and NSW (`LAND_VALUE_VIC.md`, "
+      "`LAND_VALUE_NSW.md`); no other state publishes a comparable series.")
     w("- **Cheap land is usually also available land.** Approvals share is the control for that, "
       "and growth corridors are dropped as a check, but a greenfield estate offers large, flat, "
       "vacant lots that suit SDA designs in ways a median cannot capture.")
@@ -1156,8 +1267,9 @@ def to_markdown(a):
     w("- **The outcome is a net change in published totals.** HPS and Robust enrolled dwellings "
       "include existing dwellings newly enrolled, and SA3 has no building-type split.")
     w("- **The factor and land cost move together.** A higher factor usually marks dearer land, "
-      "so across a border the factor gap is not independent of land cost, and the only cost "
-      "control is the 2021 Census median. The before-and-after comparison avoids this but has "
+      "so across a border the factor gap is not independent of land cost, and nationally the only "
+      "cost control is the 2021 Census median (`LAND_VALUE_NSW.md` repeats the border test with land "
+      "prices for NSW and Victoria). The before-and-after comparison avoids this but has "
       "only two years of after, much of it committed before the new factors were known; it is "
       "worth re-running as quarters are added.")
     return "\n".join(L) + "\n"
